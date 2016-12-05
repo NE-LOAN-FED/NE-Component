@@ -1,0 +1,54 @@
+@import "../style/setting";
+
+.ui_icon {
+  font-family: "iconfont" !important;
+  font-size: pxToRem(22);
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  margin-left: pxToRem(11);
+  &_tip {
+    color: $blue;
+    &:before {
+      content: '\e609';
+    }
+  }
+  &_loading {
+    &:before {
+      content: '\e60c';
+    }
+  }
+  &_del {
+    color: #CCCCCC;
+    &:before {
+      content: '\e60b';
+    }
+  }
+  &_arrow {
+    color: #CCCCCC;
+    &:before {
+      content: '\e600';
+    }
+  }
+  &_tick {
+    color: #0081ee;
+    &:before {
+      content: '\e608';
+    }
+  }
+  &_camera {
+    color: #b2b2b2;
+    &:before {
+      content: '\e604'
+    }
+  }
+  &_wait {
+    color: #ff401a;
+    font-size: pxToRem(56);
+    margin-left: 0;
+    &:before {
+      content: '\e60e'
+    }
+  }
+}

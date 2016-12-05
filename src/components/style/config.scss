@@ -1,0 +1,24 @@
+//----------------color---------------
+
+//base color
+$red_primary: #f8402f; // 正常红色，用于按钮等正常状态的背景色
+$red_active: #e31300; // 高亮红，按钮等按压下去的颜色
+$white: #fff;
+$blue: #0081ee; // 唯一蓝色，用于链接等地方
+$orange: #ff5533; // 唯一橙色，用于提示
+$gray: #F2F2F2; // 页面背景色
+$gray_light: #cccccc;
+// text color
+$text_primary: #111111; // 正常文字颜色
+$text_secondary: #999999; // 浅色的文字颜色，用于说明等地方
+$text_highlight: #333333; // 加深的文字颜色
+$text_placeholder: $gray_light;
+// border color
+$border_primary: #dddddd; // 与页面之间的分割颜色
+$border_secondary: #e5e5e5; // 元素与元素之间的分割颜色
+$border_error: rgba(255, 85, 51, .5); // 表单错误提示
+
+$normalSize: pxToRem(26);
+$smallSize: pxToRem(22);
+$titleColor: #666666;
+$contentColor: $text_primary;

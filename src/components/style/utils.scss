@@ -1,0 +1,9 @@
+@function pxToRem($px) {
+  @return ($px/40)*1rem
+}
+
+@mixin flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

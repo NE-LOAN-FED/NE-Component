@@ -1,0 +1,51 @@
+@import "../style/config";
+@import "../style/utils";
+
+.ui_alert_model {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ui_alert {
+  width: pxToRem(500);
+  border-radius: pxToRem(6);
+  background-color: #fff;
+  overflow: hidden;
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.ui_alert_header {
+  margin-top: pxToRem(40);
+  text-align: center;
+}
+
+.ui_alert_header_content {
+  font-size: pxToRem(32);
+}
+
+.ui_alert_content {
+  padding: pxToRem(40) pxToRem(30);
+}
+
+.ui_confirm_box {
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  height: pxToRem(90);
+  border-top: 1px solid $border_primary;
+  font-size: pxToRem(30);
+}
+
+.ui_cancel_button, .ui_confirm_button {
+  flex: 1;
+  display: inline-block;
+  text-align: center;
+  line-height: pxToRem(90);
+  vertical-align: middle;
+  background-color: #fff;
+  color: $blue;
+}

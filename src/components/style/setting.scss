@@ -1,0 +1,8 @@
+@import "base";
+@import "config";
+@import "utils";
+//-----------------global setting---------------
+html {
+  background-color: $gray;
+  font-size: pxToRem(28)
+}
