@@ -1,0 +1,16 @@
+@import "../style/setting";
+
+.NEUI_verify {
+  height: pxToRem(60);
+  background-color: transparent;
+  display: flex;
+  padding-left: pxToRem(30);
+  justify-content: center;
+  align-items: center;
+  color: $blue;
+  border-left: 1px solid $border_secondary;
+  &_sending {
+    color: $text_light;
+  }
+}
+

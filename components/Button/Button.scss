@@ -1,0 +1,57 @@
+@import "../style/setting";
+
+button, input {
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.NEUI_button {
+  display: block;
+  text-align: center;
+  font-size: pxToRem(28);
+  margin: pxToRem(30) auto;
+
+  &_style_normal {
+    border-radius: pxToRem(4);
+    width: pxToRem(580);
+    height: pxToRem(76);
+    line-height: pxToRem(76);
+  }
+  &_style_rightAngle {
+    width: 100%;
+    height: pxToRem(100);
+    line-height: pxToRem(100);
+  }
+
+  &_primary {
+    background-color: $red_primary;
+    color: $white;
+    &:active {
+      background-color: $red_active;
+    }
+    &.NEUI_button_disabled {
+      background-color: #cdcdcd;
+      color: rgba(255, 255, 255, .5);
+    }
+  }
+
+  &_secondary {
+    border: 1px solid $border_primary;
+    background-color: $white;
+    &:active {
+      background-color: #ccc;
+    }
+    &.NEUI_button_disabled {
+      border: 1px solid rgba(204, 204, 204, 0.50);
+      color: rgba(17, 17, 17, .5)
+    }
+  }
+}
+
+.NEUI_button_small {
+  width: pxToRem(270)
+}

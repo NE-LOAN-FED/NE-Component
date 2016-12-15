@@ -1,0 +1,127 @@
+@charset "utf-8";
+@font-face {
+  font-family: "iconfont";
+  src: url('../font/iconfont.woff?t=1475206537') format('woff'), /* chrome, firefox */
+  url('../font/iconfont.ttf?t=1475206537') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../font/iconfont.svg?t=1475206537#iconfont') format('svg'); /* iOS 4.1- */
+}
+html {
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  text-size-adjust:100%;
+  box-sizing: border-box;
+}
+html * {
+  outline:0;
+  -webkit-text-size-adjust:none;
+  -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  color: inherit;
+}
+body {
+  font-family:HeitiJ-Light, "Helvetica Neue-Light", Helvetica-Light, STHeiTi, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  font-size: .6rem;
+  color: #111;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  margin:0;
+  padding:0
+}
+input, select, textarea {
+  font-size:100%
+}
+input:-ms-clear {
+  display:none
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0
+}
+fieldset, img {
+  border:0
+}
+abbr, acronym {
+  border:0;
+  font-variant:normal
+}
+del {
+  text-decoration:line-through
+}
+address, caption, cite, code, dfn, em, th, var {
+  font-style:normal;
+  font-weight:500
+}
+ol, ul {
+  list-style:none
+}
+caption, th {
+  text-align:left
+}
+h1, h2, h3, h4, h5, h6 {
+  font-size:100%;
+  font-weight:500
+}
+q:before, q:after {
+  content:''
+}
+sub, sup {
+  font-size:75%;
+  line-height:0;
+  position:relative;
+  vertical-align:baseline
+}
+sup {
+  top:-.5em
+}
+sub {
+  bottom:-.25em
+}
+a:active {
+  text-decoration:none
+}
+ins, a {
+  text-decoration:none
+}
+fieldset, img, button, input {
+  border:0
+}
+button, input, select, textarea {
+  font-size:100%
+}
+table {
+  border-spacing:0;
+  border-collapse:collapse
+}
+input {
+  border-radius:0;
+  -webkit-appearance:none
+}
+:focus {
+  outline:0
+}
+body {
+  font-size:.6rem
+}
+h1 {
+  font-size:1.8rem
+}
+h2 {
+  font-size:1.5rem
+}
+h3 {
+  font-size:1.2rem
+}
+h4 {
+  font-size:.9rem
+}
+h5 {
+  font-size:.7rem
+}
+h6 {
+  font-size:.6rem
+}
+
+.hidden {
+  display: none!important;
+}
