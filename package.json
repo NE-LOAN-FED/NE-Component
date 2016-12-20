@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "demo": "node ./node_modules/better-npm-run demo",
+    "demo-build": "node ./node_modules/better-npm-run build",
     "dev": "node ./node_modules/better-npm-run dev",
     "build": "npm run build:icon-index && npm run build:babel && npm run build:copy-files",
     "build:icon-index": "babel-node ./scripts/icon-index-generator.js",
@@ -26,10 +27,10 @@
         "NODE_ENV": "demo"
       }
     },
-    "dev": {
-      "command": "node webpack --config ./config/webpack.config.js --progress --colors",
+    "build": {
+      "command": "webpack --config ./config/webpack.config.js --progress --colors",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "production"
       }
     }
   },

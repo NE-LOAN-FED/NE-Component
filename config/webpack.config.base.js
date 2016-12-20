@@ -17,7 +17,7 @@ const webpackConfig = {
     path: path.join(cwd, 'dist'),
     filename: '[name]-[hash:8].js',
     chunkFilename: '[name]-[chunkhash:8].js',
-    publicPath: '/'
+    publicPath: './'
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.sass', '.scss']
