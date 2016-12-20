@@ -1,13 +1,12 @@
-import App from '../views/App'
-import changeTitle from '../utils/changeTitle'
-import Home from '../views/Home'
+import App from '../demo/App'
+import HomeDemo from '../demo/HomeDemo'
 
 const routes = {
   component: App,
   path: '/',
   childRoutes: [],
   indexRoute: {
-    component: Home
+    component: HomeDemo
   }
 }
 
