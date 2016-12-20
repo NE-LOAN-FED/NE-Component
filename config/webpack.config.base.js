@@ -14,7 +14,7 @@ const webpackConfig = {
     ]
   },
   output: {
-    path: path.join(cwd, 'dist'),
+    path: path.join(cwd, './'),
     filename: '[name]-[hash:8].js',
     chunkFilename: '[name]-[chunkhash:8].js',
     publicPath: './'

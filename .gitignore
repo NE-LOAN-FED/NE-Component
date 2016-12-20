@@ -1,5 +1,6 @@
 # compiled output
-/dist
+app-*.js
+index.html
 /tmp
 /typings
 /deploy
