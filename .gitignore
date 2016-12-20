@@ -1,0 +1,29 @@
+# compiled output
+/dist
+/tmp
+/typings
+/deploy
+
+# Dependency directories
+/node_modules
+
+# IDEs
+/.vscode
+.idea
+
+# Optional npm cache directory
+.npm
+
+# node-waf configuration
+.lock-wscript
+
+# misc
+.DS_Store
+/.sass-cache
+/connect.lock
+/.chrome
+
+# Logs
+logs
+*.log
+npm-debug.log
