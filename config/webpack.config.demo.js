@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base.js')
 
-baseConfig.entry.app.unshift('webpack-dev-server/client?reload=true')
+baseConfig.entry.app.unshift('webpack-dev-server/client')
 
 const config = {
   devServer: {
