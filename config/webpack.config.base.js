@@ -10,14 +10,14 @@ const nodeModulePath = path.join(cwd, 'node_modules')
 const webpackConfig = {
   entry: {
     app: [
-      path.join(__dirname, '../examples/index'),
+      path.join(__dirname, '../examples/index')
     ]
   },
   output: {
     path: path.join(cwd, './'),
     filename: '[name]-[hash:8].js',
     chunkFilename: '[name]-[chunkhash:8].js',
-    publicPath: './'
+    publicPath: '/'
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.css', '.sass', '.scss']

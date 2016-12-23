@@ -1,7 +1,7 @@
-const webpack = require('webpack');
-const path = require('path');
-const webpackMerge = require('webpack-merge');
-const baseConfig = require('./webpack.config.base.js');
+const webpack = require('webpack')
+const path = require('path')
+const webpackMerge = require('webpack-merge')
+const baseConfig = require('./webpack.config.base.js')
 
 
 const config = {
@@ -12,6 +12,6 @@ const config = {
       }
     })
   ]
-};
+}
 
-module.exports = webpackMerge(baseConfig,config);
+module.exports = webpackMerge(baseConfig, config)
