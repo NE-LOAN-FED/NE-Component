@@ -61,12 +61,13 @@ function isFormComplete(formData) {
  * 如果没有错误，需要清空 errorMsg 字段。
  * 要注意，这里直接修改了传入的 formState 对象。（考虑是否需要进行深拷贝，返回新的对象，不直接修改原来的 formState）
  * @param formState 表单数据
- * @returns 修改后的 formState 对象
+ * @returns 修改后的新的 formState 对象
  */
 function isFromValidate(formState) {
+  let state = formState
   let actualRight = 0
-  formState.errorMsg = ''
-  const formData = formState.data
+  state.errorMsg = ''
+  const formData = state.data
   const shouldRight = Object.keys(formData).length
   Object.keys(formData).forEach((v, k) => {
     const validate = formData[v].validate
@@ -77,8 +78,8 @@ function isFromValidate(formState) {
           actualRight += 1
         } else {
           formData[v].isError = true
-          if (!formState.errorMsg) {
-            formState.errorMsg = formData[v].errorMsg
+          if (!state.errorMsg) {
+            state.errorMsg = formData[v].errorMsg
           }
         }
       } else if (validate instanceof Function) {
@@ -87,8 +88,8 @@ function isFromValidate(formState) {
           actualRight += 1
         } else {
           formData[v].isError = true
-          if (!formState.errorMsg) {
-            formState.errorMsg = formData[v].errorMsg
+          if (!state.errorMsg) {
+            state.errorMsg = formData[v].errorMsg
           }
         }
       }
@@ -100,9 +101,9 @@ function isFromValidate(formState) {
       formData[v].isError = true
     }
   })
-  formState.isValidate = actualRight >= shouldRight
-  formState.isValidate ? formState.errorMsg = '' : null
-  return formState
+  state.isValidate = actualRight >= shouldRight
+  state.isValidate ? state.errorMsg = '' : null
+  return state
 }
 
 /**

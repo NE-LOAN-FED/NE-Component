@@ -1,14 +1,15 @@
 import React, {Component, PropTypes} from 'react'
 import classNames from 'classnames'
-import env from '../../utils/env'
 import Icon from '../Icon'
 
 export default class Select extends React.Component {
   constructor(props) {
     super(props)
+    const {data} = this.props
+    const mapValueToName = Select.createMapValueToName(data)
     this.state = {
       hasClicked: false,
-      mapValueToName: {}
+      mapValueToName: mapValueToName
     }
   }
 
@@ -22,29 +23,18 @@ export default class Select extends React.Component {
 
   static defaultProps = {
     data: [],
-    onChange: () => {},
+    onChange: () => {
+    },
     formCellChange: PropTypes.func,
     required: true
   }
 
-  componentWillMount() {
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data) {
-      const data = nextProps.data
-      const mapValueToName = {}
-      data.forEach((v, k) => {
-        mapValueToName[v.code] = data[k].name
-      })
-      this.setState({
-        mapValueToName
-      })
-    }
-  }
-
-  componentDidMount() {
+  static createMapValueToName(data) {
+    const mapValueToName = {}
+    data.forEach((v, k) => {
+      mapValueToName[v.code] = data[k].name
+    })
+    return mapValueToName
   }
 
   // 渲染 option，data 格式为 [{name:'name',code:'code'}]
@@ -57,6 +47,24 @@ export default class Select extends React.Component {
         {item.name}
       </option>
     })
+  }
+
+  componentWillMount() {
+
+  }
+
+  componentDidMount() {
+
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.data !== nextProps.data) {
+      const data = nextProps.data
+      const mapValueToName = Select.createMapValueToName(data)
+      this.setState({
+        mapValueToName
+      })
+    }
   }
 
   clickHandler = () => {
@@ -84,8 +92,8 @@ export default class Select extends React.Component {
           }}
           onClick={this.clickHandler}
         >
-        <option disabled={!!value}>请选择</option>
-        {data.length > 0 ? Select.renderData(data) : children}
+          <option disabled={!!value}>请选择</option>
+          {data.length > 0 ? Select.renderData(data) : children}
         </select>
       </div>
     )

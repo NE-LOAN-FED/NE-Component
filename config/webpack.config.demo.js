@@ -11,7 +11,7 @@ const config = {
     hot: true,
     inline: true,
     port: 3000,
-    host: 'localhost'
+    host: '0.0.0.0'
   },
   devtool: 'eval',
   plugins: [

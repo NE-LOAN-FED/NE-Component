@@ -8,7 +8,6 @@ export default class Input extends React.Component {
     this.state = {
       showDelIcon: false
     }
-    this.value
   }
 
   static propTypes = {
@@ -41,11 +40,16 @@ export default class Input extends React.Component {
     validate: () => true,
     errorMsg: '表单填写错误',
     disabled: false,
-    onChange: () => {},
-    onFocus: () => {},
-    onBlur: () => {},
-    onEmpty: (name) => {},
-    formCellChange: () => {},
+    onChange: () => {
+    },
+    onFocus: () => {
+    },
+    onBlur: () => {
+    },
+    onEmpty: (name) => {
+    },
+    formCellChange: () => {
+    },
     parser: (data) => data,
     formatter: (data) => data
   }
@@ -60,7 +64,7 @@ export default class Input extends React.Component {
   }
 
   formCellChange = (t) => {
-    const { formCellChange, parser } = this.props
+    const {formCellChange, parser} = this.props
     const target = {
       name: t.name,
       value: parser(t.value)
@@ -111,7 +115,7 @@ export default class Input extends React.Component {
       // name 属性作为表单提交数据里面的 key, 用来区分每个不同的提交项，一个 Form 表单里面 name 不能重复
       <label className={cls}>
         <input disabled={disabled}
-               ref = {(ref) => {
+               ref={(ref) => {
                  this.Input = ref
                }}
                name={name}
@@ -136,11 +140,11 @@ export default class Input extends React.Component {
                {...others}
         />
         {showDelIcon ? <Icon onClick={
-          () => {
-            emptyInput(name)
-            onEmpty()
-            this.iconClickHandler()
-          }} type={'del'}/>
+            () => {
+              emptyInput(name)
+              onEmpty()
+              this.iconClickHandler()
+            }} type={'del'}/>
           : null}
       </label>
     )
