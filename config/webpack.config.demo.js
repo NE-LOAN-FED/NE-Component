@@ -7,13 +7,13 @@ baseConfig.entry.app.unshift('webpack-dev-server/client')
 
 const config = {
   devServer: {
-    devtool: 'eval',
+    devtool: 'source-map',
     hot: true,
     inline: true,
     port: 3000,
     host: '0.0.0.0'
   },
-  devtool: 'eval',
+  devtool: 'source-map',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({

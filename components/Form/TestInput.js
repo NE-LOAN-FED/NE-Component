@@ -8,6 +8,7 @@ import Icon from '../Icon'
 export default class TestInput extends React.Component {
   constructor(props) {
     super(props)
+    this.timer = null
     this.state = {
       showDelIcon: false,
       value: this.props.value || '',
@@ -23,7 +24,7 @@ export default class TestInput extends React.Component {
     onBlur: PropTypes.func,
     onEmpty: PropTypes.func,
     disabled: PropTypes.bool,
-    formCellChange: PropTypes.func,
+    onFieldChange: PropTypes.func,
     shouldRsa: PropTypes.bool,
     required: PropTypes.bool,
     parser: PropTypes.func,
@@ -47,17 +48,15 @@ export default class TestInput extends React.Component {
     disabled: false,
     onChange: () => {
     },
-    handleFieldChange: () => {
-    },
+    // onFieldChange: () => {
+    // },
     onFocus: () => {
     },
     onBlur: () => {
     },
-    handleFieldBlur: () => {
+    onFieldBlur: () => {
     },
     onEmpty: (name) => {
-    },
-    formCellChange: () => {
     },
     parser: (data) => data,
     formatter: (data) => data
@@ -66,15 +65,36 @@ export default class TestInput extends React.Component {
   componentDidMount() {
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value && nextProps.value !== this.state.value) {
+      this.setState({
+        value: nextProps.value
+      })
+    }
+  }
 
+  shouldComponentUpdate(nextProps, nextState) {
     return this.props.disabled !== nextProps.disabled ||
       this.state.value !== nextState.value ||
-      this.state.showDelIcon !== nextState.showDelIcon;
+      this.state.showDelIcon !== nextState.showDelIcon ||
+      this.state.isError !== nextProps.isError
+  }
+
+  componentWillUpdate(nextProps, nextState) {
 
   }
 
+  componentDidUpdate(preProps, preState) {
+    const {onFieldChange} = preProps
+    console.log(this.state.isError, preState.isError)
+    if (this.state.value !== preState.value
+      || this.state.isError !== preState.isError) {
+      onFieldChange(this.data)
+    }
+  }
+
   componentWillUnmount() {
+    clearTimeout(this.timer)
   }
 
   get data() {
@@ -99,7 +119,7 @@ export default class TestInput extends React.Component {
       isError = !(value && validate.test(value))
     } else if (validate instanceof Function) {
       if (!value) {
-        return isError = false
+        return (isError = false)
       }
       const validateResult = validate(value)
       if (validateResult.then instanceof Function) {
@@ -116,14 +136,15 @@ export default class TestInput extends React.Component {
     this.setState({
       isError
     })
+    console.log('isError', isError)
   }
 
   handleChange = (e) => {
-    const {onChange, handleFieldChange} = this.props
-    handleFieldChange(this.data)
+    const {onChange} = this.props
     onChange(e)
     this.setState({
-      value: e.target.value
+      value: e.target.value,
+      showDelIcon: !!e.target.value.length
     })
   }
 
@@ -138,15 +159,17 @@ export default class TestInput extends React.Component {
   }
 
   handleBlur = (e) => {
-    // e.persist()
-    const {name, onBlur, handleFieldBlur} = this.props
-    handleFieldBlur(name)
+    e.persist()
+    const {name, onBlur, onFieldBlur} = this.props
+    onFieldBlur(name)
     onBlur(e)
     // TODO 考虑做成配置项，来决定什么时候作校验
     this.handleValidate(e)
-    this.setState({
-      showDelIcon: false
-    })
+    this.timer = setTimeout(() => {
+      this.setState({
+        showDelIcon: false
+      })
+    }, 300)
   }
 
   handleEmptied = () => {
@@ -159,6 +182,7 @@ export default class TestInput extends React.Component {
   }
 
   handleDelClick = () => {
+    console.log('del')
     this.handleEmptied()
     this.setState({
       showDelIcon: false
@@ -174,7 +198,7 @@ export default class TestInput extends React.Component {
       [`${prefix}_input_disabled`]: disabled,
       [className]: className
     })
-    const DelIcon = <Icon onClick={this.handleDelClick} type={'del'}/>
+    const handleDelClick = this.handleDelClick
     return (
       <label className={cls}>
         <input name={name}
@@ -183,7 +207,7 @@ export default class TestInput extends React.Component {
                onFocus={this.handleFocus}
                onBlur={this.handleBlur}
         />
-        {showDelIcon ? <DelIcon/> : null}
+        {showDelIcon ? <Icon onClick={handleDelClick} type={'del'}/> : null}
       </label>
     )
   }
