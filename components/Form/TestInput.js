@@ -4,6 +4,10 @@
 import React, {PropTypes} from 'react'
 import classnames from 'classnames'
 import Icon from '../Icon'
+import Logger from '../../utils/log.js'
+
+const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
+const logger = new Logger(env, 'TestInput')
 
 export default class TestInput extends React.Component {
   constructor(props) {
@@ -77,7 +81,7 @@ export default class TestInput extends React.Component {
     return this.props.disabled !== nextProps.disabled ||
       this.state.value !== nextState.value ||
       this.state.showDelIcon !== nextState.showDelIcon ||
-      this.state.isError !== nextProps.isError
+      this.state.isError !== nextState.isError
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -86,7 +90,7 @@ export default class TestInput extends React.Component {
 
   componentDidUpdate(preProps, preState) {
     const {onFieldChange} = preProps
-    console.log(this.state.isError, preState.isError)
+    logger.log('DidUpdate ','isError now', this.state.isError, 'isError pre', preState.isError)
     if (this.state.value !== preState.value
       || this.state.isError !== preState.isError) {
       onFieldChange(this.data)
@@ -136,7 +140,6 @@ export default class TestInput extends React.Component {
     this.setState({
       isError
     })
-    console.log('isError', isError)
   }
 
   handleChange = (e) => {
@@ -182,7 +185,6 @@ export default class TestInput extends React.Component {
   }
 
   handleDelClick = () => {
-    console.log('del')
     this.handleEmptied()
     this.setState({
       showDelIcon: false
@@ -190,6 +192,7 @@ export default class TestInput extends React.Component {
   }
 
   render() {
+    logger.log('render')
     const {showDelIcon, value} = this.state
     const {className, disabled, name} = this.props
     const prefix = 'NEUI'

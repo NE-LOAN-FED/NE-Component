@@ -5,9 +5,13 @@ import React, {Component, PropTypes} from 'react'
 import classNames from 'classnames'
 import Field from './Field'
 import {isFormComplete, formPure, isFromValidate} from './FormUtils'
+import Logger from '../../utils/log'
 import create from './createFormItem.js'
 
-export default class Form extends React.Component {
+const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
+const logger = new Logger(env, 'TestForm')
+
+export default class Form extends React.PureComponent {
   constructor(props) {
     super(props)
     const {isComplete, isValidate, data, errorMsgList} = this.props
@@ -53,7 +57,7 @@ export default class Form extends React.Component {
 
   componentDidUpdate(preProps, preState) {
     this.props.onChange(this.data)
-    console.log(this.state.data.realname.isError)
+    logger.log('realname isError',this.data.data.realname.isError)
   }
 
   componentWillUnmount() {
@@ -65,7 +69,7 @@ export default class Form extends React.Component {
 
   initFormField = (children) => {
     // TODO 优化性能，当 Field 已经有 key 的时候，就不重新 clone 了
-    console.log(this.count)
+    logger.log('initFormField invoke times', this.count)
     this.count++
     const handleFieldChange = this.handleFieldChange
     return React.Children.map(children, (el, i) => {
@@ -92,7 +96,9 @@ export default class Form extends React.Component {
   handleFieldChange = (fieldData) => {
     let state = {
       ...this.state,
-      ...this.state.data
+      data: {
+        ...this.state.data
+      }
     }
     let name = fieldData.name
     if (state.data[name]) {
@@ -106,7 +112,10 @@ export default class Form extends React.Component {
     // TODO 重写 isFormComplete
     state.isComplete = isFormComplete(state.data)
     this.setState({
-      ...state
+      ...state,
+      data: {
+        ...state.data
+      }
     })
     this.props.onFieldChange(fieldData)
   }
@@ -115,10 +124,13 @@ export default class Form extends React.Component {
     const {onSubmit} = this.props
     let state = {
       ...this.state,
-      ...this.state.data
+      data: {
+        ...this.state.data
+      }
     }
     state = isFromValidate(state)
     const isValidate = state.isValidate
+    logger.log('state', state)
     if (isValidate) {
       formPure(state.data)
         .then(pureData => onSubmit(isValidate, state, pureData))
@@ -126,7 +138,10 @@ export default class Form extends React.Component {
       onSubmit(isValidate, state, null)
     }
     this.setState({
-      ...state
+      ...state,
+      data: {
+        ...this.state.data
+      }
     })
   }
 
@@ -140,7 +155,7 @@ export default class Form extends React.Component {
   }
 
   render() {
-    console.log('Test form render')
+    logger.log('render')
     const prefix = 'NEUI'
     const {className, onChange, onSubmit, onFieldChange, ...others} = this.props
     const children = this.initFormField(this.props.children)
