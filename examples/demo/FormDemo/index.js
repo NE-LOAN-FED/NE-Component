@@ -22,7 +22,13 @@ class FormDemo extends React.Component {
   }
 
   componentDidMount() {
+    const formState = this.$Form.data
+    this.setState({
+      formState
+    })
   }
+
+  componentWillUpdate() {}
 
   handleSubmit = (isValidate, state, pureData) => {
     logger.log('form submit', isValidate, state, pureData)
@@ -54,28 +60,27 @@ class FormDemo extends React.Component {
     return (
       <section className="page-form-demo">
         <p>page-form-demo</p>
+        <span>你好</span>
         <TestForm
           onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
           onChange={this.handleChange}
           ref={(ref) => {
-            this['form'] = ref
+            this['$Form'] = ref
           } }
         >
-          <div>
-            <span>Name</span>
-            <Field><Input
-              type='text'
-              name='realname'
-              validate={/\d{9}/}
-            /></Field>
-            <span>Phone</span>
-            <Field><Input
-              type='text'
-              name='phone'
-              validate={/\d{9}/}
-            /></Field>
-          </div>
+          <span>Name</span>
+          <Field><Input
+            type='text'
+            name='realname'
+            validate={/\d{9}/}
+          /></Field>
+          <span>Phone</span>
+          <Field><Input
+            type='text'
+            name='phone'
+            validate={/\d{9}/}
+          /></Field>
           <button type="submit" disabled={isComplete}>提交</button>
         </TestForm>
 

@@ -57,7 +57,6 @@ export default class Form extends React.PureComponent {
 
   componentDidUpdate(preProps, preState) {
     this.props.onChange(this.data)
-    logger.log('realname isError',this.data.data.realname.isError)
   }
 
   componentWillUnmount() {
