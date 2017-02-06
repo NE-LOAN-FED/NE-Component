@@ -4,8 +4,7 @@
  */
 import React from 'react'
 import ReactDom from 'react-dom'
-import { hashHistory } from 'react-router'
-import Root from './Root'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 
 import App from './demo/App'
 import HomeDemo from './demo/HomeDemo'
@@ -23,13 +22,3 @@ ReactDom.render((
     </Route>
   </Router>
 ), root)
-
-if (module.hot) {
-  module.hot.accept('./Root', () => {
-    const NRoot = require('./Root').default
-    ReactDom.render(
-      <NRoot history={hashHistory}/>,
-      root
-    )
-  })
-}
