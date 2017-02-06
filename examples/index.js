@@ -10,15 +10,16 @@ import {Router, hashHistory, Route, IndexRedirect, IndexRoute} from 'react-route
 import App from './demo/App'
 import HomeDemo from './demo/HomeDemo'
 import FormDemo from './demo/FormDemo'
+import AlertDemo from './demo/AlertDemo'
 
 const root = document.getElementById('root')
 
 ReactDom.render((
   <Router history={hashHistory}>
-    <Route path={'/'} component={App}>
+    <Route path="/" component={App}>
       <IndexRoute component={HomeDemo}/>
-      <Route path={'form'} component={FormDemo}>
-      </Route>
+      <Route path="form" component={FormDemo} />
+      <Route path="alert" component={AlertDemo} />
     </Route>
   </Router>
 ), root)
