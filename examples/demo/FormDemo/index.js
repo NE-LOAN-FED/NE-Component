@@ -8,6 +8,10 @@ import Input from '../../../components/Form/TestInput'
 import createFormItem from '../../../components/Form/createFormItem'
 import Field from '../../../components/Form/Field.js'
 import classnames from 'classnames'
+import Logger from '../../../utils/log'
+
+
+const logger = new Logger('DEBUG', 'FormDemo')
 
 class FormDemo extends React.Component {
   constructor() {
@@ -18,51 +22,66 @@ class FormDemo extends React.Component {
   }
 
   componentDidMount() {
+    const formState = this.$Form.data
+    this.setState({
+      formState
+    })
   }
 
+  componentWillUpdate() {}
+
   handleSubmit = (isValidate, state, pureData) => {
-    console.log('form submit', isValidate, state, pureData)
+    logger.log('form submit', isValidate, state, pureData)
   }
   handleChange = (formData) => {
-    console.log('form change', formData)
+    logger.log('form change', formData)
+    // this.setState({
+    //
+    // })
   }
   handleFieldChange = (fieldData) => {
-    console.log('field change', fieldData)
+    logger.log('field change', fieldData)
   }
   handleInputChange = () => {
-    console.log('handleInputChange')
+    logger.log('handleInputChange')
   }
   handleInputFocus = () => {
-    console.log('handleInputFocus')
+    logger.log('handleInputFocus')
   }
   handleInputBlur = () => {
-    console.log('handleInputBlur')
+    logger.log('handleInputBlur')
   }
   handleInputEmpty = () => {
-    console.log('handleInputEmpty')
+    logger.log('handleInputEmpty')
   }
 
   render() {
+    const {isComplete} = this.state.formState
     return (
       <section className="page-form-demo">
         <p>page-form-demo</p>
+        <span>你好</span>
         <TestForm
           onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
           onChange={this.handleChange}
           ref={(ref) => {
-            this['form'] = ref
+            this['$Form'] = ref
           } }
         >
-          <div>
-            <span>Name</span>
-            <Field><Input
-              type='text'
-              name='realname'
-              validate={/\d{9}/}
-            /></Field>
-          </div>
-          <button type="submit">sdfsdf</button>
+          <span>Name</span>
+          <Field><Input
+            type='text'
+            name='realname'
+            validate={/\d{9}/}
+          /></Field>
+          <span>Phone</span>
+          <Field><Input
+            type='text'
+            name='phone'
+            validate={/\d{9}/}
+          /></Field>
+          <button type="submit" disabled={isComplete}>提交</button>
         </TestForm>
 
       </section>

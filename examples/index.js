@@ -4,8 +4,8 @@
  */
 import React from 'react'
 import ReactDom from 'react-dom'
-import {Router, hashHistory, Route, IndexRedirect, IndexRoute} from 'react-router'
-// import routes from './routes'
+import { hashHistory } from 'react-router'
+import Root from './Root'
 
 import App from './demo/App'
 import HomeDemo from './demo/HomeDemo'
@@ -23,3 +23,13 @@ ReactDom.render((
     </Route>
   </Router>
 ), root)
+
+if (module.hot) {
+  module.hot.accept('./Root', () => {
+    const NRoot = require('./Root').default
+    ReactDom.render(
+      <NRoot history={hashHistory}/>,
+      root
+    )
+  })
+}
