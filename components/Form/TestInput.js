@@ -5,7 +5,7 @@ import React, {PropTypes} from 'react'
 import classnames from 'classnames'
 import Icon from '../Icon'
 import Logger from '../../utils/log.js'
-
+// TODO 完成 Input 重构
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
 const logger = new Logger(env, 'TestInput')
 
@@ -145,6 +145,7 @@ export default class TestInput extends React.Component {
   handleChange = (e) => {
     const {onChange} = this.props
     onChange(e)
+    this.handleValidate(e)
     this.setState({
       value: e.target.value,
       showDelIcon: !!e.target.value.length

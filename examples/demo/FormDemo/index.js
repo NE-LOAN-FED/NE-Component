@@ -31,7 +31,7 @@ class FormDemo extends React.Component {
   componentWillUpdate() {}
 
   handleSubmit = (isValidate, state, pureData) => {
-    logger.log('form submit', isValidate, state, pureData)
+    logger.log(`form submit, isValidate:${isValidate}, state:${state}, pureData:${pureData}`)
   }
   handleChange = (formData) => {
     logger.log('form change', formData)
@@ -70,16 +70,18 @@ class FormDemo extends React.Component {
           } }
         >
           <span>Name</span>
-          <Field><Input
+          <Field>
+            <Input
             type='text'
             name='realname'
-            validate={/\d{9}/}
-          /></Field>
+            validate={/^\d{9}$/}
+          />
+          </Field>
           <span>Phone</span>
           <Field><Input
             type='text'
             name='phone'
-            validate={/\d{9}/}
+            validate={/^\d{9}$/}
           /></Field>
           <button type="submit" disabled={isComplete}>提交</button>
         </TestForm>

@@ -213,13 +213,12 @@ export default class Form extends React.Component {
         }
       })
     }
-    const chi = getForms(children)
-    console.log(chi)
+    const FormChild = getForms(children)
     return (
       // 不使用默认表单，因为按回车键会触发表单提交事件
       <div className={cls}
            {...others}>
-        {chi}
+        {FormChild}
       </div>
     )
   }
