@@ -1,10 +1,12 @@
 /**
  * Created by hzyuanqi1 on 2016/9/28.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 
-export default class VerifyButton extends Component {
+const PropTypes = React.PropTypes
+
+export default class VerifyButton extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

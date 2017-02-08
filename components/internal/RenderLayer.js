@@ -1,9 +1,9 @@
-/* eslint-disable */
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-import React, {Component, PropTypes} from 'react'
-import {unstable_renderSubtreeIntoContainer, unmountComponentAtNode} from 'react-dom'
+const PropTypes = React.PropTypes
 
-class RenderLayer extends Component {
+class RenderLayer extends React.Component {
   static propTypes = {
     render: PropTypes.func,
     show: PropTypes.bool,
@@ -61,7 +61,7 @@ class RenderLayer extends Component {
       this.layer.removeEventListener('click', this.onClick)
     }
 
-    unmountComponentAtNode(this.layer)
+    ReactDOM.unmountComponentAtNode(this.layer)
     document.body.removeChild(this.layer)
     this.props.bodyOverHidden && this.setBodyOver(false)
     this.layer = null
@@ -88,7 +88,7 @@ class RenderLayer extends Component {
         }
 
         const layerElem = render()
-        this.layerElem = unstable_renderSubtreeIntoContainer(this, layerElem, this.layer)
+        this.layerElem = ReactDOM.unstable_renderSubtreeIntoContainer(this, layerElem, this.layer)
         bodyOverHidden && this.setBodyOver(true)
       }
     } else {

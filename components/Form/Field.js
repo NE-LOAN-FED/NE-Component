@@ -1,11 +1,11 @@
 /**
  * Created by kisnows on 2016/12/27.
  */
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import create from './createFormField'
 
-export default class Field extends Component {
+export default class Field extends React.Component {
   componentDidMount() {
     // this.injectMethod()
   }

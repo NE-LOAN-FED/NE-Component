@@ -1,7 +1,7 @@
 /**
  * Created by hzyuanqi1 on 2016/9/19.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 
 export default class CellFooter extends React.Component {

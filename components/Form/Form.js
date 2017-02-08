@@ -1,11 +1,13 @@
 /**
  * Created by hzyuanqi1 on 2016/9/12.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import {Input, Select, CheckBox} from './index'
 import {isFormComplete, formPure, isFromValidate} from './FormUtils'
 import cloneDeep from 'lodash/cloneDeep'
+
+const PropTypes = React.PropTypes
 
 export default class Form extends React.Component {
   constructor(props) {
