@@ -57,7 +57,8 @@ export default class Form extends React.PureComponent {
   }
 
   componentDidUpdate(preProps, preState) {
-    this.props.onChange(this.data)
+    // logger.log('componentDidUpdate',preState, this.data)
+    // this.props.onChange(this.data)
   }
 
   componentWillUnmount() {
@@ -157,18 +158,17 @@ export default class Form extends React.PureComponent {
   render() {
     logger.log('render')
     const prefix = 'NEUI'
-    const {className, onChange, onSubmit, onFieldChange, ...others} = this.props
+    const {className, onChange, onSubmit, onFieldChange} = this.props
     const children = this.initFormField(this.props.children)
     const cls = classNames({
       [`${prefix}_cells`]: true,
       [`${prefix}_cells_form`]: true,
       [className]: className
     })
-
     return (
       <form className={cls}
             onSubmit={e => this.handleFormSubmit(e)}
-            {...others}>
+      >
         {children}
       </form>
     )
