@@ -5,9 +5,10 @@ import React from 'react'
 import TestForm from '../../../components/Form/TestForm'
 import Form from '../../../components/Form/Form'
 import Input from '../../../components/Form/TestInput'
-import createFormItem from '../../../components/Form/createFormItem'
+import createFormItem from '../../../components/Form/createFormField'
 import Field from '../../../components/Form/Field.js'
-import Button from '../../../components/Button'
+import FieldA from '../../../components/Form/Field'
+import ButtonA from '../../../components/Button'
 import classnames from 'classnames'
 import Logger from '../../../utils/log'
 
@@ -78,22 +79,21 @@ class FormDemo extends React.Component {
           } }
         >
           <span>Name</span>
-          <Field>
-            <Input
-              type='text'
-              name='realname'
-              validate={/^\d{9}$/}
-            />
-          </Field>
+          <Input name={'smile'}/>
+          <Input
+            type='text'
+            name='realname'
+            validate={/^\d{9}$/}
+          />
           <span>Phone</span>
-          <Field><Input
+          <Input
             type='text'
             name='phone'
             validate={/^\d{9}$/}
-          /></Field>
-          <Button type="submit" disabled={isComplete}>提交</Button>
+          />
+          <ButtonA type="submit" disabled={!isComplete}>提交</ButtonA>
         </TestForm>
-        <pre style={{'whiteSpace':'normal'}}>{JSON.stringify(formData)}</pre>
+        <pre style={{'whiteSpace': 'normal'}}>{JSON.stringify(formData)}</pre>
       </section>
     )
   }

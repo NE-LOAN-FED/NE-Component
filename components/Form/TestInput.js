@@ -9,7 +9,7 @@ import Logger from '../../utils/log.js'
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
 const logger = new Logger(env, 'TestInput')
 
-export default class TestInput extends React.Component {
+export default class _FieldTestInput extends React.Component {
   constructor(props) {
     super(props)
     this.timer = null
@@ -89,11 +89,11 @@ export default class TestInput extends React.Component {
   }
 
   componentDidUpdate(preProps, preState) {
-    const {onFieldChange} = preProps
+    const {handleFieldChange} = preProps
     logger.log('DidUpdate ','isError now', this.state.isError, 'isError pre', preState.isError)
     if (this.state.value !== preState.value
       || this.state.isError !== preState.isError) {
-      onFieldChange(this.data)
+      handleFieldChange(this.data)
     }
   }
 

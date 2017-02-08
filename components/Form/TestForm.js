@@ -6,7 +6,7 @@ import classNames from 'classnames'
 import Field from './Field'
 import {isFormComplete, formPure, isFromValidate} from './TestFormUtils'
 import Logger from '../../utils/log'
-import create from './createFormItem.js'
+import create from './createFormField.js'
 
 //TODO 完成 Form 重构
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
@@ -23,6 +23,7 @@ export default class Form extends React.PureComponent {
       errorMsgList: errorMsgList || []
     }
     this.count = 1
+    this.FormFields = []
   }
 
   static propTypes = {
@@ -31,7 +32,7 @@ export default class Form extends React.PureComponent {
     onSubmit: PropTypes.func.isRequired,
     isComplete: PropTypes.bool,
     isValidate: PropTypes.bool,
-    data: PropTypes.any,
+    data: PropTypes.object,
     errorMsgList: PropTypes.array
   }
 
@@ -73,9 +74,21 @@ export default class Form extends React.PureComponent {
     logger.log('initFormField invoke times', this.count)
     this.count++
     const handleFieldChange = this.handleFieldChange
+
+    // 简单粗暴，在 Form 更新的时候直接清空上一次保存的 FormFields，全量更新，
+    // 避免 FormFields 内容或者数量发生变化时 this.FormFields 数据不正确的问题
+    const FormFields = this.FormFields = []
+
+    /**
+     * 收集所有需要管理的表单组件，并注册 handleFieldChange 方法
+     */
     return React.Children.map(children, (el, i) => {
+      // 只要 Name 以 Field 开头，就认为是需要 From 管理的组件
+      const reg = /^_Field/
+      const childName = el.type.name
       if (!el) return null
-      if (el.type === Field) {
+      if (reg.test(childName)) {
+        FormFields.push(el)
         return React.cloneElement(el, {
           key: i,
           handleFieldChange
@@ -101,6 +114,7 @@ export default class Form extends React.PureComponent {
         ...this.state.data
       }
     }
+
     let name = fieldData.name
     if (state.data[name]) {
       state.data[name] = {
@@ -110,15 +124,25 @@ export default class Form extends React.PureComponent {
     } else {
       state.data[name] = fieldData
     }
+
     // TODO 重写 isFormComplete
     state.isComplete = isFormComplete(state.data)
+    this.props.onFieldChange(fieldData)
+
+    // 为了避免传入 state 被外界修改，所以传入一个新的对象
+    this.props.onChange({
+      ...state,
+      data: {
+        ...state.data
+      }
+    })
+
     this.setState({
       ...state,
       data: {
         ...state.data
       }
     })
-    this.props.onFieldChange(fieldData)
   }
   handleFormSubmit = (e) => {
     e.preventDefault()

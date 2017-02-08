@@ -3,7 +3,7 @@
  */
 import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
-import create from './createFormItem'
+import create from './createFormField'
 
 export default class Field extends Component {
   componentDidMount() {
