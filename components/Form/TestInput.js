@@ -2,7 +2,7 @@
  * Created by kisnows on 2016/12/26.
  */
 import React, {PropTypes} from 'react'
-import classnames from 'classnames'
+import classNames from 'classnames'
 import Icon from '../Icon'
 import Logger from '../../utils/log.js'
 
@@ -90,9 +90,8 @@ export default class TestInput extends React.Component {
 
   componentDidUpdate(preProps, preState) {
     const {onFieldChange} = preProps
-    logger.log('DidUpdate ','isError now', this.state.isError, 'isError pre', preState.isError)
-    if (this.state.value !== preState.value
-      || this.state.isError !== preState.isError) {
+    logger.log('DidUpdate', 'isError now', this.state.isError, 'isError pre', preState.isError)
+    if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
       onFieldChange(this.data)
     }
   }
@@ -128,9 +127,8 @@ export default class TestInput extends React.Component {
       const validateResult = validate(value)
       if (validateResult.then instanceof Function) {
         validateResult.then(result => this.setState({
-            isError: result
-          }
-        ))
+          isError: result
+        }))
       } else {
         isError = !validateResult
       }
@@ -196,7 +194,7 @@ export default class TestInput extends React.Component {
     const {showDelIcon, value} = this.state
     const {className, disabled, name} = this.props
     const prefix = 'NEUI'
-    const cls = classnames({
+    const cls = classNames({
       [`${prefix}_input`]: true,
       [`${prefix}_input_disabled`]: disabled,
       [className]: className
