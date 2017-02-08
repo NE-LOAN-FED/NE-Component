@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import './CellInput.scss'
 
+const PropTypes = React.PropTypes
 const NUMBER_REGEXP = /^\d+$/
 
-export default class CellInput extends Component {
+export default class CellInput extends React.Component {
   static propTypes = {
     value: PropTypes.string || PropTypes.number,
     name: PropTypes.string,

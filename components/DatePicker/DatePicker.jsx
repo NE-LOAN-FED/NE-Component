@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
 import Picker from '../Picker'
 import Icon from '../Icon'
@@ -16,7 +16,9 @@ import {
 } from './DateUtils.js'
 import './DatePicker.scss'
 
-class DatePicker extends Component {
+const PropTypes = React.PropTypes
+
+class DatePicker extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string, // 修改date组件class前缀
     className: PropTypes.string,  // 添加date class

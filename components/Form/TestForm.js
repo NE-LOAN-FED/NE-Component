@@ -1,12 +1,14 @@
 /**
  * Created by kisnows on 2016/12/26.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import Field from './Field'
 import {isFormComplete, formPure, isFromValidate} from './FormUtils'
 import Logger from '../../utils/log'
 import create from './createFormItem.js'
+
+const PropTypes = React.PropTypes
 
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
 const logger = new Logger(env, 'TestForm')

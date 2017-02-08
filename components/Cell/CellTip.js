@@ -1,10 +1,10 @@
 /**
  * Created by hzyuanqi1 on 2016/9/22.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 
-export default class CellTip extends Component {
+export default class CellTip extends React.Component {
 
   static propTypes = {}
 

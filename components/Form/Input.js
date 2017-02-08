@@ -1,6 +1,8 @@
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
+
+const PropTypes = React.PropTypes
 
 export default class Input extends React.Component {
   constructor(props) {
