@@ -1,6 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-import './CellInput.scss'
 
 const PropTypes = React.PropTypes
 const NUMBER_REGEXP = /^\d+$/

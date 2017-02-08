@@ -1,6 +1,5 @@
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
-import './Toast.scss'
 
 const PropTypes = React.PropTypes
 

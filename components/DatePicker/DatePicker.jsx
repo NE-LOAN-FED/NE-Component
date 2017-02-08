@@ -14,7 +14,6 @@ import {
   getDays,
   getDaysInMonth
 } from './DateUtils.js'
-import './DatePicker.scss'
 
 const PropTypes = React.PropTypes
 

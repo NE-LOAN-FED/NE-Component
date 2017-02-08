@@ -1,6 +1,5 @@
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
-import './Alert.scss'
 
 const PropTypes = React.PropTypes
 
