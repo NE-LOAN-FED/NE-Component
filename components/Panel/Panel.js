@@ -1,7 +1,7 @@
 /**
  * Created by hzyuanqi1 on 2016/9/21.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 
 const PanelTitle = (props) => {

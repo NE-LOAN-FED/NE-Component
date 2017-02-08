@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
-import './Modal.scss'
 
+const PropTypes = React.PropTypes
 
 const noop = () => { }
 
-class Modal extends Component {
+class Modal extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     className: PropTypes.string,  // 添加modal class

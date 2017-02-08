@@ -1,0 +1,94 @@
+@import "../style/setting";
+
+$iconfont-prefix: #{$prefixCls}_icon;
+
+.#{$iconfont-prefix} {
+  @include iconfont-mixin();
+}
+
+.NEUI_icon {
+  &_tip {
+    color: $blue;
+    &:before {
+      content: '\e609';
+    }
+  }
+  &_loading {
+    animation: diurnalCircle 1s infinite linear;
+    margin-left: 0;
+    &:before {
+      content: '\e60c';
+    }
+  }
+  &_del {
+    color: $gray_light;
+    &:before {
+      content: '\e60b';
+    }
+  }
+  &_arrow {
+    color: $gray_light;
+    &:before {
+      content: '\e600';
+    }
+  }
+  &_tick {
+    color: $blue;
+    &:before {
+      content: '\e608';
+    }
+  }
+  &_camera {
+    color: $gray_light;
+    &:before {
+      content: '\e604'
+    }
+  }
+  &_wait {
+    color: $color_warning;
+    font-size: pxToRem(56);
+    margin-left: 0;
+    &:before {
+      content: '\e60e'
+    }
+  }
+  &_camera_close {
+    color: $gray_light;
+    &:before {
+      content: '\e605'
+    }
+  }
+  // FIXME content和图标对不上，找视觉
+  &_close {
+    color: $color_warning;
+    font-size: pxToRem(56);
+    margin-left: 0;
+    &:before {
+      content: '\e612'
+    }
+  }
+  &_wait {
+    color: $color_warning;
+    font-size: pxToRem(56);
+    margin-left: 0;
+    &:before {
+      content: '\e611'
+    }
+  }
+  &_warning {
+    color: $color_warning;
+    font-size: pxToRem(56);
+    margin-left: 0;
+    &:before {
+      content: '\e610'
+    }
+  }
+  &_success {
+    color: $color_warning;
+    font-size: pxToRem(56);
+    margin-left: 0;
+    &:before {
+      content: '\e60f'
+    }
+  }
+}

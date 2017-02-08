@@ -1,9 +1,10 @@
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
 
+const PropTypes = React.PropTypes
 // TODO 待完成,解决嵌套在 Form 组件后 checkbox 的选择问题
-export default class Checkbox extends Component {
+export default class Checkbox extends React.Component {
 
   static propTypes = {
     name: PropTypes.string,

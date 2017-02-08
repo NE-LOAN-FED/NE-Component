@@ -1,8 +1,10 @@
 /**
  * Created by hzyuanqi1 on 2016/9/20.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
+
+const PropTypes = React.PropTypes
 
 export default class FormCell extends React.Component {
 

@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
-import './Toast.scss'
 
+const PropTypes = React.PropTypes
 
 const noop = () => {}
 
-class Toast extends Component {
+class Toast extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     className: PropTypes.string,  // 添加toast class

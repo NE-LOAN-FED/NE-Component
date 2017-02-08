@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
-import './Alert.scss'
 
+const PropTypes = React.PropTypes
 
 const noop = () => { }
 
-class Alert extends Component {
+class Alert extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     className: PropTypes.string,  // 添加alert class

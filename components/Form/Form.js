@@ -1,11 +1,13 @@
 /**
  * Created by hzyuanqi1 on 2016/9/12.
  */
-import React, {Component, PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import {Input, Select, CheckBox} from './index'
 import {isFormComplete, formPure, isFromValidate} from './FormUtils'
 import cloneDeep from 'lodash/cloneDeep'
+
+const PropTypes = React.PropTypes
 
 export default class Form extends React.Component {
   constructor(props) {
@@ -213,12 +215,12 @@ export default class Form extends React.Component {
         }
       })
     }
-
+    const FormChild = getForms(children)
     return (
       // 不使用默认表单，因为按回车键会触发表单提交事件
       <div className={cls}
            {...others}>
-        {getForms(children)}
+        {FormChild}
       </div>
     )
   }

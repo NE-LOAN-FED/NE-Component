@@ -24,6 +24,8 @@ index.html
 /connect.lock
 /.chrome
 
+/dist
+
 # Logs
 logs
 *.log

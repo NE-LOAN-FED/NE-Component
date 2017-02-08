@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import { Animate, easeOutCubic, easeInOutCubic } from '../internal/Animate'
-import './Picker.scss'
 
+const PropTypes = React.PropTypes
 
 const DECELERATION_VELOCITY_RATE = 0.95
 
@@ -44,7 +44,7 @@ function isChildrenEqual(c1, c2, pure) {
   return true
 }
 
-class Picker extends Component {
+class Picker extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     defaultSelectedValue: PropTypes.any,
