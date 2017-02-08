@@ -7,6 +7,7 @@ import Form from '../../../components/Form/Form'
 import Input from '../../../components/Form/TestInput'
 import createFormItem from '../../../components/Form/createFormItem'
 import Field from '../../../components/Form/Field.js'
+import Button from '../../../components/Button'
 import classnames from 'classnames'
 import Logger from '../../../utils/log'
 
@@ -17,27 +18,32 @@ class FormDemo extends React.Component {
   constructor() {
     super()
     this.state = {
-      formState: {}
+      formData: {}
     }
   }
 
   componentDidMount() {
-    const formState = this.$Form.data
+    const formData = this.$Form.data
     this.setState({
-      formState
+      formData
     })
   }
 
-  componentWillUpdate() {}
+  componentWillReceiveProps() {
+
+  }
+
+  componentWillUpdate() {
+  }
 
   handleSubmit = (isValidate, state, pureData) => {
-    logger.log('form submit', isValidate, state, pureData)
+    logger.log(`form submit, isValidate:${isValidate}, state:${state}, pureData:${pureData}`)
   }
   handleChange = (formData) => {
     logger.log('form change', formData)
-    // this.setState({
-    //
-    // })
+    this.setState({
+      formData
+    })
   }
   handleFieldChange = (fieldData) => {
     logger.log('field change', fieldData)
@@ -56,7 +62,9 @@ class FormDemo extends React.Component {
   }
 
   render() {
-    const {isComplete} = this.state.formState
+    logger.log('render')
+    const formData = this.state.formData
+    const {isComplete} = formData
     return (
       <section className="page-form-demo">
         <p>page-form-demo</p>
@@ -70,20 +78,22 @@ class FormDemo extends React.Component {
           } }
         >
           <span>Name</span>
-          <Field><Input
-            type='text'
-            name='realname'
-            validate={/\d{9}/}
-          /></Field>
+          <Field>
+            <Input
+              type='text'
+              name='realname'
+              validate={/^\d{9}$/}
+            />
+          </Field>
           <span>Phone</span>
           <Field><Input
             type='text'
             name='phone'
-            validate={/\d{9}/}
+            validate={/^\d{9}$/}
           /></Field>
-          <button type="submit" disabled={isComplete}>提交</button>
+          <Button type="submit" disabled={isComplete}>提交</Button>
         </TestForm>
-
+        <pre style={{'whiteSpace':'normal'}}>{JSON.stringify(formData)}</pre>
       </section>
     )
   }

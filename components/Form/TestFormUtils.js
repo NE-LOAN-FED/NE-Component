@@ -1,5 +1,5 @@
 /**
- * Created by kisnows on 2016/9/19.
+ * Created by kisnows on 2017/2/7.
  */
   // Form 表单的输入数据格式应该是如下格式
 const FormStateSchema =
@@ -60,49 +60,30 @@ function isFormComplete(formData) {
  * 处理 Form 数据，根据每一条数据是否合法,把第一条错误的信息放到 FormState 的 errorMsg 里面,并根据整体验证结果修改 formState.isValidate 值。
  * 如果没有错误，需要清空 errorMsg 字段。
  * 要注意，这里直接修改了传入的 formState 对象。（考虑是否需要进行深拷贝，返回新的对象，不直接修改原来的 formState）
- * @param formState 表单数据
- * @returns 修改后的 formState 对象
+ * @param formState {object} 表单数据
+ * @returns {object} 修改后的新的 formState 对象
  */
 function isFromValidate(formState) {
-  let actualRight = 0
-  formState.errorMsg = ''
-  const formData = formState.data
-  const shouldRight = Object.keys(formData).length
+  let state = {
+    ...formState,
+    errorMsgList: [],
+    data: {
+      ...formState.data
+    }
+  }
+  let isValidate = false
+  const formData = state.data
   Object.keys(formData).forEach((v, k) => {
-    const validate = formData[v].validate
-    if (validate) {
-      if (validate instanceof RegExp) {
-        if (formData[v].value && validate.test(formData[v].value)) {
-          formData[v].isError = false
-          actualRight += 1
-        } else {
-          formData[v].isError = true
-          if (!formState.errorMsg) {
-            formState.errorMsg = formData[v].errorMsg
-          }
-        }
-      } else if (validate instanceof Function) {
-        if (formData[v].value && validate(formData[v].value)) {
-          formData[v].isError = false
-          actualRight += 1
-        } else {
-          formData[v].isError = true
-          if (!formState.errorMsg) {
-            formState.errorMsg = formData[v].errorMsg
-          }
-        }
-      }
-    } else if (formData[v].value &&
-      (typeof formData[v].value === 'string' ? formData[v].value.trim().length > 0 : true)) {
-      actualRight += 1
-      formData[v].isError = false
+    const isError = formData[v].isError
+    if (isError) {
+      state.errorMsgList.push(formData[v].errorMsg)
+      isValidate = false
     } else {
-      formData[v].isError = true
+      isValidate = true
     }
   })
-  formState.isValidate = actualRight >= shouldRight
-  formState.isValidate ? formState.errorMsg = '' : null
-  return formState
+  state.isValidate = isValidate
+  return state
 }
 
 /**
