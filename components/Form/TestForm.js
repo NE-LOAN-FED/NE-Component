@@ -3,10 +3,8 @@
  */
 import React from 'react'
 import classNames from 'classnames'
-import Field from './Field'
 import {isFormComplete, formPure, isFromValidate} from './TestFormUtils'
 import Logger from '../../utils/log'
-import create from './createFormField.js'
 
 const PropTypes = React.PropTypes
 
@@ -14,6 +12,12 @@ const PropTypes = React.PropTypes
 
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
 const logger = new Logger(env, 'TestForm')
+// 标识当前 Form 处于的状态
+const STATE = {
+  Normal: 'Normal',
+  FieldChange: 'FieldChange'
+}
+
 
 export default class Form extends React.PureComponent {
   constructor(props) {
@@ -26,7 +30,9 @@ export default class Form extends React.PureComponent {
       errorMsgList: errorMsgList || []
     }
     this.count = 1
-    this.FormFields = []
+    this.formFields = []
+    this.children = []
+    this.CURRENT_STATE = STATE.Normal
   }
 
   static propTypes = {
@@ -41,27 +47,31 @@ export default class Form extends React.PureComponent {
 
   static defaultProps = {}
 
+  componentWillMount() {
+    const children = this.props.children
+    this.children = this.collectFormField(children)
+    this.initFormDataStructure()
+  }
+
   componentDidMount() {
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.children !== this.props.children) {
-      // this.initFormField()
+      this.children = this.collectFormField(nextProps.children)
+      if (this.CURRENT_STATE === STATE.Normal) {
+        this.updateFormDataStructure()
+        logger.log('updateFormDataStructure end', this.state)
+      }
     }
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return this.state.isComplete !== nextState.isComplete
-  //     || this.state.isValidate !== nextState.isValidate
-  //     || this.state.errorMsgList.length !== nextState.errorMsgList.length
-  // }
-
   componentWillUpdate(nextProps, nextState) {
-
+    logger.log('componentWillUpdate', nextState)
   }
 
   componentDidUpdate(preProps, preState) {
-    // logger.log('componentDidUpdate',preState, this.data)
+    logger.log('componentDidUpdate', preState, this.state, this.CURRENT_STATE)
     // this.props.onChange(this.data)
   }
 
@@ -72,45 +82,112 @@ export default class Form extends React.PureComponent {
     return this.state
   }
 
-  initFormField = (children) => {
+  /**
+   * 递归遍历收集所有需要管理的表单组件，并注册 handleFieldChange 方法
+   * @param children
+   * @returns {*} 处理过的 children
+   */
+  collectFormField = (children) => {
     // TODO 优化性能，当 Field 已经有 key 的时候，就不重新 clone 了
-    logger.log('initFormField invoke times', this.count)
+    logger.log('collectFormField invoke times', this.count)
     this.count++
     const handleFieldChange = this.handleFieldChange
 
-    // 简单粗暴，在 Form 更新的时候直接清空上一次保存的 FormFields，全量更新，
-    // 避免 FormFields 内容或者数量发生变化时 this.FormFields 数据不正确的问题
-    const FormFields = this.FormFields = []
+    // 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formFields，全量更新，
+    // 避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题
+    const FormFields = this.formFields = []
 
-    /**
-     * 收集所有需要管理的表单组件，并注册 handleFieldChange 方法
-     */
-    return React.Children.map(children, (el, i) => {
-      // 只要 Name 以 Field 开头，就认为是需要 From 管理的组件
-      const reg = /^_Field/
-      const childName = el.type.name
-      if (!el) return null
-      if (reg.test(childName)) {
-        FormFields.push(el)
-        return React.cloneElement(el, {
-          key: i,
-          handleFieldChange
-        })
-      } else {
-        if (el.props && el.props.children instanceof Array) {
-          const children = this.initFormField(el.props.children)
+    function getChildList(children) {
+      return React.Children.map(children, (el, i) => {
+        // 只要 Name 以 Field 开头，就认为是需要 From 管理的组件
+        if (!el || el === null) return null
+
+        const reg = /^_Field/
+        const childName = el.type.name
+        if (reg.test(childName)) {
+          FormFields.push(el)
           return React.cloneElement(el, {
             key: i,
-            children
+            handleFieldChange
           })
         } else {
-          return el
+          if (el.props && el.props.children instanceof Array) {
+            const children = getChildList(el.props.children)
+            return React.cloneElement(el, {
+              key: i,
+              children
+            })
+          } else {
+            return el
+          }
+        }
+      })
+    }
+
+    const childList = getChildList(children)
+    logger.log('childList', childList)
+    return childList
+  }
+
+  /**
+   * 初始化 FormData 结构，给 this.state.data 添加 key 为表单项 name 的属性
+   */
+  initFormDataStructure = () => {
+    logger.log('initFormDataStructure')
+    const formData = {
+      ...this.state.data
+    }
+
+    this.formFields.forEach((formField, k) => {
+      const Props = formField.props
+      const Name = Props.name
+      formData[Name] = {
+        ...formData[Name],
+        required: typeof Props.required === 'undefined' ? true : Props.required
+      }
+    })
+
+    this.setState({
+      ...this.state,
+      isComplete: isFormComplete(formData),
+      data: formData
+    })
+  }
+
+  /**
+   * 更新 FormData 结构，当 Form 下表单项添加或删除时，将 FormData 结构更新到最新
+   */
+  updateFormDataStructure = () => {
+    const formData = {
+      ...this.state.data
+    }
+    const formItems = []
+    // 在 formData 中添加新加入的表单项
+    this.formFields.forEach((formField, k) => {
+      const Props = formField.props
+      const Name = Props.name
+      formItems.push(Name)
+      if (typeof formData[Name] === 'undefined') {
+        formData[Name] = {
+          required: typeof Props.required === 'undefined' ? true : Props.required
         }
       }
+    })
+    // 从 formData 中去掉删除的表单项
+    Object.keys(formData).forEach((v) => {
+      if (formItems.indexOf(v) === -1) {
+        delete formData[v]
+      }
+    })
+    this.setState({
+      ...this.state,
+      isComplete: isFormComplete(formData),
+      data: formData
     })
   }
 
   handleFieldChange = (fieldData) => {
+    this.CURRENT_STATE = STATE.FieldChange
     let state = {
       ...this.state,
       data: {
@@ -139,14 +216,17 @@ export default class Form extends React.PureComponent {
         ...state.data
       }
     })
-
+    console.log('handleFieldChange', state)
     this.setState({
       ...state,
       data: {
         ...state.data
       }
+    }, () => {
+      this.CURRENT_STATE = STATE.Normal
     })
   }
+
   handleFormSubmit = (e) => {
     e.preventDefault()
     const {onSubmit} = this.props
@@ -156,21 +236,17 @@ export default class Form extends React.PureComponent {
         ...this.state.data
       }
     }
+    // TODO 重写 isFromValidate
     state = isFromValidate(state)
     const isValidate = state.isValidate
-    logger.log('state', state)
     if (isValidate) {
       formPure(state.data)
         .then(pureData => onSubmit(isValidate, state, pureData))
     } else {
       onSubmit(isValidate, state, null)
     }
-    this.setState({
-      ...state,
-      data: {
-        ...this.state.data
-      }
-    })
+
+    this.setState(state)
   }
 
   /**
@@ -186,7 +262,6 @@ export default class Form extends React.PureComponent {
     logger.log('render')
     const prefix = 'NEUI'
     const {className, onChange, onSubmit, onFieldChange} = this.props
-    const children = this.initFormField(this.props.children)
     const cls = classNames({
       [`${prefix}_cells`]: true,
       [`${prefix}_cells_form`]: true,
@@ -196,7 +271,7 @@ export default class Form extends React.PureComponent {
       <form className={cls}
             onSubmit={e => this.handleFormSubmit(e)}
       >
-        {children}
+        {this.children}
       </form>
     )
   }

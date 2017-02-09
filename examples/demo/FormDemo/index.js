@@ -3,13 +3,8 @@
  */
 import React from 'react'
 import TestForm from '../../../components/Form/TestForm'
-import Form from '../../../components/Form/Form'
 import Input from '../../../components/Form/TestInput'
-import createFormItem from '../../../components/Form/createFormField'
-import Field from '../../../components/Form/Field.js'
-import FieldA from '../../../components/Form/Field'
-import ButtonA from '../../../components/Button'
-import classnames from 'classnames'
+import Button from '../../../components/Button'
 import Logger from '../../../utils/log'
 
 
@@ -19,22 +14,33 @@ class FormDemo extends React.Component {
   constructor() {
     super()
     this.state = {
+      showInput: true,
       formData: {}
     }
   }
 
   componentDidMount() {
     const formData = this.$Form.data
-    this.setState({
-      formData
-    })
+    setTimeout(() => {
+      this.setState({
+        showInput: false,
+        formData
+      })
+    }, 5000)
   }
 
   componentWillReceiveProps() {
-
+    logger.log('componentWillReceiveProps')
   }
 
-  componentWillUpdate() {
+  componentWillUpdate(nextProps, nextState) {
+    console.log('TEST', 2)
+
+    logger.log(nextState)
+  }
+
+  componentDidUpdate() {
+
   }
 
   handleSubmit = (isValidate, state, pureData) => {
@@ -63,13 +69,13 @@ class FormDemo extends React.Component {
   }
 
   render() {
-    logger.log('render')
-    const formData = this.state.formData
-    const {isComplete} = formData
+    const {showInput} = this.state
+    const {isComplete} = this.state.formData
+    logger.info('render', this.state.formData)
+    console.log(isComplete)
     return (
       <section className="page-form-demo">
         <p>page-form-demo</p>
-        <span>你好</span>
         <TestForm
           onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
@@ -78,22 +84,31 @@ class FormDemo extends React.Component {
             this['$Form'] = ref
           } }
         >
-          <span>Name</span>
-          <Input name={'smile'}/>
-          <Input
-            type='text'
-            name='realname'
-            validate={/^\d{9}$/}
-          />
-          <span>Phone</span>
-          <Input
-            type='text'
-            name='phone'
-            validate={/^\d{9}$/}
-          />
-          <ButtonA type="submit" disabled={!isComplete}>提交</ButtonA>
+          <div>
+            <span>smile</span>
+            <Input name={'smile'}/>
+          </div>
+          <div>
+            <span>realname</span>
+            <Input
+              type='text'
+              name='realname'
+              validate={/^\d{9}$/}
+            />
+          </div>
+          <div>
+            <span>Phone</span>
+            <Input
+              type='text'
+              name='phone'
+              validate={/^\d{9}$/}
+            />
+          </div>
+          {
+            showInput ? <Input name={'your'}/> : null
+          }
+          <Button type="submit" disabled={!isComplete}>提交</Button>
         </TestForm>
-        <pre style={{'whiteSpace': 'normal'}}>{JSON.stringify(formData)}</pre>
       </section>
     )
   }

@@ -90,7 +90,7 @@ export default class _FieldTestInput extends React.Component {
 
   componentDidUpdate(preProps, preState) {
     const {handleFieldChange} = preProps
-    logger.log('DidUpdate', 'isError now', this.state.isError, 'isError pre', preState.isError)
+    // logger.log('DidUpdate', 'isError now', this.state.isError, 'isError pre', preState.isError)
     if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
       handleFieldChange(this.data)
     }
