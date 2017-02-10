@@ -81,6 +81,13 @@
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^1.1.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NE-LOAN-FED/NE-Component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NE-LOAN-FED/NE-Component/issues"
+  },
   "keywords": [
     "component",
     "React"
