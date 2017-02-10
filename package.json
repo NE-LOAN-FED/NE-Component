@@ -1,7 +1,7 @@
 {
   "name": "NE-Component",
   "version": "0.1.1",
-  "description": "内部组件",
+  "description": "A react compoents develop by NE-LOAN-FED",
   "main": "components/index.js",
   "scripts": {
     "demo": "node ./node_modules/better-npm-run demo",
