@@ -1,7 +1,7 @@
 {
   "name": "NE-Component",
   "version": "0.1.1",
-  "description": "内部组件",
+  "description": "A react compoents develop by NE-LOAN-FED",
   "main": "components/index.js",
   "scripts": {
     "demo": "node ./node_modules/better-npm-run demo",
@@ -80,6 +80,13 @@
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^1.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NE-LOAN-FED/NE-Component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NE-LOAN-FED/NE-Component/issues"
   },
   "keywords": [
     "component",
