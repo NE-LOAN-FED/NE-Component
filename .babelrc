@@ -38,13 +38,13 @@
         ]
       ]
     },
-    "production": {
+    "build": {
       "plugins": [
         [
           "babel-plugin-transform-require-ignore",
           {
             "extensions": [
-              ".sass"
+              ".scss"
             ]
           }
         ]
