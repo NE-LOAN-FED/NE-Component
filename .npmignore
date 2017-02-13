@@ -1,5 +1,11 @@
+.babelrc
+.eslintrc.json
+.gitignore
+config.js
+jsconfig.json
 config
+node_modules
 examples
 test
 utils
-config.js
+

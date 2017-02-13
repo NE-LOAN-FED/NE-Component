@@ -1,13 +1,13 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![building](https://g.hz.netease.com/loan-f2e/Loan-SY/badges/develop/build.svg)](https://g.hz.netease.com/loan-f2e/Loan-SY/pipelines)
-**未完成**
 ## 开发
 ### 前提
 * Node > 6.0
 * Npm > 3.0
 
-# 组件
-
+## TODO
+* [ ] 完善文档
+* [ ] 重写 Form
+* [ ] 添加 Demo 页面
 ## 列表
 * [x] Form          提供表单校验，填写完成校验（决定提交按钮是否高亮）
     - [x] FromCell  表单 Cell，用以嵌套实际的表单内容（select,input,checkbox）

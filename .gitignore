@@ -25,7 +25,7 @@ index.html
 /.chrome
 
 /dist
-
+/lib
 # Logs
 logs
 *.log
