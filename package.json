@@ -1,6 +1,6 @@
 {
   "name": "ne-rc",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A react compoents develop by NE-LOAN-FED",
   "main": "lib/index.js",
   "scripts": {
