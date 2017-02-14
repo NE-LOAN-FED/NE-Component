@@ -9,14 +9,14 @@ class RenderLayer extends React.Component {
     show: PropTypes.bool,
     bodyOverHidden: PropTypes.bool,
     className: PropTypes.string,
-    clickComponent: PropTypes.func,
-    useClickComponent: PropTypes.bool,
+    onMaskClose: PropTypes.func,
+    maskClosable: PropTypes.bool,
     zIndex: PropTypes.string
   }
 
   static defaultProps = {
     show: false,
-    useClickComponent: true,
+    maskClosable: true,
     bodyOverHidden: true
   }
 
@@ -37,14 +37,14 @@ class RenderLayer extends React.Component {
   }
 
   onClick(e) {
-    const { show, clickComponent } = this.props
+    const { show, onMaskClose } = this.props
     if (!show) {
       return
     }
-    if (!clickComponent) {
+    if (!onMaskClose) {
       return
     }
-    clickComponent(e)
+    onMaskClose(e)
   }
   setBodyOver(isHidden = false) {
     document.body.style.overflow = isHidden ? 'hidden' : ''
@@ -55,7 +55,7 @@ class RenderLayer extends React.Component {
       return
     }
 
-    if (this.props.useClickComponent) {
+    if (this.props.maskClosable) {
       this.layer.style.position = 'relative'
       this.layer.removeEventListener('touchstart', this.onClick)
       this.layer.removeEventListener('click', this.onClick)
@@ -74,13 +74,15 @@ class RenderLayer extends React.Component {
         if (!this.layer) {
           this.layer = document.createElement('div')
           document.body.appendChild(this.layer)
-          if (this.props.useClickComponent) {
+          if (this.props.maskClosable) {
             this.layer.addEventListener('touchstart', this.onClick)
             this.layer.addEventListener('click', this.onClick)
           }
           this.layer.style.position = 'fixed'
           this.layer.style.top = 0
+          this.layer.style.bottom = 0
           this.layer.style.left = 0
+          this.layer.style.right = 0
           this.layer.style.height = '100%'
           this.layer.style.width = '100%'
           this.layer.style.zIndex = this.props.zIndex || '999'
