@@ -5,9 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "demo": "node ./node_modules/better-npm-run demo",
-    "dist": "node ./node_modules/better-npm-run dist",
-    "build": "node ./node_modules/better-npm-run build",
-    "publish": "npm run clean && npm run dist && npm run build",
+    "build:webpack": "node ./node_modules/better-npm-run build:webpack",
+    "build:babel": "node ./node_modules/better-npm-run build:babel",
+    "build": "npm run clean && npm run build:webpack && npm run build:babel",
     "clean": "rimraf ./dist ./lib",
     "lint": "eslint components examples test && echo \"eslint: no lint errors\"",
     "eslint": "node ./node_modules/eslint/bin/eslint.js ./",
@@ -22,13 +22,13 @@
         "NODE_ENV": "demo"
       }
     },
-    "dist": {
+    "build:webpack": {
       "command": "webpack --config ./config/webpack.config.js --progress --colors",
       "env": {
         "NODE_ENV": "production"
       }
     },
-    "build": {
+    "build:babel": {
       "command": "babel ./components --out-dir ./lib --copy-files && cp dist/ne.min.css lib/ne.min.css",
       "env": {
         "NODE_ENV": "build"
