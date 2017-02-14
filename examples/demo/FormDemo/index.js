@@ -2,11 +2,11 @@
  * Created by kisnows on 2016/12/26.
  */
 import React from 'react'
-import TestForm from '../../../components/Form/TestForm'
+// import TestForm from '../../../components/Form/TestForm'
 import Form from '../../../components/Form/Form'
-import Input from '../../../components/Form/TestInput'
-import createFormItem from '../../../components/Form/createFormItem'
-import Field from '../../../components/Form/Field.js'
+// import Input from '../../../components/Form/TestInput'
+// import createFormItem from '../../../components/Form/createFormItem'
+// import Field from '../../../components/Form/Field.js'
 import Button from '../../../components/Button'
 import classnames from 'classnames'
 import Logger from '../../../utils/log'
