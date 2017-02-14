@@ -17,4 +17,10 @@ $toast: #{$prefixCls}_toast;
     align-items: center;
     justify-content: center;
   }
+  &_icon {
+    margin: pxToRem(10) 0 pxToRem(20);
+    .#{$prefixCls}_icon {
+      font-size: pxToRem(60);
+    }
+  }
 }
