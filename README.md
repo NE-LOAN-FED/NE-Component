@@ -49,7 +49,6 @@ class Test extends React.Components {
 * [ ] 添加并完善文档
 * [ ] 重写 Form
 * [ ] 添加组件使用 Demo 页面
-
 ## 列表
 * [x] Form          提供表单校验，填写完成校验（决定提交按钮是否高亮）
     - [x] FromCell  表单 Cell，用以嵌套实际的表单内容（select,input,checkbox）
