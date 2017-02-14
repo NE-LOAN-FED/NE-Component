@@ -19,7 +19,7 @@ html * {
   color: inherit;
 }
 body {
-  font-family:HeitiJ-Light, "Helvetica Neue-Light", Helvetica-Light, STHeiTi, sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing:antialiased;
   font-size: .6rem;
   color: #111;
@@ -96,6 +96,9 @@ table {
 input {
   border-radius:0;
   -webkit-appearance:none
+}
+::-webkit-input-placeholder{
+  color: #ccc;
 }
 :focus {
   outline:0
