@@ -1,0 +1,24 @@
+@import "../style/config";
+@import "../style/utils";
+
+$popup: #{$prefixCls}_popup;
+
+.#{$popup} {
+  position: fixed;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 1000;
+  &_modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.48);
+  }
+  &_top {
+    top: 0;
+  }
+  &_bottom {
+    bottom: 0;
+  }
+}
