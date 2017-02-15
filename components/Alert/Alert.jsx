@@ -1,6 +1,5 @@
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
-import './Alert.scss'
 
 const PropTypes = React.PropTypes
 
@@ -73,7 +72,7 @@ class Alert extends React.Component {
     const { prefixCls, show } = this.props
     return show ? (
       <div>
-        <RenderLayer className={`${prefixCls}_alert_modal`} render={this.renderAlert} show={true} useComponentClick={false} />
+        <RenderLayer className={`${prefixCls}_alert_modal`} render={this.renderAlert} show={true} maskClosable={false} />
       </div>
     ) : null
   }

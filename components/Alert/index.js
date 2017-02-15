@@ -1,4 +1,6 @@
 import Alert from './Alert'
+import './Alert.scss'
+
 /**
  * class Test extends React.Component {
  *   onAlertConfirm = () => {...}

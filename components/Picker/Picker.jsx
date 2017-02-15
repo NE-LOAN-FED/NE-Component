@@ -1,6 +1,5 @@
 import React from 'react'
 import { Animate, easeOutCubic, easeInOutCubic } from '../internal/Animate'
-import './Picker.scss'
 
 const PropTypes = React.PropTypes
 

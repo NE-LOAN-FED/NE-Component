@@ -1,6 +1,6 @@
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
-import './Toast.scss'
+import Icon from '../Icon'
 
 const PropTypes = React.PropTypes
 
@@ -11,6 +11,8 @@ class Toast extends React.Component {
     prefixCls: PropTypes.string,
     className: PropTypes.string,  // 添加toast class
     show: PropTypes.bool,       // Toast是否显示
+    content: PropTypes.string,
+    icon: PropTypes.string,
     onClose: PropTypes.func,    // 点击onClose 触发函数
     timeout: PropTypes.number   // 设置 Toast 指定时间隐藏， -1 不自动隐藏
   }
@@ -18,6 +20,7 @@ class Toast extends React.Component {
     prefixCls: 'NEUI',
     show: false,
     timeout: 2000,
+    icon: '',
     onClose: noop
   }
   constructor(props) {
@@ -67,19 +70,13 @@ class Toast extends React.Component {
   }
 
   renderContent() {
-    const { prefixCls, children, className } = this.props
-    let contentEle = null
-    if (React.isValidElement(children)) {
-      contentEle = React.cloneElement(children, {
-        className: `${prefixCls}_toast ${className || ''}`
-      })
-    } else if (typeof children === 'string') {
-      contentEle = (
-        <div className={`${prefixCls}_toast ${className || ''}`}>
-          {children}
-        </div>
-      )
-    }
+    const {prefixCls, content, icon, className} = this.props
+    const contentEle = (
+      <div className={`${prefixCls}_toast ${className || ''}`}>
+        {icon !== '' ? <div className={`${prefixCls}_toast_icon`}><Icon type={icon} /></div> : null}
+        <span>{content}</span>
+      </div>
+    )
     return contentEle
   }
 
@@ -87,7 +84,10 @@ class Toast extends React.Component {
     const { prefixCls } = this.props
     return this.state.show ? (
       <div>
-        <RenderLayer className={`${prefixCls}_toast_modal`} render={this.renderContent} show={true} useComponentClick={false} />
+        <RenderLayer className={`${prefixCls}_toast_modal`}
+          render={this.renderContent}
+          show={true}
+          maskClosable={false} />
       </div>
     ) : null
   }

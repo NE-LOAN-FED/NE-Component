@@ -14,7 +14,6 @@ import {
   getDays,
   getDaysInMonth
 } from './DateUtils.js'
-import './DatePicker.scss'
 
 const PropTypes = React.PropTypes
 
@@ -288,7 +287,7 @@ class DatePicker extends React.Component {
       <div className={`${prefixCls}_date_picker`} onClick={this.onClick}>
         {selectedDateFormat ? <span className={`${prefixCls}_date_picker_date`}>{selectedDateFormat}</span> : <span className={`${prefixCls}_date_picker_placeholder`}>请选择</span>}
         <Icon type="arrow" />
-        {this.state.show ? <RenderLayer className={`${prefixCls}_date_modal`} render={this.renderContent} show={true} useComponentClick={false} /> : null}
+        {this.state.show ? <RenderLayer className={`${prefixCls}_date_modal`} render={this.renderContent} show={true} maskClosable={false}/> : null}
       </div>
     )
   }

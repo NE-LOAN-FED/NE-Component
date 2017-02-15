@@ -1,4 +1,5 @@
 import Toast from './Toast'
+import './Toast.scss'
 
 /**
  * class Test extends React.Component {

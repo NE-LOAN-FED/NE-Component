@@ -3,6 +3,7 @@
  */
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
+import {Form, Input} from '../../../components'
 
 class Home extends React.Component {
 
@@ -11,6 +12,10 @@ class Home extends React.Component {
       <section className='page_home'>
         <Link to="/alert">Alert</Link>
         <Link to="/form">Form</Link>
+        <Form>
+          <span>你好</span>
+          <Input/>
+        </Form>
       </section>
     )
   }

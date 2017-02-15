@@ -1,6 +1,5 @@
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
-import './Modal.scss'
 
 const PropTypes = React.PropTypes
 
@@ -48,7 +47,7 @@ class Modal extends React.Component {
     const { prefixCls, show } = this.props
     return show ? (
       <div>
-        <RenderLayer className={`${prefixCls}_modal_modal`} render={this.renderModal} show={true} useComponentClick={false} />
+        <RenderLayer className={`${prefixCls}_modal_modal`} render={this.renderModal} show={true} maskClosable={false} />
       </div>
     ) : null
   }

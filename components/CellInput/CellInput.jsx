@@ -1,17 +1,16 @@
 import React from 'react'
 import classNames from 'classnames'
-import './CellInput.scss'
 
 const PropTypes = React.PropTypes
 const NUMBER_REGEXP = /^\d+$/
 
 export default class CellInput extends React.Component {
   static propTypes = {
+    prefixCls: PropTypes.string,
     value: PropTypes.string || PropTypes.number,
     name: PropTypes.string,
     maxLength: PropTypes.number,
     type: PropTypes.string,
-    prefixCls: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onConfirm: PropTypes.func,
@@ -171,10 +170,13 @@ export default class CellInput extends React.Component {
   render() {
     const {
       prefixCls,
+      value,
       type,
       name,
+      maxLength,
       className, disabled, required,
-      onChange, onFocus, validate, errorMsg, isError
+      onChange, onFocus, validate, errorMsg,
+      ...other
     } = this.props
     const classnames = classNames({
       [`${prefixCls}_cell_input`]: true,
@@ -191,6 +193,7 @@ export default class CellInput extends React.Component {
           ref={(ref) => { this.Input = ref } }
           onChange={this.onChange}
           onFocus={this.onFocus}
+          {...other}
           />
         <div className={`${prefixCls}_cell_input_list`}>
           {cells}

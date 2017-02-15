@@ -1,16 +1,14 @@
 {
-  "name": "NE-Component",
-  "version": "0.1.1",
-  "description": "内部组件",
-  "main": "dist/index.js",
+  "name": "ne-rc",
+  "version": "0.1.8",
+  "description": "A react compoents develop by NE-LOAN-FED",
+  "main": "lib/index.js",
   "scripts": {
     "demo": "node ./node_modules/better-npm-run demo",
-    "demo-build": "npm run clean:demo-build && node ./node_modules/better-npm-run build",
-    "clean:demo-build": "rimraf index.html app-*.js",
-    "build": "npm run clean:build && npm run build:babel",
-    "build:babel": "babel ./components --ignore *.spec.js --out-dir ./dist",
-    "clean:build": "rimraf build",
-    "dist": "node ./node_modules/better-npm-run dist",
+    "build:webpack": "node ./node_modules/better-npm-run build:webpack",
+    "build:babel": "node ./node_modules/better-npm-run build:babel",
+    "build": "npm run clean && npm run build:webpack && npm run build:babel",
+    "clean": "rimraf ./dist ./lib",
     "lint": "eslint components examples test && echo \"eslint: no lint errors\"",
     "eslint": "node ./node_modules/eslint/bin/eslint.js ./",
     "scsslint": "node ./node_modules/eslint/bin/eslint.js ./",
@@ -24,10 +22,16 @@
         "NODE_ENV": "demo"
       }
     },
-    "build": {
+    "build:webpack": {
       "command": "webpack --config ./config/webpack.config.js --progress --colors",
       "env": {
         "NODE_ENV": "production"
+      }
+    },
+    "build:babel": {
+      "command": "babel ./components --out-dir ./lib --copy-files && cp dist/ne.min.css lib/ne.min.css",
+      "env": {
+        "NODE_ENV": "build"
       }
     }
   },
@@ -45,6 +49,7 @@
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-require-ignore": "^0.0.2",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
@@ -60,6 +65,7 @@
     "eslint-plugin-standard": "^2.0.1",
     "exports-loader": "^0.6.3",
     "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
     "imports-loader": "^0.6.5",
@@ -82,6 +88,17 @@
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^1.1.2"
+  },
+  "peerDependencies": {
+    "react": "0.14.x || ^15.0.0-0 || 15.x",
+    "react-dom": "0.14.x || ^15.0.0-0 || 15.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NE-LOAN-FED/NE-Component.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NE-LOAN-FED/NE-Component/issues"
   },
   "keywords": [
     "component",

@@ -1,5 +1,5 @@
-@import "../style/config";
-@import "../style/utils";
+@import "../style/_config";
+@import "../style/_utils";
 
 $modal: #{$prefixCls}_modal;
 
@@ -35,7 +35,7 @@ $modal: #{$prefixCls}_modal;
   font-family: "iconfont" !important;
   font-style: normal;
   &_close {
-    color: $white; 
+    color: $white;
     font-size: pxToRem(60);
     line-height: 1;
     &:before {
