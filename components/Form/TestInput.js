@@ -1,10 +1,12 @@
 /**
  * Created by kisnows on 2016/12/26.
  */
-import React, {PropTypes} from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
 import Logger from '../../utils/log.js'
+
+const PropTypes = React.PropTypes
 // TODO 完成 Input 重构
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
 const logger = new Logger(env, 'TestInput')
@@ -21,18 +23,15 @@ export default class _FieldTestInput extends React.Component {
   }
 
   static propTypes = {
-    name: PropTypes.string,
+    name: PropTypes.string.isRequired,
     value: PropTypes.any,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-    onEmpty: PropTypes.func,
     disabled: PropTypes.bool,
     onFieldChange: PropTypes.func,
     shouldRsa: PropTypes.bool,
     required: PropTypes.bool,
-    parser: PropTypes.func,
-    formatter: PropTypes.func,
     validate: function (props, propName, componentName) {
       if (!((props[propName] instanceof RegExp) || (props[propName] instanceof Function))) {
         throw new Error('Invalid prop `' + propName + '` supplied to' +
@@ -52,18 +51,12 @@ export default class _FieldTestInput extends React.Component {
     disabled: false,
     onChange: () => {
     },
-    // onFieldChange: () => {
-    // },
     onFocus: () => {
     },
     onBlur: () => {
     },
     onFieldBlur: () => {
-    },
-    onEmpty: (name) => {
-    },
-    parser: (data) => data,
-    formatter: (data) => data
+    }
   }
 
   componentDidMount() {
@@ -90,7 +83,6 @@ export default class _FieldTestInput extends React.Component {
 
   componentDidUpdate(preProps, preState) {
     const {handleFieldChange} = preProps
-    // logger.log('DidUpdate', 'isError now', this.state.isError, 'isError pre', preState.isError)
     if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
       handleFieldChange(this.data)
     }
@@ -161,12 +153,15 @@ export default class _FieldTestInput extends React.Component {
   }
 
   handleBlur = (e) => {
+    // 因为要异步的使用 e, 所以需要保留 e 的引用
     e.persist()
     const {name, onBlur, onFieldBlur} = this.props
     onFieldBlur(name)
     onBlur(e)
     // TODO 考虑做成配置项，来决定什么时候作校验
     this.handleValidate(e)
+
+    // 延迟是为了当用户点击删除按钮的时候不会因为已经触发了 onBlur 事件而导致删除按钮不显示
     this.timer = setTimeout(() => {
       this.setState({
         showDelIcon: false
@@ -191,7 +186,6 @@ export default class _FieldTestInput extends React.Component {
   }
 
   render() {
-    logger.log('render')
     const {showDelIcon, value} = this.state
     const {className, disabled, name} = this.props
     const prefix = 'NEUI'

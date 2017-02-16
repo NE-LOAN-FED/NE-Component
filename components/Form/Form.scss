@@ -8,7 +8,7 @@
 }
 
 .NEUI_cells_form {
-  border: none;
+  border-bottom: none;
   .NEUI_cell_error:after {
     background-color: $color_warning;
   }

@@ -132,8 +132,9 @@ export default class Input extends React.Component {
                  onFocus(e)
                }}
                onBlur={(e) => {
-                 // 延迟是为了当用户点击删除按钮的时候不会因为已经触发了 onBlur 事件而导致删除按钮不显示
+                 // 因为要异步的使用 e, 所以需要保留 e 的引用
                  e.persist()
+                 // 延迟是为了当用户点击删除按钮的时候不会因为已经触发了 onBlur 事件而导致删除按钮不显示
                  this.timer = setTimeout(() => {
                    this.blurHandler()
                    onBlur(e)

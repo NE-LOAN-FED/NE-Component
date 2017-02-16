@@ -12,7 +12,7 @@ const config = {
     ]
   },
   devServer: {
-    devtool: 'source-map',
+    devtool: 'cheap-eval-source-map',
     hot: true,
     inline: true,
     port: 3000,

@@ -4,7 +4,7 @@
 import React from 'react'
 import TestForm from '../../../components/Form/TestForm'
 import Input from '../../../components/Form/TestInput'
-import Button from '../../../components/Button'
+import {Button, FormCell, CellHeader, Toast} from '../../../components'
 import Logger from '../../../utils/log'
 
 
@@ -15,7 +15,9 @@ class FormDemo extends React.Component {
     super()
     this.state = {
       showInput: true,
-      formData: {}
+      formData: {},
+      msg: '',
+      showToast: false
     }
   }
 
@@ -44,6 +46,17 @@ class FormDemo extends React.Component {
   }
 
   handleSubmit = (isValidate, state, pureData) => {
+    if (!isValidate) {
+      this.setState({
+        showToast: true,
+        msg: state.errorMsgList[0]
+      })
+    } else {
+      this.setState({
+        showToast: true,
+        msg: '正在提交'
+      })
+    }
     logger.log(`form submit, isValidate:${isValidate}, state:${state}, pureData:${pureData}`)
   }
   handleChange = (formData) => {
@@ -67,14 +80,23 @@ class FormDemo extends React.Component {
   handleInputEmpty = () => {
     logger.log('handleInputEmpty')
   }
+  closeToast = () => {
+    this.setState({
+      showToast: false
+    })
+  }
 
   render() {
-    const {showInput} = this.state
-    const {isComplete} = this.state.formData
+    const {showInput, msg, showToast, formData} = this.state
+    const {isComplete} = formData
     logger.info('render', this.state.formData)
     console.log(isComplete)
     return (
       <section className="page-form-demo">
+        <Toast content={msg}
+               show={showToast}
+               onClose={this.closeToast}
+        />
         <p>page-form-demo</p>
         <TestForm
           onSubmit={this.handleSubmit}
@@ -84,29 +106,19 @@ class FormDemo extends React.Component {
             this['$Form'] = ref
           } }
         >
-          <div>
-            <span>smile</span>
-            <Input name={'smile'}/>
-          </div>
-          <div>
-            <span>realname</span>
-            <Input
-              type='text'
-              name='realname'
-              validate={/^\d{9}$/}
+          <FormCell>
+            <CellHeader>Name</CellHeader>
+            <Input type='text'
+                   name='Name'
             />
-          </div>
-          <div>
-            <span>Phone</span>
-            <Input
-              type='text'
-              name='phone'
-              validate={/^\d{9}$/}
+          </FormCell>
+          <FormCell cellsEnd>
+            <CellHeader>Phone</CellHeader>
+            <Input type='text'
+                   name='phone'
+                   validate={/^\d{11}$/}
             />
-          </div>
-          {
-            showInput ? <Input name={'your'}/> : null
-          }
+          </FormCell>
           <Button type="submit" disabled={!isComplete}>提交</Button>
         </TestForm>
       </section>

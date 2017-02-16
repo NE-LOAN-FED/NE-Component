@@ -51,9 +51,17 @@ export default class Form extends React.PureComponent {
     const children = this.props.children
     this.children = this.collectFormField(children)
     this.initFormDataStructure()
+    logger.info('WillMount')
   }
 
   componentDidMount() {
+    logger.info('DidMount')
+    this.props.onChange({
+      ...this.state,
+      data: {
+        ...this.state.data
+      }
+    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -125,7 +133,6 @@ export default class Form extends React.PureComponent {
     }
 
     const childList = getChildList(children)
-    logger.log('childList', childList)
     return childList
   }
 
@@ -259,9 +266,8 @@ export default class Form extends React.PureComponent {
   }
 
   render() {
-    logger.log('render')
     const prefix = 'NEUI'
-    const {className, onChange, onSubmit, onFieldChange} = this.props
+    const {className} = this.props
     const cls = classNames({
       [`${prefix}_cells`]: true,
       [`${prefix}_cells_form`]: true,
