@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base.js')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const cwd = process.cwd()
 
 const config = {
   entry: {
@@ -23,7 +24,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../examples/index.html'),
       hash: false,
-      filename: 'index.html',
+      filename: path.join(cwd, 'index.html'),
       inject: true
     }),
     new webpack.HotModuleReplacementPlugin(),
