@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "demo": "node ./node_modules/better-npm-run demo",
+    "demo:build": "node ./node_modules/better-npm-run demo:build",
     "build:webpack": "node ./node_modules/better-npm-run build:webpack",
     "build:babel": "node ./node_modules/better-npm-run build:babel",
     "build": "npm run clean && npm run build:webpack && npm run build:babel",
@@ -20,6 +21,12 @@
       "command": "webpack-dev-server --config ./config/webpack.config.js --progress --colors",
       "env": {
         "NODE_ENV": "demo"
+      }
+    },
+    "demo:build": {
+      "command": "webpack --config ./config/webpack.config.js --progress --colors",
+      "env": {
+        "NODE_ENV": "demo:build"
       }
     },
     "build:webpack": {
