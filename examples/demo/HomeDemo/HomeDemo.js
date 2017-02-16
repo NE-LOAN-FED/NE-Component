@@ -131,8 +131,14 @@ class Home extends React.Component {
                show={showToast}
                onClose={this.closeToast}
         />
-        <Link to="/alert">Alert</Link>
-        <Link to="/form">Form</Link>
+        <ul>
+          <li>
+            <Link to="/alert">Alert</Link>
+          </li>
+          <li>
+            <Link to="/form">Form</Link>
+          </li>
+        </ul>
         <h1>Button</h1>
         <h2>Normal Button</h2>
         <Button size={'small'}>Small Button</Button><Button size={'small'} disabled={true}>Small Button</Button>
