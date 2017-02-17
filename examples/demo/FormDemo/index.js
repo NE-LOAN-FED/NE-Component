@@ -2,8 +2,8 @@
  * Created by kisnows on 2016/12/26.
  */
 import React from 'react'
-import TestForm from '../../../components/Form/TestForm'
-import Input from '../../../components/Form/TestInput'
+import TestForm from '../../../components/Form/Form'
+import Input from '../../../components/Form/Input'
 import {Button, FormCell, CellHeader, Toast} from '../../../components'
 import Logger from '../../../utils/log'
 
@@ -108,15 +108,15 @@ class FormDemo extends React.Component {
         >
           <FormCell>
             <CellHeader>Name</CellHeader>
-            <Input type='text'
-                   name='Name'
+            <_FieldInput type='text'
+                         name='Name'
             />
           </FormCell>
           <FormCell cellsEnd>
             <CellHeader>Phone</CellHeader>
-            <Input type='text'
-                   name='phone'
-                   validate={/^\d{11}$/}
+            <_FieldInput type='text'
+                         name='phone'
+                         validate={/^\d{11}$/}
             />
           </FormCell>
           <Button type="submit" disabled={!isComplete}>提交</Button>

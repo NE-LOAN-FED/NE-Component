@@ -1,30 +1,38 @@
+/**
+ * Created by kisnows on 2016/12/26.
+ */
 import React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
+import Logger from '../../utils/log.js'
 
 const PropTypes = React.PropTypes
+// TODO 完成 Input 重构
+const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
+const logger = new Logger(env, 'TestInput')
 
-export default class Input extends React.Component {
+export default class _FieldInput extends React.Component {
   constructor(props) {
     super(props)
+    this.timer = null
     this.state = {
-      showDelIcon: false
+      showDelIcon: false,
+      value: this.props.value || '',
+      isError: this.props.isError || false
     }
   }
 
   static propTypes = {
-    disabled: PropTypes.bool,
-    name: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    value: PropTypes.any,
+    type: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-    onEmpty: PropTypes.func,
-    emptyInput: PropTypes.func,
-    formCellChange: PropTypes.func,
+    disabled: PropTypes.bool,
+    handleFieldChange: PropTypes.func,
     shouldRsa: PropTypes.bool,
     required: PropTypes.bool,
-    parser: PropTypes.func,
-    formatter: PropTypes.func,
     validate: function (props, propName, componentName) {
       if (!((props[propName] instanceof RegExp) || (props[propName] instanceof Function))) {
         throw new Error('Invalid prop `' + propName + '` supplied to' +
@@ -36,6 +44,7 @@ export default class Input extends React.Component {
   }
 
   static defaultProps = {
+    type: 'text',
     isError: false,
     shouldRsa: false,
     required: true,
@@ -48,107 +57,155 @@ export default class Input extends React.Component {
     },
     onBlur: () => {
     },
-    onEmpty: (name) => {
-    },
-    formCellChange: () => {
-    },
-    parser: (data) => data,
-    formatter: (data) => data
+    onFieldBlur: () => {
+    }
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // BUG 为了提高性能，减少了渲染次数，但是可能会导致其他问题，等发现了再处理。
-  //   return !(nextProps.value === this.props.value && this.state.showDelIcon === nextState.showDelIcon && nextProps.disabled === this.props.disabled)
-  // }
+  componentDidMount() {
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.value && nextProps.value !== this.state.value) {
+      this.setState({
+        value: nextProps.value
+      })
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.disabled !== nextProps.disabled ||
+      this.state.value !== nextState.value ||
+      this.state.showDelIcon !== nextState.showDelIcon ||
+      this.state.isError !== nextState.isError
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+
+  }
+
+  componentDidUpdate(preProps, preState) {
+    const {handleFieldChange} = preProps
+    if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
+      handleFieldChange(this.data)
+    }
+  }
 
   componentWillUnmount() {
     clearTimeout(this.timer)
   }
 
-  formCellChange = (t) => {
-    const {formCellChange, parser} = this.props
-    const target = {
-      name: t.name,
-      value: parser(t.value)
+  get data() {
+    const {value, isError} = this.state
+    const {name, errorMsg, required, shouldRsa} = this.props
+    return {
+      name,
+      value,
+      isError,
+      errorMsg,
+      required,
+      shouldRsa
     }
-    formCellChange(target)
   }
 
-  changeHandler = (e) => {
-    const showDelIcon = e.target.value.length > 0
+  handleValidate = (e) => {
+    const value = e.target.value
+    const {validate} = this.props
+    let isError = false
+    // TODO 考虑把校验方法提取出来，作为 props 传给 Input
+    if (validate instanceof RegExp) {
+      isError = !(value && validate.test(value))
+    } else if (validate instanceof Function) {
+      if (!value) {
+        return (isError = false)
+      }
+      const validateResult = validate(value)
+      if (validateResult.then instanceof Function) {
+        validateResult.then(result => this.setState({
+          isError: result
+        }))
+      } else {
+        isError = !validateResult
+      }
+    } else {
+      isError = !value
+    }
     this.setState({
-      showDelIcon
+      isError
     })
   }
-  focusHandler = (e) => {
+
+  handleChange = (e) => {
+    this.props.onChange(e)
+    this.handleValidate(e)
+    this.setState({
+      value: e.target.value,
+      showDelIcon: !!e.target.value.length
+    })
+  }
+
+  handleFocus = (e) => {
+    const {onFocus} = this.props
+    onFocus(e)
     if (e.target.value.length > 0) {
       this.setState({
         showDelIcon: true
       })
     }
   }
-  blurHandler = () => {
-    this.setState({
-      showDelIcon: false
-    })
+
+  handleBlur = (e) => {
+    // 因为要异步的使用 e, 所以需要保留 e 的引用
+    e.persist()
+    const {name, onBlur, onFieldBlur} = this.props
+    onFieldBlur(name)
+    onBlur(e)
+    // TODO 考虑做成配置项，来决定什么时候作校验
+    this.handleValidate(e)
+
+    // 延迟是为了当用户点击删除按钮的时候不会因为已经触发了 onBlur 事件而导致删除按钮不显示
+    this.timer = setTimeout(() => {
+      this.setState({
+        showDelIcon: false
+      })
+    }, 300)
   }
-  iconClickHandler = () => {
+
+  handleEmptied = () => {
+    const e = {
+      target: {
+        value: ''
+      }
+    }
+    this.handleChange(e)
+  }
+
+  handleDelClick = () => {
+    this.handleEmptied()
     this.setState({
       showDelIcon: false
     })
   }
 
   render() {
-    const {showDelIcon} = this.state
-    const {
-      className, value, disabled, name,
-      formCellChange,
-      onChange, onFocus, onBlur, onEmpty,
-      shouldRsa, validate, errorMsg, required, isError,
-      emptyInput, parser, formatter, ...others
-    } = this.props
+    const {showDelIcon, value} = this.state
+    const {className, disabled, name, type} = this.props
+    const prefix = 'NEUI'
     const cls = classNames({
-      NEUI_input: true,
-      NEUI_input_disabled: disabled,
+      [`${prefix}_input`]: true,
+      [`${prefix}_input_disabled`]: disabled,
       [className]: className
     })
-    const formatterValue = formatter(value)
+    const handleDelClick = this.handleDelClick
     return (
-      // name 属性作为表单提交数据里面的 key, 用来区分每个不同的提交项，一个 Form 表单里面 name 不能重复
       <label className={cls}>
-        <input disabled={disabled}
-               ref={(ref) => {
-                 this.Input = ref
-               }}
-               name={name}
-               value={formatterValue}
-               onChange={(e) => {
-                 this.changeHandler(e)
-                 this.formCellChange(e.target)
-                 onChange(e)
-               }}
-               onFocus={(e) => {
-                 this.focusHandler(e)
-                 onFocus(e)
-               }}
-               onBlur={(e) => {
-                 // 因为要异步的使用 e, 所以需要保留 e 的引用
-                 e.persist()
-                 // 延迟是为了当用户点击删除按钮的时候不会因为已经触发了 onBlur 事件而导致删除按钮不显示
-                 this.timer = setTimeout(() => {
-                   this.blurHandler()
-                   onBlur(e)
-                 }, 200)
-               }}
-               {...others}
+        <input name={name}
+               value={value}
+               type={type}
+               onChange={this.handleChange}
+               onFocus={this.handleFocus}
+               onBlur={this.handleBlur}
         />
-        {showDelIcon ? <Icon onClick={
-            () => {
-              emptyInput(name)
-              onEmpty()
-              this.iconClickHandler()
-            }} type={'del'}/>
-          : null}
+        {showDelIcon ? <Icon onClick={handleDelClick} type={'del'}/> : null}
       </label>
     )
   }

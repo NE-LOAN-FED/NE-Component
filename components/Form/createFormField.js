@@ -1,5 +1,5 @@
 /**
- * Created by kisnows on 2016/12/26.
+ * Created by kisnows on 2017/2/17.
  */
 import React from 'react'
 export default (argvs) => ComposedComponent => {
