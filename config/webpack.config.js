@@ -5,6 +5,8 @@ switch (process.env.NODE_ENV) {
   case 'test':
     module.exports = require('./webpack.config.test')
     break
+  case 'demo:build':
+    module.exports = require('./webpack.config.demo.build')
   default:
     module.exports = require('./webpack.config.demo')
 }
