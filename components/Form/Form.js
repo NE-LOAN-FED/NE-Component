@@ -1,227 +1,286 @@
 /**
- * Created by hzyuanqi1 on 2016/9/12.
+ * Created by kisnows on 2016/12/26.
  */
 import React from 'react'
 import classNames from 'classnames'
-import {Input, Select, CheckBox} from './index'
 import {isFormComplete, formPure, isFromValidate} from './FormUtils'
-import cloneDeep from 'lodash/cloneDeep'
+import Logger from '../../utils/log'
 
 const PropTypes = React.PropTypes
 
-export default class Form extends React.Component {
+// TODO 完成 Form 重构
+
+const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
+const logger = new Logger(env, 'TestForm')
+// 标识当前 Form 处于的状态
+const STATE = {
+  Normal: 'Normal',
+  FieldChange: 'FieldChange'
+}
+
+
+export default class Form extends React.PureComponent {
   constructor(props) {
     super(props)
-    this.Forms = []
-    this.formState = Object.assign({}, {
-      isComplete: false,
-      isValidate: false,
-      errorMsg: '',
-      data: {}
-    }, this.props.formState)
+    const {isComplete, isValidate, data, errorMsgList} = this.props
+    this.state = {
+      isComplete: isComplete || false,
+      isValidate: isValidate || false,
+      data: data || {},
+      errorMsgList: errorMsgList || []
+    }
+    this.count = 1
+    this.formFields = []
+    this.children = []
+    this.CURRENT_STATE = STATE.Normal
   }
 
   static propTypes = {
+    onFieldChange: PropTypes.func,
     onChange: PropTypes.func,
-    onSubmit: PropTypes.func,
-    formState: PropTypes.object
+    onSubmit: PropTypes.func.isRequired,
+    isComplete: PropTypes.bool,
+    isValidate: PropTypes.bool,
+    data: PropTypes.object,
+    errorMsgList: PropTypes.array
   }
 
-  static defaultProps = {
-    onChange: () => {
-    },
-    onSubmit: () => {
-    }
+  static defaultProps = {}
+
+  componentWillMount() {
+    const children = this.props.children
+    this.children = this.collectFormField(children)
+    this.initFormDataStructure()
+    logger.info('WillMount')
   }
 
   componentDidMount() {
-    this.initFormData()
+    logger.info('DidMount')
+    this.props.onChange({
+      ...this.state,
+      data: {
+        ...this.state.data
+      }
+    })
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.formState !== this.formState) {
-      this.formState = nextProps.formState
-      this.formState.isComplete = isFormComplete(nextProps.formState.data)
-    }
-  }
-
-  componentDidUpdate() {
-    this.initFormData()
-  }
-
-  /**
-   * 初始化 FromData，创建一个包含每个 fromCell 数据的对象
-   */
-  initFormData = () => {
-    const formData = this.formState.data
-    const Forms = this.Forms
-    const formItems = []
-    for (let i = Forms.length; i--;) {
-      const thisForm = Forms[i].props
-      formItems.push(thisForm.name)
-      formData[thisForm.name] = {
-        ...formData[thisForm.name],
-        isError: thisForm.isError,
-        shouldRsa: thisForm.shouldRsa,
-        required: thisForm.required,
-        errorMsg: thisForm.errorMsg,
-        validate: thisForm.validate,
-        minLength: thisForm.minLength,
-        maxLength: thisForm.maxLength
+    if (nextProps.children !== this.props.children) {
+      this.children = this.collectFormField(nextProps.children)
+      if (this.CURRENT_STATE === STATE.Normal) {
+        this.updateFormDataStructure()
+        logger.log('updateFormDataStructure end', this.state)
       }
     }
-    // FIXME 解决 formcell 动态删除可能会导致的问题
-    /* Object.keys(formData).forEach((v) => {
-     if (formItems.indexOf(v) === -1) {
-     delete formData[v]
-     }
-     }) */
-    // 解决初始化 form 本来就填写完毕下，无法提交的问题
-    this.formState.isComplete = isFormComplete(this.formState.data)
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    logger.log('componentWillUpdate', nextState)
+  }
+
+  componentDidUpdate(preProps, preState) {
+    logger.log('componentDidUpdate', preState, this.state, this.CURRENT_STATE)
+    // this.props.onChange(this.data)
+  }
+
+  componentWillUnmount() {
+  }
+
+  get data() {
+    return this.state
   }
 
   /**
-   * 检测 form 是否校验通过，结果会体现在 formState.isValidate 上
-   * @returns {*} 一个完整的 formState
+   * 递归遍历收集所有需要管理的表单组件，并注册 handleFieldChange 方法
+   * @param children
+   * @returns {*} 处理过的 children
    */
-  formValidate = () => {
-    isFromValidate(this.formState)
-    return cloneDeep(this.formState)
-  }
+  collectFormField = (children) => {
+    // TODO 优化性能，当 Field 已经有 key 的时候，就不重新 clone 了
+    logger.log('collectFormField invoke times', this.count)
+    this.count++
+    const handleFieldChange = this.handleFieldChange
 
-  formSubmit = () => {
-    const {onSubmit} = this.props
-    this.formValidate()
-    this.props.onChange(null, this.formState)
-    if (this.formState.isValidate) {
-      /**
-       *  调用外部 submit 函数用来做实际的提交操作
-       *  @param 表单的状态
-       *  @param 用于提交的实际表单内容
-       */
-      formPure(this.formState.data)
-        .then(pureData => onSubmit(this.formState, pureData))
-    } else {
-      onSubmit(this.formState, null)
+    // 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formFields，全量更新，
+    // 避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题
+    const FormFields = this.formFields = []
+
+    function getChildList(children) {
+      return React.Children.map(children, (el, i) => {
+        // 只要 Name 以 Field 开头，就认为是需要 From 管理的组件
+        if (!el || el === null) return null
+
+        const reg = /^_Field/
+        const childName = el.type && el.type.name
+        if (reg.test(childName)) {
+          FormFields.push(el)
+          return React.cloneElement(el, {
+            key: i,
+            handleFieldChange
+          })
+        } else {
+          if (el.props && el.props.children) {
+            const children = getChildList(el.props.children)
+            return React.cloneElement(el, {
+              key: i,
+              children
+            })
+          } else {
+            return el
+          }
+        }
+      })
     }
+
+    const childList = getChildList(children)
+    return childList
   }
+
   /**
-   * 获得当前的 formState
-   * @returns {*}
+   * 初始化 FormData 结构，给 this.state.data 添加 key 为表单项 name 的属性
    */
-  getFormState = () => {
-    return cloneDeep(this.formState)
+  initFormDataStructure = () => {
+    logger.log('initFormDataStructure')
+    const formData = {
+      ...this.state.data
+    }
+
+    this.formFields.forEach((formField, k) => {
+      const Props = formField.props
+      const Name = Props.name
+      formData[Name] = {
+        ...formData[Name],
+        required: typeof Props.required === 'undefined' ? true : Props.required
+      }
+    })
+
+    this.setState({
+      ...this.state,
+      isComplete: isFormComplete(formData),
+      data: formData
+    })
   }
+
+  /**
+   * 更新 FormData 结构，当 Form 下表单项添加或删除时，将 FormData 结构更新到最新
+   */
+  updateFormDataStructure = () => {
+    const formData = {
+      ...this.state.data
+    }
+    const formItems = []
+    // 在 formData 中添加新加入的表单项
+    this.formFields.forEach((formField, k) => {
+      const Props = formField.props
+      const Name = Props.name
+      formItems.push(Name)
+      if (typeof formData[Name] === 'undefined') {
+        formData[Name] = {
+          required: typeof Props.required === 'undefined' ? true : Props.required
+        }
+      }
+    })
+    // 从 formData 中去掉删除的表单项
+    Object.keys(formData).forEach((v) => {
+      if (formItems.indexOf(v) === -1) {
+        delete formData[v]
+      }
+    })
+    this.setState({
+      ...this.state,
+      isComplete: isFormComplete(formData),
+      data: formData
+    })
+  }
+
+  handleFieldChange = (fieldData) => {
+    this.CURRENT_STATE = STATE.FieldChange
+    let state = {
+      ...this.state,
+      data: {
+        ...this.state.data
+      }
+    }
+
+    let name = fieldData.name
+    if (state.data[name]) {
+      state.data[name] = {
+        ...state.data[name],
+        ...fieldData
+      }
+    } else {
+      state.data[name] = fieldData
+    }
+
+    // TODO 重写 isFormComplete
+    state.isComplete = isFormComplete(state.data)
+    this.props.onFieldChange(fieldData)
+
+    // 为了避免传入 state 被外界修改，所以传入一个新的对象
+    this.props.onChange({
+      ...state,
+      data: {
+        ...state.data
+      }
+    })
+    console.log('handleFieldChange', state)
+    this.setState({
+      ...state,
+      data: {
+        ...state.data
+      }
+    }, () => {
+      this.CURRENT_STATE = STATE.Normal
+    })
+  }
+
+  handleFormSubmit = (e) => {
+    e.preventDefault()
+    const {onSubmit} = this.props
+    let state = {
+      ...this.state,
+      data: {
+        ...this.state.data
+      }
+    }
+    // TODO 重写 isFromValidate
+    state = isFromValidate(state)
+    const isValidate = state.isValidate
+    logger.info('isValidate', isValidate)
+    if (isValidate) {
+      formPure({
+        ...state.data
+      }).then(pureData => onSubmit(isValidate, state, pureData))
+    } else {
+      onSubmit(isValidate, state, null)
+    }
+
+    this.setState(state)
+  }
+
   /**
    * 获得当前最新的处理并加密后的 form 数据
    * @returns {Promise}
    */
   getPureData = () => {
     this.formValidate()
-    return formPure(this.formState.data)
-  }
-
-  /**
-   * 每一条包裹在 form 下面的真实表单的修改都会触发这个方法
-   * @param target {object} 事件对象
-   * @param type {string} 事件类型，为了区分不同的表单类型修改
-   */
-  formCellChange = (target, type) => {
-    if (type === 'checkbox') {
-      this.formState.data[target.name].value = target.checked ? 'true' : ''
-    } else {
-      this.formState.data[target.name].value = target.value
-    }
-    this.formState.data[target.name].isError = false
-    this.formState.isComplete = isFormComplete(this.formState.data)
-    this.props.onChange(target, this.formState)
-  }
-
-  /**
-   * 清除包裹 input 的方法
-   * @param name {string} 要清除 input 的 name
-   */
-  emptyInput = (name) => {
-    this.formState.data[name].value = ''
-    this.formState.isComplete = isFormComplete(this.formState.data)
-    this.props.onChange(null, this.formState)
+    return formPure()
   }
 
   render() {
-    console.log('render Form')
-    const {children, className, onChange, onSubmit, formState, ...others} = this.props
+    const prefix = 'NEUI'
+    const {className} = this.props
     const cls = classNames({
-      NEUI_cells: true,
-      NEUI_cells_form: true,
+      [`${prefix}_cells`]: true,
+      [`${prefix}_cells_form`]: true,
       [className]: className
     })
-    // 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formCells，全量更新，避免 formCell 内容或者数量发生变化时 this.formCells 数据不正确的问题
-    const Forms = this.Forms = []
-    const formCellChange = this.formCellChange
-    const emptyInput = this.emptyInput
-
-    /**
-     * 获取 form 下面每一个表单对象，注入属性，并收集起来
-     * @param children
-     * @returns {*}
-     */
-    function getForms(children) {
-      return React.Children.map(children, (el, i) => {
-        if (!el) {
-          return null
-        }
-        switch (el.type) {
-          case Input:
-            Forms.push(el)
-            return React.cloneElement(
-              el,
-              {
-                key: i,
-                formCellChange,
-                emptyInput
-              }
-            )
-          case Select:
-            Forms.push(el)
-            return React.cloneElement(
-              el,
-              {
-                key: i,
-                formCellChange
-              }
-            )
-          case CheckBox:
-            Forms.push(el)
-            return React.cloneElement(
-              el,
-              {
-                key: i,
-                formCellChange
-              }
-            )
-          default:
-            if (el.props && el.props.children instanceof Array) {
-              const children = getForms(el.props.children)
-              return React.cloneElement(
-                el,
-                {
-                  key: i,
-                  children
-                }
-              )
-            } else {
-              return el
-            }
-        }
-      })
-    }
-    const FormChild = getForms(children)
     return (
-      // 不使用默认表单，因为按回车键会触发表单提交事件
-      <div className={cls}
-           {...others}>
-        {FormChild}
-      </div>
+      <form className={cls}
+            onSubmit={e => this.handleFormSubmit(e)}
+      >
+        {this.children}
+      </form>
     )
   }
 }

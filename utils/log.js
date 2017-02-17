@@ -1,4 +1,3 @@
-
 export default class Logger {
 
   static DEBUG = 'DEBUG'
@@ -9,11 +8,19 @@ export default class Logger {
     this.env = env || Logger.DEBUG
     this.prefix = prefix
   }
+
   log(...argvs) {
     if (this.env === Logger.DEBUG) {
       console.log(this.prefix, ...argvs)
     }
   }
+
+  info(...argvs) {
+    if (this.env === Logger.DEBUG) {
+      console.info(this.prefix, ...argvs)
+    }
+  }
+
   error(...argvs) {
     console.log(this.prefix, ...argvs)
   }

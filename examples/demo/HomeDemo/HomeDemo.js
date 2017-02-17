@@ -22,6 +22,8 @@ import {
 } from '../../../components'
 import TestForm from '../../../components/Form/Form'
 import Input from '../../../components/Form/Input'
+import Select from '../../../components/Form/Select'
+import CheckBox from '../../../components/Form/CheckBox'
 import Logger from '../../../utils/log'
 import lang from '../../utils/lang'
 import validate from '../../utils/validate'
@@ -32,6 +34,7 @@ class Home extends React.Component {
   constructor() {
     super()
     this.state = {
+      phone: '',
       formData: {},
       msg: '',
       showToast: false,
@@ -123,8 +126,16 @@ class Home extends React.Component {
   }
 
   render() {
-    const {msg, showToast, showModal, showAlert, formData} = this.state
+    const {msg, showToast, showModal, showAlert, formData, phone, gender} = this.state
     const {isComplete} = formData
+    const genderData = [{
+      name: '男',
+      value: 0,
+      disabled: true
+    }, {
+      name: '女',
+      value: 1
+    }]
     return (
       <section className='page_home'>
         <Toast content={msg}
@@ -175,7 +186,7 @@ class Home extends React.Component {
           <FormCell>
             <CellHeader>Name</CellHeader>
             <Input type='text'
-                   name='Name'
+                   name='name'
                    errorMsg={lang.nameErrorMsg}
                    validate={validate.name}
             />
@@ -191,11 +202,22 @@ class Home extends React.Component {
           <FormCell>
             <CellHeader>Verify Code</CellHeader>
             <Input type='number'
-                   name='VerifyCode'
+                   name='verifyCode'
                    errorMsg={lang.smsCodeErrorMsg}
                    validate={/\d{4}/}
             />
             <CellFooter><VerifyButton/></CellFooter>
+          </FormCell>
+          <FormCell>
+            <CellHeader>Gender</CellHeader>
+            <Select name='gender'
+                    data={genderData}
+                    required={false}
+            />
+          </FormCell>
+          <FormCell>
+            <CellBody><label htmlFor="is">Is yourself?</label></CellBody>
+            <CellFooter><CheckBox name='is' id="is"/></CellFooter>
           </FormCell>
           <Button type="submit" disabled={!isComplete}>提交</Button>
         </TestForm>
