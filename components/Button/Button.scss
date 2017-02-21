@@ -1,20 +1,16 @@
 @import "../style/config";
 
-button, input {
+.NEUI_button {
+  display: block;
+  text-align: center;
+  font-size: pxToRem(28);
+  margin: pxToRem(30) auto;
   border: 0;
   outline: 0;
   -webkit-appearance: none;
   &:focus {
     outline: 0;
   }
-}
-
-.NEUI_button {
-  display: block;
-  text-align: center;
-  font-size: pxToRem(28);
-  margin: pxToRem(30) auto;
-
   &_style_normal {
     border-radius: pxToRem(4);
     width: pxToRem(580);

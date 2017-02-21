@@ -4,7 +4,8 @@
  */
 import React from 'react'
 import ReactDom from 'react-dom'
-import { Router, Route, IndexRoute, hashHistory } from 'react-router'
+import {Router, Route, IndexRoute, hashHistory} from 'react-router'
+import '../components/style/index.scss'
 
 import App from './demo/App'
 import HomeDemo from './demo/HomeDemo'
@@ -17,8 +18,8 @@ ReactDom.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={HomeDemo}/>
-      <Route path="form" component={FormDemo} />
-      <Route path="alert" component={AlertDemo} />
+      <Route path="form" component={FormDemo}/>
+      <Route path="alert" component={AlertDemo}/>
     </Route>
   </Router>
 ), root)

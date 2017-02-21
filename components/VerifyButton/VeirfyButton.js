@@ -20,14 +20,15 @@ export default class VerifyButton extends React.Component {
     isSending: PropTypes.bool,
     text: PropTypes.string,
     times: PropTypes.number,
-    isCanSend: PropTypes.func
+    isCanSend: PropTypes.func,
   }
 
   static defaultProps = {
     isSending: false,
     text: '发送验证码',
     times: 60,
-    isCanSend: () => true
+    isCanSend: () => true,
+    handleClick: () => {}
   }
 
   getIsSending() {

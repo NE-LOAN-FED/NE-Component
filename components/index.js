@@ -27,4 +27,4 @@ export {default as Panel} from './Panel'
 export {default as Picker} from './Picker'
 export {default as Toast} from './Toast'
 export {default as VerifyButton} from './VerifyButton'
-
+export {default as Collapse} from './Collapse'

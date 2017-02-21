@@ -2,13 +2,9 @@
  * Created by kisnows on 2016/12/26.
  */
 import React from 'react'
-// import TestForm from '../../../components/Form/TestForm'
-import Form from '../../../components/Form/Form'
-// import Input from '../../../components/Form/TestInput'
-// import createFormItem from '../../../components/Form/createFormItem'
-// import Field from '../../../components/Form/Field.js'
-import Button from '../../../components/Button'
-import classnames from 'classnames'
+import TestForm from '../../../components/Form/Form'
+import Input from '../../../components/Form/Input'
+import {Button, FormCell, CellHeader, Toast} from '../../../components'
 import Logger from '../../../utils/log'
 
 
@@ -18,25 +14,49 @@ class FormDemo extends React.Component {
   constructor() {
     super()
     this.state = {
-      formData: {}
+      showInput: true,
+      formData: {},
+      msg: '',
+      showToast: false
     }
   }
 
   componentDidMount() {
     const formData = this.$Form.data
-    this.setState({
-      formData
-    })
+    setTimeout(() => {
+      this.setState({
+        showInput: false,
+        formData
+      })
+    }, 5000)
   }
 
   componentWillReceiveProps() {
-
+    logger.log('componentWillReceiveProps')
   }
 
-  componentWillUpdate() {
+  componentWillUpdate(nextProps, nextState) {
+    console.log('TEST', 2)
+
+    logger.log(nextState)
+  }
+
+  componentDidUpdate() {
+
   }
 
   handleSubmit = (isValidate, state, pureData) => {
+    if (!isValidate) {
+      this.setState({
+        showToast: true,
+        msg: state.errorMsgList[0]
+      })
+    } else {
+      this.setState({
+        showToast: true,
+        msg: '正在提交'
+      })
+    }
     logger.log(`form submit, isValidate:${isValidate}, state:${state}, pureData:${pureData}`)
   }
   handleChange = (formData) => {
@@ -60,15 +80,24 @@ class FormDemo extends React.Component {
   handleInputEmpty = () => {
     logger.log('handleInputEmpty')
   }
+  closeToast = () => {
+    this.setState({
+      showToast: false
+    })
+  }
 
   render() {
-    logger.log('render')
-    const formData = this.state.formData
+    const {showInput, msg, showToast, formData} = this.state
     const {isComplete} = formData
+    logger.info('render', this.state.formData)
+    console.log(isComplete)
     return (
       <section className="page-form-demo">
+        <Toast content={msg}
+               show={showToast}
+               onClose={this.closeToast}
+        />
         <p>page-form-demo</p>
-        <span>你好</span>
         <TestForm
           onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
@@ -77,23 +106,21 @@ class FormDemo extends React.Component {
             this['$Form'] = ref
           } }
         >
-          <span>Name</span>
-          <Field>
-            <Input
-              type='text'
-              name='realname'
-              validate={/^\d{9}$/}
+          <FormCell>
+            <CellHeader>Name</CellHeader>
+            <_FieldInput type='text'
+                         name='Name'
             />
-          </Field>
-          <span>Phone</span>
-          <Field><Input
-            type='text'
-            name='phone'
-            validate={/^\d{9}$/}
-          /></Field>
-          <Button type="submit" disabled={isComplete}>提交</Button>
+          </FormCell>
+          <FormCell cellsEnd>
+            <CellHeader>Phone</CellHeader>
+            <_FieldInput type='text'
+                         name='phone'
+                         validate={/^\d{11}$/}
+            />
+          </FormCell>
+          <Button type="submit" disabled={!isComplete}>提交</Button>
         </TestForm>
-        <pre style={{'whiteSpace':'normal'}}>{JSON.stringify(formData)}</pre>
       </section>
     )
   }

@@ -1,27 +1,22 @@
-const webpack = require('webpack')
+/**
+ * Created by kisnows on 2017/2/16.
+ */
 const path = require('path')
+const webpack = require('webpack')
 const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base.js')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const autoprefixer = require('autoprefixer')
-
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const cwd = process.cwd()
 
 const config = {
   entry: {
-    ne: [
-      path.join(__dirname, '../components/index')
+    app: [
+      path.join(__dirname, '../examples/index')
     ]
   },
-  output: {
-    path: path.join(cwd, './dist/'),
-    filename: 'ne.js',
-    library: 'ne',
-    libraryTarget: 'umd'
-  },
   module: {
-    rules: [{
+    loaders: [{
       test: /\.(css|scss|sass)$/,
       use: ExtractTextPlugin.extract({
         fallback: "style-loader",
@@ -43,23 +38,19 @@ const config = {
     }]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../examples/index.html'),
+      hash: false,
+      filename: path.join(cwd, 'index.html'),
+      inject: true
+    }),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify('production')
+        NODE_ENV: JSON.stringify('development')
       }
-    }),
-    new ExtractTextPlugin({
-      filename: '[name].min.css',
-      allChunks: false
-    }),
-    new webpack.optimize.UglifyJsPlugin()
-  ],
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-    'classnames': 'classNames'
-  },
-  devtool: '#source-map'
+    })
+  ]
 }
 
 module.exports = webpackMerge(baseConfig, config)

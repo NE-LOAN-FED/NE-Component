@@ -11,17 +11,21 @@ const config = {
       path.join(__dirname, '../examples/index')
     ]
   },
+  devtool: 'cheap-module-source-map',
   devServer: {
-    devtool: 'source-map',
     hot: true,
     inline: true,
     port: 3000,
     host: '0.0.0.0'
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.(css|scss|sass)$/,
-      loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader?sourceMap', 'sass-loader?sourceMap']
+      use: [
+        'style-loader',
+        'css-loader?sourceMap',
+        'sass-loader?sourceMap'
+      ]
     }]
   },
   plugins: [

@@ -1,4 +1,7 @@
-html {
-  background-color: $gray;
-  font-size: pxToRem(28)
+// 全局通用样式
+.NEUI-collapse {
+  overflow: hidden;
+  &-active {
+    transition: height .3s ease-out;
+  }
 }

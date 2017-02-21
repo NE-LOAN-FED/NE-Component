@@ -1,6 +1,12 @@
 @import "../style/config";
 
 .NEUI_verify {
+  border: 0;
+  outline: 0;
+  -webkit-appearance: none;
+  &:focus {
+    outline: 0;
+  }
   height: pxToRem(60);
   background-color: transparent;
   display: flex;
