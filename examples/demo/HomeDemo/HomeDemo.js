@@ -6,6 +6,9 @@ import {Link} from 'react-router'
 import {
   Form,
   FormCell,
+  Input,
+  Select,
+  CheckBox,
   Cells,
   Cell,
   CellHeader,
@@ -18,17 +21,35 @@ import {
   Alert,
   VerifyButton,
   Toast,
-  Button
+  Button,
+  Collapse
 } from '../../../components'
-import TestForm from '../../../components/Form/Form'
-import Input from '../../../components/Form/Input'
-import Select from '../../../components/Form/Select'
-import CheckBox from '../../../components/Form/CheckBox'
+
 import Logger from '../../../utils/log'
 import lang from '../../utils/lang'
 import validate from '../../utils/validate'
 const logger = new Logger('DEBUG', 'HomeDemo')
 
+const questions = [
+  {
+    q: 'Q：客服电话是多少？',
+    a: 'A：客服热线：400-0881188  服务时间：工作日09:30-12:00 ;13:30-18:00'
+  }, {
+    q: 'Q：申请的条件是什么？',
+    a: 'A：年龄在18-60周岁的在职员工。'
+  }, {
+    q: 'Q：申请借款需要哪些材料？',
+    a: 'A：只需要储蓄卡和身份证。'
+  }
+]
+
+const collapseListData = questions.map((v, k) => {
+  const obj = {
+    title: v.q,
+    content: v.a
+  }
+  return obj
+})
 
 class Home extends React.Component {
   constructor() {
@@ -124,6 +145,9 @@ class Home extends React.Component {
       showAlert: true
     })
   }
+  handleCollapseListChange = (openListIdCollection) => {
+    console.log(openListIdCollection)
+  }
 
   render() {
     const {msg, showToast, showModal, showAlert, formData, phone, gender} = this.state
@@ -175,7 +199,7 @@ class Home extends React.Component {
           </Cell>
         </Cells>
         <h1>Form</h1>
-        <TestForm
+        <Form
           onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
           onChange={this.handleChange}
@@ -220,7 +244,7 @@ class Home extends React.Component {
             <CellFooter><CheckBox name='is' id="is"/></CellFooter>
           </FormCell>
           <Button type="submit" disabled={!isComplete}>提交</Button>
-        </TestForm>
+        </Form>
         <h1>Panel</h1>
         <Panel className="panel">
           <Panel.Title>还款详情</Panel.Title>
@@ -265,6 +289,24 @@ class Home extends React.Component {
         >
           Are you a beautiful girl?
         </Alert>
+        <h1>CollapseList</h1>
+        <h2>Normal</h2>
+        <Collapse listCollection={collapseListData}
+                  onListChange={this.handleCollapseListChange}
+        />
+        <h2>Accordion</h2>
+        <Collapse listCollection={collapseListData}
+                  accordion={true}
+                  onListChange={this.handleCollapseListChange}
+        />
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
       </section>
     )
   }

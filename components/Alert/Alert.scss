@@ -35,6 +35,7 @@ $alert: #{$prefixCls}_alert;
   }
   &_cancel_button,
   &_confirm_button {
+    outline: none;
     flex: 1;
     display: inline-block;
     text-align: center;

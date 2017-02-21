@@ -1,0 +1,26 @@
+@import "../style/config";
+
+$collapse: #{$prefixCls}_collapse;
+
+.#{$collapse} {
+
+  .list_icon {
+    transition: all 0.3s ease-in-out;
+    transform: rotate(270deg);
+    &.collapse {
+      transform: rotate(90deg);
+    }
+  }
+
+  .list_content_wrap {
+    background: $white;
+    overflow: hidden;
+    &.collapse {
+      display: none;
+    }
+  }
+
+  .list_content {
+    padding: pxToRem(20) 0 pxToRem(20) pxToRem(30);
+  }
+}

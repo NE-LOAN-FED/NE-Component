@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import classNames from 'classnames'
+import ReactDOM from 'react-dom'
 
 const PanelTitle = (props) => {
   const {children} = props
@@ -91,8 +92,8 @@ export default class Panel extends React.Component {
 
   initHeight = () => {
     // TODO 拿到当前 panel
-    const $panel = document.querySelector('.NEUI_panel')
-    const $button = document.querySelector('.NEUI_panel .NEUI_panel_button')
+    const $panel = ReactDOM.findDOMNode(this)
+    const $button = $panel.querySelector('.NEUI_panel_button')
     const degHeight = $button.offsetTop - $panel.offsetTop
     const buttonHeight = $button.offsetHeight
     this.Panel.initialHeight = $panel.offsetHeight - buttonHeight
@@ -103,8 +104,7 @@ export default class Panel extends React.Component {
 
   onPanelButtonClick = () => {
     if (!this.state.expansion) {
-      // TODO 拿到当前 panel
-      const $panel = document.querySelector('.NEUI_panel')
+      const $panel = ReactDOM.findDOMNode(this)
       $panel.style.height = this.Panel.initialHeight + 'px'
       this.setState({
         expansion: true

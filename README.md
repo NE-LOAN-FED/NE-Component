@@ -71,3 +71,4 @@ class Test extends React.Components {
 * [x] Toast         
 * [x] Alert         
 * [x] DatePicker    日历
+* [X] Collapse      折叠列表
