@@ -3,6 +3,8 @@ const path = require('path')
 const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base.js')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer')
+
 
 const cwd = process.cwd()
 
@@ -19,9 +21,25 @@ const config = {
     libraryTarget: 'umd'
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.(css|scss|sass)$/,
-      loader: ExtractTextPlugin.extract('style-loader', ['css-loader?sourceMap', 'postcss-loader?sourceMap', 'sass-loader?sourceMap'])
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader",
+        use: [
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                autoprefixer({
+                  browsers: ['Android 4', 'last 5 versions', '> 5%', 'iOS 7']
+                })
+              ]
+            }
+          },
+          'sass-loader'
+        ]
+      })
     }]
   },
   plugins: [
@@ -30,7 +48,10 @@ const config = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new ExtractTextPlugin('./[name].min.css'),
+    new ExtractTextPlugin({
+      filename: '[name].min.css',
+      allChunks: false
+    }),
     new webpack.optimize.UglifyJsPlugin()
   ],
   externals: {
