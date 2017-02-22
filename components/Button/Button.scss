@@ -5,12 +5,7 @@
   text-align: center;
   font-size: pxToRem(28);
   margin: pxToRem(30) auto;
-  border: 0;
-  outline: 0;
-  -webkit-appearance: none;
-  &:focus {
-    outline: 0;
-  }
+
   &_style_normal {
     border-radius: pxToRem(4);
     width: pxToRem(580);

@@ -4,7 +4,14 @@
 import React from 'react'
 import classNames from 'classnames'
 
+const PropTypes = React.PropTypes
+
 export default class Icon extends React.Component {
+
+  static propTypes = {
+    prefixCls: PropTypes.string,
+    type: PropTypes.oneOf(['tip','loading','del','arrow','tick','wait','close','wait','warning','success'])
+  }
 
   static defaultProps = {
     prefixCls: 'NEUI',

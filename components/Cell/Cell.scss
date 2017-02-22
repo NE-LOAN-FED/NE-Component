@@ -2,8 +2,8 @@
 
 .NEUI_cells {
   width: 100%;
-  border-top: 1px solid $border_primary;
-  border-bottom: 1px solid $border_primary;
+  //border-top: pxToRem(1) solid $border_primary;
+  //border-bottom: pxToRem(1) solid $border_primary;
   overflow: hidden;
   .NEUI_cell:last-child:after {
     display: none;
@@ -13,6 +13,7 @@
 .NEUI_cell {
   width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   height: pxToRem(90);
   padding: pxToRem(20) pxToRem(30);
@@ -57,21 +58,22 @@
   }
 }
 
-.NEUI_cell_start {
-  border-top: 1px solid $border_primary;
-}
-
-.NEUI_cell_end {
-  border-bottom: 1px solid $border_primary;
-  &:after {
-    display: none;
+.NEUI_cells {
+  & .NEUI_cell:first-child {
+    border-top: 1px solid $border_primary;
+  }
+  & .NEUI_cell:last-child {
+    border-bottom: 1px solid $border_primary;
+    &:after {
+      display: none;
+    }
   }
 }
 
-.NEUI_cell_error.NEUI_cell_end {
+.NEUI_cell_error {
   border-bottom: none;
   &:after {
-    display: block;
+    display: block !important;
   }
 }
 
@@ -81,6 +83,5 @@
   line-height: pxToRem(30);
   font-size: $smallSize;
   vertical-align: bottom;
-  background-color: $gray;
   color: $text_light;
 }
