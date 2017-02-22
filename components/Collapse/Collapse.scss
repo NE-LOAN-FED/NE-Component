@@ -3,6 +3,9 @@
 $collapse: #{$prefixCls}_collapse;
 
 .#{$collapse} {
+  &+.#{$collapse} .#{$prefixCls}_cells {
+    border-top: none;
+  }
 
   .list_icon {
     transition: all 0.3s ease-in-out;

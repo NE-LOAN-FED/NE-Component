@@ -2,8 +2,8 @@
 
 .NEUI_cells {
   width: 100%;
-  border-top: 1px solid $border_primary;
-  border-bottom: 1px solid $border_primary;
+  border-top: pxToRem(1) solid $border_primary;
+  border-bottom: pxToRem(1) solid $border_primary;
   overflow: hidden;
   .NEUI_cell:last-child:after {
     display: none;

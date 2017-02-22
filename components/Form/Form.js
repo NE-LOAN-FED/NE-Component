@@ -51,11 +51,9 @@ export default class Form extends React.PureComponent {
     const children = this.props.children
     this.children = this.collectFormField(children)
     this.initFormDataStructure()
-    logger.info('WillMount')
   }
 
   componentDidMount() {
-    logger.info('DidMount')
     this.props.onChange({
       ...this.state,
       data: {
@@ -69,18 +67,14 @@ export default class Form extends React.PureComponent {
       this.children = this.collectFormField(nextProps.children)
       if (this.CURRENT_STATE === STATE.Normal) {
         this.updateFormDataStructure()
-        logger.log('updateFormDataStructure end', this.state)
       }
     }
   }
 
   componentWillUpdate(nextProps, nextState) {
-    logger.log('componentWillUpdate', nextState)
   }
 
   componentDidUpdate(preProps, preState) {
-    logger.log('componentDidUpdate', preState, this.state, this.CURRENT_STATE)
-    // this.props.onChange(this.data)
   }
 
   componentWillUnmount() {
@@ -107,7 +101,7 @@ export default class Form extends React.PureComponent {
 
     function getChildList(children) {
       return React.Children.map(children, (el, i) => {
-        // 只要 Name 以 Field 开头，就认为是需要 From 管理的组件
+        // 只要 Name 以 _Field 开头，就认为是需要 From 管理的组件
         if (!el || el === null) return null
 
         const reg = /^_Field/
@@ -132,8 +126,7 @@ export default class Form extends React.PureComponent {
       })
     }
 
-    const childList = getChildList(children)
-    return childList
+    return getChildList(children)
   }
 
   /**
