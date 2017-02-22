@@ -26,7 +26,7 @@ import {
   Collapse
 } from '../../../components'
 
-export default class ButtonPage extends Component {
+export default class ModalPage extends Component {
   constructor() {
     super()
     this.state = {
@@ -50,7 +50,6 @@ export default class ButtonPage extends Component {
     })
   }
   handleAlertConfirm = () => {
-    logger.log('You click confirm')
     this.setState({
       showAlert: false,
       showToast: true,
@@ -75,22 +74,30 @@ export default class ButtonPage extends Component {
       showAlert: true
     })
   }
+  closeToast = () => {
+    this.setState({
+      showToast: false
+    })
+  }
 
   render() {
+    const {msg, showToast, showModal, showAlert} = this.state
     return (
       <div>
+        <Toast content={msg}
+               show={showToast}
+               onClose={this.closeToast}
+        />
         <div className="page--header">
-          <h1 className="page-title">Panel</h1>
-          <p className="page--desc">信息展示面板</p>
+          <h1 className="page-title">Modal</h1>
+          <p className="page--desc">模态窗</p>
         </div>
-        <h1>Modal</h1>
         <Button onClick={this.openModal}>Click to open a Modal</Button>
         <Modal show={showModal}
                onClose={this.closeModal}
         >
           <h2>This is a Modal.</h2>
         </Modal>
-        <h1>Alert</h1>
         <Button onClick={this.openAlert}>Click to open a Alert</Button>
         <Alert headerContent={'Question'}
                show={showAlert}

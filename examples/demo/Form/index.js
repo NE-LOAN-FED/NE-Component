@@ -35,7 +35,9 @@ class FormDemo extends React.Component {
     super()
     this.state = {
       showInput: true,
-      formData: {},
+      formData: {
+        data: {}
+      },
       msg: '',
       showToast: false
     }
@@ -43,6 +45,9 @@ class FormDemo extends React.Component {
 
   componentDidMount() {
     const formData = this.$Form.data
+    this.setState({
+      formData
+    })
     setTimeout(() => {
       this.setState({
         showInput: false,
@@ -108,6 +113,8 @@ class FormDemo extends React.Component {
 
   render() {
     const {showInput, msg, showToast, formData} = this.state
+    console.log(formData)
+    const formFieldData = formData.data
     const {isComplete} = formData
     const genderData = [{
       name: '男',
@@ -118,7 +125,7 @@ class FormDemo extends React.Component {
       value: 1
     }]
     logger.info('render', this.state.formData)
-    console.log(isComplete)
+    console.log(formFieldData.phone && formFieldData.phone.isError)
     return (
       <section className="page-form-demo">
         <div className="page--header">
@@ -137,7 +144,7 @@ class FormDemo extends React.Component {
             this['$Form'] = ref
           } }
         >
-          <FormCell>
+          <FormCell isError={formFieldData.name && formFieldData.name.isError}>
             <CellHeader>Name</CellHeader>
             <Input type='text'
                    name='name'
@@ -145,7 +152,7 @@ class FormDemo extends React.Component {
                    validate={validate.name}
             />
           </FormCell>
-          <FormCell>
+          <FormCell isError={formFieldData.phone && formFieldData.phone.isError}>
             <CellHeader>Phone</CellHeader>
             <Input type='tel'
                    name='phone'
@@ -153,7 +160,7 @@ class FormDemo extends React.Component {
                    errorMsg={lang.phoneErrorMsg}
             />
           </FormCell>
-          <FormCell>
+          <FormCell isError={formFieldData.verifyCode && formFieldData.verifyCode.isError}>
             <CellHeader>Verify Code</CellHeader>
             <Input type='number'
                    name='verifyCode'
@@ -162,7 +169,7 @@ class FormDemo extends React.Component {
             />
             <CellFooter><VerifyButton/></CellFooter>
           </FormCell>
-          <FormCell>
+          <FormCell isError={formFieldData.gender && formFieldData.gender.isError}>
             <CellHeader>Gender</CellHeader>
             <Select name='gender'
                     data={genderData}

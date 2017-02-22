@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const config = {
   entry: {
     app: [
-      'webpack-dev-server/client',
+      'webpack-dev-server/client?reload=true',
       path.join(__dirname, '../examples/index')
     ]
   },

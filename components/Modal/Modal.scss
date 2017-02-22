@@ -22,7 +22,7 @@ $modal: #{$prefixCls}_modal;
     overflow-y: auto;
     background-color: $white;
     border-radius: pxToRem(6);
-    padding-top: pxToRem(30)
+    padding: pxToRem(30) pxToRem(30) 0;
   }
   &_close {
     height: pxToRem(60);

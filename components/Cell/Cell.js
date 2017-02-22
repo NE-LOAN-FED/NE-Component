@@ -12,7 +12,7 @@ export default class Cell extends React.Component {
 
   render() {
     const {className, children, cellsStart, cellsEnd, ...others} = this.props
-    const Component = this.props.href ? 'a' : this.props.htmlFor !== 'undefined' ? 'label' : 'div'
+    const Component = this.props.href ? 'a' : this.props.htmlFor === 'undefined' ? 'div' : 'label'
     const cls = classNames({
       NEUI_cell: true,
       NEUI_cell_start: cellsStart,

@@ -30,7 +30,6 @@ import Logger from '../../../utils/log'
 const logger = new Logger('DEBUG', 'Home')
 
 
-
 class Home extends React.Component {
   constructor() {
     super()
@@ -90,12 +89,11 @@ class Home extends React.Component {
   }
 
 
-
   render() {
     const {msg, showToast, showModal, showAlert, formData, phone, gender} = this.state
     const {isComplete} = formData
 
-    const Links = ['alert', 'form', 'button', 'cells', 'panel', 'picker', 'modal', 'collapse','icon']
+    const Links = ['form', 'button', 'cells', 'panel', 'picker', 'modal', 'collapse', 'icon']
     return (
       <section className='page-home'>
         <Toast content={msg}
@@ -104,7 +102,7 @@ class Home extends React.Component {
         />
         <div className="page--header">
           <h1 className="page-title">NE-RC</h1>
-          <p className="page--desc">NE-RC 是基于 React 开发一套组件，风格和交互上遵循内部规范。开发的目的是为了给内部项目提供统一用户体验输出。</p>
+          <p className="page--desc">NE-RC 是由大数据风控-前端小组开发的一套基于 React 的组件，风格和交互上遵循内部规范。项目开发的目的是为了给内部项目提供统一用户体验输出。</p>
         </div>
         <Cells>
           {
@@ -115,30 +113,7 @@ class Home extends React.Component {
               </Cell>
             })
           }
-
         </Cells>
-
-
-
-
-
-        <h1>Picker</h1>
-        <Cell>
-          <CellHeader>DatePicker</CellHeader>
-          <CellBody>
-            <DatePicker/>
-          </CellBody>
-        </Cell>
-
-
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
       </section>
     )
   }

@@ -11,6 +11,7 @@ import {
   CheckBox,
   Cells,
   Cell,
+  CellTip,
   CellHeader,
   Icon,
   CellBody,
@@ -30,8 +31,12 @@ export default class ButtonPage extends Component {
   render() {
     return (
       <div>
-        <h1>Cells</h1>
+        <div className="page--header">
+          <h1 className="page-title">Cells</h1>
+          <p className="page--desc">列表</p>
+        </div>
         <Cells>
+          <CellTip>完整的 Cell</CellTip>
           <Cell>
             <CellHeader>Header</CellHeader>
             <CellBody>Body</CellBody>
@@ -41,6 +46,20 @@ export default class ButtonPage extends Component {
             <CellHeader>Header</CellHeader>
             <CellBody>Body</CellBody>
             <CellFooter>Footer</CellFooter>
+          </Cell>
+          <CellTip>不完整的</CellTip>
+          <Cell>
+            <CellHeader>Header</CellHeader>
+            <CellBody>Body</CellBody>
+          </Cell>
+          <Cell>
+            <CellHeader>Header</CellHeader>
+            <CellFooter>Footer</CellFooter>
+          </Cell>
+          <CellTip>带链接的</CellTip>
+          <Cell href="/#/">
+            <CellHeader>Go Home</CellHeader>
+            <CellFooter><Icon type={'arrow'}/></CellFooter>
           </Cell>
         </Cells>
       </div>
