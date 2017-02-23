@@ -13,14 +13,14 @@ const webpackConfig = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.sass', '.scss']
+    extensions: ['.js', '.jsx', '.json', '.css', '.scss'],
   },
+  context: cwd,
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
       use: 'babel-loader',
-      exclude: /node_modules/,
-      include: cwd
+      exclude: /node_modules/
     }, {
       test: /\.(jpeg|jpg|png|gif)$/,
       use: {

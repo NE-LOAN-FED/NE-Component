@@ -1,6 +1,4 @@
 # compiled output
-/app-*.js
-/index.html
 /tmp
 /typings
 /deploy
@@ -24,9 +22,13 @@
 /connect.lock
 /.chrome
 
-/dist
-/lib
+
 # Logs
 logs
 *.log
 npm-debug.log
+
+# customer
+/demo
+/dist
+/lib
