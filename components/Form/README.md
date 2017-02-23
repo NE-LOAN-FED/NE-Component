@@ -2,7 +2,6 @@
 封装后的 Form 组件，提供校验和检测是否填写完成等功能，分为一下几个组件：
 
   1. Form 
-  1. FormCell
   1. Input
   1. Select
   1. CheckBox
