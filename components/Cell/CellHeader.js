@@ -12,7 +12,7 @@ export default class CellHeader extends React.Component {
   render() {
     const {className, children, ...others} = this.props
     const cls = classNames({
-      NEUI_cell_hd: true,
+      NEUI_cell__hd: true,
       [className]: className
     })
     return (

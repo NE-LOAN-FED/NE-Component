@@ -265,7 +265,6 @@ export default class Form extends React.PureComponent {
     const {className} = this.props
     const cls = classNames({
       [`${prefix}_cells`]: true,
-      [`${prefix}_cells_form`]: true,
       [className]: className
     })
     return (

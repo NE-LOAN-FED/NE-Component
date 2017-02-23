@@ -7,16 +7,6 @@
   justify-content: space-between;
 }
 
-.NEUI_cells_form {
-  border-bottom: none;
-  .NEUI_cell_error:after {
-    background-color: $color_warning;
-  }
-  .NEUI_cell:last-child.NEUI_cell_error:after {
-    display: block;
-  }
-}
-
 .NEUI_input {
   @include subCell();
   input {

@@ -9,6 +9,7 @@ import {
   CheckBox,
   Cells,
   Cell,
+  CellTip,
   CellHeader,
   Icon,
   CellBody,
@@ -87,7 +88,7 @@ class FormDemo extends React.Component {
         msg: '正在提交'
       })
     }
-    logger.log(`form submit, isValidate:${isValidate}, state:${state}, pureData:${pureData}`)
+    logger.log(`form submit, isValidate:${isValidate},`, 'state:', state, 'pureData:', pureData)
   }
   handleChange = (formData) => {
     logger.log('form change', formData)
@@ -149,42 +150,51 @@ class FormDemo extends React.Component {
             this['$Form'] = ref
           } }
         >
-          <Cell warning={formFieldData.name && formFieldData.name.isError}>
-            <CellHeader>Name</CellHeader>
-            <Input type='text'
-                   name='name'
-                   errorMsg={lang.nameErrorMsg}
-                   validate={validate.name}
-            />
-          </Cell>
-          <Cell warning={formFieldData.phone && formFieldData.phone.isError}>
-            <CellHeader>Phone</CellHeader>
-            <Input type='tel'
-                   name='phone'
-                   validate={validate.phone}
-                   errorMsg={lang.phoneErrorMsg}
-            />
-          </Cell>
-          <Cell warning={formFieldData.verifyCode && formFieldData.verifyCode.isError}>
-            <CellHeader>Verify Code</CellHeader>
-            <Input type='number'
-                   name='verifyCode'
-                   errorMsg={lang.smsCodeErrorMsg}
-                   validate={/\d{4}/}
-            />
-            <CellFooter><VerifyButton/></CellFooter>
-          </Cell>
-          <Cell warning={formFieldData.gender && formFieldData.gender.isError}>
-            <CellHeader>Gender</CellHeader>
-            <Select name='gender'
-                    data={genderData}
-                    required={false}
-            />
-          </Cell>
-          <Cell htmlFor="is">
-            <CellBody>Is yourself?</CellBody>
-            <CellFooter><CheckBox name='is' id="is"/></CellFooter>
-          </Cell>
+          <CellTip>Input</CellTip>
+          <Cells>
+            <Cell warning={formFieldData.name && formFieldData.name.isError}>
+              <CellHeader>Name</CellHeader>
+              <Input type='text'
+                     name='name'
+                     errorMsg={lang.nameErrorMsg}
+                     validate={validate.name}
+              />
+            </Cell>
+            <Cell warning={formFieldData.phone && formFieldData.phone.isError}>
+              <CellHeader>Phone</CellHeader>
+              <Input type='tel'
+                     name='phone'
+                     validate={validate.phone}
+                     errorMsg={lang.phoneErrorMsg}
+              />
+            </Cell>
+            <Cell warning={formFieldData.verifyCode && formFieldData.verifyCode.isError}>
+              <CellHeader>Verify Code</CellHeader>
+              <Input type='number'
+                     name='verifyCode'
+                     errorMsg={lang.smsCodeErrorMsg}
+                     validate={/\d{4}/}
+              />
+              <CellFooter><VerifyButton/></CellFooter>
+            </Cell>
+          </Cells>
+          <CellTip>Select</CellTip>
+          <Cells>
+            <Cell warning={formFieldData.gender && formFieldData.gender.isError}>
+              <CellHeader>Gender</CellHeader>
+              <Select name='gender'
+                      data={genderData}
+                      required={false}
+              />
+            </Cell>
+          </Cells>
+          <CellTip>CheckBox</CellTip>
+          <Cells>
+            <Cell htmlFor="is">
+              <CellBody>Is yourself?</CellBody>
+              <CellFooter><CheckBox name='is' id="is"/></CellFooter>
+            </Cell>
+          </Cells>
           <Button type="submit" disabled={!isComplete}>提交</Button>
         </Form>
       </section>
