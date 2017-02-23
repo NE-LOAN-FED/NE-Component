@@ -83,7 +83,7 @@ export default class ModalPage extends Component {
   render() {
     const {msg, showToast, showModal, showAlert} = this.state
     return (
-      <div>
+      <section>
         <Toast content={msg}
                show={showToast}
                onClose={this.closeToast}
@@ -108,7 +108,7 @@ export default class ModalPage extends Component {
         >
           Are you a beautiful girl?
         </Alert>
-      </div>
+      </section>
     )
   }
 }

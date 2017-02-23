@@ -26,8 +26,7 @@ import {
   Collapse
 } from '../../../components'
 import List from '../../../components/Collapse/List'
-
-
+import './Collapse.scss'
 
 const questions = [
   {
@@ -58,25 +57,24 @@ export default class CollapsePage extends Component {
 
   render() {
     const CollapseSubComponent = <List/>
-    return(
-      <div>
+    return (
+      <section className="page_collapse">
         <div className="page--header">
-          <h1 className="page-title">Panel</h1>
-          <p className="page--desc">信息展示面板</p>
+          <h1 className="page-title">Collapse</h1>
+          <p className="page--desc">折叠列表</p>
         </div>
-        <h1>CollapseList</h1>
-        <h2>Normal</h2>
+        <h3>Normal</h3>
         <Collapse listCollection={collapseListData}
                   onListChange={this.handleCollapseListChange}
                   subComponent={CollapseSubComponent}
         />
-        <h2>Accordion</h2>
+        <h3>Accordion</h3>
         <Collapse listCollection={collapseListData}
                   accordion={true}
                   onListChange={this.handleCollapseListChange}
                   subComponent={CollapseSubComponent}
         />
-      </div>
+      </section>
     )
   }
 }

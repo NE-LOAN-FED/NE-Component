@@ -28,8 +28,8 @@ import {
 
 export default class PickerPage extends Component {
   render() {
-    return(
-      <div>
+    return (
+      <section>
         <div className="page--header">
           <h1 className="page-title">Picker</h1>
           <p className="page--desc">选择器</p>
@@ -40,7 +40,7 @@ export default class PickerPage extends Component {
             <DatePicker/>
           </CellBody>
         </Cell>
-      </div>
+      </section>
     )
   }
 }

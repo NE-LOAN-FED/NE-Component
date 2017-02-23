@@ -33,7 +33,7 @@ export default class IconPage extends Component {
       return <Cell key={k}><CellHeader>{v}</CellHeader> <CellBody><Icon type={v}/></CellBody></Cell>
     })
     return (
-      <div>
+      <section>
         <div className="page--header">
           <h1 className="page-title">Icon</h1>
           <p className="page--desc">固定的常用字体图标</p>
@@ -41,7 +41,7 @@ export default class IconPage extends Component {
         <Cells>
           {Icons}
         </Cells>
-      </div>
+      </section>
     )
   }
 }

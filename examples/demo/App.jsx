@@ -1,13 +1,24 @@
 import React, {PropTypes} from 'react'
-import {Link} from 'react-router'
+import Animate from 'rc-animate'
+import ReactCssTransitionGroup from 'react-addons-css-transition-group'
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
   render() {
     return (
-      <div>
-        {this.props.children}
-      </div>
+      <ReactCssTransitionGroup
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
+        transitionName={'page'}
+        component={'div'}
+      >
+        {React.cloneElement(this.props.children, {
+          key: this.props.location.pathname
+        })}
+      </ReactCssTransitionGroup>
     )
   }
 }

@@ -27,10 +27,10 @@ import {
   Collapse
 } from '../../../components'
 
-export default class ButtonPage extends Component {
+export default class CellsPage extends Component {
   render() {
     return (
-      <div>
+      <section>
         <div className="page--header">
           <h1 className="page-title">Cells</h1>
           <p className="page--desc">列表</p>
@@ -62,7 +62,7 @@ export default class ButtonPage extends Component {
             <CellFooter><Icon type={'arrow'}/></CellFooter>
           </Cell>
         </Cells>
-      </div>
+      </section>
     )
   }
 }

@@ -29,7 +29,7 @@ import {
 export default class PanelPage extends Component {
   render() {
     return(
-      <div>
+      <section>
         <div className="page--header">
           <h1 className="page-title">Panel</h1>
           <p className="page--desc">信息展示面板</p>
@@ -52,7 +52,7 @@ export default class PanelPage extends Component {
             <Panel.Content>Content</Panel.Content>
           </Panel.Item>
         </Panel>
-      </div>
+      </section>
     )
   }
 }

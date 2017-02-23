@@ -3,6 +3,16 @@ a {
   color: $blue;
 }
 
+section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 1;
+}
+
 .page--header {
   padding: pxToRem(30);
 }
@@ -11,3 +21,54 @@ a {
   font-size: $normalSize;
   line-height: 1.6;
 }
+
+.page-enter {
+  position: absolute;
+  top: 0;
+  z-index: 1024;
+  transform: translate3d(100%, 0, 0);
+  transition: all .3s ease;
+  opacity: 0.01;
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  //animation: pageEnter 20s linear;
+}
+
+.page-leave {
+  position: absolute;
+  top: 0;
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  transition: all .3s ease;
+}
+
+.page-leave-active {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+  //animation: pageLeave 20s linear;
+}
+
+//@keyframes pageEnter {
+//  0% {
+//    transform: translate3d(100%, 0, 0);
+//    opacity: 0;
+//  }
+//  100% {
+//    transform: translate3d(0, 0, 0);
+//    opacity: 1;
+//  }
+//}
+//
+//@keyframes pageLeave {
+//  0% {
+//    transform: translate3d(0, 0, 0);
+//    opacity: 1;
+//  }
+//  100% {
+//    transform: translate3d(-100%, 0, 0);
+//    opacity: 0;
+//  }
+//}

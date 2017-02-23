@@ -70,9 +70,21 @@
   }
 }
 
-.NEUI_cell_error {
+.NEUI_cell_start {
+  border-top: 1px solid $border_primary;
+}
+
+.NEUI_cell_end {
+  border-bottom: 1px solid $border_primary;
+  &:after {
+    display: none;
+  }
+}
+
+.NEUI_cell_warning {
   border-bottom: none;
   &:after {
+    background-color: $color_warning;
     display: block !important;
   }
 }

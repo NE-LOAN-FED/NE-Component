@@ -4,7 +4,6 @@
 import React from 'react'
 import {
   Form,
-  FormCell,
   Input,
   Select,
   CheckBox,
@@ -41,14 +40,17 @@ class FormDemo extends React.Component {
       msg: '',
       showToast: false
     }
+    this.timer = null
   }
 
   componentDidMount() {
+    console.log(new Date())
+
     const formData = this.$Form.data
     this.setState({
       formData
     })
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.setState({
         showInput: false,
         formData
@@ -67,7 +69,10 @@ class FormDemo extends React.Component {
   }
 
   componentDidUpdate() {
+  }
 
+  componentWillUnmount() {
+    clearTimeout(this.timer)
   }
 
   handleSubmit = (isValidate, state, pureData) => {
@@ -144,23 +149,23 @@ class FormDemo extends React.Component {
             this['$Form'] = ref
           } }
         >
-          <FormCell isError={formFieldData.name && formFieldData.name.isError}>
+          <Cell warning={formFieldData.name && formFieldData.name.isError}>
             <CellHeader>Name</CellHeader>
             <Input type='text'
                    name='name'
                    errorMsg={lang.nameErrorMsg}
                    validate={validate.name}
             />
-          </FormCell>
-          <FormCell isError={formFieldData.phone && formFieldData.phone.isError}>
+          </Cell>
+          <Cell warning={formFieldData.phone && formFieldData.phone.isError}>
             <CellHeader>Phone</CellHeader>
             <Input type='tel'
                    name='phone'
                    validate={validate.phone}
                    errorMsg={lang.phoneErrorMsg}
             />
-          </FormCell>
-          <FormCell isError={formFieldData.verifyCode && formFieldData.verifyCode.isError}>
+          </Cell>
+          <Cell warning={formFieldData.verifyCode && formFieldData.verifyCode.isError}>
             <CellHeader>Verify Code</CellHeader>
             <Input type='number'
                    name='verifyCode'
@@ -168,18 +173,18 @@ class FormDemo extends React.Component {
                    validate={/\d{4}/}
             />
             <CellFooter><VerifyButton/></CellFooter>
-          </FormCell>
-          <FormCell isError={formFieldData.gender && formFieldData.gender.isError}>
+          </Cell>
+          <Cell warning={formFieldData.gender && formFieldData.gender.isError}>
             <CellHeader>Gender</CellHeader>
             <Select name='gender'
                     data={genderData}
                     required={false}
             />
-          </FormCell>
-          <FormCell>
-            <CellBody><label htmlFor="is">Is yourself?</label></CellBody>
+          </Cell>
+          <Cell htmlFor="is">
+            <CellBody>Is yourself?</CellBody>
             <CellFooter><CheckBox name='is' id="is"/></CellFooter>
-          </FormCell>
+          </Cell>
           <Button type="submit" disabled={!isComplete}>提交</Button>
         </Form>
       </section>
