@@ -13,7 +13,8 @@ const toString = Object.prototype.toString
 
 export function noop() {}
 
-function formatNumber(number, size, trim) {
+// 获取固定 size 的 number。 trim 设置为 true 则长度超过 size 部分去除
+function formatNumber(number, size, trim = false) {
   if (size === 0 || !(isString(number) || isNumber(number))) {
     return ''
   }

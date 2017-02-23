@@ -80,6 +80,11 @@ class Picker extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.init()
+    this.component.addEventListener('touchstart', this.onTouchStart.bind(this), false)
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return nextState.selectedValue !== this.state.selectedValue || !isChildrenEqual(nextProps.children, this.props.children, this.props.pure)
   }
@@ -91,92 +96,9 @@ class Picker extends React.Component {
       this.select(this.state.selectedValue)
     }
   }
-  componentDidMount() {
-    this.init()
-    this.component.addEventListener('touchstart', this.onTouchStart.bind(this), false)
-  }
 
   componentWillUnmount() {
     this.component.removeEventListener('touchstart', this.onTouchStart.bind(this), false)
-  }
-
-  initState() {
-    let selectedValueState
-    const { selectedValue, defaultSelectedValue, children } = this.props
-    if (selectedValue !== undefined) {
-      selectedValueState = selectedValue
-    } else if (defaultSelectedValue !== undefined) {
-      selectedValueState = defaultSelectedValue
-    } else if (children.length) {
-      selectedValueState = children[0].value
-    }
-    return {
-      selectedValue: selectedValueState
-    }
-  }
-  scrollTo(t, a) {
-    let top = t
-    let animate = a
-    animate = (animate === undefined) ? true : animate
-
-    this.clearAnim()
-    top = Math.round(top / this.itemHeight) * this.itemHeight
-    top = Math.max(Math.min(this.maxScrollTop, top), this.minScrollTop)
-
-    if (top === this.scrollTop) {
-      this.publish(top)
-      this.scrollingComplete()
-      return
-    }
-    this.publish(top, DEFAULT_ANIM_DURATION)
-  }
-
-  selectByIndex(index) {
-    if (index < 0 || index >= this.props.children.length) {
-      throw new Error('Invalid prop index supplied to Picker Must > 0 and < children.length.')
-    }
-    this.scrollTop = this.minScrollTop + index * this.itemHeight
-    console.log('scrollTo', this.scrollTop)
-    this.scrollTo(this.scrollTop)
-  }
-
-  select(value) {
-    const { children } = this.props
-    for (let i = 0, len = children.length; i < len; i++) {
-      if (children[i].value === value) {
-        this.selectByIndex(i)
-        return
-      }
-    }
-    this.selectByIndex(0)
-  }
-  fireValueChange(selectedValue) {
-    if (selectedValue !== this.state.selectedValue) {
-      if (!('selectedValue' in this.props)) {
-        this.setState({
-          selectedValue
-        })
-      }
-      this.props.onValueChange(selectedValue)
-    }
-  }
-  scrollingComplete() {
-    const index = Math.round((this.scrollTop - this.minScrollTop - this.itemHeight / 2) / this.itemHeight)
-    const child = this.props.children[index]
-    if (child) {
-      this.fireValueChange(child.value)
-    }
-  }
-  setDimensions() {
-    const { component, indicator, content } = this
-    const { children, clientItemCount } = this.props
-    const totalItemCount = children.length
-    this.itemHeight = parseFloat(getComputedStyle(indicator, 'height'), 10) || this.props.itemHeight
-    this.clientHeight = component.clientHeight
-
-    this.minScrollTop = -this.itemHeight * (clientItemCount / 2)
-    this.maxScrollTop = this.minScrollTop + this.itemHeight * totalItemCount - 0.001
-    console.log(this.itemHeight, this.clientHeight, clientItemCount, this.minScrollTop)
   }
 
   init() {
@@ -202,10 +124,91 @@ class Picker extends React.Component {
     this.select(this.state.selectedValue)
   }
 
+  initState() {
+    let selectedValueState
+    const { selectedValue, defaultSelectedValue, children } = this.props
+    if (selectedValue !== undefined) {
+      selectedValueState = selectedValue
+    } else if (defaultSelectedValue !== undefined) {
+      selectedValueState = defaultSelectedValue
+    } else if (children.length) {
+      selectedValueState = children[0].value
+    }
+    return {
+      selectedValue: selectedValueState
+    }
+  }
+
+  scrollTo(top, animate = true) {
+    this.clearAnim()
+    top = Math.round(top / this.itemHeight) * this.itemHeight
+    top = Math.max(Math.min(this.maxScrollTop, top), this.minScrollTop)
+
+    if (top === this.scrollTop) {
+      this.publish(top)
+      this.scrollingComplete()
+      return
+    }
+    this.publish(top, DEFAULT_ANIM_DURATION)
+  }
+
+  selectByIndex(index) {
+    if (index < 0 || index >= this.props.children.length) {
+      throw new Error('Invalid prop index supplied to Picker Must > 0 and < children.length.')
+    }
+    // 滑动到指定位置
+    this.scrollTop = this.minScrollTop + index * this.itemHeight
+    this.scrollTo(this.scrollTop)
+  }
+
+  select(value) {
+    const { children } = this.props
+    for (let i = 0, len = children.length; i < len; i++) {
+      if (children[i].value === value) {
+        this.selectByIndex(i)
+        return
+      }
+    }
+    this.selectByIndex(0)
+  }
+
+  fireValueChange(selectedValue) {
+    if (selectedValue !== this.state.selectedValue) {
+      if (!('selectedValue' in this.props)) {
+        this.setState({
+          selectedValue
+        })
+      }
+      this.props.onValueChange(selectedValue)
+    }
+  }
+
+  scrollingComplete() {
+    const index = Math.round((this.scrollTop - this.minScrollTop - this.itemHeight / 2) / this.itemHeight)
+    const child = this.props.children[index]
+    if (child) {
+      this.fireValueChange(child.value)
+    }
+  }
+
+  setDimensions() {
+    const { component, indicator, content } = this
+    const { children, clientItemCount } = this.props
+    const totalItemCount = children.length
+
+    // 根据实际高度滑动
+    this.itemHeight = parseFloat(getComputedStyle(indicator, 'height'), 10) || this.props.itemHeight
+    this.clientHeight = component.clientHeight
+
+    this.minScrollTop = -this.itemHeight * (clientItemCount / 2)
+    this.maxScrollTop = this.minScrollTop + this.itemHeight * totalItemCount - 0.001
+  }
+
   onTouchStart(e) {
     e.preventDefault()
     this.component.addEventListener('touchmove', this.onTouchMove.bind(this), false)
     this.component.addEventListener('touchend', this.onTouchEnd.bind(this), false)
+
     if (!this.props.disabled) {
       this.doTouchStart(e.touches, e.timeStamp)
     }
@@ -216,9 +219,11 @@ class Picker extends React.Component {
       this.doTouchMove(e.touches, e.timeStamp)
     }
   }
+
   onTouchEnd(e) {
     this.component.removeEventListener('touchmove', this.onTouchMove.bind(this), false)
     this.component.removeEventListener('touchend', this.onTouchEnd.bind(this), false)
+
     if (!this.props.disabled) {
       this.doTouchEnd(e.timeStamp)
     }
@@ -235,6 +240,7 @@ class Picker extends React.Component {
       this.isAnimating = false
     }
   }
+
   doTouchStart(touches, timeStamp) {
     const touchY = touches[0].pageY
     this.clearAnim()
@@ -267,6 +273,8 @@ class Picker extends React.Component {
     if (isDragging) {
       const moveY = currentTouchTop - lastTouchTop
       let scrollTop = this.scrollTop
+
+      // 判断是否到达顶部或者底部
       if (this.enableScrollY) {
         scrollTop -= moveY
         if (scrollTop > maxScrollTop || scrollTop < minScrollTop) {
@@ -277,11 +285,13 @@ class Picker extends React.Component {
           }
         }
       }
+      // 将移动位置和时间戳信息推入 postions
       this.addPosition(scrollTop, timeStamp)
       this.publish(scrollTop)
     } else {
       const distanceY = Math.abs(currentTouchTop - initialTouchTop)
       this.enableScrollY = distanceY >= MINIUM_TRACKING_FOR_SCROLL
+
       this.addPosition(this.scrollTop, timeStamp)
       this.isDragging = distanceY >= MINIUM_TRACKING_FOR_DRAG
     }
@@ -297,6 +307,7 @@ class Picker extends React.Component {
       if (timeStamp - lastTouchMove <= TIME_FRAME) {
         const endPos = positions.length - 1
         let startPos = endPos
+        // 根据 100ms 前的位置和最后一次位置差异进行减速动作
         for (let i = endPos; i > 0 && positions[i] > (lastTouchMove - TIME_FRAME); i -= 2) {
           startPos = i
         }
@@ -305,6 +316,7 @@ class Picker extends React.Component {
           const moveTop = this.scrollTop - positions[startPos - 1]
           this.decelerationVelocityY = moveTop / timeOffset * (1000 / 60)
 
+          // 大于最小移动比限制进行减速动作
           if (Math.abs(this.decelerationVelocityY) > MIN_VELOCITY_TO_START_DECELERATION) {
             this.startDeceleration()
           }
@@ -317,6 +329,7 @@ class Picker extends React.Component {
 
     this.positions.length = 0
   }
+
   setTop(top) {
     const { content } = this
 
@@ -324,6 +337,7 @@ class Picker extends React.Component {
       content.style.webkitTransform = `translate3d(0, ${-top}px, 0)`
     }
   }
+
   publish(top, animationDuration) {
     const wasAnimating = this.isAnimating
     if (wasAnimating) {
@@ -355,6 +369,7 @@ class Picker extends React.Component {
         }
       }
 
+      // 使用 Animate 开启动画移动
       this.isAnimating = Animate.start(step, verify, completed, animationDuration, wasAnimating ? easeOutCubic : easeInOutCubic)
     } else {
       this.scheduledTop = this.scrollTop = top
@@ -367,6 +382,7 @@ class Picker extends React.Component {
     this.maxDecelerationScrollTop = this.maxScrollTop
 
     const step = (percent, now, render) => {
+      // 每步动画操作
       this.stepThroughDeceleration(render)
     }
 
@@ -411,6 +427,7 @@ class Picker extends React.Component {
 
     this.publish(scrollTop)
   }
+
   render() {
     const { children, prefixCls, className } = this.props
     const { selectedValue } = this.state
@@ -423,6 +440,7 @@ class Picker extends React.Component {
         </div>
       )
     })
+
     return (
       <div className={`${className || ''} ${prefixCls}_picker`} ref={(ref) => { this.component = ref } }>
         <div className={`${prefixCls}_picker_indicator`} ref={(ref) => { this.indicator = ref } }></div>
