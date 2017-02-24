@@ -28,3 +28,4 @@ logs
 *.log
 npm-debug.log
 /lib
+/demo
