@@ -48,18 +48,13 @@ export default class Form extends React.PureComponent {
   static defaultProps = {}
 
   componentWillMount() {
+    logger.log('WillMount')
     const children = this.props.children
     this.children = this.collectFormField(children)
     this.initFormDataStructure()
   }
 
   componentDidMount() {
-    this.props.onChange({
-      ...this.state,
-      data: {
-        ...this.state.data
-      }
-    })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -133,7 +128,6 @@ export default class Form extends React.PureComponent {
    * 初始化 FormData 结构，给 this.state.data 添加 key 为表单项 name 的属性
    */
   initFormDataStructure = () => {
-    logger.log('initFormDataStructure')
     const formData = {
       ...this.state.data
     }
@@ -146,12 +140,19 @@ export default class Form extends React.PureComponent {
         required: typeof Props.required === 'undefined' ? true : Props.required
       }
     })
-
-    this.setState({
+    logger.log('initFormDataStructure', {
       ...this.state,
       isComplete: isFormComplete(formData),
       data: formData
     })
+    const nextState = {
+      ...this.state,
+      isComplete: isFormComplete(formData),
+      data: formData
+    }
+
+    this.props.onChange(nextState)
+    this.setState(nextState)
   }
 
   /**
@@ -249,15 +250,6 @@ export default class Form extends React.PureComponent {
     }
 
     this.setState(state)
-  }
-
-  /**
-   * 获得当前最新的处理并加密后的 form 数据
-   * @returns {Promise}
-   */
-  getPureData = () => {
-    this.formValidate()
-    return formPure()
   }
 
   render() {
