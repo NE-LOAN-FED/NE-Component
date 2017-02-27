@@ -47,6 +47,7 @@ export default class _FieldSelect extends React.Component {
     required: PropTypes.bool,
     shouldRsa: PropTypes.bool,
     onChange: PropTypes.func,
+    disabled: PropTypes.bool,
     handleFieldChange: PropTypes.func,
     value: PropTypes.any
   }
@@ -112,7 +113,7 @@ export default class _FieldSelect extends React.Component {
   }
 
   render() {
-    const {className, name, data, children} = this.props
+    const {className, name, data, disabled, children} = this.props
     const {value} = this.state
     const cls = classNames({
       NEUI_select: true,
@@ -126,6 +127,7 @@ export default class _FieldSelect extends React.Component {
           name={name}
           value={value}
           onChange={this.handleChange}
+          disabled={disabled}
         >
           <option disabled={!!value}>请选择</option>
           {data.length > 0 ? renderData(data) : children}
