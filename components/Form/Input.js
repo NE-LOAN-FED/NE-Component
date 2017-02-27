@@ -14,6 +14,7 @@ const logger = new Logger(env, 'TestInput')
 export default class _FieldInput extends React.Component {
   constructor(props) {
     super(props)
+    logger.log('Init')
     this.timer = null
     this.state = {
       showDelIcon: false,

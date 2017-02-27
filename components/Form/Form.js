@@ -14,22 +14,24 @@ const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'P
 const logger = new Logger(env, 'TestForm')
 // 标识当前 Form 处于的状态
 const STATE = {
+  Init: 'Init',
   Normal: 'Normal',
-  FieldChange: 'FieldChange'
+  FieldChange: 'FieldChange',
+  UpdateFormDataStructure: 'UpdateFormDataStructure'
 }
 
 
 export default class Form extends React.PureComponent {
   constructor(props) {
     super(props)
-    const {isComplete, isValidate, data, errorMsgList} = this.props
     this.state = {
-      isComplete: isComplete || false,
-      isValidate: isValidate || false,
-      data: data || {},
-      errorMsgList: errorMsgList || []
+      isComplete: false,
+      isValidate: false,
+      data: {},
+      errorMsgList: []
     }
     this.count = 1
+    this.field = []
     this.formFields = []
     this.children = []
     this.CURRENT_STATE = STATE.Normal
@@ -38,26 +40,24 @@ export default class Form extends React.PureComponent {
   static propTypes = {
     onFieldChange: PropTypes.func,
     onChange: PropTypes.func,
-    onSubmit: PropTypes.func.isRequired,
-    isComplete: PropTypes.bool,
-    isValidate: PropTypes.bool,
-    data: PropTypes.object,
-    errorMsgList: PropTypes.array
+    onSubmit: PropTypes.func
   }
+
 
   static defaultProps = {}
 
   componentWillMount() {
     logger.log('WillMount')
-    const children = this.props.children
-    this.children = this.collectFormField(children)
-    this.initFormDataStructure()
+    this.children = this.collectFormField(this.props.children)
   }
 
   componentDidMount() {
+    this.initFormDataStructure()
+    logger.log('DidMount')
   }
 
   componentWillReceiveProps(nextProps) {
+    logger.log('ReceiveProps', this.field)
     if (nextProps.children !== this.props.children) {
       this.children = this.collectFormField(nextProps.children)
       if (this.CURRENT_STATE === STATE.Normal) {
@@ -67,9 +67,11 @@ export default class Form extends React.PureComponent {
   }
 
   componentWillUpdate(nextProps, nextState) {
+    logger.log('WillUpdate', nextState)
   }
 
   componentDidUpdate(preProps, preState) {
+    logger.log('DidUpdate', this.state)
   }
 
   componentWillUnmount() {
@@ -94,6 +96,9 @@ export default class Form extends React.PureComponent {
     // 避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题
     const FormFields = this.formFields = []
 
+    // key 不变的话，clone 的子组件不会重新实例化，所以 ref 里面的函数只会执行一次
+    const Fields = this.field = []
+
     function getChildList(children) {
       return React.Children.map(children, (el, i) => {
         // 只要 Name 以 _Field 开头，就认为是需要 From 管理的组件
@@ -102,11 +107,15 @@ export default class Form extends React.PureComponent {
         const reg = /^_Field/
         const childName = el.type && el.type.name
         if (reg.test(childName)) {
-          FormFields.push(el)
-          return React.cloneElement(el, {
+          const child = React.cloneElement(el, {
             key: i,
+            ref: (ref) => {
+              ref && Fields.push(ref)
+            },
             handleFieldChange
           })
+          FormFields.push(child)
+          return child
         } else {
           if (el.props && el.props.children) {
             const children = getChildList(el.props.children)
@@ -120,7 +129,6 @@ export default class Form extends React.PureComponent {
         }
       })
     }
-
     return getChildList(children)
   }
 
@@ -128,15 +136,18 @@ export default class Form extends React.PureComponent {
    * 初始化 FormData 结构，给 this.state.data 添加 key 为表单项 name 的属性
    */
   initFormDataStructure = () => {
+    this.CURRENT_STATE = STATE.Init
     const formData = {
       ...this.state.data
     }
-
-    this.formFields.forEach((formField, k) => {
+    logger.log('initFormDataStructure', this.field, this.field.length)
+    this.field.forEach((formField, k) => {
       const Props = formField.props
+      const Data = formField.data
       const Name = Props.name
+      // TODO 重写初始化 Form data 方法
       formData[Name] = {
-        ...formData[Name],
+        ...Data,
         required: typeof Props.required === 'undefined' ? true : Props.required
       }
     })
@@ -150,40 +161,49 @@ export default class Form extends React.PureComponent {
       isComplete: isFormComplete(formData),
       data: formData
     }
-
     this.props.onChange(nextState)
-    this.setState(nextState)
+    this.setState(nextState, () => {
+      this.CURRENT_STATE = STATE.Normal
+    })
   }
 
   /**
    * 更新 FormData 结构，当 Form 下表单项添加或删除时，将 FormData 结构更新到最新
    */
   updateFormDataStructure = () => {
+    this.CURRENT_STATE = STATE.UpdateFormDataStructure
     const formData = {
       ...this.state.data
     }
+
     const formItems = []
     // 在 formData 中添加新加入的表单项
     this.formFields.forEach((formField, k) => {
       const Props = formField.props
       const Name = Props.name
       formItems.push(Name)
+      /* 如果新增加了子表单，则添加对应 name 的 key */
       if (typeof formData[Name] === 'undefined') {
         formData[Name] = {
+          ...Props,
           required: typeof Props.required === 'undefined' ? true : Props.required
         }
       }
     })
-    // 从 formData 中去掉删除的表单项
+    /* TODO 由于 field 没有动态删除，所以暂时做不到从 formData 中去掉删除的表单项 */
     Object.keys(formData).forEach((v) => {
       if (formItems.indexOf(v) === -1) {
         delete formData[v]
       }
     })
-    this.setState({
+    const nextState = {
       ...this.state,
       isComplete: isFormComplete(formData),
       data: formData
+    }
+    this.props.onChange(nextState)
+    this.setState(nextState, () => {
+      this.CURRENT_STATE = STATE.Normal
     })
   }
 

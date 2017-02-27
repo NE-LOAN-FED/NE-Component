@@ -9,12 +9,13 @@ export default class _FieldCheckbox extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      checked: this.props.checked || false
+      value: this.props.value || false
     }
   }
 
   static propTypes = {
     name: PropTypes.string,
+    value: PropTypes.bool,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
@@ -31,34 +32,34 @@ export default class _FieldCheckbox extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.checked && nextProps.checked !== this.state.checked) {
+    if (nextProps.value && nextProps.value !== this.state.value) {
       this.setState({
-        checked: nextProps.checked
+        value: nextProps.value
       })
     }
   }
 
   componentDidUpdate(preProps, preState) {
     const {handleFieldChange} = preProps
-    if (preState.checked !== this.state.checked) {
+    if (preState.value !== this.state.value) {
       handleFieldChange(this.data)
       console.log(this.data)
     }
   }
 
   get data() {
-    const {checked} = this.state
+    const {value} = this.state
     const {name} = this.props
     return {
       name,
-      value: checked
+      value: value
     }
   }
 
   handleChange = (e) => {
     this.props.onChange(e)
     this.setState({
-      checked: e.target.checked
+      value: e.target.checked
     })
   }
 
@@ -66,10 +67,9 @@ export default class _FieldCheckbox extends React.Component {
     const {
       className, name, value, children, onChange, handleFieldChange, ...others
     } = this.props
-    const {checked} = this.state
     const cls = classNames({
       NEUI_checkbox: true,
-      NEUI_checkbox_checked: checked,
+      NEUI_checkbox_checked: this.state.value,
       [className]: className
     })
     return (
@@ -77,11 +77,11 @@ export default class _FieldCheckbox extends React.Component {
         <input type="checkbox"
                name={name}
                onChange={this.handleChange}
-               checked={checked}
+               checked={this.state.value}
                value={value}
                {...others}
         />
-        {checked ? <Icon type="tick" className="NEUI_checkbox_icon"/> : null}
+        {this.state.value ? <Icon type="tick" className="NEUI_checkbox_icon"/> : null}
         {children}
       </div>
     )

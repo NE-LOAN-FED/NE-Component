@@ -36,40 +36,43 @@ class FormDemo extends React.Component {
     this.state = {
       showInput: true,
       formData: {
-        data: {
-          name: {
-            value: '抹桥'
-          },
-          phone: {
-            value: ''
-          },
-          verifyCode: {},
-          gender: {},
-          is: {}
+        name: {
+          value: '抹桥'
+        },
+        phone: {
+          value: '13333333333'
+        },
+        verifyCode: {
+          value: 3303
+        },
+        gender: {},
+        is: {
+          value: true
         }
       },
       msg: '',
+      isComplete: false,
+
       showToast: false
     }
     this.timer = null
   }
 
   componentWillMount() {
-    logger.log('WillMount')
+    logger.log('WillMount', this.state)
   }
 
   componentDidMount() {
-
-    const formData = this.$Form.data
-    this.setState({
-      formData
-    })
+    logger.log('DidMount', this.state)
     this.timer = setTimeout(() => {
       this.setState({
         showInput: false,
-        formData
+        formData: {
+          ...this.state.formData,
+          gender: {}
+        }
       })
-    }, 5000)
+    }, 1000)
   }
 
   componentWillReceiveProps() {
@@ -77,10 +80,11 @@ class FormDemo extends React.Component {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    logger.log('nextState', nextState)
+    logger.log('WillUpdate', nextState)
   }
 
   componentDidUpdate() {
+    logger.log('DidUpdate', this.state)
   }
 
   componentWillUnmount() {
@@ -104,24 +108,14 @@ class FormDemo extends React.Component {
   handleChange = (formData) => {
     logger.log('form change', formData)
     this.setState({
-      formData
+      formData: formData.data,
+      isComplete: formData.isComplete
     })
   }
-  handleFieldChange = (fieldData) => {
-    logger.log('field change', fieldData)
+  handleFieldChange = (FieldData) => {
+    logger.log('FieldChange', FieldData)
   }
-  handleInputChange = () => {
-    logger.log('handleInputChange')
-  }
-  handleInputFocus = () => {
-    logger.log('handleInputFocus')
-  }
-  handleInputBlur = () => {
-    logger.log('handleInputBlur')
-  }
-  handleInputEmpty = () => {
-    logger.log('handleInputEmpty')
-  }
+
   closeToast = () => {
     this.setState({
       showToast: false
@@ -129,9 +123,7 @@ class FormDemo extends React.Component {
   }
 
   render() {
-    const {showInput, msg, showToast, formData} = this.state
-    const formFieldData = formData.data
-    const {isComplete} = formData
+    const {showInput, msg, showToast, formData, isComplete} = this.state
     const genderData = [{
       name: '男',
       value: 0,
@@ -161,48 +153,53 @@ class FormDemo extends React.Component {
         >
           <CellTip>Input</CellTip>
           <Cells>
-            <Cell warning={formFieldData.name.isError}>
+            <Cell warning={formData.name.isError}>
               <CellHeader>Name</CellHeader>
               <Input type='text'
                      name='name'
                      errorMsg={lang.nameErrorMsg}
                      validate={validate.name}
-                     value={formFieldData.name.value}
+                     value={formData.name.value}
               />
             </Cell>
-            <Cell warning={formFieldData.phone.isError}>
+            <Cell warning={formData.phone.isError}>
               <CellHeader>Phone</CellHeader>
               <Input type='tel'
                      name='phone'
                      validate={validate.phone}
                      errorMsg={lang.phoneErrorMsg}
+                     value={formData.phone.value}
               />
             </Cell>
-            <Cell warning={ formFieldData.verifyCode.isError}>
+            <Cell warning={ formData.verifyCode.isError}>
               <CellHeader>Verify Code</CellHeader>
               <Input type='number'
                      name='verifyCode'
                      errorMsg={lang.smsCodeErrorMsg}
                      validate={/\d{4}/}
+                     value={formData.verifyCode.value}
               />
               <CellFooter><VerifyButton/></CellFooter>
             </Cell>
           </Cells>
           <CellTip>Select</CellTip>
-          <Cells>
-            <Cell warning={formFieldData.gender.isError}>
-              <CellHeader>Gender</CellHeader>
-              <Select name='gender'
-                      data={genderData}
-                      required={false}
-              />
-            </Cell>
-          </Cells>
+          {
+
+            showInput ? <Cells>
+                <Cell warning={formData.gender.isError}>
+                  <CellHeader>Gender</CellHeader>
+                  <Select name='gender'
+                          data={genderData}
+                          value={formData.gender.value}
+                  />
+                </Cell>
+              </Cells> : null
+          }
           <CellTip>CheckBox</CellTip>
           <Cells>
             <Cell htmlFor="is">
               <CellBody>Is yourself?</CellBody>
-              <CellFooter><CheckBox name='is' id="is"/></CellFooter>
+              <CellFooter><CheckBox name='is' id="is" value={formData.is.value}/></CellFooter>
             </Cell>
           </Cells>
           <Button type="submit" disabled={!isComplete}>提交</Button>

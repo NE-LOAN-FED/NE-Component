@@ -4,14 +4,40 @@ import Icon from '../Icon'
 
 const PropTypes = React.PropTypes
 
+/**
+ * 生成一个 Value 到 Name 的 Map 对象
+ * @param data Object
+ * @returns {{}}
+ */
+function mapValueToName(data) {
+  const mapValueToName = {}
+  data.forEach((v, k) => {
+    mapValueToName[v.value] = data[k].name
+  })
+  return mapValueToName
+}
+
+// 渲染 option，data 格式为 [{name:'name',value:'value',disabled: false}]
+function renderData(data) {
+  return data.map((item, i) => {
+    return <option
+      key={i}
+      value={item.value}
+      disabled={item.disabled}
+    >
+      {item.name}
+    </option>
+  })
+}
+
 export default class _FieldSelect extends React.Component {
   constructor(props) {
     super(props)
     const {data} = this.props
-    const mapValueToName = this.createMapValueToName(data)
+    const valueNameMap = mapValueToName(data)
     this.state = {
       value: this.props.value || '',
-      mapValueToName: mapValueToName
+      valueNameMap: valueNameMap
     }
   }
 
@@ -21,7 +47,8 @@ export default class _FieldSelect extends React.Component {
     required: PropTypes.bool,
     shouldRsa: PropTypes.bool,
     onChange: PropTypes.func,
-    handleFieldChange: PropTypes.func
+    handleFieldChange: PropTypes.func,
+    value: PropTypes.any
   }
 
   static defaultProps = {
@@ -32,27 +59,6 @@ export default class _FieldSelect extends React.Component {
     },
     handleFieldChange: () => {
     }
-  }
-
-  createMapValueToName(data) {
-    const mapValueToName = {}
-    data.forEach((v, k) => {
-      mapValueToName[v.value] = data[k].name
-    })
-    return mapValueToName
-  }
-
-  // 渲染 option，data 格式为 [{name:'name',value:'value',disabled: false}]
-  renderData(data) {
-    return data.map((item, i) => {
-      return <option
-        key={i}
-        value={item.value}
-        disabled={item.disabled}
-      >
-        {item.name}
-      </option>
-    })
   }
 
   componentWillMount() {
@@ -66,9 +72,9 @@ export default class _FieldSelect extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.data !== nextProps.data) {
       const data = nextProps.data
-      const mapValueToName = this.createMapValueToName(data)
+      const valueNameMap = mapValueToName(data)
       this.setState({
-        mapValueToName
+        valueNameMap
       })
     }
     if (nextProps.value && nextProps.value !== this.state.value) {
@@ -112,7 +118,7 @@ export default class _FieldSelect extends React.Component {
       NEUI_select: true,
       [className]: className
     })
-    const label = value ? this.state.mapValueToName[value] : '请选择'
+    const label = value ? this.state.valueNameMap[value] : '请选择'
     return (
       <div className={cls}>
         <div><span>{label}</span><Icon type='arrow'/></div>
@@ -122,7 +128,7 @@ export default class _FieldSelect extends React.Component {
           onChange={this.handleChange}
         >
           <option disabled={!!value}>请选择</option>
-          {data.length > 0 ? this.renderData(data) : children}
+          {data.length > 0 ? renderData(data) : children}
         </select>
       </div>
     )
