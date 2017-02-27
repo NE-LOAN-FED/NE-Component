@@ -7,19 +7,19 @@
   1. CheckBox
   
 ## Form 组件
-Form 在加载时会收集他下面所有的 Input 和 Select 组件，然后根据这些表单来做一个 `fromState` 的初始化，并对每个 Input 和 Select 绑定 `formChange` 事件。`Form` 的 state 结构如下：
+Form 在 willMount 时会收集所有 class name 符合 /^_Field/ 的 child 组件，为它们注入 `handleFieldChange` 方法。同时根据这些收集的组件来做一个 `state` 的初始化。`Form` 的 state 结构如下：
 ```
 {
   'isValidate': 'boole',  // 决定是否能提交
-  'errorMsg': '',         // 放第一条错误信息
-  'isComplete': 'boole',   // 决定提交按钮是否高亮
+  'errorMsgList': '',         // 存放提交时所有的错误信息
+  'isComplete': 'boole',   // 是否所有必填项填写完毕
   'data': {
     'name': {             // 每条表单的属性
-      'value': 'value',   // 表单的值
+      'value': 'value',   // 表单的值        
       'validate': /[a-z]/,  // 校验方法
       'isError': 'boole', // 是否通过校验
       'errorMsg': '',         // 错误信息
-      'shouldRsa': 'boole',   // 是否需要加密
+      'shouldRsa': 'boole',   // 是否需要加密（未完成）
       'required': 'boole'     // 是否为必填项
     },
     'name1': {
@@ -35,74 +35,81 @@ Form 在加载时会收集他下面所有的 Input 和 Select 组件，然后根
   }
 }
 ```
-### formValidate
-对当前收集的表单数据进行校验，返回一个当前 `form` 的 `fromState`
-### formSubmit(submit)
-表单提交动作，将当前的 fromState 处理为可提交的 {key: value} 格式，然后需要提供回调函数用来做真实的提交动作。 
-### getPureData
-返回一个 `Promise` 对象，处理过后的数据会作为第一个参数。
-```javascript
-this.form.getPureData()
-  .then(data => {})
-```
-### formCellChange(e)
-Form 下面所有的输入动作都会触发这个函数，最终把修改过后的数据作为通过父级传下来的 `onChange` 的第二个参数。这个过程会检测整个 form 是否填写完成，如果完成会修改 `formState` 的 `isComplete` 属性。
-### emptyInput(name)
-用来传递给 Input 的清除当前输入的方法，`name` 为要清除 `Input` 的 `name` 值。
-之所以把这个方法放在这里而没有放在 `Input` 里面，是因为每个 `Input` 都需要这个方法。所以直接在 `Form` 里面就把这个方法传了进去，省去了每个 `Input` 都需要手动传入这一步骤。
-### onChange(target,formState)
-通过父级 `state` 传下来，接受两个参数。当表单状态有任何修改时,这个函数都会被调用，第一个参数为修改的 DOM target ，第二个为修改后的 `fromState`.
-### onSubmit(formState, pureData)
-真实的 `submit` 方法，当 Form 组件的 `formSubmit` 方法被调用时这个函数会被调用。
-## FormCell
-用来包裹实际的表单，用来展示错误等状态。
+
+## Props
+
+### Form
+属性名 | 描述 | 类型 | 默认值
+--- | --- | --- | ---
+onFieldChange(fieldData) | 子表单修改时的方法 | Function | 无
+onChange(state) | 表单发生变化时的方法 | Function | 无
+onSubmit(isValidate, state, pureData) | 提交方法 | Function | 无
+
+### `onFieldChange(fieldData:object)`
+被 Form 收集的自表单修改时调用的方法，`fieldData` 的具体值由变动的子表单决定，一般至少会包含 `name` 和 `value` 字段。
+
+### `onChange(state:object)`
+Form 发生任何更新时会调用的方法，`state` 为整个 Form 的 `state`. 
+任何更新指的是所有的变化，无论是 Form 下面 child 的变化，还是子表单更新或者其他的变化。
+
+### `onSubmit(isValidate:bool, state:object, pureData:object)`
+Form 提交的时候触发的方法。
+
+参数名|描述|类型|默认值
+---|---|---|---
+isValidate| 表单是否通过校验| bool | false
+state | 整个 State 对象 | object | {}
+pureData | 处理过后的 name:value 格式的数据，以供提交到后端使用 | object | {}
+
+有两个途径来触发 Form 的提交方法：
+1. 【推荐】跟原生 html 一样，在 Form 内部放一个 type='submit' 的 button, 点击后触发 `onSubmit` 方法
+1. 给 Form 组件设置一个 ref 来拿到 Form 组件的实例，然后可以手动调用 `this.[ref].formSubmit` 来触发 `onSubmit` 方法
+
+## 子表单
+任何 class 的名字符合 /^_Field/ 的组件都可以被 Form 收集并注入 `handleFieldChange` 方法，只要子组件在合适的时机调用这个方法并传入合适的参数,就可以被 Form 组件所管理。
+
+属性名 | 描述 | 类型 
+--- | --- | --- 
+handleFieldChange(fieldData:object) | Form组件注入的函数，传入的参数必须有 `name` 和 `value` 字段 | Function 
+
+这里我预先实现了三个常用的组件：
+* Input
+* Select
+* CheckBox
+
+### 公用的 Props
+上面三个组件基本 Props 都是相同的。
+属性名 | 描述 | 类型 | 默认值
+--- | --- | --- | ---
+name | Name，必填项 | String | 无
+value | 值，如果需要外部控制的话，可以传入，也可以不传 | any | 无
+onChange | 变动时调用的方法 | Function | ()=>{}
+disabled | 是否被禁用 | Bool | false
+shouldRsa(未完成) | 是否需要 Rsa 加密 | Bool | false
+required | 是否为必填项 | Bool | true
+
 ## Input
-input 输入表单，提供一下配置项：
 
-  * disabled
-  * name
-  * onChange
-  * onFocus
-  * onBlur
-  * onEmpty
-  * emptyInput
-  * formCellChange
-  * shouldRsa
-  * required
-  * validate
-  * errorMsg
-  * isError
-### onEmpty
-调用 emptyInput 清除输入框内容后，会触发这个方法
-### emptyInput(name)
-当用户输入时，点击输入框右侧的删除按钮触发的事件，如果当前组件包裹在 Form 中，则默认为清除当前 Input 的内容。
-### formCellChange
-如果当前组件包裹在 Form 中，则默认又 Form 传进来，用来触发整个 Form 的 onChange 事件。
-### shouldRsa:(bool)
-是否需要加密,默认为 `false`
-### required:(bool)
-是否为必填，默认为 `true`
-### validate:(regular||func)
-校验规则
-### errorMsg:(string)
-校验错误时要现实的信息
-### isError:(bool)
-当前填写是否错误
+属性名 | 描述 | 类型 | 默认值
+--- | --- | --- | ---
+type | Input 类型 | String | 无
+onChange(e) | 输入时调用的方法，参数为传统的 Event 对象 | Function | ()=>{}
+onFocus(e) | Focus 时调用的方法，参数为传统的 Event 对象 | Function | ()=>{}
+onBlur(e) | Focus 时调用的方法，参数为传统的 Event 对象 | Function | ()=>{}
+validate | 校验函数，输入时调用的方法，来决定当前填写是否正确 | Function || RegExp | ()=> true
+errorMsg | 校验错误时的报错信息 | String | 表单填写错误
+isError | 当前填写的内容是否错误 | Bool | false
+
 ## Select
-select 表单组件，提供一下配置：
- 
-* name
-* data:
-* onChange
-* formCellChange
-* required
-
-### data
-用来渲染 select 内容的数据，格式如下：
-```javascript
-[{name:'name',code:'code'},{name:'name1',code:'code1'}]
-```
-如果在 ios 下面，会默认添加一个 ‘请选择’ 的项目进去，因为 ios 上选择第一个选项默认不会触发 change 事件。
+属性名 | 描述 | 类型 | 默认值
+--- | --- | --- | ---
+data | 用来渲染子选项的数据，格式为 `[{name:'name',value:'value',disabled:false}]` | Array | []
+value | 值，传入的话，会选中和 data 中 value 相同的选项 | any | 无
+onChange(e) | 选项变化时调用的方法，参数为传统的 Event 对象 | Function | ()=>{}
 
 ## CheckBox
-checkbox 表单组件，配置与 `Select` 基本相同，只是不需要 `data` 配置。
+
+属性名 | 描述 | 类型 | 默认值
+--- | --- | --- | ---
+value | 值，标识是否选中 |Bool | 无
+onChange(e) | 选项变化时调用的方法，参数为传统的 Event 对象 | Function | ()=>{}
