@@ -133,6 +133,7 @@ class FormDemo extends React.Component {
       value: 1
     }]
     logger.info('render', this.state.formData)
+    console.log('Ref Render')
     return (
       <section className="page-form-demo">
         <div className="page--header">
@@ -160,6 +161,7 @@ class FormDemo extends React.Component {
                      errorMsg={lang.nameErrorMsg}
                      validate={validate.name}
                      value={formData.name.value}
+                     data-index="1"
               />
             </Cell>
             <Cell warning={formData.phone.isError}>
@@ -191,6 +193,7 @@ class FormDemo extends React.Component {
                   <Select name='gender'
                           data={genderData}
                           value={formData.gender.value}
+                          disabled={true}
                   />
                 </Cell>
               </Cells> : null

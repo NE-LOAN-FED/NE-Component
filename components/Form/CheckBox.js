@@ -16,6 +16,7 @@ export default class _FieldCheckbox extends React.Component {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.bool,
+    shouldRsa: PropTypes.bool,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     onChange: PropTypes.func,
@@ -49,10 +50,11 @@ export default class _FieldCheckbox extends React.Component {
 
   get data() {
     const {value} = this.state
-    const {name} = this.props
+    const {name, shouldRsa} = this.props
     return {
       name,
-      value: value
+      value,
+      shouldRsa
     }
   }
 

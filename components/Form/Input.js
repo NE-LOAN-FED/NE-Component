@@ -57,8 +57,6 @@ export default class _FieldInput extends React.Component {
     onFocus: () => {
     },
     onBlur: () => {
-    },
-    onFieldBlur: () => {
     }
   }
 
@@ -157,8 +155,7 @@ export default class _FieldInput extends React.Component {
   handleBlur = (e) => {
     // 因为要异步的使用 e, 所以需要保留 e 的引用
     e.persist()
-    const {name, onBlur, onFieldBlur} = this.props
-    onFieldBlur(name)
+    const {name, onBlur} = this.props
     onBlur(e)
     // TODO 考虑做成配置项，来决定什么时候作校验
     this.handleValidate(e)

@@ -92,11 +92,9 @@ export default class Form extends React.PureComponent {
     this.count++
     const handleFieldChange = this.handleFieldChange
 
-    // 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formFields，全量更新，
-    // 避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题
+    /* 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formFields，全量更新，避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题 */
     const FormFields = this.formFields = []
 
-    // key 不变的话，clone 的子组件不会重新实例化，所以 ref 里面的函数只会执行一次
     const Fields = this.field = []
 
     function getChildList(children) {
@@ -129,6 +127,7 @@ export default class Form extends React.PureComponent {
         }
       })
     }
+
     return getChildList(children)
   }
 
@@ -248,8 +247,7 @@ export default class Form extends React.PureComponent {
     })
   }
 
-  handleFormSubmit = (e) => {
-    e.preventDefault()
+  formSubmit = () => {
     const {onSubmit} = this.props
     let state = {
       ...this.state,
@@ -270,6 +268,11 @@ export default class Form extends React.PureComponent {
     }
 
     this.setState(state)
+  }
+
+  handleFormSubmit = (e) => {
+    e.preventDefault()
+    this.formSubmit()
   }
 
   render() {
