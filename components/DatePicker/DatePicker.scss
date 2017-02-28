@@ -32,7 +32,6 @@ $date_picker: #{$prefixCls}_date_picker;
     background-color: $gray;
     &_content {
       flex: 1;
-      line-height: pxToRem(100);
       font-size: pxToRem(28);
       font-weight: normal;
       text-align: center;

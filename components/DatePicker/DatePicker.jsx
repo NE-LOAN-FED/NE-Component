@@ -251,6 +251,7 @@ class DatePicker extends React.Component {
       children: this.getMonths(),
       onValueChange: this.onMonthChange
     }]
+    // 根据 type 选择显示是否包含天
     switch (this.props.type) {
       case 'YM':
         break

@@ -3,20 +3,28 @@
  */
 import React from 'react'
 import classNames from 'classnames'
-
+const PropTypes = React.PropTypes
 export default class Cell extends React.Component {
 
-  static propTypes = {}
 
-  static defaultProps = {}
+  static propTypes = {
+    tip: PropTypes.bool,
+    warning: PropTypes.bool
+  }
+
+
+  static defaultProps = {
+    tip: false,
+    warning: false
+  }
 
   render() {
-    const {className, children, cellsStart, cellsEnd, ...others} = this.props
-    const Component = this.props.href ? 'a' : this.props.htmlFor !== 'undefined' ? 'label' : 'div'
+    const {className, children, tip, warning, ...others} = this.props
+    const Component = this.props.href ? 'a' : this.props.htmlFor === 'undefined' ? 'div' : 'label'
     const cls = classNames({
       NEUI_cell: true,
-      NEUI_cell_start: cellsStart,
-      NEUI_cell_end: cellsEnd,
+      NEUI_cell_tip: tip,
+      NEUI_cell_warning: warning,
       [className]: className
     })
     return (

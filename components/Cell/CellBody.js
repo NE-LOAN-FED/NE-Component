@@ -13,7 +13,7 @@ export default class CellBody extends React.Component {
   render() {
     const {className, children, ...others} = this.props
     const cls = classNames({
-      NEUI_cell_bd: true,
+      NEUI_cell__bd: true,
       [className]: className
     })
     return (

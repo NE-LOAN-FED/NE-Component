@@ -14,27 +14,30 @@ export default class List extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      collapse: this.props.collapse || true
+      isCollapse: this.props.data.isCollapse || true
     }
   }
 
   static propTypes = {
     prefixCls: PropTypes.string,
-    title: PropTypes.node,
-    content: PropTypes.node,
-    collapse: PropTypes.bool,
+    data: PropTypes.shape({
+      title: PropTypes.node,
+      content: PropTypes.node,
+      isCollapse: PropTypes.bool
+    }),
     onChange: PropTypes.func,
     id: PropTypes.number
   }
 
   static defaultProps = {
     prefixCls: 'NEUI',
+    data: {}
   }
-  
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.collapse && nextProps.collapse !== this.state.collapse) {
+    if (nextProps.data.isCollapse && nextProps.data.isCollapse !== this.state.isCollapse) {
       this.setState({
-        collapse: nextProps.collapse
+        isCollapse: nextProps.data.isCollapse
       })
     }
   }
@@ -45,16 +48,17 @@ export default class List extends Component {
 
   toggle = (collapse) => {
     const id = this.props.id
-    const nextCollapse = collapse ? collapse : !this.state.collapse
+    const nextCollapse = collapse ? collapse : !this.state.isCollapse
     this.props.onChange(id, nextCollapse)
     this.setState({
-      collapse: nextCollapse
+      isCollapse: nextCollapse
     })
   }
 
   render() {
-    const {title, content, className, prefixCls, onClick} = this.props
-    const {collapse} = this.state
+    const {data, className, prefixCls, onClick} = this.props
+    const {title, content} = data
+    const {isCollapse} = this.state
     const cls = classNames({
       [`${prefixCls}_collapse`]: true,
       [className]: className
@@ -73,14 +77,14 @@ export default class List extends Component {
             <CellFooter>
               <Icon type='arrow'
                     className={classNames({
+                      collapse: isCollapse,
                       list_icon: true,
-                      collapse: collapse
                     })}/>
             </CellFooter>
           </Cell>
         </Cells>
         <Animate animation={Animation} component={FirstChild}>
-          {!collapse ?
+          {!isCollapse ?
             <div className="list_content_wrap">
               <p className="list_content" key={this}>{content}</p>
             </div> : null}

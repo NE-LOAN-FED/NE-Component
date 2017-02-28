@@ -16,7 +16,8 @@ const config = {
     hot: true,
     inline: true,
     port: 3000,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    lazy: false
   },
   module: {
     rules: [{

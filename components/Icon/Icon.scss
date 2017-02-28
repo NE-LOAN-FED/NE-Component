@@ -44,21 +44,12 @@ $iconfont-prefix: #{$prefixCls}_icon;
       content: '\e604'
     }
   }
-  &_wait {
-    color: $color_warning;
-    font-size: pxToRem(56);
-    margin-left: 0;
-    &:before {
-      content: '\e60e'
-    }
-  }
   &_camera_close {
     color: $gray_light;
     &:before {
       content: '\e605'
     }
   }
-  // FIXME content和图标对不上，找视觉
   &_close {
     color: $color_warning;
     font-size: pxToRem(56);
@@ -90,5 +81,14 @@ $iconfont-prefix: #{$prefixCls}_icon;
     &:before {
       content: '\e60f'
     }
+  }
+}
+
+@keyframes diurnalCircle {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
