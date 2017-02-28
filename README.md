@@ -117,6 +117,20 @@ npm install ne-rc
 	export default FormDemo
 
 ```
+## 文档
+1. [Alert]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Alert/README.md')
+1. [Button]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Button/README.md')
+1. [Cell]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Cell/README.md')
+1. [CellInput]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//CellInput/README.md')
+1. [Collapse]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Collapse/README.md')
+1. [DatePicker]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//DatePicker/README.md')
+1. [Form]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Form/README.md')
+1. [Icon]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Icon/README.md')
+1. [Modal]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Modal/README.md')
+1. [Picker]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Picker/README.md')
+1. [Popup]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Popup/README.md')
+1. [Toast]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Toast/README.md')
+1. [VerifyButton]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//VerifyButton/README.md')
 
 
 ## TODO
@@ -126,7 +140,6 @@ npm install ne-rc
 
 ## 列表
 * [x] Form          提供表单校验，填写完成校验（决定提交按钮是否高亮）
-    - [x] FromCell  表单 Cell，用以嵌套实际的表单内容（select,input,checkbox）
     - [x] Select    选择器
     - [x] Input     基础输入组件
     - [x] CheckBox
@@ -147,17 +160,3 @@ npm install ne-rc
 * [x] DatePicker    日历
 * [X] Collapse      折叠列表
 
-## 文档
-1. [Alert]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Alert/README.md')
-1. [Button]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Button/README.md')
-1. [Cell]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Cell/README.md')
-1. [CellInput]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//CellInput/README.md')
-1. [Collapse]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Collapse/README.md')
-1. [DatePicker]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//DatePicker/README.md')
-1. [Form]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Form/README.md')
-1. [Icon]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Icon/README.md')
-1. [Modal]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Modal/README.md')
-1. [Picker]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Picker/README.md')
-1. [Popup]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Popup/README.md')
-1. [Toast]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//Toast/README.md')
-1. [VerifyButton]('https://github.com/NE-LOAN-FED/NE-Component/blob/master//VerifyButton/README.md')
