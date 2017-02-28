@@ -452,8 +452,8 @@ section {
   z-index: 1024;
   -webkit-transform: translate3d(100%, 0, 0);
           transform: translate3d(100%, 0, 0);
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
   opacity: 0.01; }
 
 .page-enter-active {
@@ -467,8 +467,8 @@ section {
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
   opacity: 1;
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease; }
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease; }
 
 .page-leave-active {
   opacity: 0;

@@ -227,23 +227,6 @@ exports.default = function (obj, key, value) {
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var store      = __webpack_require__(157)('wks')
-  , uid        = __webpack_require__(126)
-  , Symbol     = __webpack_require__(30).Symbol
-  , USE_SYMBOL = typeof Symbol == 'function';
-
-var $exports = module.exports = function(name){
-  return store[name] || (store[name] =
-    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
-};
-
-$exports.store = store;
-
-/***/ }),
-/* 26 */,
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -270,6 +253,23 @@ exports.default = _assign2.default || function (target) {
 };
 
 /***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var store      = __webpack_require__(157)('wks')
+  , uid        = __webpack_require__(126)
+  , Symbol     = __webpack_require__(30).Symbol
+  , USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function(name){
+  return store[name] || (store[name] =
+    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+};
+
+$exports.store = store;
+
+/***/ }),
+/* 27 */,
 /* 28 */,
 /* 29 */,
 /* 30 */
@@ -789,7 +789,7 @@ module.exports = function(it){
 
 var def = __webpack_require__(50).f
   , has = __webpack_require__(72)
-  , TAG = __webpack_require__(25)('toStringTag');
+  , TAG = __webpack_require__(26)('toStringTag');
 
 module.exports = function(it, tag, stat){
   if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
@@ -836,7 +836,7 @@ __webpack_require__(443);
 var global        = __webpack_require__(30)
   , hide          = __webpack_require__(61)
   , Iterators     = __webpack_require__(88)
-  , TO_STRING_TAG = __webpack_require__(25)('toStringTag');
+  , TO_STRING_TAG = __webpack_require__(26)('toStringTag');
 
 for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
   var NAME       = collections[i]
@@ -1108,7 +1108,7 @@ exports.default = Logger;
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
 var cof = __webpack_require__(105)
-  , TAG = __webpack_require__(25)('toStringTag')
+  , TAG = __webpack_require__(26)('toStringTag')
   // ES3 wrong here
   , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 
@@ -1401,7 +1401,7 @@ var LIBRARY        = __webpack_require__(122)
   , $iterCreate    = __webpack_require__(430)
   , setToStringTag = __webpack_require__(106)
   , getPrototypeOf = __webpack_require__(238)
-  , ITERATOR       = __webpack_require__(25)('iterator')
+  , ITERATOR       = __webpack_require__(26)('iterator')
   , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
   , FF_ITERATOR    = '@@iterator'
   , KEYS           = 'keys'
@@ -1616,7 +1616,7 @@ module.exports = function(name){
 /* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.f = __webpack_require__(25);
+exports.f = __webpack_require__(26);
 
 /***/ }),
 /* 163 */
@@ -2169,7 +2169,7 @@ var global      = __webpack_require__(30)
   , core        = __webpack_require__(21)
   , dP          = __webpack_require__(50)
   , DESCRIPTORS = __webpack_require__(48)
-  , SPECIES     = __webpack_require__(25)('species');
+  , SPECIES     = __webpack_require__(26)('species');
 
 module.exports = function(KEY){
   var C = typeof core[KEY] == 'function' ? core[KEY] : global[KEY];
@@ -2264,7 +2264,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var classof   = __webpack_require__(119)
-  , ITERATOR  = __webpack_require__(25)('iterator')
+  , ITERATOR  = __webpack_require__(26)('iterator')
   , Iterators = __webpack_require__(88);
 module.exports = __webpack_require__(21).getIteratorMethod = function(it){
   if(it != undefined)return it[ITERATOR]
@@ -3613,7 +3613,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -3758,7 +3758,7 @@ var _objectWithoutProperties2 = __webpack_require__(36);
 
 var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -4095,7 +4095,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -4197,7 +4197,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -4286,7 +4286,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -4375,7 +4375,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -4464,7 +4464,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -4557,7 +4557,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -5035,7 +5035,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -5715,7 +5715,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -5775,12 +5775,12 @@ var _FieldCheckbox = function (_React$Component) {
     _this.handleChange = function (e) {
       _this.props.onChange(e);
       _this.setState({
-        checked: e.target.checked
+        value: e.target.checked
       });
     };
 
     _this.state = {
-      checked: _this.props.checked || false
+      value: _this.props.value || false
     };
     return _this;
   }
@@ -5788,9 +5788,9 @@ var _FieldCheckbox = function (_React$Component) {
   (0, _createClass3.default)(_FieldCheckbox, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      if (nextProps.checked && nextProps.checked !== this.state.checked) {
+      if (nextProps.value && nextProps.value !== this.state.value) {
         this.setState({
-          checked: nextProps.checked
+          value: nextProps.value
         });
       }
     }
@@ -5799,7 +5799,7 @@ var _FieldCheckbox = function (_React$Component) {
     value: function componentDidUpdate(preProps, preState) {
       var handleFieldChange = preProps.handleFieldChange;
 
-      if (preState.checked !== this.state.checked) {
+      if (preState.value !== this.state.value) {
         handleFieldChange(this.data);
         console.log(this.data);
       }
@@ -5815,11 +5815,10 @@ var _FieldCheckbox = function (_React$Component) {
           onChange = _props.onChange,
           handleFieldChange = _props.handleFieldChange,
           others = (0, _objectWithoutProperties3.default)(_props, ['className', 'name', 'value', 'children', 'onChange', 'handleFieldChange']);
-      var checked = this.state.checked;
 
       var cls = (0, _classnames2.default)((0, _defineProperty3.default)({
         NEUI_checkbox: true,
-        NEUI_checkbox_checked: checked
+        NEUI_checkbox_checked: this.state.value
       }, className, className));
       return _react2.default.createElement(
         'div',
@@ -5827,22 +5826,25 @@ var _FieldCheckbox = function (_React$Component) {
         _react2.default.createElement('input', (0, _extends3.default)({ type: 'checkbox',
           name: name,
           onChange: this.handleChange,
-          checked: checked,
+          checked: this.state.value,
           value: value
         }, others)),
-        checked ? _react2.default.createElement(_Icon2.default, { type: 'tick', className: 'NEUI_checkbox_icon' }) : null,
+        this.state.value ? _react2.default.createElement(_Icon2.default, { type: 'tick', className: 'NEUI_checkbox_icon' }) : null,
         children
       );
     }
   }, {
     key: 'data',
     get: function get() {
-      var checked = this.state.checked;
-      var name = this.props.name;
+      var value = this.state.value;
+      var _props2 = this.props,
+          name = _props2.name,
+          shouldRsa = _props2.shouldRsa;
 
       return {
         name: name,
-        value: checked
+        value: value,
+        shouldRsa: shouldRsa
       };
     }
   }]);
@@ -5851,6 +5853,8 @@ var _FieldCheckbox = function (_React$Component) {
 
 _FieldCheckbox.propTypes = {
   name: PropTypes.string,
+  value: PropTypes.bool,
+  shouldRsa: PropTypes.bool,
   required: PropTypes.bool,
   disabled: PropTypes.bool,
   onChange: PropTypes.func,
@@ -5875,17 +5879,17 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _defineProperty2 = __webpack_require__(23);
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
 var _keys = __webpack_require__(231);
 
 var _keys2 = _interopRequireDefault(_keys);
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
-
-var _defineProperty2 = __webpack_require__(23);
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _getPrototypeOf = __webpack_require__(7);
 
@@ -5934,8 +5938,10 @@ var env = __webpack_require__.i({"NODE_ENV":"development"}) || "development" ===
 var logger = new _log2.default(env, 'TestForm');
 // 标识当前 Form 处于的状态
 var STATE = {
+  Init: 'Init',
   Normal: 'Normal',
-  FieldChange: 'FieldChange'
+  FieldChange: 'FieldChange',
+  UpdateFormDataStructure: 'UpdateFormDataStructure'
 };
 
 var Form = function (_React$PureComponent) {
@@ -5946,21 +5952,174 @@ var Form = function (_React$PureComponent) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Form.__proto__ || (0, _getPrototypeOf2.default)(Form)).call(this, props));
 
-    _initialiseProps.call(_this);
+    _this.collectFormField = function (children) {
+      // TODO 优化性能，当 Field 已经有 key 的时候，就不重新 clone 了
+      logger.log('collectFormField invoke times', _this.count);
+      _this.count++;
+      var handleFieldChange = _this.handleFieldChange;
 
-    var _this$props = _this.props,
-        isComplete = _this$props.isComplete,
-        isValidate = _this$props.isValidate,
-        data = _this$props.data,
-        errorMsgList = _this$props.errorMsgList;
+      /* 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formFields，全量更新，避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题 */
+      var FormFields = _this.formFields = [];
+
+      var Fields = _this.field = [];
+
+      function getChildList(children) {
+        return _react2.default.Children.map(children, function (el, i) {
+          // 只要 Name 以 _Field 开头，就认为是需要 From 管理的组件
+          if (!el || el === null) return null;
+
+          var reg = /^_Field/;
+          var childName = el.type && el.type.name;
+          if (reg.test(childName)) {
+            var child = _react2.default.cloneElement(el, {
+              key: i,
+              ref: function ref(_ref) {
+                _ref && Fields.push(_ref);
+              },
+              handleFieldChange: handleFieldChange
+            });
+            FormFields.push(child);
+            return child;
+          } else {
+            if (el.props && el.props.children) {
+              var _children = getChildList(el.props.children);
+              return _react2.default.cloneElement(el, {
+                key: i,
+                children: _children
+              });
+            } else {
+              return el;
+            }
+          }
+        });
+      }
+
+      return getChildList(children);
+    };
+
+    _this.initFormDataStructure = function () {
+      _this.CURRENT_STATE = STATE.Init;
+      var formData = (0, _extends3.default)({}, _this.state.data);
+      logger.log('initFormDataStructure', _this.field, _this.field.length);
+      _this.field.forEach(function (formField, k) {
+        var Props = formField.props;
+        var Data = formField.data;
+        var Name = Props.name;
+        // TODO 重写初始化 Form data 方法
+        formData[Name] = (0, _extends3.default)({}, Data, {
+          required: typeof Props.required === 'undefined' ? true : Props.required
+        });
+      });
+      logger.log('initFormDataStructure', (0, _extends3.default)({}, _this.state, {
+        isComplete: (0, _FormUtils.isFormComplete)(formData),
+        data: formData
+      }));
+      var nextState = (0, _extends3.default)({}, _this.state, {
+        isComplete: (0, _FormUtils.isFormComplete)(formData),
+        data: formData
+      });
+      _this.props.onChange(nextState);
+      _this.setState(nextState, function () {
+        _this.CURRENT_STATE = STATE.Normal;
+      });
+    };
+
+    _this.updateFormDataStructure = function () {
+      _this.CURRENT_STATE = STATE.UpdateFormDataStructure;
+      var formData = (0, _extends3.default)({}, _this.state.data);
+
+      var formItems = [];
+      // 在 formData 中添加新加入的表单项
+      _this.formFields.forEach(function (formField, k) {
+        var Props = formField.props;
+        var Name = Props.name;
+        formItems.push(Name);
+        /* 如果新增加了子表单，则添加对应 name 的 key */
+        if (typeof formData[Name] === 'undefined') {
+          formData[Name] = (0, _extends3.default)({}, Props, {
+            required: typeof Props.required === 'undefined' ? true : Props.required
+          });
+        }
+      });
+      /* TODO 由于 field 没有动态删除，所以暂时做不到从 formData 中去掉删除的表单项 */
+      (0, _keys2.default)(formData).forEach(function (v) {
+        if (formItems.indexOf(v) === -1) {
+          delete formData[v];
+        }
+      });
+      var nextState = (0, _extends3.default)({}, _this.state, {
+        isComplete: (0, _FormUtils.isFormComplete)(formData),
+        data: formData
+      });
+      _this.props.onChange(nextState);
+      _this.setState(nextState, function () {
+        _this.CURRENT_STATE = STATE.Normal;
+      });
+    };
+
+    _this.handleFieldChange = function (fieldData) {
+      _this.CURRENT_STATE = STATE.FieldChange;
+      var state = (0, _extends3.default)({}, _this.state, {
+        data: (0, _extends3.default)({}, _this.state.data)
+      });
+
+      var name = fieldData.name;
+      if (state.data[name]) {
+        state.data[name] = (0, _extends3.default)({}, state.data[name], fieldData);
+      } else {
+        state.data[name] = fieldData;
+      }
+
+      // TODO 重写 isFormComplete
+      state.isComplete = (0, _FormUtils.isFormComplete)(state.data);
+      _this.props.onFieldChange(fieldData);
+
+      // 为了避免传入 state 被外界修改，所以传入一个新的对象
+      _this.props.onChange((0, _extends3.default)({}, state, {
+        data: (0, _extends3.default)({}, state.data)
+      }));
+      console.log('handleFieldChange', state);
+      _this.setState((0, _extends3.default)({}, state, {
+        data: (0, _extends3.default)({}, state.data)
+      }), function () {
+        _this.CURRENT_STATE = STATE.Normal;
+      });
+    };
+
+    _this.formSubmit = function () {
+      var onSubmit = _this.props.onSubmit;
+
+      var state = (0, _extends3.default)({}, _this.state, {
+        data: (0, _extends3.default)({}, _this.state.data)
+      });
+      // TODO 重写 isFromValidate
+      state = (0, _FormUtils.isFromValidate)(state);
+      var isValidate = state.isValidate;
+      logger.info('isValidate', isValidate);
+      if (isValidate) {
+        (0, _FormUtils.formPure)((0, _extends3.default)({}, state.data)).then(function (pureData) {
+          return onSubmit(isValidate, state, pureData);
+        });
+      } else {
+        onSubmit(isValidate, state, null);
+      }
+
+      _this.setState(state);
+    };
+
+    _this.handleFormSubmit = function (e) {
+      e.preventDefault();
+      _this.formSubmit();
+    };
 
     _this.state = {
-      isComplete: isComplete || false,
-      isValidate: isValidate || false,
-      data: data || {},
-      errorMsgList: errorMsgList || []
+      isComplete: false,
+      isValidate: false,
+      data: {},
+      errorMsgList: []
     };
     _this.count = 1;
+    _this.field = [];
     _this.formFields = [];
     _this.children = [];
     _this.CURRENT_STATE = STATE.Normal;
@@ -5971,16 +6130,18 @@ var Form = function (_React$PureComponent) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       logger.log('WillMount');
-      var children = this.props.children;
-      this.children = this.collectFormField(children);
-      this.initFormDataStructure();
+      this.children = this.collectFormField(this.props.children);
     }
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      this.initFormDataStructure();
+      logger.log('DidMount');
+    }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
+      logger.log('ReceiveProps', this.field);
       if (nextProps.children !== this.props.children) {
         this.children = this.collectFormField(nextProps.children);
         if (this.CURRENT_STATE === STATE.Normal) {
@@ -5990,10 +6151,14 @@ var Form = function (_React$PureComponent) {
     }
   }, {
     key: 'componentWillUpdate',
-    value: function componentWillUpdate(nextProps, nextState) {}
+    value: function componentWillUpdate(nextProps, nextState) {
+      logger.log('WillUpdate', nextState);
+    }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate(preProps, preState) {}
+    value: function componentDidUpdate(preProps, preState) {
+      logger.log('DidUpdate', this.state);
+    }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {}
@@ -6046,158 +6211,9 @@ var Form = function (_React$PureComponent) {
 Form.propTypes = {
   onFieldChange: PropTypes.func,
   onChange: PropTypes.func,
-  onSubmit: PropTypes.func.isRequired,
-  isComplete: PropTypes.bool,
-  isValidate: PropTypes.bool,
-  data: PropTypes.object,
-  errorMsgList: PropTypes.array
+  onSubmit: PropTypes.func
 };
 Form.defaultProps = {};
-
-var _initialiseProps = function _initialiseProps() {
-  var _this3 = this;
-
-  this.collectFormField = function (children) {
-    // TODO 优化性能，当 Field 已经有 key 的时候，就不重新 clone 了
-    logger.log('collectFormField invoke times', _this3.count);
-    _this3.count++;
-    var handleFieldChange = _this3.handleFieldChange;
-
-    // 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formFields，全量更新，
-    // 避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题
-    var FormFields = _this3.formFields = [];
-
-    function getChildList(children) {
-      return _react2.default.Children.map(children, function (el, i) {
-        // 只要 Name 以 _Field 开头，就认为是需要 From 管理的组件
-        if (!el || el === null) return null;
-
-        var reg = /^_Field/;
-        var childName = el.type && el.type.name;
-        if (reg.test(childName)) {
-          FormFields.push(el);
-          return _react2.default.cloneElement(el, {
-            key: i,
-            handleFieldChange: handleFieldChange
-          });
-        } else {
-          if (el.props && el.props.children) {
-            var _children = getChildList(el.props.children);
-            return _react2.default.cloneElement(el, {
-              key: i,
-              children: _children
-            });
-          } else {
-            return el;
-          }
-        }
-      });
-    }
-
-    return getChildList(children);
-  };
-
-  this.initFormDataStructure = function () {
-    var formData = (0, _extends3.default)({}, _this3.state.data);
-
-    _this3.formFields.forEach(function (formField, k) {
-      var Props = formField.props;
-      var Name = Props.name;
-      formData[Name] = (0, _extends3.default)({}, formData[Name], {
-        required: typeof Props.required === 'undefined' ? true : Props.required
-      });
-    });
-    logger.log('initFormDataStructure', (0, _extends3.default)({}, _this3.state, {
-      isComplete: (0, _FormUtils.isFormComplete)(formData),
-      data: formData
-    }));
-    var nextState = (0, _extends3.default)({}, _this3.state, {
-      isComplete: (0, _FormUtils.isFormComplete)(formData),
-      data: formData
-    });
-
-    _this3.props.onChange(nextState);
-    _this3.setState(nextState);
-  };
-
-  this.updateFormDataStructure = function () {
-    var formData = (0, _extends3.default)({}, _this3.state.data);
-    var formItems = [];
-    // 在 formData 中添加新加入的表单项
-    _this3.formFields.forEach(function (formField, k) {
-      var Props = formField.props;
-      var Name = Props.name;
-      formItems.push(Name);
-      if (typeof formData[Name] === 'undefined') {
-        formData[Name] = {
-          required: typeof Props.required === 'undefined' ? true : Props.required
-        };
-      }
-    });
-    // 从 formData 中去掉删除的表单项
-    (0, _keys2.default)(formData).forEach(function (v) {
-      if (formItems.indexOf(v) === -1) {
-        delete formData[v];
-      }
-    });
-    _this3.setState((0, _extends3.default)({}, _this3.state, {
-      isComplete: (0, _FormUtils.isFormComplete)(formData),
-      data: formData
-    }));
-  };
-
-  this.handleFieldChange = function (fieldData) {
-    _this3.CURRENT_STATE = STATE.FieldChange;
-    var state = (0, _extends3.default)({}, _this3.state, {
-      data: (0, _extends3.default)({}, _this3.state.data)
-    });
-
-    var name = fieldData.name;
-    if (state.data[name]) {
-      state.data[name] = (0, _extends3.default)({}, state.data[name], fieldData);
-    } else {
-      state.data[name] = fieldData;
-    }
-
-    // TODO 重写 isFormComplete
-    state.isComplete = (0, _FormUtils.isFormComplete)(state.data);
-    _this3.props.onFieldChange(fieldData);
-
-    // 为了避免传入 state 被外界修改，所以传入一个新的对象
-    _this3.props.onChange((0, _extends3.default)({}, state, {
-      data: (0, _extends3.default)({}, state.data)
-    }));
-    console.log('handleFieldChange', state);
-    _this3.setState((0, _extends3.default)({}, state, {
-      data: (0, _extends3.default)({}, state.data)
-    }), function () {
-      _this3.CURRENT_STATE = STATE.Normal;
-    });
-  };
-
-  this.handleFormSubmit = function (e) {
-    e.preventDefault();
-    var onSubmit = _this3.props.onSubmit;
-
-    var state = (0, _extends3.default)({}, _this3.state, {
-      data: (0, _extends3.default)({}, _this3.state.data)
-    });
-    // TODO 重写 isFromValidate
-    state = (0, _FormUtils.isFromValidate)(state);
-    var isValidate = state.isValidate;
-    logger.info('isValidate', isValidate);
-    if (isValidate) {
-      (0, _FormUtils.formPure)((0, _extends3.default)({}, state.data)).then(function (pureData) {
-        return onSubmit(isValidate, state, pureData);
-      });
-    } else {
-      onSubmit(isValidate, state, null);
-    }
-
-    _this3.setState(state);
-  };
-};
-
 exports.default = Form;
 
 /***/ }),
@@ -6216,7 +6232,7 @@ var _promise = __webpack_require__(400);
 
 var _promise2 = _interopRequireDefault(_promise);
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -6423,6 +6439,7 @@ var _FieldInput = function (_React$Component) {
 
     _initialiseProps.call(_this);
 
+    logger.log('Init');
     _this.timer = null;
     _this.state = {
       showDelIcon: false,
@@ -6552,8 +6569,7 @@ _FieldInput.defaultProps = {
   disabled: false,
   onChange: function onChange() {},
   onFocus: function onFocus() {},
-  onBlur: function onBlur() {},
-  onFieldBlur: function onFieldBlur() {}
+  onBlur: function onBlur() {}
 };
 
 var _initialiseProps = function _initialiseProps() {
@@ -6614,10 +6630,8 @@ var _initialiseProps = function _initialiseProps() {
     e.persist();
     var _props3 = _this2.props,
         name = _props3.name,
-        onBlur = _props3.onBlur,
-        onFieldBlur = _props3.onFieldBlur;
+        onBlur = _props3.onBlur;
 
-    onFieldBlur(name);
     onBlur(e);
     // TODO 考虑做成配置项，来决定什么时候作校验
     _this2.handleValidate(e);
@@ -6700,6 +6714,34 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PropTypes = _react2.default.PropTypes;
 
+/**
+ * 生成一个 Value 到 Name 的 Map 对象
+ * @param data Object
+ * @returns {{}}
+ */
+function mapValueToName(data) {
+  var mapValueToName = {};
+  data.forEach(function (v, k) {
+    mapValueToName[v.value] = data[k].name;
+  });
+  return mapValueToName;
+}
+
+// 渲染 option，data 格式为 [{name:'name',value:'value',disabled: false}]
+function renderData(data) {
+  return data.map(function (item, i) {
+    return _react2.default.createElement(
+      'option',
+      {
+        key: i,
+        value: item.value,
+        disabled: item.disabled
+      },
+      item.name
+    );
+  });
+}
+
 var _FieldSelect = function (_React$Component) {
   (0, _inherits3.default)(_FieldSelect, _React$Component);
 
@@ -6719,42 +6761,15 @@ var _FieldSelect = function (_React$Component) {
 
     var data = _this.props.data;
 
-    var mapValueToName = _this.createMapValueToName(data);
+    var valueNameMap = mapValueToName(data);
     _this.state = {
       value: _this.props.value || '',
-      mapValueToName: mapValueToName
+      valueNameMap: valueNameMap
     };
     return _this;
   }
 
   (0, _createClass3.default)(_FieldSelect, [{
-    key: 'createMapValueToName',
-    value: function createMapValueToName(data) {
-      var mapValueToName = {};
-      data.forEach(function (v, k) {
-        mapValueToName[v.value] = data[k].name;
-      });
-      return mapValueToName;
-    }
-
-    // 渲染 option，data 格式为 [{name:'name',value:'value',disabled: false}]
-
-  }, {
-    key: 'renderData',
-    value: function renderData(data) {
-      return data.map(function (item, i) {
-        return _react2.default.createElement(
-          'option',
-          {
-            key: i,
-            value: item.value,
-            disabled: item.disabled
-          },
-          item.name
-        );
-      });
-    }
-  }, {
     key: 'componentWillMount',
     value: function componentWillMount() {}
   }, {
@@ -6765,9 +6780,9 @@ var _FieldSelect = function (_React$Component) {
     value: function componentWillReceiveProps(nextProps) {
       if (this.props.data !== nextProps.data) {
         var data = nextProps.data;
-        var mapValueToName = this.createMapValueToName(data);
+        var valueNameMap = mapValueToName(data);
         this.setState({
-          mapValueToName: mapValueToName
+          valueNameMap: valueNameMap
         });
       }
       if (nextProps.value && nextProps.value !== this.state.value) {
@@ -6792,13 +6807,14 @@ var _FieldSelect = function (_React$Component) {
           className = _props.className,
           name = _props.name,
           data = _props.data,
+          disabled = _props.disabled,
           children = _props.children;
       var value = this.state.value;
 
       var cls = (0, _classnames2.default)((0, _defineProperty3.default)({
         NEUI_select: true
       }, className, className));
-      var label = value ? this.state.mapValueToName[value] : '请选择';
+      var label = value ? this.state.valueNameMap[value] : '请选择';
       return _react2.default.createElement(
         'div',
         { className: cls },
@@ -6817,14 +6833,15 @@ var _FieldSelect = function (_React$Component) {
           {
             name: name,
             value: value,
-            onChange: this.handleChange
+            onChange: this.handleChange,
+            disabled: disabled
           },
           _react2.default.createElement(
             'option',
             { disabled: !!value },
             '\u8BF7\u9009\u62E9'
           ),
-          data.length > 0 ? this.renderData(data) : children
+          data.length > 0 ? renderData(data) : children
         )
       );
     }
@@ -6854,7 +6871,9 @@ _FieldSelect.propTypes = {
   required: PropTypes.bool,
   shouldRsa: PropTypes.bool,
   onChange: PropTypes.func,
-  handleFieldChange: PropTypes.func
+  disabled: PropTypes.bool,
+  handleFieldChange: PropTypes.func,
+  value: PropTypes.any
 };
 _FieldSelect.defaultProps = {
   data: [],
@@ -6915,7 +6934,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -7169,7 +7188,7 @@ var _inherits2 = __webpack_require__(8);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _extends2 = __webpack_require__(27);
+var _extends2 = __webpack_require__(25);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
@@ -9168,6 +9187,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends2 = __webpack_require__(25);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _getPrototypeOf = __webpack_require__(7);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -9238,28 +9261,13 @@ var FormDemo = function (_React$Component) {
     _this.handleChange = function (formData) {
       logger.log('form change', formData);
       _this.setState({
-        formData: formData
+        formData: formData.data,
+        isComplete: formData.isComplete
       });
     };
 
-    _this.handleFieldChange = function (fieldData) {
-      logger.log('field change', fieldData);
-    };
-
-    _this.handleInputChange = function () {
-      logger.log('handleInputChange');
-    };
-
-    _this.handleInputFocus = function () {
-      logger.log('handleInputFocus');
-    };
-
-    _this.handleInputBlur = function () {
-      logger.log('handleInputBlur');
-    };
-
-    _this.handleInputEmpty = function () {
-      logger.log('handleInputEmpty');
+    _this.handleFieldChange = function (FieldData) {
+      logger.log('FieldChange', FieldData);
     };
 
     _this.closeToast = function () {
@@ -9271,19 +9279,23 @@ var FormDemo = function (_React$Component) {
     _this.state = {
       showInput: true,
       formData: {
-        data: {
-          name: {
-            value: '抹桥'
-          },
-          phone: {
-            value: ''
-          },
-          verifyCode: {},
-          gender: {},
-          is: {}
+        name: {
+          value: '抹桥'
+        },
+        phone: {
+          value: '13333333333'
+        },
+        verifyCode: {
+          value: 3303
+        },
+        gender: {},
+        is: {
+          value: true
         }
       },
       msg: '',
+      isComplete: false,
+
       showToast: false
     };
     _this.timer = null;
@@ -9293,23 +9305,22 @@ var FormDemo = function (_React$Component) {
   (0, _createClass3.default)(FormDemo, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      logger.log('WillMount');
+      logger.log('WillMount', this.state);
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _this2 = this;
 
-      var formData = this.$Form.data;
-      this.setState({
-        formData: formData
-      });
+      logger.log('DidMount', this.state);
       this.timer = setTimeout(function () {
         _this2.setState({
           showInput: false,
-          formData: formData
+          formData: (0, _extends3.default)({}, _this2.state.formData, {
+            gender: {}
+          })
         });
-      }, 5000);
+      }, 1000);
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -9319,11 +9330,13 @@ var FormDemo = function (_React$Component) {
   }, {
     key: 'componentWillUpdate',
     value: function componentWillUpdate(nextProps, nextState) {
-      logger.log('nextState', nextState);
+      logger.log('WillUpdate', nextState);
     }
   }, {
     key: 'componentDidUpdate',
-    value: function componentDidUpdate() {}
+    value: function componentDidUpdate() {
+      logger.log('DidUpdate', this.state);
+    }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
@@ -9338,10 +9351,8 @@ var FormDemo = function (_React$Component) {
           showInput = _state.showInput,
           msg = _state.msg,
           showToast = _state.showToast,
-          formData = _state.formData;
-
-      var formFieldData = formData.data;
-      var isComplete = formData.isComplete;
+          formData = _state.formData,
+          isComplete = _state.isComplete;
 
       var genderData = [{
         name: '男',
@@ -9352,6 +9363,7 @@ var FormDemo = function (_React$Component) {
         value: 1
       }];
       logger.info('render', this.state.formData);
+      console.log('Ref Render');
       return _react2.default.createElement(
         'section',
         { className: 'page-form-demo' },
@@ -9395,7 +9407,7 @@ var FormDemo = function (_React$Component) {
             null,
             _react2.default.createElement(
               _components.Cell,
-              { warning: formFieldData.name.isError },
+              { warning: formData.name.isError },
               _react2.default.createElement(
                 _components.CellHeader,
                 null,
@@ -9405,12 +9417,13 @@ var FormDemo = function (_React$Component) {
                 name: 'name',
                 errorMsg: _lang2.default.nameErrorMsg,
                 validate: _validate2.default.name,
-                value: formFieldData.name.value
+                value: formData.name.value,
+                'data-index': '1'
               })
             ),
             _react2.default.createElement(
               _components.Cell,
-              { warning: formFieldData.phone.isError },
+              { warning: formData.phone.isError },
               _react2.default.createElement(
                 _components.CellHeader,
                 null,
@@ -9419,12 +9432,13 @@ var FormDemo = function (_React$Component) {
               _react2.default.createElement(_components.Input, { type: 'tel',
                 name: 'phone',
                 validate: _validate2.default.phone,
-                errorMsg: _lang2.default.phoneErrorMsg
+                errorMsg: _lang2.default.phoneErrorMsg,
+                value: formData.phone.value
               })
             ),
             _react2.default.createElement(
               _components.Cell,
-              { warning: formFieldData.verifyCode.isError },
+              { warning: formData.verifyCode.isError },
               _react2.default.createElement(
                 _components.CellHeader,
                 null,
@@ -9433,7 +9447,8 @@ var FormDemo = function (_React$Component) {
               _react2.default.createElement(_components.Input, { type: 'number',
                 name: 'verifyCode',
                 errorMsg: _lang2.default.smsCodeErrorMsg,
-                validate: /\d{4}/
+                validate: /\d{4}/,
+                value: formData.verifyCode.value
               }),
               _react2.default.createElement(
                 _components.CellFooter,
@@ -9447,12 +9462,12 @@ var FormDemo = function (_React$Component) {
             null,
             'Select'
           ),
-          _react2.default.createElement(
+          showInput ? _react2.default.createElement(
             _components.Cells,
             null,
             _react2.default.createElement(
               _components.Cell,
-              { warning: formFieldData.gender.isError },
+              { warning: formData.gender.isError },
               _react2.default.createElement(
                 _components.CellHeader,
                 null,
@@ -9460,10 +9475,11 @@ var FormDemo = function (_React$Component) {
               ),
               _react2.default.createElement(_components.Select, { name: 'gender',
                 data: genderData,
-                required: false
+                value: formData.gender.value,
+                disabled: true
               })
             )
-          ),
+          ) : null,
           _react2.default.createElement(
             _components.CellTip,
             null,
@@ -9483,7 +9499,7 @@ var FormDemo = function (_React$Component) {
               _react2.default.createElement(
                 _components.CellFooter,
                 null,
-                _react2.default.createElement(_components.CheckBox, { name: 'is', id: 'is' })
+                _react2.default.createElement(_components.CheckBox, { name: 'is', id: 'is', value: formData.is.value })
               )
             )
           ),
@@ -10659,7 +10675,7 @@ module.exports = function(TYPE, $create){
 
 var isObject = __webpack_require__(62)
   , isArray  = __webpack_require__(234)
-  , SPECIES  = __webpack_require__(25)('species');
+  , SPECIES  = __webpack_require__(26)('species');
 
 module.exports = function(original){
   var C;
@@ -10959,7 +10975,7 @@ module.exports = function(fn, args, that){
 
 // check on default Array iterator
 var Iterators  = __webpack_require__(88)
-  , ITERATOR   = __webpack_require__(25)('iterator')
+  , ITERATOR   = __webpack_require__(26)('iterator')
   , ArrayProto = Array.prototype;
 
 module.exports = function(it){
@@ -10995,7 +11011,7 @@ var create         = __webpack_require__(123)
   , IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(61)(IteratorPrototype, __webpack_require__(25)('iterator'), function(){ return this; });
+__webpack_require__(61)(IteratorPrototype, __webpack_require__(26)('iterator'), function(){ return this; });
 
 module.exports = function(Constructor, NAME, next){
   Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
@@ -11006,7 +11022,7 @@ module.exports = function(Constructor, NAME, next){
 /* 431 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ITERATOR     = __webpack_require__(25)('iterator')
+var ITERATOR     = __webpack_require__(26)('iterator')
   , SAFE_CLOSING = false;
 
 try {
@@ -11235,7 +11251,7 @@ module.exports = {
 // 7.3.20 SpeciesConstructor(O, defaultConstructor)
 var anObject  = __webpack_require__(56)
   , aFunction = __webpack_require__(147)
-  , SPECIES   = __webpack_require__(25)('species');
+  , SPECIES   = __webpack_require__(26)('species');
 module.exports = function(O, D){
   var C = anObject(O).constructor, S;
   return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
@@ -11292,7 +11308,7 @@ module.exports = __webpack_require__(21).getIterator = function(it){
 /***/ (function(module, exports, __webpack_require__) {
 
 var classof   = __webpack_require__(119)
-  , ITERATOR  = __webpack_require__(25)('iterator')
+  , ITERATOR  = __webpack_require__(26)('iterator')
   , Iterators = __webpack_require__(88);
 module.exports = __webpack_require__(21).isIterable = function(it){
   var O = Object(it);
@@ -11456,7 +11472,7 @@ var USE_NATIVE = !!function(){
   try {
     // correct subclassing with @@species support
     var promise     = $Promise.resolve(1)
-      , FakePromise = (promise.constructor = {})[__webpack_require__(25)('species')] = function(exec){ exec(empty, empty); };
+      , FakePromise = (promise.constructor = {})[__webpack_require__(26)('species')] = function(exec){ exec(empty, empty); };
     // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
     return (isNode || typeof PromiseRejectionEvent == 'function') && promise.then(empty) instanceof FakePromise;
   } catch(e){ /* empty */ }
@@ -11747,7 +11763,7 @@ var global         = __webpack_require__(30)
   , shared         = __webpack_require__(157)
   , setToStringTag = __webpack_require__(106)
   , uid            = __webpack_require__(126)
-  , wks            = __webpack_require__(25)
+  , wks            = __webpack_require__(26)
   , wksExt         = __webpack_require__(162)
   , wksDefine      = __webpack_require__(161)
   , keyOf          = __webpack_require__(432)
@@ -14736,7 +14752,7 @@ if (typeof process !== 'undefined' && __webpack_require__.i({"NODE_ENV":"develop
   // https://github.com/facebook/react/issues/7240
   // Remove the inline requires when we don't need them anymore:
   // https://github.com/facebook/react/pull/7178
-  ReactComponentTreeHook = __webpack_require__(26);
+  ReactComponentTreeHook = __webpack_require__(27);
 }
 
 /**
@@ -14752,7 +14768,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name, selfDebugID
     var keyUnique = result[name] === undefined;
     if (true) {
       if (!ReactComponentTreeHook) {
-        ReactComponentTreeHook = __webpack_require__(26);
+        ReactComponentTreeHook = __webpack_require__(27);
       }
       if (!keyUnique) {
          true ? warning(false, 'flattenChildren(...): Encountered two children with the same key, ' + '`%s`. Child keys must be unique; when two children share a key, only ' + 'the first child will be used.%s', KeyEscapeUtils.unescape(name), ReactComponentTreeHook.getStackAddendumByID(selfDebugID)) : void 0;
