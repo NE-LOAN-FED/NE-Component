@@ -62,6 +62,7 @@ state | 整个 State 对象 | object | {}
 pureData | 处理过后的 name:value 格式的数据，以供提交到后端使用 | object | {}
 
 有两个途径来触发 Form 的提交方法：
+
 1. 【推荐】跟原生 html 一样，在 Form 内部放一个 type='submit' 的 button, 点击后触发 `onSubmit` 方法
 1. 给 Form 组件设置一个 ref 来拿到 Form 组件的实例，然后可以手动调用 `this.[ref].formSubmit` 来触发 `onSubmit` 方法
 
@@ -79,6 +80,7 @@ handleFieldChange(fieldData:object) | Form组件注入的函数，传入的参�
 
 ### 公用的 Props
 上面三个组件基本 Props 都是相同的。
+
 属性名 | 描述 | 类型 | 默认值
 --- | --- | --- | ---
 name | Name，必填项 | String | 无
