@@ -19,29 +19,103 @@ npm install ne-rc
 ### 引用
 
 ```js
-import React from 'react'
-import {Form, FormCell, Input, Select, CellHeader, CellTip, Button} from 'ne-rc'
+	import React from 'react'
+	// 引入组件
+	import {
+	  Form, Input, CheckBox,
+	  Cells, Cell, CellTip, CellHeader, CellBody, CellFooter,
+	  VerifyButton, Toast, Button
+	} from 'ne-rc'
+	import Logger from '../../../utils/log'
+	import lang from '../../utils/lang'
+	import validate from '../../utils/validate'
+	
+	const logger = new Logger('DEBUG', 'FormDemo')
+	
+	class FormDemo extends React.Component {
+	  constructor() {
+	    super()
+	    this.state = {  // 初始化需要的数据
+	      formData: {
+	        name: {value: '抹桥'},
+	        phone: {value: '13333333333'},
+	        verifyCode: {value: 3303},
+	        is: {value: true}
+	      },
+	      msg: '',
+	      isComplete: false,
+	      showToast: false
+	    }
+	  }
+	
+	  handleSubmit = (isValidate, state, pureData) => { // Form 提交的回调函数
+	    if (!isValidate) {
+	      this.setState({
+	        showToast: true,
+	        msg: state.errorMsgList[0]
+	      })
+	    } else {
+	      this.setState({
+	        showToast: true,
+	        msg: '正在提交'
+	      })
+	    }
+	  }
+	  handleChange = (formData) => {  // Form 变化的回调函数
+	    this.setState({
+	      formData: formData.data,
+	      isComplete: formData.isComplete
+	    })
+	  }
+	  handleFieldChange = (FieldData) => { // Form 下面子表单变化的回调函数
+	    logger.log('FieldChange', FieldData)
+	  }
+	  closeToast = () => {
+	    this.setState({
+	      showToast: false
+	    })
+	  }
+	
+	  render() {
+	    const {msg, showToast, formData, isComplete} = this.state
+	    return (
+	      <section className="page-form-demo">
+	        <Toast content={msg}
+	               show={showToast}
+	               onClose={this.closeToast}
+	        />
+	        <Form onSubmit={this.handleSubmit}
+	              onFieldChange={this.handleFieldChange}
+	              onChange={this.handleChange}
+	              ref={(ref) => {
+	                this['$Form'] = ref
+	              } }>
+	          <Cells>
+	            <Cell warning={formData.name.isError}>
+	              <CellHeader>Name</CellHeader>
+	              <Input type='text'
+	                     name='name'
+	                     errorMsg={lang.nameErrorMsg}
+	                     validate={validate.name}
+	                     value={formData.name.value}
+	              />
+	            </Cell>
+	          </Cells>
+	          <Cells>
+	            <Cell htmlFor="is">
+	              <CellBody>Is yourself?</CellBody>
+	              <CellFooter><CheckBox name='is' id="is" value={formData.is.value}/></CellFooter>
+	            </Cell>
+	          </Cells>
+	          <Button type="submit" disabled={!isComplete}>提交</Button>
+	        </Form>
+	      </section>
+	    )
+	  }
+	}
+	
+	export default FormDemo
 
-class Test extends React.Components {
-  render() {
-    const {formData} = this.props
-    return (
-      <section>
-      <Form>
-        <FormCell isError={formData.realName.isError}
-                  cellsStart
-                  cellsEnd >
-          <CellHeader>姓名</CellHeader>
-          <Input type="text"
-                 name="realName"
-           />
-          </FormCell>
-        </Form>
-        <Button>提交</Button>
-      </section>
-    )
-  }
-}
 ```
 
 
