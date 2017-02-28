@@ -1,9 +1,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 ## 说明
-大数据风控组移动端 React 组件
-
-**1.0** 正式版本发布前，组件 API 可能**随时会发生大的变动**，不建议外部项目使用。 
+大数据风控组移动端 React 组件。
 
 ## 开发
 ### 前提
@@ -140,6 +138,7 @@ npm install ne-rc
  * [ ] Collapse
 * [ ] Modal 添加动画
 * [ ] 样式表结构重新组织
+
 ## 列表
 * [x] Form          提供表单校验，填写完成校验（决定提交按钮是否高亮）
     - [x] Select    选择器
