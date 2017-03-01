@@ -1,7 +1,9 @@
 {
   "name": "ne-rc",
   "version": "0.2.0-beta",
+  "title":"NE-ReactComponents",
   "description": "A react compoents develop by NE-LOAN-FED",
+  "homepage":"https://github.com/NE-LOAN-FED/NE-Component",
   "main": "lib/index.js",
   "scripts": {
     "demo": "node ./node_modules/better-npm-run demo",
@@ -102,9 +104,11 @@
     "url": "https://github.com/NE-LOAN-FED/NE-Component/issues"
   },
   "keywords": [
+    "react",
     "component",
-    "React"
+    "react-components",
+    "frontend"
   ],
   "author": "NE-LOAN-FED",
-  "license": "ISC"
+  "license": "MIT"
 }
