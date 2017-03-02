@@ -4,14 +4,12 @@
 import React from 'react'
 import classNames from 'classnames'
 import {isFormComplete, formPure, isFromValidate} from './FormUtils'
-import Logger from '../../utils/log'
 
 const PropTypes = React.PropTypes
 
 // TODO 完成 Form 重构
 
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
-const logger = new Logger(env, 'TestForm')
 // 标识当前 Form 处于的状态
 const STATE = {
   Init: 'Init',
@@ -19,7 +17,6 @@ const STATE = {
   FieldChange: 'FieldChange',
   UpdateFormDataStructure: 'UpdateFormDataStructure'
 }
-
 
 export default class Form extends React.PureComponent {
   constructor(props) {
@@ -43,21 +40,17 @@ export default class Form extends React.PureComponent {
     onSubmit: PropTypes.func
   }
 
-
   static defaultProps = {}
 
   componentWillMount() {
-    logger.log('WillMount')
     this.children = this.collectFormField(this.props.children)
   }
 
   componentDidMount() {
     this.initFormDataStructure()
-    logger.log('DidMount')
   }
 
   componentWillReceiveProps(nextProps) {
-    logger.log('ReceiveProps', this.field)
     if (nextProps.children !== this.props.children) {
       this.children = this.collectFormField(nextProps.children)
       if (this.CURRENT_STATE === STATE.Normal) {
@@ -67,11 +60,9 @@ export default class Form extends React.PureComponent {
   }
 
   componentWillUpdate(nextProps, nextState) {
-    logger.log('WillUpdate', nextState)
   }
 
   componentDidUpdate(preProps, preState) {
-    logger.log('DidUpdate', this.state)
   }
 
   componentWillUnmount() {
@@ -88,7 +79,6 @@ export default class Form extends React.PureComponent {
    */
   collectFormField = (children) => {
     // TODO 优化性能，当 Field 已经有 key 的时候，就不重新 clone 了
-    logger.log('collectFormField invoke times', this.count)
     this.count++
     const handleFieldChange = this.handleFieldChange
 
@@ -139,7 +129,6 @@ export default class Form extends React.PureComponent {
     const formData = {
       ...this.state.data
     }
-    logger.log('initFormDataStructure', this.field, this.field.length)
     this.field.forEach((formField, k) => {
       const Props = formField.props
       const Data = formField.data
@@ -149,11 +138,6 @@ export default class Form extends React.PureComponent {
         ...Data,
         required: typeof Props.required === 'undefined' ? true : Props.required
       }
-    })
-    logger.log('initFormDataStructure', {
-      ...this.state,
-      isComplete: isFormComplete(formData),
-      data: formData
     })
     const nextState = {
       ...this.state,
@@ -258,7 +242,6 @@ export default class Form extends React.PureComponent {
     // TODO 重写 isFromValidate
     state = isFromValidate(state)
     const isValidate = state.isValidate
-    logger.info('isValidate', isValidate)
     if (isValidate) {
       formPure({
         ...state.data

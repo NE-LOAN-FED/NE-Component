@@ -4,17 +4,14 @@
 import React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
-import Logger from '../../utils/log.js'
 
 const PropTypes = React.PropTypes
 // TODO 完成 Input 重构
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
-const logger = new Logger(env, 'TestInput')
 
 export default class _FieldInput extends React.Component {
   constructor(props) {
     super(props)
-    logger.log('Init')
     this.timer = null
     this.state = {
       showDelIcon: false,
