@@ -18,8 +18,7 @@ export {
   Form,
   Input,
   CheckBox,
-  Select,
-  FormCell
+  Select
 } from './Form'
 export {default as Icon} from './Icon'
 export {default as Modal} from './Modal'
