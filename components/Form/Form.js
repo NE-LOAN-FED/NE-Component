@@ -18,6 +18,9 @@ const STATE = {
   UpdateFormDataStructure: 'UpdateFormDataStructure'
 }
 
+const noop = () => {
+}
+
 export default class Form extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -40,7 +43,11 @@ export default class Form extends React.PureComponent {
     onSubmit: PropTypes.func
   }
 
-  static defaultProps = {}
+  static defaultProps = {
+    onFieldChange: noop,
+    onChange: noop,
+    onSubmit: noop
+  }
 
   componentWillMount() {
     this.children = this.collectFormField(this.props.children)
@@ -144,7 +151,7 @@ export default class Form extends React.PureComponent {
       isComplete: isFormComplete(formData),
       data: formData
     }
-    this.props.onChange(nextState)
+    this.handleFormChange(nextState)
     this.setState(nextState, () => {
       this.CURRENT_STATE = STATE.Normal
     })
@@ -184,12 +191,16 @@ export default class Form extends React.PureComponent {
       isComplete: isFormComplete(formData),
       data: formData
     }
-    this.props.onChange(nextState)
+    this.handleFormChange(nextState)
     this.setState(nextState, () => {
       this.CURRENT_STATE = STATE.Normal
     })
   }
 
+  /**
+   * 由 Form 管理的子表单变化时触发的回掉函数，会对外触发 onFieldChange 和 onFormChange 事件
+   * @param fieldData {object} 由子表单传入的参数
+   */
   handleFieldChange = (fieldData) => {
     this.CURRENT_STATE = STATE.FieldChange
     let state = {
@@ -214,13 +225,13 @@ export default class Form extends React.PureComponent {
     this.props.onFieldChange(fieldData)
 
     // 为了避免传入 state 被外界修改，所以传入一个新的对象
-    this.props.onChange({
+    const nextState = {
       ...state,
       data: {
         ...state.data
       }
-    })
-    console.log('handleFieldChange', state)
+    }
+    this.handleFormChange(nextState)
     this.setState({
       ...state,
       data: {
@@ -231,6 +242,17 @@ export default class Form extends React.PureComponent {
     })
   }
 
+  /**
+   * Form 发生变化时触发的回调函数，同时对外触发 onFormChange 事件
+   * @param state {object} 当前的表单 state
+   */
+  handleFormChange = (state) => {
+    this.props.onChange(state)
+  }
+
+  /**
+   * 提交事件，对外触发 onSubmit 事件
+   */
   formSubmit = () => {
     const {onSubmit} = this.props
     let state = {

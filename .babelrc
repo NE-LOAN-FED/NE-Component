@@ -4,15 +4,10 @@
     "react",
     "stage-2"
   ],
-  "plugins": [
-    "transform-runtime"
-  ],
   "env": {
-    "test": {
-      "sourceMaps": "both"
-    },
-    "build": {
+    "cjs": {
       "plugins": [
+        "add-module-exports",
         [
           "babel-plugin-transform-require-ignore",
           {
