@@ -1,8 +1,6 @@
 /**
  * Created by hzyuanqi1 on 2016/10/8.
  */
-import './style/index.scss'
-
 export {default as Alert} from './Alert'
 export {default as Button} from './Button'
 import {

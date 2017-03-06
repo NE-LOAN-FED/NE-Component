@@ -7,26 +7,7 @@
   "env": {
     "cjs": {
       "plugins": [
-        [
-          "babel-plugin-transform-require-ignore",
-          {
-            "extensions": [
-              ".scss"
-            ]
-          }
-        ]
-      ]
-    },
-    "es": {
-      "plugins": [
-        [
-          "babel-plugin-transform-require-ignore",
-          {
-            "extensions": [
-              ".scss"
-            ]
-          }
-        ]
+        "add-module-exports"
       ]
     }
   }
