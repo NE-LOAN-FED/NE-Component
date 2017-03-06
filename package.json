@@ -71,9 +71,9 @@
     "webpack-merge": "^3.0.0"
   },
   "files": [
-    "components",
     "lib",
-    "dist"
+    "dist",
+    "es"
   ],
   "peerDependencies": {
     "react": "0.14.x || ^15.0.0-0 || 15.x",
