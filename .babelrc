@@ -1,6 +1,6 @@
 {
   "presets": [
-    "es2015",
+    "./tools/es2015Preset",
     "react",
     "stage-2"
   ],

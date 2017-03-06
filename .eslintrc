@@ -4,10 +4,8 @@
     "browser": true,
     "node": true,
     "es6": true,
-    "jest": true,
-    "jquery": true
+    "jest": true
   },
-  "parser": "babel-eslint",
   "plugins": [
     "react"
   ],
