@@ -11,7 +11,7 @@ const cwd = process.cwd()
 const config = {
   entry: {
     ne: [
-      path.join(__dirname, '../components/index')
+      path.join(__dirname, '../src/index')
     ]
   },
   output: {

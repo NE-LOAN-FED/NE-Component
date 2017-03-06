@@ -2,9 +2,10 @@
  * Created by hzyuanqi1 on 2016/10/8.
  */
 import './style/index.scss'
+
 export {default as Alert} from './Alert'
 export {default as Button} from './Button'
-export {
+import {
   Cell,
   CellBody,
   CellHeader,
@@ -14,7 +15,7 @@ export {
 } from './Cell'
 export {default as CellInput} from './CellInput'
 export {default as DatePicker} from './DatePicker'
-export {
+import {
   Form,
   Input,
   CheckBox,
@@ -27,3 +28,28 @@ export {default as Picker} from './Picker'
 export {default as Toast} from './Toast'
 export {default as VerifyButton} from './VerifyButton'
 export {default as Collapse} from './Collapse'
+
+export default {
+  Alert,
+  Button,
+  Cell,
+  CellBody,
+  CellHeader,
+  CellFooter,
+  CellTip,
+  Cells,
+  CellInput,
+  DatePicker,
+  Form,
+  Input,
+  CheckBox,
+  Select,
+  Icon,
+  Modal,
+  Panel,
+  Picker,
+  Toast,
+  VerifyButton,
+  Collapse
+
+}

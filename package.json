@@ -1,18 +1,18 @@
 {
   "name": "ne-rc",
   "version": "0.2.0-beta.3",
-  "title":"NE-ReactComponents",
+  "title": "NE-ReactComponents",
   "description": "A react compoents develop by NE-LOAN-FED",
-  "homepage":"https://github.com/NE-LOAN-FED/NE-Component",
+  "homepage": "https://github.com/NE-LOAN-FED/NE-Component",
   "main": "lib/index.js",
   "scripts": {
-    "demo": "node ./node_modules/better-npm-run demo",
-    "demo:build": "rimraf ./demo && node ./node_modules/better-npm-run demo:build",
-    "build:webpack": "node ./node_modules/better-npm-run build:webpack",
-    "build:babel": "node ./node_modules/better-npm-run build:babel",
-    "build": "npm run clean && npm run build:webpack && npm run build:babel",
     "clean": "rimraf ./dist ./lib",
-    "lint": "eslint components examples test && echo \"eslint: no lint errors\"",
+    "demo": "cross-env NODE_NEV=demo webpack-dev-server --config ./config/index.js",
+    "demo:build": "rimraf ./demo && cross-env NODE_NEV=demo:build webapck --config ./config/index.js --progress --colors",
+    "build:umd": "cross-env NODE_ENV=production webpack --config ./config/index.js --progress --colors",
+    "build:cjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --copy-files && cp dist/ne.min.css lib/ne.min.css",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build": "npm run clean && npm run build:umd && npm run build:cjs && npm run build:es",
     "eslint": "node ./node_modules/eslint/bin/eslint.js ./",
     "scsslint": "node ./node_modules/eslint/bin/eslint.js ./",
     "test": "mocha --compilers js:babel-register --recursive",
@@ -42,7 +42,8 @@
       "env": {
         "NODE_ENV": "build"
       }
-    }
+    },
+    "build-cjs": {}
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
@@ -65,6 +66,7 @@
     "babel-preset-stage-2": "^6.13.0",
     "better-npm-run": "0.0.14",
     "chai": "^3.5.0",
+    "cross-env": "^3.2.3",
     "css-loader": "^0.26.1",
     "eslint": "^3.16.1",
     "eslint-config-standard": "^6.2.0",
@@ -92,7 +94,11 @@
     "webpack-dev-server": "^2.4.1",
     "webpack-merge": "^3.0.0"
   },
-  "files": ["components","lib","dist"],
+  "files": [
+    "components",
+    "lib",
+    "dist"
+  ],
   "peerDependencies": {
     "react": "0.14.x || ^15.0.0-0 || 15.x",
     "react-dom": "0.14.x || ^15.0.0-0 || 15.x"
