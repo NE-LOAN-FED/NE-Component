@@ -7,7 +7,6 @@
   "env": {
     "cjs": {
       "plugins": [
-        "add-module-exports",
         [
           "babel-plugin-transform-require-ignore",
           {
