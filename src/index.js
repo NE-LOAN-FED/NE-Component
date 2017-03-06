@@ -1,9 +1,11 @@
 /**
- * Created by hzyuanqi1 on 2016/10/8.
+ * Created by kisnows on 2016/10/8.
  */
-export {default as Alert} from './Alert'
-export {default as Button} from './Button'
-import {
+import './_style/index.scss'
+
+export { default as Alert } from './Alert'
+export { default as Button } from './Button'
+export {
   Cell,
   CellBody,
   CellHeader,
@@ -11,18 +13,18 @@ import {
   CellTip,
   Cells
 } from './Cell'
-export {default as CellInput} from './CellInput'
-export {default as DatePicker} from './DatePicker'
-import {
+export { default as CellInput } from './CellInput'
+export { default as DatePicker } from './DatePicker'
+export {
   Form,
   Input,
   CheckBox,
   Select
 } from './Form'
-export {default as Icon} from './Icon'
-export {default as Modal} from './Modal'
-export {default as Panel} from './Panel'
-export {default as Picker} from './Picker'
-export {default as Toast} from './Toast'
-export {default as VerifyButton} from './VerifyButton'
-export {default as Collapse} from './Collapse'
+export { default as Icon } from './Icon'
+export { default as Modal } from './Modal'
+export { default as Panel } from './Panel'
+export { default as Picker } from './Picker'
+export { default as Toast } from './Toast'
+export { default as VerifyButton } from './VerifyButton'
+
