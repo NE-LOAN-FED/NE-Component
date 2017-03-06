@@ -28,28 +28,3 @@ export {default as Picker} from './Picker'
 export {default as Toast} from './Toast'
 export {default as VerifyButton} from './VerifyButton'
 export {default as Collapse} from './Collapse'
-
-export default {
-  Alert,
-  Button,
-  Cell,
-  CellBody,
-  CellHeader,
-  CellFooter,
-  CellTip,
-  Cells,
-  CellInput,
-  DatePicker,
-  Form,
-  Input,
-  CheckBox,
-  Select,
-  Icon,
-  Modal,
-  Panel,
-  Picker,
-  Toast,
-  VerifyButton,
-  Collapse
-
-}
