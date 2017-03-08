@@ -80,7 +80,7 @@ export default class _FieldInput extends React.Component {
   }
 
   componentDidUpdate(preProps, preState) {
-    const {handleFieldChange} = preProps
+    const { handleFieldChange } = preProps
     if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
       handleFieldChange(this.data)
     }
@@ -91,8 +91,8 @@ export default class _FieldInput extends React.Component {
   }
 
   get data() {
-    const {value, isError} = this.state
-    const {name, errorMsg, required, shouldRsa} = this.props
+    const { value, isError } = this.state
+    const { name, errorMsg, required, shouldRsa } = this.props
     return {
       name,
       value,
@@ -105,7 +105,7 @@ export default class _FieldInput extends React.Component {
 
   handleValidate = (e) => {
     const value = e.target.value
-    const {validate} = this.props
+    const { validate } = this.props
     let isError = false
     // TODO 考虑把校验方法提取出来，作为 props 传给 Input
     if (validate instanceof RegExp) {
@@ -140,7 +140,7 @@ export default class _FieldInput extends React.Component {
   }
 
   handleFocus = (e) => {
-    const {onFocus} = this.props
+    const { onFocus } = this.props
     onFocus(e)
     if (e.target.value.length > 0) {
       this.setState({
@@ -152,7 +152,7 @@ export default class _FieldInput extends React.Component {
   handleBlur = (e) => {
     // 因为要异步的使用 e, 所以需要保留 e 的引用
     e.persist()
-    const {name, onBlur} = this.props
+    const { name, onBlur } = this.props
     onBlur(e)
     // TODO 考虑做成配置项，来决定什么时候作校验
     this.handleValidate(e)
@@ -182,8 +182,8 @@ export default class _FieldInput extends React.Component {
   }
 
   render() {
-    const {showDelIcon, value} = this.state
-    const {className, disabled, name, type} = this.props
+    const { showDelIcon, value } = this.state
+    const { className, disabled, name, type } = this.props
     const prefix = 'NEUI'
     const cls = classNames({
       [`${prefix}_input`]: true,
@@ -194,13 +194,13 @@ export default class _FieldInput extends React.Component {
     return (
       <label className={cls}>
         <input name={name}
-               value={value}
-               type={type}
-               onChange={this.handleChange}
-               onFocus={this.handleFocus}
-               onBlur={this.handleBlur}
+          value={value}
+          type={type}
+          onChange={this.handleChange}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
         />
-        {showDelIcon ? <Icon onClick={handleDelClick} type={'del'}/> : null}
+        {showDelIcon ? <Icon onClick={handleDelClick} type={'del'} /> : null}
       </label>
     )
   }

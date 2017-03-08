@@ -20,7 +20,7 @@ export default class VerifyButton extends React.Component {
     isSending: PropTypes.bool,
     text: PropTypes.string,
     times: PropTypes.number,
-    isCanSend: PropTypes.func,
+    isCanSend: PropTypes.func
   }
 
   static defaultProps = {

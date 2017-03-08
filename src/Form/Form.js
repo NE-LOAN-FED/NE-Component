@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import classNames from 'classnames'
-import {isFormComplete, formPure, isFromValidate} from './FormUtils'
+import { isFormComplete, formPure, isFromValidate } from './FormUtils'
 
 const PropTypes = React.PropTypes
 
@@ -254,7 +254,7 @@ export default class Form extends React.PureComponent {
    * 提交事件，对外触发 onSubmit 事件
    */
   formSubmit = () => {
-    const {onSubmit} = this.props
+    const { onSubmit } = this.props
     let state = {
       ...this.state,
       data: {
@@ -282,14 +282,14 @@ export default class Form extends React.PureComponent {
 
   render() {
     const prefix = 'NEUI'
-    const {className} = this.props
+    const { className } = this.props
     const cls = classNames({
       [`${prefix}_cells`]: true,
       [className]: className
     })
     return (
       <form className={cls}
-            onSubmit={e => this.handleFormSubmit(e)}
+        onSubmit={e => this.handleFormSubmit(e)}
       >
         {this.children}
       </form>

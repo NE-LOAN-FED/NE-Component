@@ -1,5 +1,4 @@
 export default class Logger {
-
   static DEBUG = 'DEBUG'
   static PROD = 'PROD'
   static DEV = 'DEV'
@@ -24,5 +23,4 @@ export default class Logger {
   error(...argvs) {
     console.log(this.prefix, ...argvs)
   }
-
 }

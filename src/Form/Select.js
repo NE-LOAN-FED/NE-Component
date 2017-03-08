@@ -33,7 +33,7 @@ function renderData(data) {
 export default class _FieldSelect extends React.Component {
   constructor(props) {
     super(props)
-    const {data} = this.props
+    const { data } = this.props
     const valueNameMap = mapValueToName(data)
     this.state = {
       value: this.props.value || '',
@@ -86,15 +86,15 @@ export default class _FieldSelect extends React.Component {
   }
 
   componentDidUpdate(preProps, preState) {
-    const {handleFieldChange} = preProps
+    const { handleFieldChange } = preProps
     if (preState.value !== this.state.value) {
       handleFieldChange(this.data)
     }
   }
 
   get data() {
-    const {value} = this.state
-    const {name, required, shouldRsa} = this.props
+    const { value } = this.state
+    const { name, required, shouldRsa } = this.props
     return {
       name,
       value,
@@ -113,8 +113,8 @@ export default class _FieldSelect extends React.Component {
   }
 
   render() {
-    const {className, name, data, disabled, children} = this.props
-    const {value} = this.state
+    const { className, name, data, disabled, children } = this.props
+    const { value } = this.state
     const cls = classNames({
       NEUI_select: true,
       [className]: className
@@ -122,7 +122,7 @@ export default class _FieldSelect extends React.Component {
     const label = value ? this.state.valueNameMap[value] : '请选择'
     return (
       <div className={cls}>
-        <div><span>{label}</span><Icon type='arrow'/></div>
+        <div><span>{label}</span><Icon type='arrow' /></div>
         <select
           name={name}
           value={value}

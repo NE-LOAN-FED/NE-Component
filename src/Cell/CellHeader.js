@@ -10,7 +10,7 @@ export default class CellHeader extends React.Component {
   static defaultProps = {}
 
   render() {
-    const {className, children, ...others} = this.props
+    const { className, children, ...others } = this.props
     const cls = classNames({
       NEUI_cell__hd: true,
       [className]: className

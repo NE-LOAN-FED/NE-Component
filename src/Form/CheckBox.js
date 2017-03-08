@@ -5,7 +5,6 @@ import Icon from '../Icon'
 const PropTypes = React.PropTypes
 // TODO 待完成,解决嵌套在 Form 组件后 checkbox 的选择问题
 export default class _FieldCheckbox extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -29,7 +28,7 @@ export default class _FieldCheckbox extends React.Component {
     onChange: () => {
     },
     handleFieldChange: () => {
-    },
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,7 +40,7 @@ export default class _FieldCheckbox extends React.Component {
   }
 
   componentDidUpdate(preProps, preState) {
-    const {handleFieldChange} = preProps
+    const { handleFieldChange } = preProps
     if (preState.value !== this.state.value) {
       handleFieldChange(this.data)
       console.log(this.data)
@@ -49,8 +48,8 @@ export default class _FieldCheckbox extends React.Component {
   }
 
   get data() {
-    const {value} = this.state
-    const {name, shouldRsa} = this.props
+    const { value } = this.state
+    const { name, shouldRsa } = this.props
     return {
       name,
       value,
@@ -77,13 +76,13 @@ export default class _FieldCheckbox extends React.Component {
     return (
       <div className={cls}>
         <input type="checkbox"
-               name={name}
-               onChange={this.handleChange}
-               checked={this.state.value}
-               value={value}
-               {...others}
+          name={name}
+          onChange={this.handleChange}
+          checked={this.state.value}
+          value={value}
+          {...others}
         />
-        {this.state.value ? <Icon type="tick" className="NEUI_checkbox_icon"/> : null}
+        {this.state.value ? <Icon type="tick" className="NEUI_checkbox_icon" /> : null}
         {children}
       </div>
     )

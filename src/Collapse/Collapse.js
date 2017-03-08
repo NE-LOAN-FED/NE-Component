@@ -25,17 +25,17 @@ export default class Collapse extends React.Component {
   }
 
   static defaultProps = {
-    prefixCls: 'NEUI',
+    prefixCls: 'NEUI'
   }
 
   handleListChange = (id, collapse) => {
-    //TODO 把 openListIdCollection 改为不可重复的数据结构 set
-    let {openListIdCollection, listCollection}= this.state
+    // TODO 把 openListIdCollection 改为不可重复的数据结构 set
+    let {openListIdCollection, listCollection} = this.state
     const {accordion} = this.props
     listCollection[id]['isCollapse'] = collapse
 
     function removeCollapseListId() {
-      return openListIdCollection = openListIdCollection.filter((value) => {
+      return openListIdCollection.filter((value) => {
         return value !== id
       })
     }
@@ -45,8 +45,8 @@ export default class Collapse extends React.Component {
     }
 
     if (accordion) {
-      openListIdCollection = collapse ?
-        removeCollapseListId() : [id]
+      openListIdCollection = collapse
+        ? removeCollapseListId() : [id]
     } else {
       collapse ? removeCollapseListId() : addIdToCollapseListId(id)
     }
@@ -66,7 +66,7 @@ export default class Collapse extends React.Component {
         data: v,
         onChange: this.handleListChange,
         id: k,
-        key: k,
+        key: k
       })
     })
   }

@@ -1,33 +1,32 @@
 /**
  * Created by kisnows on 2017/2/7.
  */
-  // Form 表单的输入数据格式应该是如下格式
-const FormStateSchema =
-    {
-      'isValidate': 'boole',  // 决定是否能提交
-      'errorMsg': '',         // 放第一条错误信息
-      'isComplete': 'boole',   // 决定提交按钮是否高亮
-      'data': {
-        'name': {             // 每条表单的属性
-          'value': 'value',   // 表单的值
-          'validate': /[a-z]/,  // 校验方法
-          'isError': 'boole', // 是否通过校验
-          'errorMsg': '',         // 错误信息
-          'shouldRsa': 'boole',   // 是否需要加密
-          'required': 'boole'     // 是否为必填项
-        },
-        'name1': {
-          'value': 'value',
-          'validate': function (value) {
-            return true
-          },
-          'isValidate': 'boole',
-          'errorMsg': '',
-          'shouldRsa': 'boole',
-          'required': 'boole'
-        }
-      }
+// Form 表单的输入数据格式应该是如下格式
+const FormStateSchema = {
+  'isValidate': 'boole',  // 决定是否能提交
+  'errorMsg': '',         // 放第一条错误信息
+  'isComplete': 'boole',   // 决定提交按钮是否高亮
+  'data': {
+    'name': {             // 每条表单的属性
+      'value': 'value',   // 表单的值
+      'validate': /[a-z]/,  // 校验方法
+      'isError': 'boole', // 是否通过校验
+      'errorMsg': '',         // 错误信息
+      'shouldRsa': 'boole',   // 是否需要加密
+      'required': 'boole'     // 是否为必填项
+    },
+    'name1': {
+      'value': 'value',
+      'validate': function (value) {
+        return true
+      },
+      'isValidate': 'boole',
+      'errorMsg': '',
+      'shouldRsa': 'boole',
+      'required': 'boole'
     }
+  }
+}
 
 /**
  * 判断 Form 是否完全填写，用来决定提交按钮是否高亮,判断完成后修改 formData 的 canSubmit 字段

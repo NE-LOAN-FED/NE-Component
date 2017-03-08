@@ -5,20 +5,19 @@ import React from 'react'
 import classNames from 'classnames'
 
 export default class CellTip extends React.Component {
-
   static propTypes = {}
 
   static defaultProps = {}
 
   render() {
-    const {className, children, ...others} = this.props
+    const { className, children, ...others } = this.props
     const cls = classNames({
       NEUI_cells_tip: true,
       [className]: className
     })
     return (
       <div className={cls} {...others}>
-      <span>{children}</span>
+        <span>{children}</span>
       </div>
     )
   }
