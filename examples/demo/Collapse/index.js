@@ -24,8 +24,8 @@ import {
   Toast,
   Button,
   Collapse
-} from '../../../components'
-import List from '../../../components/Collapse/List'
+} from '../../../src'
+import List from '../../../src/Collapse/List'
 import './Collapse.scss'
 
 const questions = [

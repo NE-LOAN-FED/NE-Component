@@ -24,8 +24,8 @@ import {
   Toast,
   Button,
   Collapse
-} from '../../../components'
-import Logger from '../../../utils/log'
+} from '../../../src'
+import Logger from '../../../src/_utils/log'
 
 const logger = new Logger('DEBUG', 'Home')
 
@@ -102,7 +102,8 @@ class Home extends React.Component {
         />
         <div className="page--header">
           <h1 className="page-title">NE-RC</h1>
-          <p className="page--desc">NE-RC 是由大数据风控-前端小组开发的一套基于 React 的组件，风格和交互上遵循之前部门的内部规范。开发的目的是为了给内部移动端项目提供统一用户体验输出。</p>
+          <p className="page--desc">NE-RC 是由大数据风控-前端小组开发的一套基于 React
+            的组件，风格和交互上遵循之前部门的内部规范。开发的目的是为了给内部移动端项目提供统一用户体验输出。</p>
         </div>
         <Cells>
           {

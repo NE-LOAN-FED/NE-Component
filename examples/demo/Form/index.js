@@ -23,8 +23,8 @@ import {
   Toast,
   Button,
   Collapse
-} from '../../../components'
-import Logger from '../../../utils/log'
+} from '../../../src'
+import Logger from '../../../src/_utils/log'
 import lang from '../../utils/lang'
 import validate from '../../utils/validate'
 

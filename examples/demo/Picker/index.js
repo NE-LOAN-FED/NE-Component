@@ -24,10 +24,10 @@ import {
   Toast,
   Button,
   Collapse
-} from '../../../components'
+} from '../../../src'
 
 export default class PickerPage extends Component {
-  render() {
+  render() { 
     return (
       <section>
         <div className="page--header">
