@@ -6,28 +6,28 @@ import classNames from 'classnames'
 import ReactDOM from 'react-dom'
 
 const PanelTitle = (props) => {
-  const {children} = props
+  const { children } = props
   return (
-    <h3 className="NEUI_panel_title">{children}</h3>
+    <h3 className='NEUI_panel_title'>{children}</h3>
   )
 }
 
 const PanelItem = (props) => {
-  const {label, className, children, ...others} = props
+  const { label, className, children, ...others } = props
   const cls = classNames({
     NEUI_panel_item: true,
     [className]: className
   })
   return (
     <div {...others} className={cls}>
-      <div className="NEUI_panel_label">{label}</div>
+      <div className='NEUI_panel_label'>{label}</div>
       {children}
     </div>
   )
 }
 
 const PanelContent = (props) => {
-  const {className, children, ...others} = props
+  const { className, children, ...others } = props
   const cls = classNames({
     NEUI_panel_content: true,
     [className]: className
@@ -41,12 +41,12 @@ const PanelContent = (props) => {
 
 const PanelDriver = () => {
   return (
-    <div className="NEUI_panel_driver"></div>
+    <div className='NEUI_panel_driver' />
   )
 }
 
 const PanelButton = (props) => {
-  const {className, children, onPanelButtonClick, ...others} = props
+  const { className, children, onPanelButtonClick, ...others } = props
   const cls = classNames({
     NEUI_panel_button: true,
     [className]: className
@@ -113,8 +113,8 @@ export default class Panel extends React.Component {
   }
 
   render() {
-    const {className, children, ...others} = this.props
-    const {limit, expansion} = this.state
+    const { className, children, ...others } = this.props
+    const { limit, expansion } = this.state
     const cls = classNames({
       NEUI_panel: true,
       NEUI_panel_limit: limit,

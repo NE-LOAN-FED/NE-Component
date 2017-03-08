@@ -75,14 +75,14 @@ export default class _FieldCheckbox extends React.Component {
     })
     return (
       <div className={cls}>
-        <input type="checkbox"
+        <input type='checkbox'
           name={name}
           onChange={this.handleChange}
           checked={this.state.value}
           value={value}
           {...others}
         />
-        {this.state.value ? <Icon type="tick" className="NEUI_checkbox_icon" /> : null}
+        {this.state.value ? <Icon type='tick' className='NEUI_checkbox_icon' /> : null}
         {children}
       </div>
     )

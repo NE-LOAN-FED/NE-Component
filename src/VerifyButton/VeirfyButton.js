@@ -28,7 +28,7 @@ export default class VerifyButton extends React.Component {
     text: '发送验证码',
     times: 60,
     isCanSend: () => true,
-    handleClick: () => {}
+    handleClick: () => { }
   }
 
   getIsSending() {
@@ -40,7 +40,7 @@ export default class VerifyButton extends React.Component {
   }
 
   send = () => {
-    const {isCanSend, handleClick} = this.props
+    const { isCanSend, handleClick } = this.props
     if (!isCanSend()) return false
     let count = 60
     handleClick()
@@ -66,8 +66,8 @@ export default class VerifyButton extends React.Component {
   }
 
   render() {
-    const {className} = this.props
-    const {isSending, text} = this.state
+    const { className } = this.props
+    const { isSending, text } = this.state
     const cls = classNames({
       NEUI_verify: true,
       NEUI_verify_sending: isSending,
@@ -75,11 +75,11 @@ export default class VerifyButton extends React.Component {
     })
     return (
       <button className={cls}
-              onClick={(e) => {
-                e.preventDefault()
-                this.send()
-              }}
-              disabled={isSending}
+        onClick={(e) => {
+          e.preventDefault()
+          this.send()
+        }}
+        disabled={isSending}
       >{text}</button>
     )
   }
