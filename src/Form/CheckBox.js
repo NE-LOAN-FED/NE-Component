@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import Icon from '../Icon'
 
 const PropTypes = React.PropTypes
+const noop = () => { }
 // TODO 待完成,解决嵌套在 Form 组件后 checkbox 的选择问题
 export default class _FieldCheckbox extends React.Component {
   constructor(props) {
@@ -25,10 +26,8 @@ export default class _FieldCheckbox extends React.Component {
   static defaultProps = {
     required: true,
     disabled: false,
-    onChange: () => {
-    },
-    handleFieldChange: () => {
-    }
+    onChange: noop,
+    handleFieldChange: noop
   }
 
   componentWillReceiveProps(nextProps) {

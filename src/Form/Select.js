@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import Icon from '../Icon'
 
 const PropTypes = React.PropTypes
-
+const noop = () => {}
 /**
  * 生成一个 Value 到 Name 的 Map 对象
  * @param data Object
@@ -56,10 +56,8 @@ export default class _FieldSelect extends React.Component {
     data: [],
     required: true,
     shouldRsa: false,
-    onChange: () => {
-    },
-    handleFieldChange: () => {
-    }
+    onChange: noop,
+    handleFieldChange: noop
   }
 
   componentWillMount() {

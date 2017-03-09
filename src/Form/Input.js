@@ -8,6 +8,7 @@ import Icon from '../Icon'
 const PropTypes = React.PropTypes
 // TODO 完成 Input 重构
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
+const noop = () => { }
 
 export default class _FieldInput extends React.Component {
   constructor(props) {
@@ -49,12 +50,10 @@ export default class _FieldInput extends React.Component {
     validate: () => true,
     errorMsg: '表单填写错误',
     disabled: false,
-    onChange: () => {
-    },
-    onFocus: () => {
-    },
-    onBlur: () => {
-    }
+    onChange: noop,
+    onFocus: noop,
+    onBlur: noop,
+    handleFieldChange: noop
   }
 
   componentDidMount() {
