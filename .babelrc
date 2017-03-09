@@ -11,7 +11,21 @@
         [
           "babel-plugin-transform-require-ignore",
           {
-            "extensions": [".scss"]
+            "extensions": [
+              ".scss"
+            ]
+          }
+        ]
+      ]
+    },
+    "es": {
+      "plugins": [
+        [
+          "babel-plugin-transform-require-ignore",
+          {
+            "extensions": [
+              ".scss"
+            ]
           }
         ]
       ]

@@ -15,7 +15,8 @@ const STATE = {
   Init: 'Init',
   Normal: 'Normal',
   FieldChange: 'FieldChange',
-  UpdateFormDataStructure: 'UpdateFormDataStructure'
+  UpdateFormDataStructure: 'UpdateFormDataStructure',
+  Submit: 'Submit'
 }
 
 const noop = () => {
@@ -30,10 +31,10 @@ export default class Form extends React.PureComponent {
       data: {},
       errorMsgList: []
     }
-    this.count = 1
-    this.field = []
+    // 存放 clone 前的原始子组件
     this.formFields = []
     this.children = []
+    // 标识当前 Form 处于哪个状态
     this.CURRENT_STATE = STATE.Normal
   }
 
@@ -51,14 +52,14 @@ export default class Form extends React.PureComponent {
 
   componentWillMount() {
     this.children = this.collectFormField(this.props.children)
-  }
-
-  componentDidMount() {
     this.initFormDataStructure()
   }
 
+  componentDidMount() {
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (nextProps.children !== this.props.children) {
+    if (nextProps.children !== this.props.children && this.CURRENT_STATE !== STATE.Submit) {
       this.children = this.collectFormField(nextProps.children)
       if (this.CURRENT_STATE === STATE.Normal) {
         this.updateFormDataStructure()
@@ -86,12 +87,14 @@ export default class Form extends React.PureComponent {
    */
   collectFormField = (children) => {
     // TODO 优化性能，当 Field 已经有 key 的时候，就不重新 clone 了
-    this.count++
     const handleFieldChange = this.handleFieldChange
 
     /* 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formFields，全量更新，避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题 */
     const FormFields = this.formFields = []
 
+    /**
+     * 用来保存 clone 后的子组件的实例
+     */
     const Fields = this.field = []
 
     function getChildList(children) {
@@ -129,6 +132,20 @@ export default class Form extends React.PureComponent {
   }
 
   /**
+   * 更新子表单的基础数据
+   * @param {object} props 传入的 props
+   */
+  updateFieldData(props) {
+    return {
+      value: props.value,
+      errorMsg: props.errorMsg || `${props.name} 填写错误`,
+      validate: props.validate,
+      shouldRsa: props.shouldRsa,
+      required: typeof props.required === 'undefined' ? true : props.required
+    }
+  }
+
+  /**
    * 初始化 FormData 结构，给 this.state.data 添加 key 为表单项 name 的属性
    */
   initFormDataStructure = () => {
@@ -136,15 +153,12 @@ export default class Form extends React.PureComponent {
     const formData = {
       ...this.state.data
     }
-    this.field.forEach((formField, k) => {
+    this.formFields.forEach((formField, k) => {
       const Props = formField.props
       const Data = formField.data
       const Name = Props.name
       // TODO 重写初始化 Form data 方法
-      formData[Name] = {
-        ...Data,
-        required: typeof Props.required === 'undefined' ? true : Props.required
-      }
+      formData[Name] = this.updateFieldData(Props)
     })
     const nextState = {
       ...this.state,
@@ -174,10 +188,7 @@ export default class Form extends React.PureComponent {
       formItems.push(Name)
       /* 如果新增加了子表单，则添加对应 name 的 key */
       if (typeof formData[Name] === 'undefined') {
-        formData[Name] = {
-          ...Props,
-          required: typeof Props.required === 'undefined' ? true : Props.required
-        }
+        formData[Name] = this.updateFieldData(Props)
       }
     })
     /* TODO 由于 field 没有动态删除，所以暂时做不到从 formData 中去掉删除的表单项 */
@@ -254,6 +265,7 @@ export default class Form extends React.PureComponent {
    * 提交事件，对外触发 onSubmit 事件
    */
   formSubmit = () => {
+    this.CURRENT_STATE = STATE.Submit
     const { onSubmit } = this.props
     let state = {
       ...this.state,
@@ -272,7 +284,9 @@ export default class Form extends React.PureComponent {
       onSubmit(isValidate, state, null)
     }
 
-    this.setState(state)
+    this.setState(state, () => {
+      this.CURRENT_STATE = STATE.Normal
+    })
   }
 
   handleFormSubmit = (e) => {

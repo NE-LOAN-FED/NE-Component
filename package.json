@@ -13,7 +13,7 @@
     "demo:build": "rimraf ./demo && cross-env NODE_NEV=demo:build webapck --config ./config/index.js --progress --colors",
     "build:umd": "cross-env NODE_ENV=production webpack --config ./config/index.js --progress --colors",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib --copy-files && cp dist/ne.min.css lib/ne.min.css",
-    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es && cp dist/ne.min.css es/ne.min.css",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files && cp dist/ne.min.css es/ne.min.css",
     "build": "npm run clean && npm run build:umd && npm run build:cjs && npm run build:es",
     "eslint": "node ./node_modules/eslint/bin/eslint.js ./src",
     "scsslint": "node ./node_modules/eslint/bin/eslint.js ./",
