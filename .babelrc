@@ -2,12 +2,14 @@
   "presets": [
     "./tools/es2015Preset",
     "react",
-    "stage-2"
+    "stage-1"
+  ],
+  "plugins": [
+    "transform-runtime"
   ],
   "env": {
     "cjs": {
       "plugins": [
-        "add-module-exports",
         [
           "babel-plugin-transform-require-ignore",
           {

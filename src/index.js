@@ -3,27 +3,23 @@
  */
 import './_style/index.scss'
 
-export {default as Alert} from './Alert'
-export {default as Button} from './Button'
-export {
-  Cell,
-  CellBody,
-  CellHeader,
-  CellFooter,
-  CellTip,
-  Cells
-} from './Cell'
-export {default as CellInput} from './CellInput'
-export {default as DatePicker} from './DatePicker'
-export {
-  Form,
-  Input,
-  CheckBox,
-  Select
-} from './Form'
-export {default as Icon} from './Icon'
-export {default as Modal} from './Modal'
-export {default as Panel} from './Panel'
-export {default as Picker} from './Picker'
-export {default as Toast} from './Toast'
-export {default as VerifyButton} from './VerifyButton'
+export Alert from './Alert'
+export Button from './Button'
+export Cell from './Cell/Cell'
+export CellBody from './Cell/CellBody.js'
+export CellHeader from './Cell/CellHeader.js'
+export CellFooter from './Cell/CellFooter.js'
+export CellTip from './Cell/CellTip.js'
+export Cells from './Cell/Cells.js'
+export CellInput from './CellInput'
+export DatePicker from './DatePicker'
+export Form from './Form/Form'
+export Input from './Form/Input.js'
+export CheckBox from './Form/CheckBox.js'
+export Select from './Form/Select.js'
+export Icon from './Icon'
+export Modal from './Modal'
+export Panel from './Panel'
+export Picker from './Picker'
+export Toast from './Toast'
+export VerifyButton from './VerifyButton'
