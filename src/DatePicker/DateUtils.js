@@ -1,5 +1,4 @@
 import isNumber from 'lodash/isNumber'
-import isDate from 'lodash/isDate'
 import isFunction from 'lodash/isFunction'
 import isString from 'lodash/isString'
 
