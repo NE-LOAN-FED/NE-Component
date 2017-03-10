@@ -4,6 +4,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import {isFormComplete, formPure, isFromValidate} from './FormUtils'
+import isEqual from 'lodash/isEqual'
 
 const PropTypes = React.PropTypes
 
@@ -65,11 +66,8 @@ export default class Form extends React.PureComponent {
     this.initFormDataStructure()
   }
 
-  componentDidMount() {
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps.children !== this.props.children && this.CURRENT_STATUS !== STATUS.Submit) {
+    if (!isEqual(nextProps.children, this.props.children) && this.CURRENT_STATUS !== STATUS.Submit) {
       this.children = this.collectFormField(nextProps.children)
       if (this.CURRENT_STATUS === STATUS.Normal) {
         this.updateFormDataStructure()
