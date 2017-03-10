@@ -60,8 +60,7 @@ const config = {
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM',
-    'classnames': 'classNames',
-    'loadash': 'loadsh'
+    'classnames': 'classNames'
   }
 }
 
