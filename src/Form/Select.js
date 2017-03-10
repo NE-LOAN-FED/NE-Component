@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import Icon from '../Icon'
 
 const PropTypes = React.PropTypes
-const noop = () => {}
+const noop = () => { }
 /**
  * 生成一个 Value 到 Name 的 Map 对象
  * @param data Object
@@ -76,9 +76,10 @@ export default class _FieldSelect extends React.Component {
         valueNameMap
       })
     }
-    if (nextProps.value && nextProps.value !== this.state.value) {
+    if (nextProps.value !== this.state.value) {
+      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
       this.setState({
-        value: nextProps.value
+        value: nextValue
       })
     }
   }

@@ -31,9 +31,10 @@ export default class _FieldCheckbox extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.value && nextProps.value !== this.state.value) {
+    if (nextProps.value !== this.state.value) {
+      const nextValue = typeof nextProps.value === 'undefined' ? false : nextProps.value
       this.setState({
-        value: nextProps.value
+        value: nextValue
       })
     }
   }

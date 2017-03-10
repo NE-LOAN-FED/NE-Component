@@ -65,11 +65,18 @@ class FormDemo extends React.Component {
   componentDidMount() {
     logger.log('DidMount', this.state)
     this.timer = setTimeout(() => {
+      console.log('update')
       this.setState({
-        showInput: false,
         formData: {
-          ...this.state.formData,
-          gender: {}
+          name: {
+          },
+          phone: {
+          },
+          verifyCode: {
+          },
+          gender: {},
+          is: {
+          }
         }
       })
     }, 1000)
@@ -146,6 +153,7 @@ class FormDemo extends React.Component {
           onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
           onChange={this.handleChange}
+          state={formData}
         >
           <CellTip>Input</CellTip>
           <Cells>
@@ -187,7 +195,6 @@ class FormDemo extends React.Component {
                 <Select name='gender'
                   data={genderData}
                   value={formData.gender.value}
-                  disabled
                 />
               </Cell>
             </Cells> : null

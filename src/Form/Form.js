@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import classNames from 'classnames'
-import { isFormComplete, formPure, isFromValidate } from './FormUtils'
+import {isFormComplete, formPure, isFromValidate} from './FormUtils'
 
 const PropTypes = React.PropTypes
 
@@ -11,7 +11,7 @@ const PropTypes = React.PropTypes
 
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
 // 标识当前 Form 处于的状态
-const STATE = {
+const STATUS = {
   Init: 'Init',
   Normal: 'Normal',
   FieldChange: 'FieldChange',
@@ -35,7 +35,17 @@ export default class Form extends React.PureComponent {
     this.formFields = []
     this.children = []
     // 标识当前 Form 处于哪个状态
-    this.CURRENT_STATE = STATE.Normal
+    this.CURRENT_STATUS = STATUS.Normal
+    // 由于 setState 是异步的，所以需要存放一个最新 state 的地方
+    this.currentState = Object.assign({}, this.state)
+    this.setStateAndCurrentState = function (nextState, nextSTATUS) {
+      this.currentState = nextState
+      this.setState(nextState, () => {
+        /* eslint no-unused-expressions:0 */
+        typeof nextSTATUS === 'undefined' ? this.CURRENT_STATUS = nextSTATUS : null
+        /* eslint no-unused-expressions:1 */
+      })
+    }
   }
 
   static propTypes = {
@@ -59,21 +69,12 @@ export default class Form extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.children !== this.props.children && this.CURRENT_STATE !== STATE.Submit) {
+    if (nextProps.children !== this.props.children && this.CURRENT_STATUS !== STATUS.Submit) {
       this.children = this.collectFormField(nextProps.children)
-      if (this.CURRENT_STATE === STATE.Normal) {
+      if (this.CURRENT_STATUS === STATUS.Normal) {
         this.updateFormDataStructure()
       }
     }
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-  }
-
-  componentDidUpdate(preProps, preState) {
-  }
-
-  componentWillUnmount() {
   }
 
   get data() {
@@ -149,7 +150,7 @@ export default class Form extends React.PureComponent {
    * 初始化 FormData 结构，给 this.state.data 添加 key 为表单项 name 的属性
    */
   initFormDataStructure = () => {
-    this.CURRENT_STATE = STATE.Init
+    this.CURRENT_STATUS = STATUS.Init
     const formData = {
       ...this.state.data
     }
@@ -166,18 +167,16 @@ export default class Form extends React.PureComponent {
       data: formData
     }
     this.handleFormChange(nextState)
-    this.setState(nextState, () => {
-      this.CURRENT_STATE = STATE.Normal
-    })
+    this.setStateAndCurrentState(nextState, STATUS.Normal)
   }
 
   /**
    * 更新 FormData 结构，当 Form 下表单项添加或删除时，将 FormData 结构更新到最新
    */
   updateFormDataStructure = () => {
-    this.CURRENT_STATE = STATE.UpdateFormDataStructure
+    this.CURRENT_STATUS = STATUS.UpdateFormDataStructure
     const formData = {
-      ...this.state.data
+      ...this.currentState.data
     }
 
     const formItems = []
@@ -203,9 +202,7 @@ export default class Form extends React.PureComponent {
       data: formData
     }
     this.handleFormChange(nextState)
-    this.setState(nextState, () => {
-      this.CURRENT_STATE = STATE.Normal
-    })
+    this.setStateAndCurrentState(nextState, STATUS.Normal)
   }
 
   /**
@@ -213,11 +210,12 @@ export default class Form extends React.PureComponent {
    * @param fieldData {object} 由子表单传入的参数
    */
   handleFieldChange = (fieldData) => {
-    this.CURRENT_STATE = STATE.FieldChange
+    this.CURRENT_STATUS = STATUS.FieldChange
+    // TODO 由于 setState 是异步的，所以这里需要爱一个地方存放临时的 state
     let state = {
-      ...this.state,
+      ...this.currentState,
       data: {
-        ...this.state.data
+        ...this.currentState.data
       }
     }
 
@@ -243,14 +241,7 @@ export default class Form extends React.PureComponent {
       }
     }
     this.handleFormChange(nextState)
-    this.setState({
-      ...state,
-      data: {
-        ...state.data
-      }
-    }, () => {
-      this.CURRENT_STATE = STATE.Normal
-    })
+    this.setStateAndCurrentState(nextState, STATUS.Normal)
   }
 
   /**
@@ -265,8 +256,8 @@ export default class Form extends React.PureComponent {
    * 提交事件，对外触发 onSubmit 事件
    */
   formSubmit = () => {
-    this.CURRENT_STATE = STATE.Submit
-    const { onSubmit } = this.props
+    this.CURRENT_STATUS = STATUS.Submit
+    const {onSubmit} = this.props
     let state = {
       ...this.state,
       data: {
@@ -283,10 +274,7 @@ export default class Form extends React.PureComponent {
     } else {
       onSubmit(isValidate, state, null)
     }
-
-    this.setState(state, () => {
-      this.CURRENT_STATE = STATE.Normal
-    })
+    this.setStateAndCurrentState(state, STATUS.Normal)
   }
 
   handleFormSubmit = (e) => {
@@ -296,13 +284,14 @@ export default class Form extends React.PureComponent {
 
   render() {
     const prefix = 'NEUI'
-    const { className } = this.props
+    const {className} = this.props
     const cls = classNames({
       [`${prefix}_cells`]: true,
       [className]: className
     })
     return (
-      <form className={cls}
+      <form
+        className={cls}
         onSubmit={e => this.handleFormSubmit(e)}
       >
         {this.children}
