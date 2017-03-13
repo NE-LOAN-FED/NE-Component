@@ -4,9 +4,6 @@
     "react",
     "stage-1"
   ],
-  "plugins": [
-    "transform-runtime"
-  ],
   "env": {
     "cjs": {
       "plugins": [
