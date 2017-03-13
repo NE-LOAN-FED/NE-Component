@@ -39,7 +39,9 @@ export default class _FieldInput extends React.Component {
       }
     },
     errorMsg: PropTypes.string,
-    isError: PropTypes.bool
+    isError: PropTypes.bool,
+    formatter: PropTypes.func,
+    parser: PropTypes.func
   }
 
   static defaultProps = {
@@ -53,7 +55,9 @@ export default class _FieldInput extends React.Component {
     onChange: noop,
     onFocus: noop,
     onBlur: noop,
-    handleFieldChange: noop
+    handleFieldChange: noop,
+    formatter: data => data,
+    parser: data => data
   }
 
   componentDidMount() {
@@ -131,11 +135,18 @@ export default class _FieldInput extends React.Component {
   }
 
   handleChange = (e) => {
-    this.props.onChange(e)
-    this.handleValidate(e)
+    const {parser} = this.props
+    const value = e.target.value
+    const formatterE = Object.assign({}, e, {
+      target: {
+        value: parser(value)
+      }
+    })
+    this.props.onChange(formatterE)
+    this.handleValidate(formatterE)
     this.setState({
-      value: e.target.value,
-      showDelIcon: !!e.target.value.length
+      value: formatterE.target.value,
+      showDelIcon: !!formatterE.target.value.length
     })
   }
 
@@ -183,7 +194,8 @@ export default class _FieldInput extends React.Component {
 
   render() {
     const { showDelIcon, value } = this.state
-    const { className, disabled, name, type } = this.props
+    const { className, disabled, name, type, formatter } = this.props
+    const formatterValue = formatter(value)
     const prefix = 'NEUI'
     const cls = classNames({
       [`${prefix}_input`]: true,
@@ -194,7 +206,7 @@ export default class _FieldInput extends React.Component {
     return (
       <label className={cls}>
         <input name={name}
-          value={value}
+          value={formatterValue}
           type={type}
           onChange={this.handleChange}
           onFocus={this.handleFocus}

@@ -27,6 +27,7 @@ import {
 import Logger from '../../../src/_utils/log'
 import lang from '../../utils/lang'
 import validate from '../../utils/validate'
+import {removeBlack, formatterToBankCard} from '../../utils/formatter'
 
 const logger = new Logger('DEBUG', 'FormDemo')
 
@@ -48,7 +49,8 @@ class FormDemo extends React.Component {
         gender: {},
         is: {
           value: true
-        }
+        },
+        card: {}
       },
       msg: '',
       isComplete: false,
@@ -64,22 +66,6 @@ class FormDemo extends React.Component {
 
   componentDidMount() {
     logger.log('DidMount', this.state)
-    this.timer = setTimeout(() => {
-      console.log('update')
-      this.setState({
-        formData: {
-          name: {
-          },
-          phone: {
-          },
-          verifyCode: {
-          },
-          gender: {},
-          is: {
-          }
-        }
-      })
-    }, 1000)
   }
 
   componentWillReceiveProps() {
@@ -174,6 +160,17 @@ class FormDemo extends React.Component {
                 validate={validate.phone}
                 errorMsg={lang.phoneErrorMsg}
                 value={formData.phone.value}
+              />
+            </Cell>
+            <Cell warning={formData.card.isError}>
+              <CellHeader>Card</CellHeader>
+              <Input type='tel'
+                name='card'
+                validate={validate.card}
+                errorMsg={lang.card}
+                value={formData.card.value}
+                formatter={formatterToBankCard}
+                parser={removeBlack}
               />
             </Cell>
             <Cell warning={formData.verifyCode.isError}>

@@ -101,6 +101,8 @@ onBlur(e) | Focus 时调用的方法，参数为传统的 Event 对象 | Functio
 validate | 校验函数，输入时调用的方法，来决定当前填写是否正确 | Function || RegExp | ()=> true
 errorMsg | 校验错误时的报错信息 | String | 表单填写错误
 isError | 当前填写的内容是否错误 | Bool | false
+formatter | 用来格式化显示输出的函数 | func | data=> data
+parser | 用来解析格式化显示输出的数据 | func | data=> data
 
 ## Select
 属性名 | 描述 | 类型 | 默认值
