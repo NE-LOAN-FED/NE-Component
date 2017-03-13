@@ -1,0 +1,26 @@
+@import "../_style/_config";
+@import "../_style/_utils";
+
+$toast: #{$prefixCls}_toast;
+
+.#{$toast} {
+  max-width: pxToRem(400);
+  border-radius: pxToRem(6);
+  background: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  text-align: center;
+  padding: pxToRem(20);
+  z-index: 1000;
+  color: $white;
+  &_modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &_icon {
+    margin: pxToRem(10) 0 pxToRem(20);
+    .#{$prefixCls}_icon {
+      font-size: pxToRem(60);
+    }
+  }
+}

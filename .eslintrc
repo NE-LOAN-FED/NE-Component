@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "standard",
+    "standard-jsx"
+  ],
+  "env": {
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "parseOptions": {
+    "ecmaVerison": 7
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "no-unused-vars": 0,
+    "space-before-function-paren": 0
+  }
+}

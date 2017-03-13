@@ -25,7 +25,7 @@ import {
   Toast,
   Button,
   Collapse
-} from '../../../components'
+} from '../../../src'
 
 export default class CellsPage extends Component {
   render() {

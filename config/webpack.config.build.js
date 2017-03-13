@@ -5,13 +5,12 @@ const baseConfig = require('./webpack.config.base.js')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
-
 const cwd = process.cwd()
 
 const config = {
   entry: {
     ne: [
-      path.join(__dirname, '../components/index')
+      path.join(__dirname, '../src/index')
     ]
   },
   output: {
@@ -24,19 +23,23 @@ const config = {
     rules: [{
       test: /\.(css|scss|sass)$/,
       use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
-        use: [
-          'css-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [
-                autoprefixer({
-                  browsers: ['Android 4', 'last 5 versions', '> 5%', 'iOS 7']
-                })
-              ]
-            }
-          },
+        fallback: 'style-loader',
+        use: [{
+          loader: 'css-loader',
+          options: {
+            minimize: true
+          }
+        },
+        {
+          loader: 'postcss-loader',
+          options: {
+            plugins: () => [
+              autoprefixer({
+                browsers: ['Android 4', '> 5%', 'iOS 7']
+              })
+            ]
+          }
+        },
           'sass-loader'
         ]
       })
@@ -58,8 +61,7 @@ const config = {
     'react': 'React',
     'react-dom': 'ReactDOM',
     'classnames': 'classNames'
-  },
-  devtool: '#source-map'
+  }
 }
 
 module.exports = webpackMerge(baseConfig, config)

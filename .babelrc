@@ -1,17 +1,26 @@
 {
   "presets": [
-    "es2015",
+    "./tools/es2015Preset",
     "react",
-    "stage-2"
+    "stage-1"
   ],
   "plugins": [
     "transform-runtime"
   ],
   "env": {
-    "test": {
-      "sourceMaps": "both"
+    "cjs": {
+      "plugins": [
+        [
+          "babel-plugin-transform-require-ignore",
+          {
+            "extensions": [
+              ".scss"
+            ]
+          }
+        ]
+      ]
     },
-    "build": {
+    "es": {
       "plugins": [
         [
           "babel-plugin-transform-require-ignore",
@@ -25,4 +34,3 @@
     }
   }
 }
-

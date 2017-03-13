@@ -5,7 +5,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import {Router, Route, IndexRoute, hashHistory} from 'react-router'
-import '../components/style/index.scss'
+import '../src/_style/index.scss'
 import './style/app.scss'
 
 import App from './demo/App'

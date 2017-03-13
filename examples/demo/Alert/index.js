@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import Alert from '../../../components/Alert'
+import Alert from '../../../src/Alert'
 
 
 class AlertDemo extends React.Component {

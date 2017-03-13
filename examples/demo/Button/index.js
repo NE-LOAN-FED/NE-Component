@@ -24,7 +24,7 @@ import {
   Toast,
   Button,
   Collapse
-} from '../../../components'
+} from '../../../src'
 
 export default class ButtonPage extends Component {
   render() {
