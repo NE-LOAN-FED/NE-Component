@@ -39,7 +39,7 @@ export default class Form extends React.PureComponent {
     this.CURRENT_STATUS = STATUS.Normal
     // 由于 setState 是异步的，所以需要存放一个最新 state 的地方
     this.currentState = Object.assign({}, this.state)
-    this.setStateAndCurrentState = function (nextState, nextSTATUS) {
+    this.setStateAndCurrentStatus = function (nextState, nextSTATUS) {
       this.currentState = nextState
       this.setState(nextState, () => {
         /* eslint no-unused-expressions:0 */
@@ -165,7 +165,7 @@ export default class Form extends React.PureComponent {
       data: formData
     }
     this.handleFormChange(nextState)
-    this.setStateAndCurrentState(nextState, STATUS.Normal)
+    this.setStateAndCurrentStatus(nextState, STATUS.Normal)
   }
 
   /**
@@ -200,7 +200,7 @@ export default class Form extends React.PureComponent {
       data: formData
     }
     this.handleFormChange(nextState)
-    this.setStateAndCurrentState(nextState, STATUS.Normal)
+    this.setStateAndCurrentStatus(nextState, STATUS.Normal)
   }
 
   /**
@@ -239,7 +239,7 @@ export default class Form extends React.PureComponent {
       }
     }
     this.handleFormChange(nextState)
-    this.setStateAndCurrentState(nextState, STATUS.Normal)
+    this.setStateAndCurrentStatus(nextState, STATUS.Normal)
   }
 
   /**
@@ -272,7 +272,7 @@ export default class Form extends React.PureComponent {
     } else {
       onSubmit(isValidate, state, null)
     }
-    this.setStateAndCurrentState(state, STATUS.Normal)
+    this.setStateAndCurrentStatus(state, STATUS.Normal)
   }
 
   handleFormSubmit = (e) => {
