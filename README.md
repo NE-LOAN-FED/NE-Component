@@ -116,19 +116,19 @@ npm install ne-rc
 
 ```
 ## 文档
-1. [Alert](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Alert/README.md)
-1. [Button](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Button/README.md)
-1. [Cell](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Cell/README.md)
-1. [CellInput](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/CellInput/README.md)
-1. [Collapse](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Collapse/README.md)
-1. [DatePicker](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/DatePicker/README.md)
-1. [Form](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Form/README.md)
-1. [Icon](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Icon/README.md)
-1. [Modal](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Modal/README.md)
-1. [Picker](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Picker/README.md)
-1. [Popup](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Popup/README.md)
-1. [Toast](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/Toast/README.md)
-1. [VerifyButton](https://github.com/NE-LOAN-FED/NE-Component/blob/master/components/VerifyButton/README.md)
+1. [Alert](./src/Alert/README.md)
+1. [Button](./src/Button/README.md)
+1. [Cell](./src/Cell/README.md)
+1. [CellInput](./src/CellInput/README.md)
+1. [Collapse](./src/Collapse/README.md)
+1. [DatePicker](./src/DatePicker/README.md)
+1. [Form](./src/Form/README.md)
+1. [Icon](./src/Icon/README.md)
+1. [Modal](./src/Modal/README.md)
+1. [Picker](./src/Picker/README.md)
+1. [Popup](./src/Popup/README.md)
+1. [Toast](./src/Toast/README.md)
+1. [VerifyButton](./src/VerifyButton/README.md)
 
 
 ## TODO
