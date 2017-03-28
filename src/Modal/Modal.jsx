@@ -1,5 +1,6 @@
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
+import ReactCssTransitionGroup from 'react-addons-css-transition-group'
 
 const PropTypes = React.PropTypes
 
@@ -30,24 +31,35 @@ class Modal extends React.Component {
   }
 
   renderModal() {
-    const { prefixCls, className, onClose, children } = this.props
+    const { prefixCls, className, onClose, children, show } = this.props
     // TODO close icon 修改
     return (
-      <div className={`${prefixCls}_modal ${className || ''}`}>
-        <div className={`${prefixCls}_modal_body`}>
-          {children || null}
-        </div>
-        <div className={`${prefixCls}_modal_close`} onClick={this.onClose}>
-          <i className={`${prefixCls}_modal_icon ${prefixCls}_modal_icon_close`} />
-        </div>
-      </div>
+      <ReactCssTransitionGroup
+        transitionAppear
+        transitionAppearTimeout={10000}
+        transitionEnter
+        transitionEnterTimeout={10000}
+        transitionLeaveTimeout={10000}
+        transitionName={'floatLayer'}
+      >
+        {show &&
+          <div className={`${prefixCls}_modal ${className || ''}`}>
+            <div className={`${prefixCls}_modal_body`}>
+              {children || null}
+            </div>
+            <div className={`${prefixCls}_modal_close`} onClick={this.onClose}>
+              <i className={`${prefixCls}_modal_icon ${prefixCls}_modal_icon_close`} />
+            </div>
+          </div>
+        }
+      </ReactCssTransitionGroup>
     )
   }
   render() {
     const { prefixCls, show } = this.props
     return show ? (
       <div>
-        <RenderLayer className={`${prefixCls}_modal_modal`} render={this.renderModal} show={true} maskClosable={false} />
+        <RenderLayer className={`${prefixCls}_modal_modal`} render={this.renderModal} show maskClosable={false} />
       </div>
     ) : null
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
+import ReactCssTransitionGroup from 'react-addons-css-transition-group'
 
 const PropTypes = React.PropTypes
 
@@ -61,18 +62,27 @@ class Alert extends React.Component {
       </div>
     ) : null
     return (
-      <div className={`${prefixCls}_alert ${className || ''}`} >
-        {header}
-        {content}
-        <ConfirmBox {...ConfirmBoxProps}></ConfirmBox>
-      </div >
+      <ReactCssTransitionGroup
+        transitionAppear
+        transitionAppearTimeout={300}
+        transitionEnter
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
+        transitionName={'floatLayer'}
+      >
+        <div className={`${prefixCls}_alert ${className || ''}`} >
+          {header}
+          {content}
+          <ConfirmBox {...ConfirmBoxProps} />
+        </div >
+      </ReactCssTransitionGroup>
     )
   }
   render() {
     const { prefixCls, show } = this.props
     return show ? (
       <div>
-        <RenderLayer className={`${prefixCls}_alert_modal`} render={this.renderAlert} show={true} maskClosable={false} />
+        <RenderLayer className={`${prefixCls}_alert_modal`} render={this.renderAlert} show maskClosable={false} />
       </div>
     ) : null
   }
