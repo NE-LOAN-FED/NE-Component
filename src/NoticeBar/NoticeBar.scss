@@ -1,0 +1,25 @@
+@import "../_style/_config";
+@import "../_style/_utils";
+$noticeBar: #{$prefixCls}_notice_bar;
+.#{$noticeBar} {
+  width: 100%;
+  display: flex;
+  height: pxToRem(70);
+  line-height: pxToRem(70);
+  font-size: pxToRem(28);
+  color: $color_warning;
+  background-color: $noticebar_primary;
+  position: relative;
+  i {
+    color: $color_warning;
+  }
+  .content {
+    flex: 1;
+    margin: 0 pxToRem(30);
+  }
+  .tail-icon {
+    position: absolute;
+    right: pxToRem(30);
+  }
+
+}

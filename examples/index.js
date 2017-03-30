@@ -19,6 +19,7 @@ import Picker from './demo/Picker'
 import Modal from './demo/Modal'
 import Collapse from './demo/Collapse'
 import Icon from './demo/Icon'
+import NoticeBar from './demo/NoticeBar'
 
 if (module.hot) {
   module.hot.accept()
@@ -39,6 +40,7 @@ ReactDom.render((
       <Route path="modal" component={Modal}/>
       <Route path="collapse" component={Collapse}/>
       <Route path="icon" component={Icon}/>
+      <Route path="noticebar" component={NoticeBar}/>
     </Route>
   </Router>
 ), root)
