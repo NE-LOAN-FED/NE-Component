@@ -4,7 +4,7 @@ import Icon from '../Icon'
 
 const PropTypes = React.PropTypes
 
-const noop = () => {}
+const noop = () => { }
 
 class Toast extends React.Component {
   static propTypes = {
@@ -26,7 +26,7 @@ class Toast extends React.Component {
   constructor(props) {
     super(props)
     this.renderContent = this.renderContent.bind(this)
-
+    this.close = this.close.bind(this)
     this.state = {
       show: props.show
     }
@@ -60,6 +60,7 @@ class Toast extends React.Component {
 
   close() {
     const { onClose } = this.props
+    console.log('mask close')
     if (this.state.show) {
       this.setState({
         show: false
@@ -70,7 +71,7 @@ class Toast extends React.Component {
   }
 
   renderContent() {
-    const {prefixCls, content, icon, className} = this.props
+    const { prefixCls, content, icon, className } = this.props
     const contentEle = (
       <div className={`${prefixCls}_toast ${className || ''}`}>
         {icon !== '' ? <div className={`${prefixCls}_toast_icon`}><Icon type={icon} /></div> : null}
@@ -86,8 +87,10 @@ class Toast extends React.Component {
       <div>
         <RenderLayer className={`${prefixCls}_toast_modal`}
           render={this.renderContent}
-          show={true}
-          maskClosable={false} />
+          show
+          maskClosable
+          onMaskClose={this.close}
+        />
       </div>
     ) : null
   }

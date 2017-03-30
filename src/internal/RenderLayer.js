@@ -51,6 +51,7 @@ class RenderLayer extends React.Component {
   }
 
   unrenderLayer() {
+    console.log('remove layer')
     if (!this.layer) {
       return
     }
@@ -83,8 +84,6 @@ class RenderLayer extends React.Component {
           this.layer.style.bottom = 0
           this.layer.style.left = 0
           this.layer.style.right = 0
-          this.layer.style.height = '100%'
-          this.layer.style.width = '100%'
           this.layer.style.zIndex = this.props.zIndex || '999'
           this.layer.className = className || ''
         }
