@@ -15,28 +15,27 @@ button {
   }
 }
 
-// .floatLayer-appear{
-// }
-// .floatLayer-appear-active{
-//   animation: 10s ease-in slideUpOut;
-// }
-
-// .floatLayer-enter {
-
-// }
-// .floatLayer-enter-active {
-
-// }
-
-@keyframes slideUpIn {
-  0% {
-    opacity: 0;
-    transform-origin: 0% 0%;
-    transform: scaleY(0.8);
-  }
-  100% {
+.floatLayer-appear{
+  opacity: 0.1;
+  transform-origin: 0 0;
+  transform: translate(0, -10%);
+  transition: all .2s ease-out;
+}
+.floatLayer-appear-active{
     opacity: 1;
     transform-origin: 0% 0%;
-    transform: scaleY(1);
-  }
+    transform: translate(0, 0);
 }
+
+.floatLayer-leave {
+    opacity: 1;
+    transform-origin: 0% 0%;
+    transform: translate(0, 0);
+    transition: all .2s ease-out;
+}
+.floatLayer-leave-active {
+opacity: 0.1;
+  transform-origin: 0 0;
+  transform: translate(0, -10%);
+}
+

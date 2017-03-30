@@ -4,6 +4,7 @@
 import './_style/index.scss'
 
 export Alert from './Alert'
+export Dialog from './Dialog'
 export Button from './Button'
 export Cell from './Cell/Cell'
 export CellBody from './Cell/CellBody.js'

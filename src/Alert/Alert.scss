@@ -1,50 +1,45 @@
 @import "../_style/_config";
 @import "../_style/_utils";
 
-$alert: #{$prefixCls}_alert;
+$modal: #{$prefixCls}_modal;
 
-.#{$alert} {
+.#{$modal}_modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.#{$modal} {
+  display: flex;
+  flex-direction: column;
   width: pxToRem(500);
-  border-radius: pxToRem(6);
-  background-color: #fff;
+  max-height: 90%;
   overflow: hidden;
   z-index: 1000;
-  &_modal {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.48);
+  &_body {
+    width: 100%;
+    overflow-y: auto;
+    background-color: $white;
+    border-radius: pxToRem(6);
+    padding: pxToRem(30) pxToRem(30) 0;
   }
-  &_header {
+  &_close {
+    height: pxToRem(60);
     margin-top: pxToRem(30);
     text-align: center;
   }
-  &_header_content {
-    font-size: pxToRem(32);
-  }
-  &_content {
-    margin: pxToRem(30) pxToRem(20) pxToRem(40);
-  }
-  &_confirm_box {
-    display: flex;
-    position: relative;
-    width: 100%;
-    align-items: center;
-    border-top: 1px solid $border_primary;
-    font-size: pxToRem(28);
-  }
-  &_cancel_button,
-  &_confirm_button {
-    outline: none;
-    flex: 1;
-    display: inline-block;
-    text-align: center;
-    line-height: pxToRem(80);
-    vertical-align: middle;
-    background-color: #fff;
-    color: $blue;
-  }
-  &_confirm_button {
-    border-left: 1px solid $border_primary;
+}
+
+.#{$modal}_icon {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  &_close {
+    color: $white;
+    font-size: pxToRem(60);
+    line-height: 1;
+    &:before {
+      content: "\e61e";
+    }
   }
 }
