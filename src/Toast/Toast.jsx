@@ -50,6 +50,10 @@ class Toast extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.timer)
+  }
+
   autoClose(timeout = 0) {
     if (timeout >= 0) {
       this.timer = setTimeout(() => {

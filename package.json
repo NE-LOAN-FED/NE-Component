@@ -1,6 +1,6 @@
 {
   "name": "ne-rc",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "title": "NE-ReactComponents",
   "description": "A react compoents develop by NE-LOAN-FED",
   "homepage": "https://github.com/NE-LOAN-FED/NE-Component",
@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rimraf ./dist ./lib ./es",
     "demo": "cross-env NODE_NEV=demo webpack-dev-server --config ./config/index.js",
-    "demo:build": "rimraf ./demo && cross-env NODE_NEV=demo:build webapck --config ./config/index.js --progress --colors",
+    "demo:build": "rimraf ./demo && cross-env NODE_NEV=demo:build webpack --config ./config/index.js --progress --colors",
     "build:umd": "cross-env NODE_ENV=production webpack --config ./config/index.js --progress --colors",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib --copy-files && cp dist/ne.min.css lib/ne.min.css",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files && cp dist/ne.min.css es/ne.min.css",

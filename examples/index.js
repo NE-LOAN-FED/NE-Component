@@ -4,7 +4,7 @@
  */
 import React from 'react'
 import ReactDom from 'react-dom'
-import {Router, Route, IndexRoute, hashHistory} from 'react-router'
+import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import '../src/_style/index.scss'
 import './style/app.scss'
 
@@ -29,18 +29,18 @@ const root = document.getElementById('root')
 
 ReactDom.render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
-      <Route path="form" component={Form}/>
-      <Route path="alert" component={Alert}/>
-      <Route path="button" component={Button}/>
-      <Route path="cells" component={Cells}/>
-      <Route path="panel" component={Panel}/>
-      <Route path="picker" component={Picker}/>
-      <Route path="modal" component={Modal}/>
-      <Route path="collapse" component={Collapse}/>
-      <Route path="icon" component={Icon}/>
-      <Route path="noticebar" component={NoticeBar}/>
+    <Route path='/' component={App}>
+      <IndexRoute component={Home} />
+      <Route path='form' component={Form} />
+      <Route path='alert' component={Alert} />
+      <Route path='button' component={Button} />
+      <Route path='cells' component={Cells} />
+      <Route path='panel' component={Panel} />
+      <Route path='picker' component={Picker} />
+      <Route path='modal' component={Modal} />
+      <Route path='collapse' component={Collapse} />
+      <Route path='icon' component={Icon} />
+      <Route path='noticebar' component={NoticeBar} />
     </Route>
   </Router>
 ), root)

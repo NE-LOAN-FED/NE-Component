@@ -1,8 +1,8 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import {
   Form,
   FormCell,
@@ -29,31 +29,31 @@ import {
 
 export default class NoticeBarPage extends Component {
   render() {
-    return(
+    return (
       <section>
-        <div className="page--header">
-          <h1 className="page-title">NoticeBar</h1>
-          <p className="page--desc">按钮</p>
+        <div className='page--header'>
+          <h1 className='page-title'>NoticeBar</h1>
+          <p className='page--desc'>按钮</p>
         </div>
         <NoticeBar>
-        这是一条普通的公告栏
+          这是一条普通的公告栏
         </NoticeBar>
-        <div style={{height: 30}}/>
+        <div style={{ height: 30 }} />
         <NoticeBar type='closable'>
-        这是一条可关闭的公告栏
+          这是一条可关闭的公告栏
         </NoticeBar>
-        <div style={{height: 30}}/>
+        <div style={{ height: 30 }} />
         <NoticeBar
-          icon={<Icon type='tip'/>}
+          icon={<Icon type='tip' />}
         >
-        这是一条可定制icon的公告栏
+          这是一条可定制icon的公告栏
         </NoticeBar>
-        <div style={{height: 30}}/>
+        <div style={{ height: 30 }} />
         <NoticeBar
           type='link'
-          icon={<Icon type='tip'/>}
+          icon={<Icon type='tip' />}
         >
-        这一条跳转至链接
+          这一条跳转至链接
         </NoticeBar>
       </section>
     )
