@@ -9,14 +9,18 @@ const noop = () => { }
 
 class Modal extends React.Component {
   static propTypes = {
-    show: PropTypes.bool,       //  是否展示 Modal
-    prepareStyle: PropTypes.object,   // 需要覆盖的样式
-    transitionName: PropTypes.string, // 动画的类名
-    transitionTimeOut: PropTypes.number // 动画的时间
+    show: PropTypes.bool,                   //  是否展示 Modal
+    isLockScreen: PropTypes.bool,           //  是否锁屏
+    onClickAway: PropTypes.func,            //  点击遮罩层的回掉
+    prepareStyle: PropTypes.object,         // 需要覆盖的样式
+    transitionName: PropTypes.string,       // 动画的类名
+    transitionTimeOut: PropTypes.number     // 动画的时间
   }
 
   static defaultProps = {
     show: false,
+    isLockScreen: true,
+    onClickAway: noop,
     prepareStyle: {},
     transitionName: 'vertialSlide',
     transitionTimeOut: 300
@@ -28,7 +32,7 @@ class Modal extends React.Component {
   }
 
   renderContent() {
-    const { children, show, prepareStyle, transitionName, transitionTimeOut } = this.props
+    const { children, show, isLockScreen, onClickAway, prepareStyle, transitionName, transitionTimeOut } = this.props
     const style = {
       position: 'fixed',
       top: 0,
@@ -59,7 +63,7 @@ class Modal extends React.Component {
             children
           }
         </ReactCSSTransitionGroup>
-        <Mask show={show} />
+        {isLockScreen && <Mask show={show} onClick={onClickAway} />}
       </div>
     )
   }

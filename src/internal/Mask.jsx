@@ -11,7 +11,7 @@ class Mask extends Component {
   }
 
   render() {
-    const { show, prefixCls, backgroundColor } = this.props
+    const { show, prefixCls, backgroundColor, ...others } = this.props
     const style = {
       position: 'fixed',
       top: 0,
@@ -34,7 +34,7 @@ class Mask extends Component {
         transitionName='fade'
       >
         {
-          show ? <div style={style} /> : null
+          show ? <div style={style} {...others} /> : null
         }
       </ReactCSSTransitionGroup>
     )
