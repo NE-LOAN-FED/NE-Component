@@ -1,7 +1,7 @@
 import React from 'react'
-import Modal from '../Modal'
-
 const PropTypes = React.PropTypes
+import ReactCSSTransitionGroup from 'react-addons-transition-group'
+import RenderLayer from '../internal/RenderLayer'
 
 const noop = () => { }
 
@@ -31,6 +31,7 @@ class Dialog extends React.Component {
     super(props)
     this.onConfirm = this.onConfirm.bind(this)
     this.onCancel = this.onCancel.bind(this)
+    this.renderContent = this.renderContent.bind(this)
   }
 
   onConfirm() {
@@ -42,9 +43,9 @@ class Dialog extends React.Component {
     const { onCancel } = this.props
     onCancel && onCancel()
   }
-  render() {
-    const { prefixCls, confirmContent, headerContent, cancelContent, className, show, transitionName, transitionTimeOut} = this.props
-    console.log(show)
+
+  renderContent() {
+    const { prefixCls, confirmContent, headerContent, cancelContent, className, show, transitionName, transitionTimeOut } = this.props
     const ConfirmBoxProps = {
       prefixCls,
       confirmContent,
@@ -62,10 +63,27 @@ class Dialog extends React.Component {
         {this.props.children}
       </div>
     ) : null
+    const DiglogContent = (
+      <DialogContent prefixCls={prefixCls} className={className} header={header} content={content} ConfirmBoxProps={ConfirmBoxProps} />
+    )
     return (
-      <Modal onClose={this.onCancel} show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut}>
-        <DialogContent prefixCls={prefixCls} className={className} header={header} content={content} ConfirmBoxProps={ConfirmBoxProps} />
-      </Modal>
+      <div>
+        <ReactCSSTransitionGroup
+          transitionAppear
+          transitionAppearTimeout={300}
+          transitionLeave
+          transitionLeaveTimeout={300}
+          transitionName={transitionName}
+        >
+          {show && DiglogContent}
+        </ReactCSSTransitionGroup>
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <RenderLayer render={this.renderContent} show />
     )
   }
 }
