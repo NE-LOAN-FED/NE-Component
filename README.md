@@ -1,5 +1,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
+# Notice
+**1.0.0 版本正式发布前，不建议外部项目使用。**
 ## 说明
 大数据风控组移动端 React 组件。
 
