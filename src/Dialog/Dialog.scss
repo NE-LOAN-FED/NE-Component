@@ -1,14 +1,15 @@
 @import "../_style/_config";
 @import "../_style/_utils";
 
-$alert: #{$prefixCls}_alert;
+$dialog: #{$prefixCls}_dialog;
 
-.#{$alert} {
+.#{$dialog} {
   width: pxToRem(500);
   border-radius: pxToRem(6);
   background-color: #fff;
   overflow: hidden;
   z-index: 1000;
+  position: relative;
   &_modal {
     display: flex;
     align-items: center;

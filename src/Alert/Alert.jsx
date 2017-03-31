@@ -2,7 +2,7 @@ import React from 'react'
 const PropTypes = React.PropTypes
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import RenderLayer from '../internal/RenderLayer'
-import Mask from '../internal/Mask.jsx'
+import Mask from '../internal/Mask'
 import classname from 'classnames'
 
 const noop = () => { }
@@ -10,21 +10,10 @@ const noop = () => { }
 class AlertContent extends React.Component {
   render() {
     const { prefixCls, className, children, onClose, show, transitionName, transitionTimeOut } = this.props
-    console.log('show', show)
     const cls = classname({
       [`${prefixCls}_modal`]: true,
       [className]: className
     })
-    const Content = (
-      <div className={cls}>
-        <div className={`${prefixCls}_modal_body`}>
-          {children || null}
-        </div>
-        <div className={`${prefixCls}_modal_close`} onClick={onClose}>
-          <i className={`${prefixCls}_modal_icon ${prefixCls}_modal_icon_close`} />
-        </div>
-      </div>
-    )
     const style = {
       root: {
         position: 'fixed',
@@ -35,7 +24,10 @@ class AlertContent extends React.Component {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 900
+        zIndex: 900,
+        transition: show
+          ? '0ms left 0ms'
+          : `0ms left ${transitionTimeOut}ms`
       }
     }
     return (
@@ -43,13 +35,23 @@ class AlertContent extends React.Component {
         <ReactCSSTransitionGroup
           component='div'
           transitionAppear
-          transitionAppearTimeout={1000}
-          transitionEnter={false}
+          transitionAppearTimeout={transitionTimeOut}
+          transitionEnter
+          transitionEnterTimeout={transitionTimeOut}
           transitionLeave
-          transitionLeaveTimeout={1000}
+          transitionLeaveTimeout={transitionTimeOut}
           transitionName={transitionName}
         >
-          {show && Content}
+          {show &&
+            <div className={cls}>
+              <div className={`${prefixCls}_modal_body`}>
+                {children || null}
+              </div>
+              <div className={`${prefixCls}_modal_close`} onClick={onClose}>
+                <i className={`${prefixCls}_modal_icon ${prefixCls}_modal_icon_close`} />
+              </div>
+            </div>
+          }
         </ReactCSSTransitionGroup>
         <Mask show={show} />
       </div>
@@ -75,7 +77,8 @@ export default class Alert extends React.Component {
     prefixCls: 'NEUI',
     show: false,
     onClose: noop,
-    transitionName: 'vertialSlide'
+    transitionName: 'vertialSlide',
+    transitionTimeOut: 300
   }
   renderContent() {
     return (
@@ -83,7 +86,6 @@ export default class Alert extends React.Component {
     )
   }
   render() {
-    const { prefixCls, className, children, onClose, show, transitionName, transitionTimeOut } = this.props
     return (
       <RenderLayer render={this.renderContent} show />
     )

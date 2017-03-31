@@ -27,10 +27,10 @@ class Mask extends Component {
     return (
       <ReactCSSTransitionGroup
         transitionAppear
-        transitionAppearTimeout={30000}
+        transitionAppearTimeout={300}
         transitionEnter={false}
         transitionLeave
-        transitionLeaveTimeout={30000}
+        transitionLeaveTimeout={300}
         transitionName='fade'
       >
         {
