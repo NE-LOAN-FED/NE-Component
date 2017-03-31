@@ -1,153 +1,76 @@
 import React from 'react'
-import RenderLayer from '../internal/RenderLayer'
-import ReactTransitionGroup from 'react-addons-transition-group'
-import classname from 'classnames'
-
 const PropTypes = React.PropTypes
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import RenderLayer from '../internal/RenderLayer'
+import Mask from '../internal/Mask'
+import classname from 'classnames'
 
 const noop = () => { }
 
-class TransitionItem extends React.Component {
-  static PropTypes = {
-    timeOut: React.PropTypes.number,
-    transitionName: React.PropTypes.string
+class Modal extends React.Component {
+  static propTypes = {
+    show: PropTypes.bool,                   //  是否展示 Modal
+    isLockScreen: PropTypes.bool,           //  是否锁屏
+    onClickAway: PropTypes.func,            //  点击遮罩层的回掉
+    prepareStyle: PropTypes.object,         // 需要覆盖的样式
+    transitionName: PropTypes.string,       // 动画的类名
+    transitionTimeOut: PropTypes.number     // 动画的时间
   }
 
   static defaultProps = {
-    timeOut: 300
+    show: false,
+    isLockScreen: true,
+    onClickAway: noop,
+    prepareStyle: {},
+    transitionName: 'vertialSlide',
+    transitionTimeOut: 300
   }
 
   constructor(props) {
     super(props)
-    this.state = {
-      cls: classname()
-    }
-    this.transitionName = this.props.transitionName
-  }
-  componentWillAppear(callback) {
-    this.setState({
-      cls: classname({
-        [`${this.transitionName}-appear`]: true
-      })
-    }, () => {
-      setTimeout(() => {
-        this.setState({
-          cls: classname({
-            [`${this.transitionName}-appear`]: true,
-            [`${this.transitionName}-appear-active`]: true
-          })
-        })
-      })
-    })
-    this.appearTimeOut = setTimeout(callback, this.props.timeOut)
+    this.renderContent = this.renderContent.bind(this)
   }
 
-  componentDidAppear() {
-    this.setState({
-      cls: classname({
-        [`${this.transitionName}-appear`]: false,
-        [`${this.transitionName}-appear-active`]: false
-      })
-    })
-  }
-  componentWillLeave(callback) {
-    this.setState({
-      cls: classname({
-        [`${this.transitionName}-leave`]: true
-      })
-    }, () => {
-      this.setState({
-        cls: classname({
-          [`${this.transitionName}-leave`]: true,
-          [`${this.transitionName}-leave-active`]: true
-        })
-      })
-    })
-    this.leaveTimeOut = setTimeout(callback, this.props.timeOut)
-  }
-  componentDidLeave() {
-    this.setState({
-      cls: classname({
-        [`${this.transitionName}-leave`]: false,
-        [`${this.transitionName}-leave-active`]: false
-      })
-    })
-  }
-  componentWillUnmount() {
-    clearTimeout(this.appearTimeOut)
-    clearTimeout(this.leaveTimeOut)
-    this.props.onClose()
-  }
-  render() {
+  renderContent() {
+    const { children, show, isLockScreen, onClickAway, prepareStyle, transitionName, transitionTimeOut } = this.props
+    const style = {
+      position: 'fixed',
+      top: 0,
+      left: show ? 0 : '-10000px',
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 900,
+      transition: show
+        ? '0ms left 0ms'
+        : `0ms left ${transitionTimeOut}ms`
+    }
     return (
-      <div className={this.state.cls}>
-        {this.props.children}
+      <div style={Object.assign(style, prepareStyle)}>
+        <ReactCSSTransitionGroup
+          component='div'
+          transitionAppear
+          transitionAppearTimeout={transitionTimeOut}
+          transitionEnter
+          transitionEnterTimeout={transitionTimeOut}
+          transitionLeave
+          transitionLeaveTimeout={transitionTimeOut}
+          transitionName={transitionName}
+        >
+          {show &&
+            children
+          }
+        </ReactCSSTransitionGroup>
+        {isLockScreen && <Mask show={show} onClick={onClickAway} />}
       </div>
     )
   }
-}
 
-class Modal extends React.Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    className: PropTypes.string,  // 添加modal class
-    show: PropTypes.bool,       // modal 显示
-    onClose: PropTypes.func  // modal close 事件
-  }
-
-  static defaultProps = {
-    prefixCls: 'NEUI',
-    show: false,
-    onClose: noop
-  }
-
-  constructor(props) {
-    super(props)
-    this.handleModalClose = this.handleModalClose.bind(this)
-    this.renderModal = this.renderModal.bind(this)
-    this.state = {
-      showModal: typeof this.props.show === 'undefined' ? false : this.props.show
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.show && !this.state.showModal) {
-      this.setState({
-        showModal: true
-      })
-    }
-  }
-  handleModalClose() {
-    this.setState({
-      showModal: false
-    })
-  }
-
-  renderModal() {
-    const { prefixCls, className, onClose, children, show, transitionName, timeOut } = this.props
-    const { showModal } = this.state
-    const handleModalClose = this.handleModalClose
-    // TODO close icon 修改
-    return (
-      <ReactTransitionGroup
-        transitionAppear
-        transitionAppearTimeout={timeOut}
-        transitionLeave
-        transitionLeaveTimeout={timeOut}
-      >
-        {showModal &&
-          <TransitionItem onClose={onClose} transitionName={transitionName}>
-            {React.cloneElement(children, {
-              handleModalClose
-            })}
-          </TransitionItem>
-        }
-      </ReactTransitionGroup>
-    )
-  }
   render() {
-    const { prefixCls, show } = this.props
     return (
-      <RenderLayer className={`${prefixCls}_modal_modal`} render={this.renderModal} show={show} maskClosable={false} />
+      <RenderLayer render={this.renderContent} show />
     )
   }
 }

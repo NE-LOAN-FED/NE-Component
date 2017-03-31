@@ -1,17 +1,16 @@
 import React from 'react'
-import Modal from '../Modal'
-
 const PropTypes = React.PropTypes
+import classname from 'classnames'
+import Modal from '../Modal'
 
 const noop = () => { }
 
 class Dialog extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
-    className: PropTypes.string,  // 添加alert class
-    show: PropTypes.bool,       // alert 显示
-    onConfirm: PropTypes.func,  // alert confirm 事件
-    onCancel: PropTypes.func,   // alert cancel 事件
+    show: PropTypes.bool,       // dialog 显示
+    onConfirm: PropTypes.func,  // dialog confirm 事件
+    onCancel: PropTypes.func,   // dialog cancel 事件
     headerContent: PropTypes.node, // 头部内容
     confirmContent: PropTypes.node, // 确认内容
     cancelContent: PropTypes.node,  // 取消内容
@@ -24,71 +23,42 @@ class Dialog extends React.Component {
     show: false,
     onConfirm: noop,
     onCancel: noop,
-    transitionName: 'floatLayer'
-  }
-
-  constructor(props) {
-    super(props)
-    this.onConfirm = this.onConfirm.bind(this)
-    this.onCancel = this.onCancel.bind(this)
-  }
-
-  onConfirm() {
-    const { onConfirm } = this.props
-    onConfirm && onConfirm()
-  }
-
-  onCancel() {
-    const { onCancel } = this.props
-    onCancel && onCancel()
+    transitionName: 'vertialSlide',
+    transitionTimeOut: 300
   }
   render() {
-    const { prefixCls, confirmContent, headerContent, cancelContent, className, show, transitionName, transitionTimeOut} = this.props
-    console.log(show)
-    const ConfirmBoxProps = {
-      prefixCls,
-      confirmContent,
-      cancelContent,
-      onConfirm: this.onConfirm,
-      onCancel: this.onCancel
-    }
-    const header = headerContent ? (<div className={`${prefixCls}_alert_header`}>
-      <h4 className={`${prefixCls}_alert_header_content`}>
-        {headerContent}
-      </h4>
-    </div>) : null
+    const { prefixCls, confirmContent, headerContent, onConfirm, onCancel, cancelContent, className, show, transitionName, transitionTimeOut, ...others } = this.props
+    const confirmEle = confirmContent ? <button onClick={onConfirm} className={`${prefixCls}_dialog_confirm_button`}>{confirmContent}</button> : null
+    const cancelEle = cancelContent ? <button onClick={onCancel} className={`${prefixCls}_dialog_cancel_button`}>{cancelContent}</button> : null
+    const header = headerContent ? (
+      <div className={`${prefixCls}_dialog_header`}>
+        <h4 className={`${prefixCls}_dialog_header_content`}>
+          {headerContent}
+        </h4>
+      </div>
+    ) : null
     const content = this.props.children ? (
-      <div className={`${prefixCls}_alert_content`}>
+      <div className={`${prefixCls}_dialog_content`}>
         {this.props.children}
       </div>
     ) : null
+    const cls = classname({
+      [`${prefixCls}_dialog`]: true,
+      [className]: className
+    })
     return (
-      <Modal onClose={this.onCancel} show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut}>
-        <DialogContent prefixCls={prefixCls} className={className} header={header} content={content} ConfirmBoxProps={ConfirmBoxProps} />
+      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut}>
+        <div className={cls} {...others}>
+          {header}
+          {content}
+          <div className={`${prefixCls}_dialog_confirm_box`}>
+            {cancelEle}
+            {confirmEle}
+          </div>
+        </div >
       </Modal>
     )
   }
 }
-function DialogContent({
-  prefixCls,
-  className,
-  header,
-  content,
-  ConfirmBoxProps
-}) {
-  const { onConfirm, onCancel, confirmContent, cancelContent } = ConfirmBoxProps
-  const confirmEle = confirmContent ? <button onClick={onConfirm} className={`${prefixCls}_alert_confirm_button`}>{confirmContent}</button> : null
-  const cancelEle = cancelContent ? <button onClick={onCancel} className={`${prefixCls}_alert_cancel_button`}>{cancelContent}</button> : null
-  return (
-    < div className={`${prefixCls}_alert ${className || ''}`
-    } >
-      {header}
-      {content}
-      <div className={`${prefixCls}_alert_confirm_box`}>
-        {cancelEle}
-        {confirmEle}
-      </div>
-    </div >
-  )
-}
+
 export default Dialog

@@ -1,8 +1,8 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import {
   Form,
   FormCell,
@@ -35,22 +35,11 @@ export default class ModalPage extends Component {
       formData: {},
       msg: '',
       showToast: false,
-      showModal: false,
       showAlert: false
     }
   }
 
-  closeModal = () => {
-    this.setState({
-      showModal: false
-    })
-  }
-  closeAlert = () => {
-    this.setState({
-      showAlert: false
-    })
-  }
-  handleAlertConfirm = () => {
+  handleDialogConfirm = () => {
     this.setState({
       showAlert: false,
       showToast: true,
@@ -58,19 +47,24 @@ export default class ModalPage extends Component {
     })
   }
 
-  handleAlertCancel = () => {
+  handleDialogCancel = () => {
     this.setState({
       showAlert: false,
       showToast: true,
       msg: 'This is mean nothing to you.'
     })
   }
-  openModal = () => {
+  openAlert = () => {
     this.setState({
       showModal: true
     })
   }
-  openAlert = () => {
+  closeAlert = () => {
+    this.setState({
+      showModal: false
+    })
+  }
+  openDialog = () => {
     this.setState({
       showAlert: true
     })
@@ -82,7 +76,7 @@ export default class ModalPage extends Component {
   }
 
   render() {
-    const {msg, showToast, showModal, showAlert} = this.state
+    const { msg, showToast, showModal, showAlert } = this.state
     return (
       <section>
         <Toast content={msg}
@@ -93,21 +87,21 @@ export default class ModalPage extends Component {
           <h1 className='page-title'>Modal</h1>
           <p className='page--desc'>模态窗</p>
         </div>
-        <Button onClick={this.openModal}>Click to open a Alert</Button>
+        <Button onClick={this.openAlert}>Click to open a Alert</Button>
         <Alert
           show={showModal}
-          onClose={this.closeModal}
+          onClose={this.closeAlert}
         >
           <h2>This is a Alert.</h2>
         </Alert>
-        <Button onClick={this.openAlert}>Click to open a Dialog</Button>
+        <Button onClick={this.openDialog}>Click to open a Dialog</Button>
         <Dialog
           headerContent={'Question'}
           show={showAlert}
           confirmContent={'Yes'}
           cancelContent={'No'}
-          onConfirm={this.handleAlertConfirm}
-          onCancel={this.handleAlertCancel}
+          onConfirm={this.handleDialogConfirm}
+          onCancel={this.handleDialogCancel}
         >
           Are you a beautiful girl?
         </Dialog>

@@ -1,6 +1,6 @@
 {
   "name": "ne-rc",
-  "version": "0.4.0-beta.1",
+  "version": "0.6.0",
   "title": "NE-ReactComponents",
   "description": "A react compoents develop by NE-LOAN-FED",
   "homepage": "https://github.com/NE-LOAN-FED/NE-Component",
@@ -27,6 +27,7 @@
     "lodash": "^4.17.4",
     "normalize.css": "^5.0.0",
     "rc-animate": "^2.3.3",
+    "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2"
   },
   "devDependencies": {
