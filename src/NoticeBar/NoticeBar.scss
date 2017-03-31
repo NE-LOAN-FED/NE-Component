@@ -16,6 +16,8 @@ $noticeBar: #{$prefixCls}_notice_bar;
   .content {
     flex: 1;
     margin: 0 pxToRem(30);
+    overflow: hidden;
+    white-space: nowrap;
   }
   .tail-icon {
     position: absolute;
