@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Mask extends Component {
   static propTypes = {
@@ -20,12 +20,17 @@ class Mask extends Component {
       right: 0,
       backgroundColor: backgroundColor || 'rgba(0,0,0,0.5)'
     }
+    function FirstChild(props) {
+      const childrenArray = React.Children.toArray(props.children)
+      return childrenArray[0] || null
+    }
     return (
       <ReactCSSTransitionGroup
         transitionAppear
-        transitionAppearTimeout={300}
+        transitionAppearTimeout={30000}
+        transitionEnter={false}
         transitionLeave
-        transitionLeaveTimeout={300}
+        transitionLeaveTimeout={30000}
         transitionName='fade'
       >
         {

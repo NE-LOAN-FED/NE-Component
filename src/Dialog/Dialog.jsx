@@ -1,6 +1,6 @@
 import React from 'react'
 const PropTypes = React.PropTypes
-import ReactCSSTransitionGroup from 'react-addons-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import RenderLayer from '../internal/RenderLayer'
 
 const noop = () => { }
@@ -63,11 +63,22 @@ class Dialog extends React.Component {
         {this.props.children}
       </div>
     ) : null
-    const DiglogContent = (
-      <DialogContent prefixCls={prefixCls} className={className} header={header} content={content} ConfirmBoxProps={ConfirmBoxProps} />
-    )
+
+    const style = {
+      root: {
+        position: 'fixed',
+        top: 0,
+        left: show ? 0 : '-10000px',
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 900
+      }
+    }
     return (
-      <div>
+      <div style={style}>
         <ReactCSSTransitionGroup
           transitionAppear
           transitionAppearTimeout={300}
@@ -75,7 +86,7 @@ class Dialog extends React.Component {
           transitionLeaveTimeout={300}
           transitionName={transitionName}
         >
-          {show && DiglogContent}
+          {show && <DialogContent prefixCls={prefixCls} className={className} header={header} content={content} ConfirmBoxProps={ConfirmBoxProps} />}
         </ReactCSSTransitionGroup>
       </div>
     )

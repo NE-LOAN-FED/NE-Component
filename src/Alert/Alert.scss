@@ -12,6 +12,7 @@ $modal: #{$prefixCls}_modal;
 
 .#{$modal} {
   display: flex;
+  position: relative;
   flex-direction: column;
   width: pxToRem(500);
   max-height: 90%;
