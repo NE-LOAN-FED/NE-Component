@@ -4,9 +4,9 @@ import classNames from 'classnames'
 import Icon from '../Icon'
 export default class NoticeBar extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = {};
+    this.state = {}
     this.handleClose = this.handleClose.bind(this)
   }
 
@@ -23,8 +23,8 @@ export default class NoticeBar extends Component {
     prefixCls: 'NEUI',
     type: '',
     icon: null,
-    onClose: () => {},
-    onClick: () => {},
+    onClose: () => { },
+    onClick: () => { }
   }
 
   handleClose() {
@@ -33,12 +33,11 @@ export default class NoticeBar extends Component {
     el.parentNode.removeChild(el)
   }
 
-
   render() {
-    const { type, icon, className, children, ...others } = this.props
+    const { type, icon, prefixCls, className, children, ...others } = this.props
     const cls = classNames({
       [className]: className,
-      NEUI_notice_bar: true
+      [`${prefixCls}_notice_bar`]: true
     })
     let iconEle
 
@@ -46,15 +45,15 @@ export default class NoticeBar extends Component {
       case 'link':
         iconEle =
           <div className='tail-icon' onClick={this.handleClose}>
-              <Icon type='arrow'/> 
-            </div>
-        break;
+            <Icon type='arrow' />
+          </div>
+        break
       case 'closable':
         iconEle =
           <div className='tail-icon'>
-              <Icon type='close'/> 
-            </div>
-        break;
+            <Icon type='close' />
+          </div>
+        break
       default:
         iconEle = null
     }
@@ -62,20 +61,18 @@ export default class NoticeBar extends Component {
     return (
       <div className={cls}
         onClick={this.props.onClick}
-        >
-        {icon ?
-          <div className='head-icon'>
-          {icon}
+      >
+        {icon
+          ? <div className='head-icon'>
+            {icon}
           </div>
-          :
-          null
+          : null
         }
         <div className='content'>
-        {children}
+          {children}
         </div>
-         {iconEle}
+        {iconEle}
       </div>
     )
   }
-
 }
