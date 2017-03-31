@@ -129,6 +129,7 @@ npm install ne-rc
 1. [Popup](./src/Popup/README.md)
 1. [Toast](./src/Toast/README.md)
 1. [VerifyButton](./src/VerifyButton/README.md)
+1. [NoticeBar](./src/NoticeBar/README.md)
 
 
 ## TODO
