@@ -36,7 +36,8 @@ export default class NoticeBarPage extends Component {
           <p className='page--desc'>按钮</p>
         </div>
         <NoticeBar>
-          这是一条普通的公告栏
+        截止3月21日，您已逾期￥2,010.00。将尝试从招商银行储蓄
+卡（1114）自动扣款，否则将产生更多罚息。
         </NoticeBar>
         <div style={{ height: 30 }} />
         <NoticeBar type='closable'>

@@ -44,13 +44,15 @@ export default class NoticeBar extends Component {
     switch (type) {
       case 'link':
         iconEle =
-          <div className='tail-icon' onClick={this.handleClose}>
+          <div className='tail-icon'>
             <Icon type='arrow' />
           </div>
         break
       case 'closable':
         iconEle =
-          <div className='tail-icon'>
+          <div
+            className='tail-icon'
+            onClick={this.handleClose}>
             <Icon type='close' />
           </div>
         break
