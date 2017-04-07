@@ -1,55 +1,77 @@
 import React from 'react'
-import RenderLayer from '../internal/RenderLayer'
-
 const PropTypes = React.PropTypes
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import RenderLayer from '../internal/RenderLayer'
+import Mask from '../internal/Mask'
+import classname from 'classnames'
 
 const noop = () => { }
 
 class Modal extends React.Component {
   static propTypes = {
-    prefixCls: PropTypes.string,
-    className: PropTypes.string,  // 添加modal class
-    show: PropTypes.bool,       // modal 显示
-    onClose: PropTypes.func  // modal close 事件
+    show: PropTypes.bool,                   //  是否展示 Modal
+    isLockScreen: PropTypes.bool,           //  是否锁屏
+    onClickAway: PropTypes.func,            //  点击遮罩层的回掉
+    prepareStyle: PropTypes.object,         // 需要覆盖的样式
+    transitionName: PropTypes.string,       // 动画的类名
+    transitionTimeOut: PropTypes.number     // 动画的时间
   }
 
   static defaultProps = {
-    prefixCls: 'NEUI',
     show: false,
-    onClose: noop
+    isLockScreen: true,
+    onClickAway: noop,
+    prepareStyle: {},
+    transitionName: 'vertialSlide',
+    transitionTimeOut: 300
   }
 
   constructor(props) {
     super(props)
-    this.onClose = this.onClose.bind(this)
-    this.renderModal = this.renderModal.bind(this)
+    this.renderContent = this.renderContent.bind(this)
   }
 
-  onClose() {
-    this.props.onClose()
-  }
-
-  renderModal() {
-    const { prefixCls, className, onClose, children } = this.props
-    // TODO close icon 修改
+  renderContent() {
+    const { children, show, isLockScreen, onClickAway, prepareStyle, transitionName, transitionTimeOut } = this.props
+    const style = {
+      position: 'fixed',
+      top: 0,
+      left: show ? 0 : '-10000px',
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 900,
+      transition: show
+        ? '0ms left 0ms'
+        : `0ms left ${transitionTimeOut}ms`
+    }
     return (
-      <div className={`${prefixCls}_modal ${className || ''}`}>
-        <div className={`${prefixCls}_modal_body`}>
-          {children || null}
-        </div>
-        <div className={`${prefixCls}_modal_close`} onClick={this.onClose}>
-          <i className={`${prefixCls}_modal_icon ${prefixCls}_modal_icon_close`} />
-        </div>
+      <div style={Object.assign(style, prepareStyle)}>
+        <ReactCSSTransitionGroup
+          component='div'
+          transitionAppear
+          transitionAppearTimeout={transitionTimeOut}
+          transitionEnter
+          transitionEnterTimeout={transitionTimeOut}
+          transitionLeave
+          transitionLeaveTimeout={transitionTimeOut}
+          transitionName={transitionName}
+        >
+          {show &&
+            children
+          }
+        </ReactCSSTransitionGroup>
+        {isLockScreen && <Mask show={show} onClick={onClickAway} />}
       </div>
     )
   }
+
   render() {
-    const { prefixCls, show } = this.props
-    return show ? (
-      <div>
-        <RenderLayer className={`${prefixCls}_modal_modal`} render={this.renderModal} show={true} maskClosable={false} />
-      </div>
-    ) : null
+    return (
+      <RenderLayer render={this.renderContent} show />
+    )
   }
 }
 

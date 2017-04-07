@@ -1,5 +1,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
+# Notice
+**1.0.0 版本正式发布前，不建议外部项目使用。**
 ## 说明
 大数据风控组移动端 React 组件。
 
@@ -124,20 +126,21 @@ npm install ne-rc
 1. [DatePicker](./src/DatePicker/README.md)
 1. [Form](./src/Form/README.md)
 1. [Icon](./src/Icon/README.md)
-1. [Modal](./src/Modal/README.md)
+1. [Dialog](./src/Dialog/README.md)
 1. [Picker](./src/Picker/README.md)
 1. [Popup](./src/Popup/README.md)
 1. [Toast](./src/Toast/README.md)
 1. [VerifyButton](./src/VerifyButton/README.md)
+1. [NoticeBar](./src/NoticeBar/README.md)
 
 
 ## TODO
-* [ ] 添加并完善文档
-* [ ] 重写部分组件
- * [ ] Form
- * [ ] Collapse
-* [ ] Modal 添加动画
-* [ ] 样式表结构重新组织
+* [x] 添加并完善文档
+* [x] 重写部分组件
+ * [x] Form
+ * [x] Collapse
+* [x] Modal 添加动画
+* [] 样式表结构重新组织
 
 ## 列表
 * [x] Form          提供表单校验，填写完成校验（决定提交按钮是否高亮）
@@ -157,7 +160,8 @@ npm install ne-rc
 * [x] Link
 * [x] Icon
 * [x] Toast         
-* [x] Alert         
+* [x] Alert         弹窗
+* [X] Dialog        对话框
 * [x] DatePicker    日历
 * [X] Collapse      折叠列表
 

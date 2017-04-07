@@ -33,3 +33,6 @@ show | 是否显示 | Boolean | false
 content | 显示文字内容 | String | 无
 icon | 显示 icon 的 type | String | 无
 timeout | 自动隐藏时间 | Number | 2000
+isLockScreen | 是否需要锁屏遮罩 | Bool | false
+transitionName | 出现和消失动画的类名 |String | vertialSlide
+transitionTimeOut | 动画的时间 | Number | 300 单位ms

@@ -1,8 +1,8 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import {
   Form,
   FormCell,
@@ -19,6 +19,7 @@ import {
   DatePicker,
   Picker,
   Modal,
+  Dialog,
   Alert,
   VerifyButton,
   Toast,
@@ -34,22 +35,11 @@ export default class ModalPage extends Component {
       formData: {},
       msg: '',
       showToast: false,
-      showModal: false,
       showAlert: false
     }
   }
 
-  closeModal = () => {
-    this.setState({
-      showModal: false
-    })
-  }
-  closeAlert = () => {
-    this.setState({
-      showAlert: false
-    })
-  }
-  handleAlertConfirm = () => {
+  handleDialogConfirm = () => {
     this.setState({
       showAlert: false,
       showToast: true,
@@ -57,19 +47,24 @@ export default class ModalPage extends Component {
     })
   }
 
-  handleAlertCancel = () => {
+  handleDialogCancel = () => {
     this.setState({
       showAlert: false,
       showToast: true,
       msg: 'This is mean nothing to you.'
     })
   }
-  openModal = () => {
+  openAlert = () => {
     this.setState({
       showModal: true
     })
   }
-  openAlert = () => {
+  closeAlert = () => {
+    this.setState({
+      showModal: false
+    })
+  }
+  openDialog = () => {
     this.setState({
       showAlert: true
     })
@@ -81,33 +76,35 @@ export default class ModalPage extends Component {
   }
 
   render() {
-    const {msg, showToast, showModal, showAlert} = this.state
+    const { msg, showToast, showModal, showAlert } = this.state
     return (
       <section>
         <Toast content={msg}
-               show={showToast}
-               onClose={this.closeToast}
+          show={showToast}
+          onClose={this.closeToast}
         />
-        <div className="page--header">
-          <h1 className="page-title">Modal</h1>
-          <p className="page--desc">模态窗</p>
+        <div className='page--header'>
+          <h1 className='page-title'>Modal</h1>
+          <p className='page--desc'>模态窗</p>
         </div>
-        <Button onClick={this.openModal}>Click to open a Modal</Button>
-        <Modal show={showModal}
-               onClose={this.closeModal}
-        >
-          <h2>This is a Modal.</h2>
-        </Modal>
         <Button onClick={this.openAlert}>Click to open a Alert</Button>
-        <Alert headerContent={'Question'}
-               show={showAlert}
-               confirmContent={'Yes'}
-               cancelContent={'No'}
-               onConfirm={this.handleAlertConfirm}
-               onCancel={this.handleAlertCancel}
+        <Alert
+          show={showModal}
+          onClose={this.closeAlert}
+        >
+          <h2>This is a Alert.</h2>
+        </Alert>
+        <Button onClick={this.openDialog}>Click to open a Dialog</Button>
+        <Dialog
+          headerContent={'Question'}
+          show={showAlert}
+          confirmContent={'Yes'}
+          cancelContent={'No'}
+          onConfirm={this.handleDialogConfirm}
+          onCancel={this.handleDialogCancel}
         >
           Are you a beautiful girl?
-        </Alert>
+        </Dialog>
       </section>
     )
   }

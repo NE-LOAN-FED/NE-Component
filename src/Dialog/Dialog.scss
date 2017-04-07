@@ -1,0 +1,51 @@
+@import "../_style/_config";
+@import "../_style/_utils";
+
+$dialog: #{$prefixCls}_dialog;
+
+.#{$dialog} {
+  width: pxToRem(500);
+  border-radius: pxToRem(6);
+  background-color: #fff;
+  overflow: hidden;
+  z-index: 1000;
+  position: relative;
+  &_modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.48);
+  }
+  &_header {
+    margin-top: pxToRem(30);
+    text-align: center;
+  }
+  &_header_content {
+    font-size: pxToRem(32);
+  }
+  &_content {
+    margin: pxToRem(30) pxToRem(20) pxToRem(40);
+  }
+  &_confirm_box {
+    display: flex;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    border-top: 1px solid $border_primary;
+    font-size: pxToRem(28);
+  }
+  &_cancel_button,
+  &_confirm_button {
+    outline: none;
+    flex: 1;
+    display: inline-block;
+    text-align: center;
+    line-height: pxToRem(80);
+    vertical-align: middle;
+    background-color: #fff;
+    color: $blue;
+  }
+  &_confirm_button {
+    border-left: 1px solid $border_primary;
+  }
+}

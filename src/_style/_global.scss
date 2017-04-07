@@ -2,7 +2,7 @@
 .NEUI-collapse {
   overflow: hidden;
   &-active {
-    transition: height .3s ease-out;
+    transition: height .2s ease-out;
   }
 }
 
@@ -13,4 +13,54 @@ button {
   &:focus {
     outline: 0;
   }
+}
+
+.vertialSlide-appear{
+  opacity: 0.01;
+  transform-origin: 0 0;
+  transform: translate(0, -10%);
+  transition: all .2s ease-in;
+}
+.vertialSlide-appear-active{
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.vertialSlide-enter{
+  @extend .vertialSlide-appear
+}
+.vertialSlide-enter-active{
+  @extend .vertialSlide-appear-active
+}
+
+.vertialSlide-leave {
+  opacity: 1;
+  transform-origin: 0% 0%;
+  transform: translate(0, 0);
+  transition: all .2s ease-out;
+}
+.vertialSlide-leave-active {
+  opacity: 0.01;
+  transform-origin: 0 0;
+  transform: translate(0, -10%);
+}
+
+.fade-appear {
+  opacity: 0.01;
+  transition: all .2s ease-in;
+}
+.fade-appear-active {
+  opacity: 1;
+}
+.fade-enter {
+  @extend .fade-appear
+}
+.fade-appear-active {
+  @extend .fade-appear-active
+}
+.fade-leave {
+  opacity: 1;
+  transition: all .2s ease-out;
+}
+.fade-leave-active {
+  opacity: 0.01;
 }

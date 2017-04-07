@@ -1,98 +1,43 @@
 import React from 'react'
-import RenderLayer from '../internal/RenderLayer'
-
 const PropTypes = React.PropTypes
-
+import classname from 'classnames'
+import Modal from '../Modal'
 const noop = () => { }
 
-class Alert extends React.Component {
+export default class Alert extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
-    className: PropTypes.string,  // 添加alert class
-    show: PropTypes.bool,       // alert 显示
-    onConfirm: PropTypes.func,  // alert confirm 事件
-    onCancel: PropTypes.func,   // alert cancel 事件
-    headerContent: PropTypes.node, // 头部内容
-    confirmContent: PropTypes.node, // 确认内容
-    cancelContent: PropTypes.node  // 取消内容
+    show: PropTypes.bool,       // modal 显示
+    onClose: PropTypes.func,  // modal close 事件
+    transitionName: PropTypes.string, // 动画的类名
+    transitionTimeOut: PropTypes.number // 动画的时间
   }
 
   static defaultProps = {
     prefixCls: 'NEUI',
     show: false,
-    onConfirm: noop,
-    onCancel: noop
+    onClose: noop,
+    transitionName: 'vertialSlide',
+    transitionTimeOut: 300
   }
 
-  constructor(props) {
-    super(props)
-    this.onConfirm = this.onConfirm.bind(this)
-    this.onCancel = this.onCancel.bind(this)
-    this.renderAlert = this.renderAlert.bind(this)
-  }
-
-  onConfirm() {
-    const { onConfirm } = this.props
-    onConfirm && onConfirm()
-  }
-
-  onCancel() {
-    const { onCancel } = this.props
-    onCancel && onCancel()
-  }
-
-  renderAlert() {
-    const { prefixCls, confirmContent, headerContent, cancelContent, className } = this.props
-    const ConfirmBoxProps = {
-      prefixCls,
-      confirmContent,
-      cancelContent,
-      onConfirm: this.onConfirm,
-      onCancel: this.onCancel
-    }
-    const header = headerContent ? (<div className={`${prefixCls}_alert_header`}>
-      <h4 className={`${prefixCls}_alert_header_content`}>
-        {headerContent}
-      </h4>
-    </div>) : null
-    const content = this.props.children ? (
-      <div className={`${prefixCls}_alert_content`}>
-        {this.props.children}
-      </div>
-    ) : null
+  render() {
+    const { prefixCls, className, children, onClose, show, transitionName, transitionTimeOut, ...others } = this.props
+    const cls = classname({
+      [`${prefixCls}_modal`]: true,
+      [className]: className
+    })
     return (
-      <div className={`${prefixCls}_alert ${className || ''}`} >
-        {header}
-        {content}
-        <ConfirmBox {...ConfirmBoxProps}></ConfirmBox>
-      </div >
+      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut}>
+        <div className={cls} {...others}>
+          <div className={`${prefixCls}_modal_body`}>
+            {children || null}
+          </div>
+          <div className={`${prefixCls}_modal_close`} onClick={onClose}>
+            <i className={`${prefixCls}_modal_icon ${prefixCls}_modal_icon_close`} />
+          </div>
+        </div>
+      </Modal>
     )
   }
-  render() {
-    const { prefixCls, show } = this.props
-    return show ? (
-      <div>
-        <RenderLayer className={`${prefixCls}_alert_modal`} render={this.renderAlert} show={true} maskClosable={false} />
-      </div>
-    ) : null
-  }
 }
-
-function ConfirmBox({
-  prefixCls,
-  onConfirm,
-  onCancel,
-  confirmContent,
-  cancelContent
-}) {
-  const confirmEle = confirmContent ? <button onClick={onConfirm} className={`${prefixCls}_alert_confirm_button`}>{confirmContent}</button> : null
-  const cancelEle = cancelContent ? <button onClick={onCancel} className={`${prefixCls}_alert_cancel_button`}>{cancelContent}</button> : null
-  return (
-    <div className={`${prefixCls}_alert_confirm_box`}>
-      {cancelEle}
-      {confirmEle}
-    </div>
-  )
-}
-
-export default Alert
