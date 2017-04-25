@@ -2,7 +2,7 @@
  * Created by kisnows on 2017/2/17.
  */
 import React, {Component, PropTypes} from 'react'
-import List from './List.jsx'
+import List from './List'
 export default class Collapse extends React.Component {
   constructor(props) {
     super(props)
