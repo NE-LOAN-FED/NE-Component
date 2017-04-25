@@ -22,9 +22,9 @@ import {
   Alert,
   VerifyButton,
   Toast,
-  Button,
-  Collapse
+  Button
 } from '../../../src'
+import Collapse from '../../../src/Collapse'
 import List from '../../../src/Collapse/List'
 import './Collapse.scss'
 
@@ -50,29 +50,26 @@ const collapseListData = questions.map((v, k) => {
 })
 
 export default class CollapsePage extends Component {
-
   handleCollapseListChange = (openListIdCollection) => {
     console.log(openListIdCollection)
   }
 
   render() {
-    const CollapseSubComponent = <List/>
+    const CollapseSubComponent = <List />
     return (
-      <section className="page_collapse">
-        <div className="page--header">
-          <h1 className="page-title">Collapse</h1>
-          <p className="page--desc">折叠列表</p>
+      <section className='page_collapse'>
+        <div className='page--header'>
+          <h1 className='page-title'>Collapse</h1>
+          <p className='page--desc'>折叠列表</p>
         </div>
         <h3>Normal</h3>
         <Collapse listCollection={collapseListData}
-                  onListChange={this.handleCollapseListChange}
-                  subComponent={CollapseSubComponent}
+          onListChange={this.handleCollapseListChange}
         />
         <h3>Accordion</h3>
         <Collapse listCollection={collapseListData}
-                  accordion={true}
-                  onListChange={this.handleCollapseListChange}
-                  subComponent={CollapseSubComponent}
+          accordion
+          onListChange={this.handleCollapseListChange}
         />
       </section>
     )
