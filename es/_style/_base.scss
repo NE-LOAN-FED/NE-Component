@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+@font-face {
+  font-family: "iconfont";
+  src: url('../font/iconfont.woff?t=1475206537') format('woff'), /* chrome, firefox */
+  url('../font/iconfont.ttf?t=1475206537') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+}
+
+html {
+  background-color: #f8f8f8;
+  font-size: pxToRem(28)
+}
+
+* {
+  box-sizing: border-box;
+}
