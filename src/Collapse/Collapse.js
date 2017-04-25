@@ -1,8 +1,9 @@
 /**
  * Created by kisnows on 2017/2/17.
  */
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import List from './List'
+const noop = () => { }
 export default class Collapse extends React.Component {
   constructor(props) {
     super(props)
@@ -26,13 +27,14 @@ export default class Collapse extends React.Component {
 
   static defaultProps = {
     prefixCls: 'NEUI',
-    subComponent: <List />
+    subComponent: <List />,
+    onListChange: noop
   }
 
   handleListChange = (id, collapse) => {
     // TODO 把 openListIdCollection 改为不可重复的数据结构 set
-    let {openListIdCollection, listCollection} = this.state
-    const {accordion} = this.props
+    let { openListIdCollection, listCollection } = this.state
+    const { accordion } = this.props
     listCollection[id]['isCollapse'] = collapse
 
     function removeCollapseListId() {
@@ -59,7 +61,7 @@ export default class Collapse extends React.Component {
     })
   }
   renderList = () => {
-    const {openListIdCollection, listCollection} = this.state
+    const { openListIdCollection, listCollection } = this.state
     const subComponent = this.props.subComponent
     return listCollection.map((v, k) => {
       v.isCollapse = openListIdCollection.indexOf(k) === -1
@@ -74,7 +76,7 @@ export default class Collapse extends React.Component {
 
   render() {
     const Lists = this.renderList()
-    const {prefixCls, openListIdCollection, listCollection, accordion, onListChange, subComponent, ...others} = this.props
+    const { prefixCls, openListIdCollection, listCollection, accordion, onListChange, subComponent, ...others } = this.props
     return (
       <div {...others}>
         {Lists}
