@@ -23,8 +23,8 @@ export default class NoticeBar extends Component {
     prefixCls: 'NEUI',
     type: '',
     icon: null,
-    onClose: () => { },
-    onClick: () => { }
+    onClose: () => {},
+    onClick: () => {}
   }
 
   handleClose() {
@@ -34,7 +34,7 @@ export default class NoticeBar extends Component {
   }
 
   render() {
-    const { type, icon, prefixCls, className, children, ...others } = this.props
+    const { type, icon, prefixCls, className, children, closeIcon, ...others } = this.props
     const cls = classNames({
       [className]: className,
       [`${prefixCls}_notice_bar`]: true
@@ -53,7 +53,7 @@ export default class NoticeBar extends Component {
           <div
             className='tail-icon'
             onClick={this.handleClose}>
-            <Icon type='close' />
+            {closeIcon ? closeIcon : <Icon type='close' />}
           </div>
         break
       default:
