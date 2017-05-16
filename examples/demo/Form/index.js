@@ -27,7 +27,7 @@ import {
 import Logger from '../../../src/_utils/log'
 import lang from '../../utils/lang'
 import validate from '../../utils/validate'
-import {removeBlack, formatterToBankCard} from '../../utils/formatter'
+import { removeBlack, formatterToBankCard } from '../../utils/formatter'
 
 const logger = new Logger('DEBUG', 'FormDemo')
 
@@ -35,29 +35,34 @@ class FormDemo extends React.Component {
   constructor() {
     super()
     this.state = {
-      showInput: true,
-      formData: {
-        name: {
-          value: '抹桥'
-        },
-        phone: {
-          value: '13333333333'
-        },
-        verifyCode: {
-          value: 3303
-        },
-        gender: {},
-        is: {
-          value: true
-        },
-        card: {}
+      showInput: false,
+      name: {
+        value: '抹桥'
       },
+      phone: {
+        value: '13333333333'
+      },
+      verifyCode: {
+        value: 3303
+      },
+      gender: {},
+      is: {
+        value: true
+      },
+      card: {},
       msg: '',
       isComplete: false,
 
       showToast: false
     }
-    this.timer = null
+    this.timer = setTimeout(() => {
+      this.setState(Object.assign({}, this.state, {
+        name: {
+          value: '123'
+        },
+        showInput: true
+      }))
+    }, 3000)
   }
 
   componentWillMount() {
@@ -101,12 +106,20 @@ class FormDemo extends React.Component {
   handleChange = (formData) => {
     logger.log('form change', formData)
     this.setState({
-      formData: formData.data,
+      ...formData.data,
       isComplete: formData.isComplete
     })
   }
   handleFieldChange = (FieldData) => {
     logger.log('FieldChange', FieldData)
+    switch (FieldData.name) {
+      case 'card':
+        this.setState({
+          showToast: true,
+          msg: '测试'
+        })
+        break
+    }
   }
 
   closeToast = () => {
@@ -116,7 +129,7 @@ class FormDemo extends React.Component {
   }
 
   render() {
-    const { showInput, msg, showToast, formData, isComplete } = this.state
+    const { showInput, msg, showToast, isComplete } = this.state
     const genderData = [{
       name: '男',
       value: 0,
@@ -139,47 +152,46 @@ class FormDemo extends React.Component {
           onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
           onChange={this.handleChange}
-          state={formData}
         >
           <CellTip>Input</CellTip>
           <Cells>
-            <Cell warning={formData.name.isError}>
+            <Cell warning={this.state.name.isError}>
               <CellHeader>Name</CellHeader>
               <Input type='text'
                 name='name'
                 errorMsg={lang.nameErrorMsg}
                 validate={validate.name}
-                value={formData.name.value}
+                value={this.state.name.value}
                 data-index='1'
               />
             </Cell>
-            <Cell warning={formData.phone.isError}>
+            <Cell warning={this.state.phone.isError}>
               <CellHeader>Phone</CellHeader>
               <Input type='tel'
                 name='phone'
                 validate={validate.phone}
                 errorMsg={lang.phoneErrorMsg}
-                value={formData.phone.value}
+                value={this.state.phone.value}
               />
             </Cell>
-            <Cell warning={formData.card.isError}>
+            <Cell warning={this.state.card.isError}>
               <CellHeader>Card</CellHeader>
               <Input type='tel'
                 name='card'
                 validate={validate.card}
                 errorMsg={lang.card}
-                value={formData.card.value}
+                value={this.state.card.value}
                 formatter={formatterToBankCard}
                 parser={removeBlack}
               />
             </Cell>
-            <Cell warning={formData.verifyCode.isError}>
+            <Cell warning={this.state.verifyCode.isError}>
               <CellHeader>Verify Code</CellHeader>
               <Input type='number'
                 name='verifyCode'
                 errorMsg={lang.smsCodeErrorMsg}
                 validate={/\d{4}/}
-                value={formData.verifyCode.value}
+                value={this.state.verifyCode.value}
               />
               <CellFooter><VerifyButton /></CellFooter>
             </Cell>
@@ -187,11 +199,11 @@ class FormDemo extends React.Component {
           <CellTip>Select</CellTip>
           {
             showInput ? <Cells>
-              <Cell warning={formData.gender.isError}>
+              <Cell warning={this.state.gender.isError}>
                 <CellHeader>Gender</CellHeader>
                 <Select name='gender'
                   data={genderData}
-                  value={formData.gender.value}
+                  value={this.state.gender.value}
                 />
               </Cell>
             </Cells> : null
@@ -200,7 +212,7 @@ class FormDemo extends React.Component {
           <Cells>
             <Cell htmlFor='is'>
               <CellBody>Is yourself?</CellBody>
-              <CellFooter><CheckBox name='is' id='is' value={formData.is.value} /></CellFooter>
+              <CellFooter><CheckBox name='is' id='is' value={this.state.is.value} /></CellFooter>
             </Cell>
           </Cells>
           <Button type='submit' disabled={!isComplete}>提交</Button>
