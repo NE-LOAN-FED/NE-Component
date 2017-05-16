@@ -5,7 +5,6 @@
   margin: pxToRem(15) pxToRem(30) pxToRem(30);
   line-height: pxToRem(30);
   font-size: $smallSize;
-  vertical-align: bottom;
   color: $text_light;
 }
 
@@ -55,7 +54,7 @@
   &:after {
     content: '';
     position: absolute;
-    bottom: 1px;
+    bottom: 0;
     right: 0;
     z-index: 10;
     width: 95%;

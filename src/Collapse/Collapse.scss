@@ -4,7 +4,7 @@
 $collapse: #{$prefixCls}_collapse;
 
 .#{$collapse} {
-  &+.#{$collapse} .#{$prefixCls}_cells {
+  &+.#{$collapse} .#{$prefixCls}_cells .#{$prefixCls}_cell{
     border-top: none;
   }
 

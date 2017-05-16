@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 import classNames from 'classnames'
 import Animation from '../_utils/animation'
 import Animate from 'rc-animate'
@@ -48,7 +48,7 @@ export default class List extends Component {
 
   toggle = (collapse) => {
     const id = this.props.id
-    const nextCollapse = collapse ? collapse : !this.state.isCollapse
+    const nextCollapse = collapse || !this.state.isCollapse
     this.props.onChange(id, nextCollapse)
     this.setState({
       isCollapse: nextCollapse
@@ -56,11 +56,12 @@ export default class List extends Component {
   }
 
   render() {
-    const {data, className, prefixCls, onClick} = this.props
-    const {title, content} = data
-    const {isCollapse} = this.state
+    const { data, className, prefixCls, onClick } = this.props
+    const { title, content } = data
+    const { isCollapse } = this.state
     const cls = classNames({
       [`${prefixCls}_collapse`]: true,
+      is_active: !isCollapse,
       [className]: className
     })
 
@@ -71,22 +72,20 @@ export default class List extends Component {
 
     return (
       <div className={cls} onClick={onClick}>
-        <Cells onClick={this.handleClick}>
-          <Cell>
-            <CellBody>{title}</CellBody>
-            <CellFooter>
-              <Icon type='arrow'
-                    className={classNames({
-                      collapse: isCollapse,
-                      list_icon: true,
-                    })}/>
-            </CellFooter>
-          </Cell>
-        </Cells>
+        <Cell onClick={this.handleClick}>
+          <CellBody>{title}</CellBody>
+          <CellFooter>
+            <Icon type='arrow'
+              className={classNames({
+                collapse: isCollapse,
+                list_icon: true
+              })} />
+          </CellFooter>
+        </Cell>
         <Animate animation={Animation} component={FirstChild}>
-          {!isCollapse ?
-            <div className="list_content_wrap">
-              <p className="list_content" key={this}>{content}</p>
+          {!isCollapse
+            ? <div className='list_content_wrap'>
+              <p className='list_content' key={this}>{content}</p>
             </div> : null}
         </Animate>
       </div>

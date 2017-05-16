@@ -22,12 +22,12 @@ export default class Collapse extends React.Component {
     // 手风琴模式
     accordion: PropTypes.bool,
     onListChange: PropTypes.func,
-    subComponent: PropTypes.element
+    subComponent: PropTypes.func
   }
 
   static defaultProps = {
     prefixCls: 'NEUI',
-    subComponent: <List />,
+    subComponent: List,
     onListChange: noop
   }
 
@@ -37,10 +37,8 @@ export default class Collapse extends React.Component {
     const { accordion } = this.props
     listCollection[id]['isCollapse'] = collapse
 
-    function removeCollapseListId() {
-      return openListIdCollection.filter((value) => {
-        return value !== id
-      })
+    function removeCollapseListId(id) {
+      openListIdCollection = openListIdCollection.filter(value => value !== id)
     }
 
     function addIdToCollapseListId(id) {
@@ -49,9 +47,9 @@ export default class Collapse extends React.Component {
 
     if (accordion) {
       openListIdCollection = collapse
-        ? removeCollapseListId() : [id]
+        ? removeCollapseListId(id) : [id]
     } else {
-      collapse ? removeCollapseListId() : addIdToCollapseListId(id)
+      collapse ? removeCollapseListId(id) : addIdToCollapseListId(id)
     }
     openListIdCollection = openListIdCollection.length ? openListIdCollection : []
     this.props.onListChange(openListIdCollection)
@@ -62,15 +60,15 @@ export default class Collapse extends React.Component {
   }
   renderList = () => {
     const { openListIdCollection, listCollection } = this.state
-    const subComponent = this.props.subComponent
+    const SubComponent = this.props.subComponent
     return listCollection.map((v, k) => {
       v.isCollapse = openListIdCollection.indexOf(k) === -1
-      return React.cloneElement(subComponent, {
-        data: v,
-        onChange: this.handleListChange,
-        id: k,
-        key: k
-      })
+      return <SubComponent
+        data={v}
+        onChange={this.handleListChange}
+        id={k}
+        key={k}
+      />
     })
   }
 
