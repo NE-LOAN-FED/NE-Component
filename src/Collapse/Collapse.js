@@ -39,6 +39,7 @@ export default class Collapse extends React.Component {
 
     function removeCollapseListId(id) {
       openListIdCollection = openListIdCollection.filter(value => value !== id)
+      return openListIdCollection
     }
 
     function addIdToCollapseListId(id) {
@@ -66,7 +67,7 @@ export default class Collapse extends React.Component {
       return <SubComponent
         data={v}
         onChange={this.handleListChange}
-        id={k}
+        id={v.id || k}
         key={k}
       />
     })

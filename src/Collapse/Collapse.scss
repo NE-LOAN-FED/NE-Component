@@ -4,10 +4,10 @@
 $collapse: #{$prefixCls}_collapse;
 
 .#{$collapse} {
-  &+.#{$collapse} .#{$prefixCls}_cells .#{$prefixCls}_cell{
-    border-top: none;
+  border-top: 1px solid $border_primary;
+  &:last-child {
+  border-bottom: 1px solid $border_primary;
   }
-
   .list_icon {
     transition: all 0.3s ease-in-out;
     transform: rotate(270deg);
@@ -27,4 +27,8 @@ $collapse: #{$prefixCls}_collapse;
   .list_content {
     padding: pxToRem(20) 0 pxToRem(20) pxToRem(30);
   }
+}
+
+.#{$collapse} .#{$prefixCls}_cell::after {
+  display: none;
 }
