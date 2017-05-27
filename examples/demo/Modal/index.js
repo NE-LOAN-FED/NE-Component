@@ -24,18 +24,20 @@ import {
   VerifyButton,
   Toast,
   Button,
-  Collapse
+  Collapse,
+  ActionSheet
 } from '../../../src'
 
 export default class ModalPage extends Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       phone: '',
       formData: {},
       msg: '',
       showToast: false,
-      showAlert: false
+      showAlert: false,
+      showActionSheet: false
     }
   }
 
@@ -74,15 +76,22 @@ export default class ModalPage extends Component {
       showToast: false
     })
   }
+  openActionSheet = () => {
+    this.setState({
+      showActionSheet: true
+    })
+  }
+  handleActionClose = () => {
+    this.setState({
+      showActionSheet: false
+    })
+  }
 
-  render() {
-    const { msg, showToast, showModal, showAlert } = this.state
+  render () {
+    const {msg, showToast, showModal, showAlert, showActionSheet} = this.state
     return (
       <section>
-        <Toast content={msg}
-          show={showToast}
-          onClose={this.closeToast}
-        />
+        <Toast content={msg} show={showToast} onClose={this.closeToast} />
         <div className='page--header'>
           <h1 className='page-title'>Modal</h1>
           <p className='page--desc'>模态窗</p>
@@ -105,6 +114,8 @@ export default class ModalPage extends Component {
         >
           Are you a beautiful girl?
         </Dialog>
+        <Button onClick={this.openActionSheet}>Click to open a ActionSheet</Button>
+        <ActionSheet items={[<a href='/form'>你好</a>, '我好']} show={showActionSheet} onClose={this.handleActionClose} />
       </section>
     )
   }
