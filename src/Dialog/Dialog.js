@@ -23,7 +23,7 @@ class Dialog extends React.Component {
     show: false,
     onConfirm: noop,
     onCancel: noop,
-    transitionName: 'vertialSlide',
+    transitionName: 'verticalSlideTB',
     transitionTimeOut: 300
   }
   render() {

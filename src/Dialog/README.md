@@ -33,5 +33,5 @@ confirmContent | 确认按钮内容 | String | 无
 cancelContent | 取消按钮内容 | String | 无
 onConfirm | 确认按钮回调 | Function | 无
 onCancel | 取消按钮回调 | Function | 无
-transitionName | 出现和消失动画的类名 |String | vertialSlide
+transitionName | 出现和消失动画的类名 |String | verticalSlideTB
 transitionTimeOut | 动画的时间 | Number | 300 单位ms

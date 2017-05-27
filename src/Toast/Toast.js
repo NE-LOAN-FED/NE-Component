@@ -30,7 +30,8 @@ class Toast extends React.Component {
     transitionName: 'fade',
     transitionTimeOut: 300
   }
-  constructor(props) {
+
+  constructor (props) {
     super(props)
     this.close = this.close.bind(this)
     this.state = {
@@ -39,7 +40,7 @@ class Toast extends React.Component {
     this.autoClose(props.timeout)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.show !== this.state.show) {
       if (nextProps.show) {
         this.show()
@@ -50,11 +51,11 @@ class Toast extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearTimeout(this.timer)
   }
 
-  autoClose(timeout = 0) {
+  autoClose (timeout = 0) {
     if (timeout >= 0) {
       this.timer = setTimeout(() => {
         this.close()
@@ -62,14 +63,14 @@ class Toast extends React.Component {
     }
   }
 
-  show() {
+  show () {
     this.setState({
       show: true
     })
   }
 
-  close() {
-    const { onClose } = this.props
+  close () {
+    const {onClose} = this.props
     if (this.state.show) {
       this.setState({
         show: false
@@ -79,8 +80,8 @@ class Toast extends React.Component {
     }
   }
 
-  render() {
-    const { prefixCls, content, icon, show, transitionName, className, isLockScreen } = this.props
+  render () {
+    const {prefixCls, content, icon, show, transitionName, className, isLockScreen} = this.props
     return (
       <Modal show={show} transitionName={transitionName} isLockScreen={isLockScreen}>
         <div className={`${prefixCls}_toast ${className || ''}`}>

@@ -22,7 +22,7 @@ class Modal extends React.Component {
     isLockScreen: true,
     onClickAway: noop,
     prepareStyle: {},
-    transitionName: 'vertialSlide',
+    transitionName: 'verticalSlideTB',
     transitionTimeOut: 300
   }
 

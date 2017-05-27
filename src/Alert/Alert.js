@@ -17,7 +17,7 @@ export default class Alert extends React.Component {
     prefixCls: 'NEUI',
     show: false,
     onClose: noop,
-    transitionName: 'vertialSlide',
+    transitionName: 'verticalSlideTB',
     transitionTimeOut: 300
   }
 

@@ -15,52 +15,94 @@ button {
   }
 }
 
-.vertialSlide-appear{
+.verticalSlideTB-appear {
   opacity: 0.01;
   transform-origin: 0 0;
   transform: translate(0, -10%);
   transition: all .2s ease-in;
 }
-.vertialSlide-appear-active{
+
+.verticalSlideTB-appear-active {
   opacity: 1;
   transform: translate(0, 0);
 }
-.vertialSlide-enter{
-  @extend .vertialSlide-appear
-}
-.vertialSlide-enter-active{
-  @extend .vertialSlide-appear-active
+
+.verticalSlideTB-enter {
+  @extend .verticalSlideTB-appear
 }
 
-.vertialSlide-leave {
+.verticalSlideTB-enter-active {
+  @extend .verticalSlideTB-appear-active
+}
+
+.verticalSlideTB-leave {
   opacity: 1;
   transform-origin: 0% 0%;
   transform: translate(0, 0);
   transition: all .2s ease-out;
 }
-.vertialSlide-leave-active {
+
+.verticalSlideTB-leave-active {
   opacity: 0.01;
   transform-origin: 0 0;
   transform: translate(0, -10%);
+}
+
+.verticalSlideBT-appear {
+  opacity: 0.01;
+  transform-origin: 0 0;
+  transform: translate(0, 10%);
+  transition: all .2s ease-in;
+}
+
+.verticalSlideBT-appear-active {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.verticalSlideBT-enter {
+  @extend .verticalSlideBT-appear
+}
+
+.verticalSlideBT-enter-active {
+  @extend .verticalSlideBT-appear-active
+}
+
+.verticalSlideBT-leave {
+  opacity: 1;
+  transform-origin: 0 0;
+  transform: translate(0, 0);
+  transition: all .2s ease-out;
+}
+
+.verticalSlideBT-leave-active {
+  opacity: 0.01;
+  transform-origin: 0 0;
+  transform: translate(0, 10%);
 }
 
 .fade-appear {
   opacity: 0.01;
   transition: all .2s ease-in;
 }
+
 .fade-appear-active {
   opacity: 1;
 }
+
 .fade-enter {
   @extend .fade-appear
 }
+
 .fade-appear-active {
   @extend .fade-appear-active
 }
+
 .fade-leave {
   opacity: 1;
   transition: all .2s ease-out;
 }
+
 .fade-leave-active {
   opacity: 0.01;
 }
