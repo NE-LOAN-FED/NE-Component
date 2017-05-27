@@ -24,7 +24,8 @@ export default class ActionSheet extends React.Component {
     onClose: noop,
     autoClose: true,
     transitionName: 'verticalSlideBT',
-    transitionTimeOut: 300
+    transitionTimeOut: 300,
+    items: []
   }
 
   render () {
