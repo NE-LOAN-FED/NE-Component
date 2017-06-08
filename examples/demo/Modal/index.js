@@ -43,7 +43,6 @@ export default class ModalPage extends Component {
 
   handleDialogConfirm = () => {
     this.setState({
-      showAlert: false,
       showToast: true,
       msg: 'HaHa'
     })

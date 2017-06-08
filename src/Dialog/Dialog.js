@@ -14,6 +14,7 @@ class Dialog extends React.Component {
     headerContent: PropTypes.node, // 头部内容
     confirmContent: PropTypes.node, // 确认内容
     cancelContent: PropTypes.node,  // 取消内容
+    prepareStyle: PropTypes.any,         // 需要覆盖 Modal 的样式
     transitionName: PropTypes.string, // 动画的类名
     transitionTimeOut: PropTypes.number // 动画的时间
   }
@@ -23,11 +24,14 @@ class Dialog extends React.Component {
     show: false,
     onConfirm: noop,
     onCancel: noop,
+    prepareStyle: {
+      zIndex: 900
+    },
     transitionName: 'verticalSlideTB',
     transitionTimeOut: 300
   }
   render() {
-    const { prefixCls, confirmContent, headerContent, onConfirm, onCancel, cancelContent, className, show, transitionName, transitionTimeOut, ...others } = this.props
+    const { prefixCls, confirmContent, headerContent, onConfirm, onCancel, cancelContent, className, show, transitionName, transitionTimeOut, prepareStyle, ...others } = this.props
     const confirmEle = confirmContent ? <button onClick={onConfirm} className={`${prefixCls}_dialog_confirm_button`}>{confirmContent}</button> : null
     const cancelEle = cancelContent ? <button onClick={onCancel} className={`${prefixCls}_dialog_cancel_button`}>{cancelContent}</button> : null
     const header = headerContent ? (
@@ -47,7 +51,7 @@ class Dialog extends React.Component {
       [className]: className
     })
     return (
-      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut}>
+      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} prepareStyle={prepareStyle}>
         <div className={cls} {...others}>
           {header}
           {content}
