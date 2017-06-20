@@ -39,16 +39,14 @@ class Modal extends React.Component {
       left: show ? 0 : '-10000px',
       width: '100%',
       height: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
       zIndex: 900,
       transition: show
         ? '0ms left 0ms'
         : `0ms left ${transitionTimeOut}ms`
     }
+
     return (
-      <div style={Object.assign(style, prepareStyle)}>
+      <div className='NEUI-Modal' style={Object.assign(style, prepareStyle)}>
         <ReactCSSTransitionGroup
           component='div'
           transitionAppear

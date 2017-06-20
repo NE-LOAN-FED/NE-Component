@@ -1,6 +1,6 @@
 {
   "name": "ne-rc",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "title": "NE-ReactComponents",
   "description": "A react compoents develop by NE-LOAN-FED",
   "homepage": "https://github.com/NE-LOAN-FED/NE-Component",
@@ -57,7 +57,7 @@
     "html-webpack-plugin": "^2.22.0",
     "imports-loader": "^0.7.1",
     "mocha": "^3.1.2",
-    "node-sass": "^4.5.0",
+    "node-sass": "^4.5.3",
     "postcss-loader": "^1.3.3",
     "react": "^15.3.0",
     "react-addons-css-transition-group": "^15.4.2",
