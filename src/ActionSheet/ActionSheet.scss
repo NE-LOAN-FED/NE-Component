@@ -1,0 +1,23 @@
+@import "../_style/_config";
+@import "../_style/_utils";
+
+$prefix: NEUI;
+.#{$prefix}_action__sheet {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: $white;
+  list-style: none;
+  z-index: 100;
+  li {
+    height: pxToRem(74);
+    font-size: $normalSize;
+    border-bottom: 1px solid $border_secondary;
+    display: flex;
+    align-items: center;
+    padding-left: pxToRem(30);
+  }
+}

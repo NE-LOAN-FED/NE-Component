@@ -12,7 +12,8 @@ $toast: #{$prefixCls}_toast;
   padding: pxToRem(20);
   z-index: 1000;
   color: $white;
-  &_modal{
+  font-size: $normalSize;
+  &_modal {
     display: flex;
     align-items: center;
     justify-content: center;

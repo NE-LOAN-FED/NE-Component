@@ -12,6 +12,7 @@ class Toast extends React.Component {
     prefixCls: PropTypes.string,
     className: PropTypes.string,        // 添加toast class
     show: PropTypes.bool,               // Toast是否显示
+    prepareStyle: PropTypes.any,         // 需要覆盖 Modal 的样式
     content: PropTypes.string,
     icon: PropTypes.string,
     onClose: PropTypes.func,            // 点击onClose 触发函数
@@ -25,11 +26,15 @@ class Toast extends React.Component {
     show: false,
     timeout: 2000,
     icon: '',
+    prepareStyle: {
+      zIndex: 1000
+    },
     onClose: noop,
     isLockScreen: false,
     transitionName: 'fade',
     transitionTimeOut: 300
   }
+
   constructor(props) {
     super(props)
     this.close = this.close.bind(this)
@@ -80,9 +85,9 @@ class Toast extends React.Component {
   }
 
   render() {
-    const { prefixCls, content, icon, show, transitionName, className, isLockScreen } = this.props
+    const { prefixCls, content, icon, show, transitionName, className, isLockScreen, prepareStyle } = this.props
     return (
-      <Modal show={show} transitionName={transitionName} isLockScreen={isLockScreen}>
+      <Modal show={show} transitionName={transitionName} isLockScreen={isLockScreen} prepareStyle={prepareStyle}>
         <div className={`${prefixCls}_toast ${className || ''}`}>
           {icon !== '' ? <div className={`${prefixCls}_toast_icon`}><Icon type={icon} /></div> : null}
           <span>{content}</span>
