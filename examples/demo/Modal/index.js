@@ -85,6 +85,9 @@ export default class ModalPage extends Component {
       showActionSheet: false
     })
   }
+  handleActionChange = (key) => {
+    console.log('clicked key = ', key)
+  }
 
   render () {
     const {msg, showToast, showModal, showAlert, showActionSheet} = this.state
@@ -114,7 +117,13 @@ export default class ModalPage extends Component {
           Are you a beautiful girl?
         </Dialog>
         <Button onClick={this.openActionSheet}>Click to open a ActionSheet</Button>
-        <ActionSheet items={[<a href='/form'>你好</a>, '我好']} show={showActionSheet} onClose={this.handleActionClose} />
+        <ActionSheet
+          menus={[<a href='#form'>你好</a>, '我好']}
+          show={showActionSheet}
+          showCancel
+          onMaskClick={this.handleActionClose}
+          onMenuChange={this.handleActionChange}
+        />
       </section>
     )
   }

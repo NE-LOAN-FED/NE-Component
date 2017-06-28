@@ -9,7 +9,7 @@ $prefix: NEUI;
   width: 100%;
   padding: 0;
   margin: 0;
-  background: $white;
+  background: $border_secondary;
   list-style: none;
   z-index: 100;
   li {
@@ -18,6 +18,12 @@ $prefix: NEUI;
     border-bottom: 1px solid $border_secondary;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding-left: pxToRem(30);
+    padding-right: pxToRem(30);
+    background-color: $white;
+  }
+  .#{$prefix}_action_cancel {
+    margin-top: pxToRem(10);
   }
 }
