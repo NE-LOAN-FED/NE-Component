@@ -36,41 +36,28 @@ export default class ActionSheet extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      open: props.show || false
-    }
-  }
-
-  componentWillReceiveProps(props) {
-    this.setState({
-      open: props.show
-    })
   }
 
   onMenuClick = (key) => {
-    const { autoClose, onMenuChange } = this.props
+    const { autoClose, onMenuChange, onMaskClick } = this.props
     if (autoClose) {
-      this.setState({
-        open: false
-      })
+      onMaskClick()
     }
     onMenuChange && onMenuChange(key)
   }
 
   render () {
     const {
-      prefixCls, menus, className, showCancel, cancelText, onMaskClick, transitionName, transitionTimeOut, ...others
+      prefixCls, show, menus, className, showCancel, cancelText, onMaskClick, transitionName, transitionTimeOut, title, ...others
     } = this.props
-    const {
-      open
-    } = this.state
     const cls = classname({
       [`${prefixCls}_action__sheet`]: true,
       [className]: className
     })
     return (
-      <Modal show={open} transitionName={transitionName} transitionTimeOut={transitionTimeOut} onClickAway={onMaskClick}>
+      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} onClickAway={onMaskClick}>
         <ul className={cls}>
+          { title ? <li>{title}</li> : null}
           {menus.map((el, index) => {
             return <li key={index} onClick={() => this.onMenuClick(index)}>{el}</li>
           })}
