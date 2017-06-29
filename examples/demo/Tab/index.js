@@ -3,7 +3,8 @@
  */
 import React, { Component } from 'react'
 import {
-  Tab
+  Tab,
+  Button
 } from '../../../src'
 
 export default class TabPage extends Component {
@@ -15,7 +16,8 @@ export default class TabPage extends Component {
         { title: '审核中', disabled: false },
         { title: '还款中', disabled: true },
         { title: '放款中', disabled: false}
-      ]
+      ],
+      activeIndex: 0
     }
   }
 
@@ -23,19 +25,39 @@ export default class TabPage extends Component {
     console.log('current tab:', index)
   }
 
+  onControlledTabChange = (index) => {
+    this.setState({
+      activeIndex: index
+    })
+  }
+
+  handleTabChange = () => {
+    this.setState({
+      activeIndex: 3
+    })
+  }
+
   render() {
-    const { tabs } = this.state
+    const { tabs, activeIndex } = this.state
     return (
-      <section>
+      <section className="page_collapse">
         <div className="page--header">
           <h1 className="page-title">Tab</h1>
           <p className="page--desc">选项卡列表</p>
         </div>
-        <Tab defaultIndex={1} onChange={this.onTabChange}>
+        <h3>Normal</h3>
+        <Tab defaultActiveIndex={1} onChange={this.onTabChange}>
           {tabs.map((item, index) => {
             return <Tab.Item title={item.title} key={index} disabled={item.disabled}>内容：{item.title}</Tab.Item>
           })}
         </Tab>
+        <h3>Controlled</h3>
+        <Tab activeIndex={activeIndex} onChange={this.onControlledTabChange}>
+          {tabs.map((item, index) => {
+            return <Tab.Item title={item.title} key={index} disabled={item.disabled}>内容：{item.title}</Tab.Item>
+          })}
+        </Tab>
+        <Button onClick={this.handleTabChange}>放款中</Button>
       </section>
     )
   }
