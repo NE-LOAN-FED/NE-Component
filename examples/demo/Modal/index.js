@@ -122,7 +122,7 @@ export default class ModalPage extends Component {
           show={showActionSheet}
           showCancel
           onClose={this.handleActionClose}
-          onMenuChange={this.handleActionChange}
+          onMenuClick={this.handleActionChange}
           clickMaskToClose={true}
           onMaskClick={e => console.log(e)}
         />
