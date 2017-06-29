@@ -121,8 +121,10 @@ export default class ModalPage extends Component {
           menus={[<a href='#form'>你好</a>, '我好']}
           show={showActionSheet}
           showCancel
-          onMaskClick={this.handleActionClose}
-          onMenuChange={this.handleActionChange}
+          onClose={this.handleActionClose}
+          onMenuClick={this.handleActionChange}
+          clickMaskToClose={true}
+          onMaskClick={e => console.log(e)}
         />
       </section>
     )
