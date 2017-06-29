@@ -12,6 +12,7 @@ export default class ActionSheet extends React.Component {
     prefixCls: PropTypes.string,
     show: PropTypes.bool,       // 显示
     onMaskClick: PropTypes.func,  // 遮罩点击事件
+    onClose: PropTypes.func, // 关闭动作面板事件
     menus: PropTypes.array,   // 内容列表
     onMenuChange: PropTypes.func, // 选项点击事件
     autoClose: PropTypes.bool,  // 点击一个选项后，是否自动关闭
@@ -25,6 +26,7 @@ export default class ActionSheet extends React.Component {
     prefixCls: 'NEUI',
     show: false,
     onMaskClick: noop,
+    onClose: noop,
     onMenuChange: noop,
     autoClose: true,
     showCancel: false,
@@ -39,9 +41,9 @@ export default class ActionSheet extends React.Component {
   }
 
   onMenuClick = (key) => {
-    const { autoClose, onMenuChange, onMaskClick } = this.props
+    const { autoClose, onMenuChange, onClose } = this.props
     if (autoClose) {
-      onMaskClick()
+      onClose()
     }
     onMenuChange && onMenuChange(key)
   }
