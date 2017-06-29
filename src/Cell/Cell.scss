@@ -26,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: pxToRem(90);
+  min-height: pxToRem(90);
   padding: pxToRem(20) pxToRem(30);
   font-size: $normalSize;
   background-color: $white;
@@ -43,6 +43,8 @@
     flex: 1;
     display: flex;
     align-items: center;
+    word-wrap: break-word;
+    word-break: break-all;
     a {
       width: 100%;
     }
@@ -50,6 +52,7 @@
   &__ft {
     display: flex;
     align-items: center;
+    margin-left: pxToRem(30)
   }
   &:after {
     content: '';
