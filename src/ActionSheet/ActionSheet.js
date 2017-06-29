@@ -11,6 +11,7 @@ export default class ActionSheet extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     show: PropTypes.bool,       // 显示
+    clickMaskToClose: PropTypes.bool, // 是否点击遮罩关闭
     onMaskClick: PropTypes.func,  // 遮罩点击事件
     onClose: PropTypes.func, // 关闭动作面板事件
     menus: PropTypes.array,   // 内容列表
@@ -26,6 +27,7 @@ export default class ActionSheet extends React.Component {
     prefixCls: 'NEUI',
     show: false,
     onMaskClick: noop,
+    clickMaskToClose: true,
     onClose: noop,
     onMenuChange: noop,
     autoClose: true,
@@ -42,12 +44,14 @@ export default class ActionSheet extends React.Component {
 
   onMenuClick = (key) => {
     const { autoClose, onMenuChange, onClose } = this.props
-    if (autoClose) {
-      onClose()
-    }
-    onMenuChange && onMenuChange(key)
+    autoClose && onClose()
+    onMenuChange(key)
   }
-
+  onMaskClick = (e) => {
+    const {clickMaskToClose,onClose,onMaskClick} = this.props
+    clickMaskToClose && onClose()
+    onMaskClick(e)
+  }
   render () {
     const {
       prefixCls, show, menus, className, showCancel, cancelText, onMaskClick, transitionName, transitionTimeOut, title, ...others
@@ -57,7 +61,7 @@ export default class ActionSheet extends React.Component {
       [className]: className
     })
     return (
-      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} onClickAway={onMaskClick}>
+      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} onClickAway={this.onMaskClick} {...others}>
         <ul className={cls}>
           { title ? <li>{title}</li> : null}
           {menus.map((el, index) => {
