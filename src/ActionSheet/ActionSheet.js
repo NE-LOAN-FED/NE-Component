@@ -15,7 +15,7 @@ export default class ActionSheet extends React.Component {
     onMaskClick: PropTypes.func,  // 遮罩点击事件
     onClose: PropTypes.func, // 关闭动作面板事件
     menus: PropTypes.array,   // 内容列表
-    onMenuChange: PropTypes.func, // 选项点击事件
+    onMenuClick: PropTypes.func, // 选项点击事件
     autoClose: PropTypes.bool,  // 点击一个选项后，是否自动关闭
     showCancel: PropTypes.bool,  // 显示底部取消
     cancelText: PropTypes.string, // 取消文本
@@ -29,7 +29,7 @@ export default class ActionSheet extends React.Component {
     onMaskClick: noop,
     clickMaskToClose: true,
     onClose: noop,
-    onMenuChange: noop,
+    onMenuClick: noop,
     autoClose: true,
     showCancel: false,
     cancelText: '取消',
@@ -42,12 +42,12 @@ export default class ActionSheet extends React.Component {
     super(props)
   }
 
-  onMenuClick = (key) => {
-    const { autoClose, onMenuChange, onClose } = this.props
+  handleMenuClick = (key) => {
+    const { autoClose, onMenuClick, onClose } = this.props
     autoClose && onClose()
-    onMenuChange(key)
+    onMenuClick(key)
   }
-  onMaskClick = (e) => {
+  handleMaskClick = (e) => {
     const {clickMaskToClose,onClose,onMaskClick} = this.props
     clickMaskToClose && onClose()
     onMaskClick(e)
@@ -61,14 +61,14 @@ export default class ActionSheet extends React.Component {
       [className]: className
     })
     return (
-      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} onClickAway={this.onMaskClick} {...others}>
+      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} onClickAway={this.handleMaskClick} {...others}>
         <ul className={cls}>
           { title ? <li>{title}</li> : null}
           {menus.map((el, index) => {
-            return <li key={index} onClick={() => this.onMenuClick(index)}>{el}</li>
+            return <li key={index} onClick={() => this.handleMenuClick(index)}>{el}</li>
           })}
           {showCancel &&
-          <li className={`${prefixCls}_action_cancel`} key={-1} onClick={() => this.onMenuClick(-1)}>{cancelText}</li>
+          <li className={`${prefixCls}_action_cancel`} key={-1} onClick={() => this.handleMenuClick(-1)}>{cancelText}</li>
           }
         </ul>
       </Modal>
