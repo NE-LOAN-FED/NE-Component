@@ -17,6 +17,11 @@ $prefix: NEUI;
         display: none;
       }
     }
+    &_process {
+      .#{$prefix}_flow_body_title {
+        color: $text_primary;
+      }
+    }
     &_finish {
       .#{$prefix}_flow_tail {
         background-color: $red_primary;
@@ -40,20 +45,10 @@ $prefix: NEUI;
       font-size: pxToRem(26);
       white-space: nowrap;
       text-align: center;
-      bottom: pxToRem(-40);
+      top: pxToRem(40);
       left: 50%;
       transform: translate(-50%, 0);
-    }
-    &_desc {
-      margin: pxToRem(10) 0 0 0;
-      position: absolute;
-      font-size: pxToRem(20);
       color: $text_secondary;
-      white-space: nowrap;
-      text-align: center;
-      bottom: pxToRem(-40);
-      left: 50%;
-      transform: translate(-50%, 0);
     }
     &_finish {
       font-size: pxToRem(32);
