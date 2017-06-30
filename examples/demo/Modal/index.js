@@ -86,6 +86,7 @@ export default class ModalPage extends Component {
       showActionSheet: false
     })
   }
+
   showToast = () => {
     this.setState({
       showToast: true,
@@ -93,7 +94,6 @@ export default class ModalPage extends Component {
       msg: 'Jello'
     },()=>{
       setTimeout(()=>{
-
       this.setState({
         showToast: true,
         timeout: 2000,
@@ -131,7 +131,15 @@ export default class ModalPage extends Component {
           Are you a beautiful girl?
         </Dialog>
         <Button onClick={this.openActionSheet}>Click to open a ActionSheet</Button>
-        <ActionSheet items={[<a href='/form'>你好</a>, '我好']} show={showActionSheet} onClose={this.handleActionClose} />
+        <ActionSheet
+          menus={[<a href='#form'>你好</a>, '我好']}
+          show={showActionSheet}
+          showCancel
+          onClose={this.handleActionClose}
+          onMenuClick={this.handleActionChange}
+          clickMaskToClose={true}
+          onMaskClick={e => console.log(e)}
+        />
       </section>
     )
   }
