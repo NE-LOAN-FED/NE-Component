@@ -48,11 +48,11 @@ class Toast extends React.Component {
     if (nextProps.show !== this.state.show) {
       if (nextProps.show) {
         this.show()
-        this.autoClose(nextProps.timeout)
       } else {
         this.close()
       }
     }
+    this.autoClose(nextProps.timeout)
   }
 
   componentWillUnmount() {

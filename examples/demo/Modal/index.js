@@ -35,6 +35,7 @@ export default class ModalPage extends Component {
       phone: '',
       formData: {},
       msg: '',
+      timeout: 2000,
       showToast: false,
       showAlert: false,
       showActionSheet: false
@@ -85,12 +86,28 @@ export default class ModalPage extends Component {
       showActionSheet: false
     })
   }
+  showToast = () => {
+    this.setState({
+      showToast: true,
+      timeout: -1,
+      msg: 'Jello'
+    },()=>{
+      setTimeout(()=>{
 
+      this.setState({
+        showToast: true,
+        timeout: 2000,
+        msg: 'Hello World'
+      })
+      },2000)
+    })
+  }
   render () {
-    const {msg, showToast, showModal, showAlert, showActionSheet} = this.state
+    const {msg, showToast, showModal, showAlert, showActionSheet,timeout} = this.state
     return (
       <section>
-        <Toast content={msg} show={showToast} onClose={this.closeToast} />
+        <Button onClick={this.showToast} />
+        <Toast content={msg} show={showToast} onClose={this.closeToast} timeout={timeout}/>
         <div className='page--header'>
           <h1 className='page-title'>Modal</h1>
           <p className='page--desc'>模态窗</p>
