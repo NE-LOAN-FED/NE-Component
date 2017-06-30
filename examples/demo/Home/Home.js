@@ -94,7 +94,7 @@ class Home extends React.Component {
     const {msg, showToast, showModal, showAlert, formData, phone, gender} = this.state
     const {isComplete} = formData
 
-    const Links = ['form', 'button', 'cells', 'panel', 'picker', 'modal', 'collapse', 'icon', 'noticebar', 'tab']
+    const Links = ['form', 'button', 'cells', 'panel', 'picker', 'modal', 'collapse', 'icon', 'noticebar']
     return (
       <section className='page-home'>
         <Toast content={msg}
