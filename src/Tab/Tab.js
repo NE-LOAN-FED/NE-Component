@@ -112,9 +112,20 @@ export default class Tab extends Component {
       [`${prefixCls}_tab`]: true,
       [className]: className
     })
+
+    const barIndex = function(children, activeIndex) {
+      let index
+      children.forEach((child, i) => {
+        if (child.key == activeIndex) {
+          index = i
+        }
+      });
+      return index
+    }(children, activeIndex)
+
     const percent = (100 / children.length).toFixed(1)
-    const percentLeft = parseInt(activeIndex, 10) * percent
-    const percentRight = 100 - (parseInt(activeIndex, 10) + 1) * percent
+    const percentLeft = barIndex * percent
+    const percentRight = 100 - (barIndex + 1) * percent
 
     return (
       <div className={cls}>
