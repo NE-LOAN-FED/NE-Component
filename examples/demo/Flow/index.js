@@ -18,7 +18,7 @@ export default class FlowPage extends React.Component {
   handleNext = () => {
     let { current } = this.state
     this.setState({
-      current: current === 4 ? 0 : ++current
+      current: current === 3 ? 0 : ++current
     })
   }
 
