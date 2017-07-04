@@ -34,10 +34,10 @@ class FlowItem extends React.Component {
         <div className={`${prefixCls}_flow_body`}>
           <div className={`${prefixCls}_flow_body_main`}>
             { ['wait', 'process'].indexOf(status) !== -1 &&
-              <span className={`${prefixCls}_flow_body_${status}`}>{number}</span>
+            <span className={`${prefixCls}_flow_body_${status}`}>{number}</span>
             }
             { status === 'finish' &&
-              <Icon type="success" className={`${prefixCls}_flow_body_${status}`}/>
+            <Icon type="success" className={`${prefixCls}_flow_body_${status}`}/>
             }
           </div>
           <p className={`${prefixCls}_flow_body_title`}>{ title }</p>
