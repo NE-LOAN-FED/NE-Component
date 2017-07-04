@@ -46,9 +46,9 @@ export default class TabPage extends Component {
           <p className="page--desc">选项卡列表</p>
         </div>
         <h3>Normal</h3>
-        <Tab defaultActiveIndex={1} onChange={this.onTabChange}>
+        <Tab defaultActiveIndex="key1" onChange={this.onTabChange}>
           {tabs.map((item, index) => {
-            return <Tab.Item title={item.title} key={index} disabled={item.disabled}>内容：{item.title}</Tab.Item>
+            return <Tab.Item title={item.title} key={`key${index}`} disabled={item.disabled}>内容：{item.title}</Tab.Item>
           })}
         </Tab>
         <h3>Controlled</h3>
