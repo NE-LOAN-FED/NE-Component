@@ -1,7 +1,8 @@
 language: node_js
 node_js:
   - "4"
-  - "5"
+  - "6"
+  - "8"
 before_install:
   - npm i -g npm@5.0.3
 install:
