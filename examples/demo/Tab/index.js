@@ -40,13 +40,13 @@ export default class TabPage extends Component {
   render() {
     const { tabs, activeIndex } = this.state
     return (
-      <section className="page_collapse">
-        <div className="page--header">
-          <h1 className="page-title">Tab</h1>
-          <p className="page--desc">选项卡列表</p>
+      <section className='page_collapse'>
+        <div className='page--header'>
+          <h1 className='page-title'>Tab</h1>
+          <p className='page--desc'>选项卡列表</p>
         </div>
         <h3>Normal</h3>
-        <Tab defaultActiveIndex="key1" onChange={this.onTabChange}>
+        <Tab defaultActiveIndex='key1' onChange={this.onTabChange}>
           {tabs.map((item, index) => {
             return <Tab.Item title={item.title} key={`key${index}`} disabled={item.disabled}>内容：{item.title}</Tab.Item>
           })}

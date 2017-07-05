@@ -15,7 +15,7 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib --copy-files && cp dist/ne.min.css lib/ne.min.css",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files && cp dist/ne.min.css es/ne.min.css",
     "build": "npm run clean && npm run build:umd && npm run build:cjs && npm run build:es",
-    "eslint": "node ./node_modules/eslint/bin/eslint.js ./src",
+    "lint": "node ./node_modules/eslint/bin/eslint.js ./src || eslint ./src",
     "scsslint": "node ./node_modules/eslint/bin/eslint.js ./",
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "npm test --watch"
@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.7.6",
-    "babel": "^6.5.2",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.11.4",
     "babel-eslint": "^7.1.1",
@@ -49,7 +48,9 @@
     "eslint": "^3.17.0",
     "eslint-config-standard": "^7.0.0",
     "eslint-config-standard-jsx": "^3.3.0",
+    "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.2.0",
+    "eslint-plugin-standard": "^3.0.1",
     "exports-loader": "^0.6.4",
     "express": "^4.15.0",
     "extract-text-webpack-plugin": "^2.1.0",
