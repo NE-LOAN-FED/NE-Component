@@ -442,9 +442,9 @@ class Picker extends React.Component {
     })
 
     return (
-      <div className={`${className || ''} ${prefixCls}_picker`} ref={(ref) => { this.component = ref } }>
-        <div className={`${prefixCls}_picker_indicator`} ref={(ref) => { this.indicator = ref } }></div>
-        <div className={`${prefixCls}_picker_content`} ref={(ref) => { this.content = ref } }>
+      <div className={`${className || ''} ${prefixCls}_picker`} ref={(ref) => { this.component = ref }}>
+        <div className={`${prefixCls}_picker_indicator`} ref={(ref) => { this.indicator = ref }} />
+        <div className={`${prefixCls}_picker_content`} ref={(ref) => { this.content = ref }}>
           {items}
         </div>
       </div>
@@ -453,4 +453,3 @@ class Picker extends React.Component {
 }
 
 export default Picker
-

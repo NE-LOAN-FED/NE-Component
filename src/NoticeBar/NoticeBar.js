@@ -53,7 +53,7 @@ export default class NoticeBar extends Component {
           <div
             className='tail-icon'
             onClick={this.handleClose}>
-            {closeIcon ? closeIcon : <Icon type='close' />}
+            {closeIcon || <Icon type='close' />}
           </div>
         break
       default:

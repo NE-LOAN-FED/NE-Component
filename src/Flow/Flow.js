@@ -37,12 +37,12 @@ class FlowItem extends React.Component {
             <span className={`${prefixCls}_flow_body_${status}`}>{number}</span>
             }
             { status === 'finish' &&
-            <Icon type="success" className={`${prefixCls}_flow_body_${status}`}/>
+            <Icon type='success' className={`${prefixCls}_flow_body_${status}`} />
             }
           </div>
           <p className={`${prefixCls}_flow_body_title`}>{ title }</p>
         </div>
-        <div className={`${prefixCls}_flow_tail`}></div>
+        <div className={`${prefixCls}_flow_tail`} />
       </div>
     )
   }
@@ -78,11 +78,11 @@ export default class Flow extends React.Component {
             key: el.key || index
           }
           if (index === current) {
-            props.status = 'process';
+            props.status = 'process'
           } else if (index < current) {
-            props.status = 'finish';
+            props.status = 'finish'
           } else {
-            props.status = 'wait';
+            props.status = 'wait'
           }
           return React.cloneElement(el, props)
         })}
