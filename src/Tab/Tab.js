@@ -49,6 +49,23 @@ export default class Tab extends Component {
   constructor(props) {
     super(props)
 
+    this.state = {
+      activeIndex: this.getActiveIndex(props)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if ('activeIndex' in nextProps) {
+      this.setState({
+        activeIndex: nextProps.activeIndex
+      })
+    }
+  }
+  /**
+   * 获取默认 activeIndex
+   * @return {string}
+   */
+  getActiveIndex = (props) => {
     let activeIndex
     if ('activeIndex' in props) {
       activeIndex = props.activeIndex
@@ -65,21 +82,10 @@ export default class Tab extends Component {
         return index
       }(props))
     }
-
-    this.state = {
-      activeIndex
-    }
+    return activeIndex + ''
   }
 
-  componentWillReceiveProps(nextProps) {
-    if ('activeIndex' in nextProps) {
-      this.setState({
-        activeIndex: nextProps.activeIndex
-      })
-    }
-  }
-
-  checkHeaderClass = (index, disabled) => {
+  getHeaderClass = (index, disabled) => {
     let { activeIndex } = this.state
     const { prefixCls } = this.props
     if ('activeIndex' in this.props) {
@@ -105,7 +111,7 @@ export default class Tab extends Component {
     const { children, className, prefixCls, animated } = this.props
     let { activeIndex } = this.state
     if ('activeIndex' in this.props) {
-      activeIndex = this.props.activeIndex
+      activeIndex = this.props.activeIndex + ''
     }
     const cls = classname({
       [`${prefixCls}_tab`]: true,
@@ -133,7 +139,7 @@ export default class Tab extends Component {
             return (
               <div
                 key={el.key}
-                className={this.checkHeaderClass(el.key, el.props.disabled)}
+                className={this.getHeaderClass(el.key, el.props.disabled)}
                 onClick={() => this.handleTabClick(el.key, el.props.disabled)}
               >
                 { el.props.title }
