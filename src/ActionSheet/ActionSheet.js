@@ -38,10 +38,6 @@ export default class ActionSheet extends React.Component {
     menus: []
   }
 
-  constructor (props) {
-    super(props)
-  }
-
   handleMenuClick = (key) => {
     const { autoClose, onMenuClick, onClose } = this.props
     autoClose && onClose()

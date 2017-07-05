@@ -88,7 +88,7 @@ export default class Tab extends Component {
     if (disabled) {
       return `${prefixCls}_tab_header_item disabled`
     }
-    return activeIndex == index ? `${prefixCls}_tab_header_item active` : `${prefixCls}_tab_header_item`
+    return activeIndex === index ? `${prefixCls}_tab_header_item active` : `${prefixCls}_tab_header_item`
   }
 
   handleTabClick = (index, disabled) => {
@@ -115,7 +115,7 @@ export default class Tab extends Component {
     const barIndex = (function(children, activeIndex) {
       let index
       children.forEach((child, i) => {
-        if (child.key == activeIndex) {
+        if (child.key === activeIndex) {
           index = i
         }
       })
@@ -146,7 +146,7 @@ export default class Tab extends Component {
           {children.map((el) => {
             return React.cloneElement(el, {
               key: el.key,
-              isShow: el.key == activeIndex
+              isShow: el.key === activeIndex
             })
           })}
         </div>

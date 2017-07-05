@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import classNames from 'classnames'
-import {isFormComplete, formPure, isFromValidate} from './FormUtils'
+import { isFormComplete, formPure, isFromValidate } from './FormUtils'
 import isEqual from 'lodash/isEqual'
 
 const PropTypes = React.PropTypes
@@ -24,7 +24,7 @@ const noop = () => {
 }
 
 export default class Form extends React.PureComponent {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       isComplete: false,
@@ -42,9 +42,8 @@ export default class Form extends React.PureComponent {
     this.setStateAndCurrentStatus = function (nextState, nextSTATUS) {
       this.currentState = nextState
       this.setState(nextState, () => {
-        /* eslint no-unused-expressions:0 */
+        // eslint-disable-next-line
         typeof nextSTATUS === 'undefined' ? this.CURRENT_STATUS = nextSTATUS : null
-        /* eslint no-unused-expressions:1 */
       })
     }
   }
@@ -61,12 +60,12 @@ export default class Form extends React.PureComponent {
     onSubmit: noop
   }
 
-  componentWillMount() {
+  componentWillMount () {
     this.children = this.collectFormField(this.props.children)
     this.initFormDataStructure()
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (!isEqual(nextProps.children, this.props.children) && this.CURRENT_STATUS !== STATUS.Submit) {
       this.children = this.collectFormField(nextProps.children)
       if (this.CURRENT_STATUS === STATUS.Normal) {
@@ -75,7 +74,7 @@ export default class Form extends React.PureComponent {
     }
   }
 
-  get data() {
+  get data () {
     return this.state
   }
 
@@ -96,7 +95,7 @@ export default class Form extends React.PureComponent {
      */
     const Fields = this.field = []
 
-    function getChildList(children) {
+    function getChildList (children) {
       return React.Children.map(children, (el, i) => {
         // 只要 Name 以 _Field 开头，就认为是需要 From 管理的组件
         if (!el || el === null) return null
@@ -134,7 +133,7 @@ export default class Form extends React.PureComponent {
    * 更新子表单的基础数据
    * @param {object} props 传入的 props
    */
-  updateFieldData(props) {
+  updateFieldData (props) {
     return {
       value: props.value,
       errorMsg: props.errorMsg || `${props.name} 填写错误`,
@@ -280,7 +279,7 @@ export default class Form extends React.PureComponent {
     this.formSubmit()
   }
 
-  render() {
+  render () {
     const prefix = 'NEUI'
     const {className} = this.props
     const cls = classNames({
