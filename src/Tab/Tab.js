@@ -20,22 +20,21 @@ class TabItem extends Component {
   render() {
     const { children, isShow } = this.props
     return (
-      <div className="NEUI_tab_content_item" style={{'display': (isShow ? 'block' : 'none')}}>{ children }</div>
+      <div className='NEUI_tab_content_item' style={{'display': (isShow ? 'block' : 'none')}}>{ children }</div>
     )
   }
 }
-
 
 export default class Tab extends Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     defaultActiveIndex: PropTypes.oneOfType([ // 默认选项卡index
       PropTypes.number,
-      PropTypes.string,
+      PropTypes.string
     ]),
     activeIndex: PropTypes.oneOfType([ // 当前选项卡index
       PropTypes.number,
-      PropTypes.string,
+      PropTypes.string
     ]),
     onChange: PropTypes.func, // 切换选项卡的回调
     animated: PropTypes.bool // 切换是否有动画
@@ -52,19 +51,19 @@ export default class Tab extends Component {
 
     let activeIndex
     if ('activeIndex' in props) {
-      activeIndex = props.activeIndex;
+      activeIndex = props.activeIndex
     } else if ('defaultActiveIndex' in props) {
-      activeIndex = props.defaultActiveIndex;
+      activeIndex = props.defaultActiveIndex
     } else {
-      activeIndex = function(props) {
+      activeIndex = (function(props) {
         let index
         props.children.forEach(child => {
           if (!index && !child.props.disabled) {
             index = child.key
           }
-        });
+        })
         return index
-      }(props)
+      }(props))
     }
 
     this.state = {
@@ -75,8 +74,8 @@ export default class Tab extends Component {
   componentWillReceiveProps(nextProps) {
     if ('activeIndex' in nextProps) {
       this.setState({
-        activeIndex: nextProps.activeIndex,
-      });
+        activeIndex: nextProps.activeIndex
+      })
     }
   }
 
@@ -113,15 +112,15 @@ export default class Tab extends Component {
       [className]: className
     })
 
-    const barIndex = function(children, activeIndex) {
+    const barIndex = (function(children, activeIndex) {
       let index
       children.forEach((child, i) => {
         if (child.key == activeIndex) {
           index = i
         }
-      });
+      })
       return index
-    }(children, activeIndex)
+    }(children, activeIndex))
 
     const percent = (100 / children.length).toFixed(1)
     const percentLeft = barIndex * percent
@@ -141,7 +140,7 @@ export default class Tab extends Component {
               </div>
             )
           })}
-          <div className={classname({[`${prefixCls}_ink_bar`]: true, bar_animate: animated})} style={{ 'left': percentLeft + '%', 'right': percentRight + '%' }}></div>
+          <div className={classname({[`${prefixCls}_ink_bar`]: true, bar_animate: animated})} style={{ 'left': percentLeft + '%', 'right': percentRight + '%' }} />
         </div>
         <div className={`${prefixCls}_tab_content`}>
           {children.map((el) => {

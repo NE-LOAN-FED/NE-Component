@@ -190,7 +190,7 @@ export default class CellInput extends React.Component {
         <input disabled={disabled}
           name={name}
           value={this.state.value}
-          ref={(ref) => { this.Input = ref } }
+          ref={(ref) => { this.Input = ref }}
           onChange={this.onChange}
           onFocus={this.onFocus}
           {...other}

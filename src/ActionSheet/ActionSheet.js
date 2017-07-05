@@ -48,7 +48,7 @@ export default class ActionSheet extends React.Component {
     onMenuClick(key)
   }
   handleMaskClick = (e) => {
-    const {clickMaskToClose,onClose,onMaskClick} = this.props
+    const {clickMaskToClose, onClose, onMaskClick} = this.props
     clickMaskToClose && onClose()
     onMaskClick(e)
   }
