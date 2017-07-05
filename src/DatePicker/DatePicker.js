@@ -269,7 +269,7 @@ class DatePicker extends React.Component {
   renderContent() {
     const { children, className, prefixCls, confirmContent, cancelContent, classNames } = this.props
     const content = this.getContent().map(function (c, i) {
-      return <Picker className={`${prefixCls}_date_picker_content_item`} {...c}></Picker>
+      return <Picker className={`${prefixCls}_date_picker_content_item`} {...c} />
     })
     return (
       <div className={`${className || ''} ${prefixCls}_date_picker_popup`} >
@@ -287,8 +287,8 @@ class DatePicker extends React.Component {
     return (
       <div className={`${prefixCls}_date_picker`} onClick={this.onClick}>
         {selectedDateFormat ? <span className={`${prefixCls}_date_picker_date`}>{selectedDateFormat}</span> : <span className={`${prefixCls}_date_picker_placeholder`}>请选择</span>}
-        <Icon type="arrow" />
-        {this.state.show ? <RenderLayer className={`${prefixCls}_date_modal`} render={this.renderContent} show={true} maskClosable={false}/> : null}
+        <Icon type='arrow' />
+        {this.state.show ? <RenderLayer className={`${prefixCls}_date_modal`} render={this.renderContent} show maskClosable={false} /> : null}
       </div>
     )
   }

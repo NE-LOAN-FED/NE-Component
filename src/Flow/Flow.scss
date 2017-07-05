@@ -1,0 +1,100 @@
+@import "../_style/_config";
+@import "../_style/_utils";
+
+$prefix: NEUI;
+.#{$prefix}_flow {
+  display: flex;
+  padding: pxToRem(30) pxToRem(60);
+  justify-content: space-between;
+  align-items: center;
+  &_item {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    &:last-child {
+      flex: 0;
+      .#{$prefix}_flow_tail {
+        display: none;
+      }
+    }
+    &_process {
+      .#{$prefix}_flow_body_title {
+        color: $text_primary;
+      }
+    }
+    &_finish {
+      .#{$prefix}_flow_tail {
+        background-color: $red_primary;
+      }
+    }
+  }
+  &_tail {
+    height: 2px;
+    background-color: $border_primary;
+    width: 100%;
+  }
+  &_body {
+    position: relative;
+    &_main {
+      display: flex;
+      align-items: center;
+    }
+    &_title {
+      margin: 0;
+      position: absolute;
+      font-size: pxToRem(26);
+      white-space: nowrap;
+      text-align: center;
+      top: pxToRem(40);
+      left: 50%;
+      transform: translate(-50%, 0);
+      color: $text_secondary;
+    }
+    &_finish {
+      font-size: pxToRem(32);
+      height: pxToRem(32);
+    }
+    &_wait {
+      width: pxToRem(32);
+      height: pxToRem(32);
+      font-size: pxToRem(20);
+      text-align: center;
+      line-height: pxToRem(32);
+      border-radius: 50%;
+      border: 1px solid $text_secondary;
+      color: $text_secondary;
+    }
+    &_process {
+      width: pxToRem(32);
+      height: pxToRem(32);
+      font-size: pxToRem(20);
+      text-align: center;
+      line-height: pxToRem(32);
+      border-radius: 50%;
+      border: 1px solid $red_primary;
+      background-color: $red_primary;
+      color: $white;
+    }
+  }
+}
+.#{$prefix}_flow_vertical {
+  align-items: flex-start;
+  flex-direction: column;
+  height: 100%;
+  .#{$prefix}_flow_item {
+    flex-direction: column;
+  }
+  .#{$prefix}_flow_tail {
+    height: 100%;
+    background-color: $border_primary;
+    width: 2px;
+  }
+  .#{$prefix}_flow_body_title {
+    text-align: left;
+    left: pxToRem(50);
+    top: 50%;
+    transform: translate(0, -50%);
+    display: flex;
+    align-items: center;
+  }
+}

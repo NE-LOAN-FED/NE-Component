@@ -20,7 +20,8 @@ import Modal from './demo/Modal'
 import Collapse from './demo/Collapse'
 import Icon from './demo/Icon'
 import NoticeBar from './demo/NoticeBar'
-
+import Tab from './demo/Tab'
+import Flow from './demo/Flow'
 if (module.hot) {
   module.hot.accept()
 }
@@ -41,6 +42,8 @@ ReactDom.render((
       <Route path='collapse' component={Collapse} />
       <Route path='icon' component={Icon} />
       <Route path='noticebar' component={NoticeBar} />
+      <Route path='tab' component={Tab} />
+      <Route path='flow' component={Flow} />
     </Route>
   </Router>
 ), root)
