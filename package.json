@@ -15,7 +15,7 @@
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib --copy-files && cp dist/ne.min.css lib/ne.min.css",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files && cp dist/ne.min.css es/ne.min.css",
     "build": "npm run clean && npm run build:umd && npm run build:cjs && npm run build:es",
-    "lint": "node ./node_modules/eslint/bin/eslint.js ./src",
+    "lint": "node ./node_modules/eslint/bin/eslint.js ./src || eslint ./src",
     "scsslint": "node ./node_modules/eslint/bin/eslint.js ./",
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "npm test --watch"
