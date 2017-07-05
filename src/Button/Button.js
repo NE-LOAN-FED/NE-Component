@@ -3,6 +3,7 @@
  */
 import React from 'react'
 import classNames from 'classnames'
+import {Icon} from '../index'
 
 export default class Button extends React.Component {
 
@@ -24,7 +25,7 @@ export default class Button extends React.Component {
   }
 
   render() {
-    const {role, type, size, disabled, style, className, children, ...others} = this.props
+    const {role, type, size, disabled, style, className, children, loading, icon, ...others} = this.props
     const cls = classNames({
       NEUI_button: true,
       NEUI_button_style_normal: style === 'normal',
@@ -40,6 +41,8 @@ export default class Button extends React.Component {
               disabled={disabled}
               type={type}
               {...others}>
+        {loading ? <Icon type="loading"/> : null}
+        {!loading && icon ? <Icon type={icon}/> : null}
         {children}
       </button>
     )
