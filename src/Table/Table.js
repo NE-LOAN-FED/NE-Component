@@ -1,5 +1,5 @@
 /*
- * @Author: hzzhanfenghai 
+ * @Author: hzzhanfenghai
  * @Date: 2017-07-06
  * @Last Modified by: hzzhanfenghai
  */
@@ -21,7 +21,7 @@ export default class Table extends React.Component {
     const cls = classNames({
       NEUI_table: true,
       NEUI_table_no_cell_border: !cellBorder,
-      [className] : className
+      [className]: className
     })
     return (
       <table className={cls}>
