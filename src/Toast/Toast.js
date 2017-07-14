@@ -85,9 +85,9 @@ class Toast extends React.Component {
   }
 
   render() {
-    const { prefixCls, content, icon, show, transitionName, className, isLockScreen, prepareStyle } = this.props
+    const { prefixCls, content, icon, show, transitionName, transitionTimeOut, className, isLockScreen, prepareStyle } = this.props
     return (
-      <Modal show={show} transitionName={transitionName} isLockScreen={isLockScreen} prepareStyle={prepareStyle}>
+      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} isLockScreen={isLockScreen} prepareStyle={prepareStyle}>
         <div className={`${prefixCls}_toast ${className || ''}`}>
           {icon !== '' ? <div className={`${prefixCls}_toast_icon`}><Icon type={icon} /></div> : null}
           <span>{content}</span>
