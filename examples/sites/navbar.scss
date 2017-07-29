@@ -1,0 +1,47 @@
+.edit-doc-btn {
+  color: red !important;
+}
+
+.slidedown-transition {
+  transition: all .3s ease-in-out;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.slidedown-enter,
+.slidedown-leave {
+  max-height: 0 !important;
+  opacity: 0.3;
+}
+
+.nav {
+  background-color: #f9fafb;
+  color: #4c555a;
+  font-size: 14px;
+  min-height: 100%;
+  padding: 42px 0 42px 20px;
+}
+
+.nav-label {
+  color: #9da5b3;
+  font-weight: bold;
+  padding: 8px;
+  display: block;
+}
+
+.nav-link {
+  padding: 8px;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: color .2s;
+
+  &.is-active {
+    color: #4078c0;
+    border-right: 2px solid;
+  }
+
+  &:hover {
+    color: #4078c0;
+  }
+}
