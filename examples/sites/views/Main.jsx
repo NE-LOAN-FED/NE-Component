@@ -22,12 +22,12 @@ export default class Main extends React.Component {
     this.renderContent()
   }
 
-
+  
   componentWillReceiveProps() {
     this.renderContent()
   }
 
-  renderContent() {
+  renderContent(){
     const { query } = this.props.location
     var item = getItem(query.component, list)
     // console.log(list)
@@ -44,7 +44,7 @@ export default class Main extends React.Component {
       <main className='row main'>
         <Menu />
         <Content item={this.state.item}>
-          {this.props.children}
+            {this.props.children}
         </Content>
         <Phone />
       </main>

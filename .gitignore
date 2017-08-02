@@ -13,6 +13,8 @@
 # Optional npm cache directory
 .npm
 
+# cache folders
+_cache
 # node-waf configuration
 .lock-wscript
 

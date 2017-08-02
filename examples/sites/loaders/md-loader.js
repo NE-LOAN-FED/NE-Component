@@ -16,7 +16,8 @@ module.exports = function (source) {
 
   var parser
   // var params = loaderUtils.parseQuery(this.query)
-  var params = (this.query === '' ? {} : loaderUtils.parseQuery(this.query));
+  // var params = (this.query === '' ? {} : loaderUtils.parseQuery(this.query));
+  var params = (this.query === '' ? {} : this.query)
   var opts = Object.assign({}, params)
 
 

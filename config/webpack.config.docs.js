@@ -50,20 +50,22 @@ module.exports = {
       }
     }, {
       test: /\.(md)$/,
-      use: [
-        {
-          loader: 'my-loader'
+      use: {
+        loader: 'my-loader',
+        options: {
+          preprocess: function (MarkdownIt, Source) {
+            MarkdownIt.renderer.rules.table_open = function () {
+              return '<div class="table-container"><table class="table">';
+            };
+            MarkdownIt.renderer.rules.table_close = function () {
+              return '</table></div>';
+            };
+            return Source;
+          }
         }
-        // {
-        //   loader: "html-loader"
-        // },
-        // {
-        //   loader: "markdown-loader",
-        //   options: {
-        //     /* your options here */
-        //   }
-        // }
-      ]
+      }
+      // loader: 'my-loader',
+
     }, {
       test: /\.(css|scss|sass)$/,
       use: ExtractTextPlugin.extract({
