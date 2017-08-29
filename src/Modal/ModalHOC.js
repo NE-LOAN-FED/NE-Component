@@ -16,7 +16,7 @@ export default function ModalHOC(options) {
         onClose: PropTypes.func,  // modal close 事件
         isLockScreen: PropTypes.bool, // 是否添加遮罩
         onMaskClick: PropTypes.func,  // 遮罩点击事件
-        clickMaskToClose: PropTypes.bool, // 是否点击遮罩关闭
+        isClickMaskToClose: PropTypes.bool, // 是否点击遮罩关闭
         transitionName: PropTypes.string, // 动画的类名
         transitionTimeOut: PropTypes.number, // 动画的时间
         prepareStyle: PropTypes.object // 覆盖默认的 Modal 样式
@@ -26,19 +26,19 @@ export default function ModalHOC(options) {
         onClose: noop,
         isLockScreen: true,
         onMaskClick: noop,
-        clickMaskToClose: false,
+        isClickMaskToClose: false,
         transitionName: 'verticalSlideTB',
         transitionTimeOut: 300,
         prepareStyle: {},
         ...options
       }
       handleMaskClick =(e) => {
-        const {onClose, clickMaskToClose, onMaskClick} = this.props
-        clickMaskToClose && onClose(e)
-        onMaskClick()
+        const {onClose, isClickMaskToClose, onMaskClick} = this.props
+        isClickMaskToClose && onClose(e)
+        onMaskClick(e)
       }
       renderContent = () => {
-        const { show, isLockScreen, onMaskClick, clickMaskToClose, transitionName, transitionTimeOut, prepareStyle, ...others } = this.props
+        const { show, isLockScreen, onMaskClick, isClickMaskToClose, transitionName, transitionTimeOut, prepareStyle, ...others } = this.props
         const style = {
           position: 'fixed',
           top: 0,
@@ -63,7 +63,7 @@ export default function ModalHOC(options) {
               transitionName={transitionName}
             >
               {show &&
-                <WrapComponent {...others} />
+                <WrapComponent {...others} show={show} />
               }
             </ReactCSSTransitionGroup>
             {isLockScreen && <Mask show={show} onClick={this.handleMaskClick} />}

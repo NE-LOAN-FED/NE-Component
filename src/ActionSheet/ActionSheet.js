@@ -10,7 +10,6 @@ const noop = () => { }
 class ActionSheet extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
-    show: PropTypes.bool,       // 显示
     onClose: PropTypes.func, // 关闭动作面板事件
     menus: PropTypes.array,   // 内容列表
     onMenuClick: PropTypes.func, // 选项点击事件
@@ -21,7 +20,6 @@ class ActionSheet extends React.Component {
 
   static defaultProps = {
     prefixCls: 'NEUI',
-    show: false,
     onClose: noop,
     onMenuClick: noop,
     autoClose: true,

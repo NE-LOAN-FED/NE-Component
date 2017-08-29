@@ -1,8 +1,8 @@
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
 import Icon from '../Icon'
-import Modal from '../Modal'
-
+import { ModalHOC } from '../Modal'
+import classname from 'classnames'
 const PropTypes = React.PropTypes
 
 const noop = () => { }
@@ -11,28 +11,17 @@ class Toast extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
     className: PropTypes.string,        // 添加toast class
-    show: PropTypes.bool,               // Toast是否显示
-    prepareStyle: PropTypes.any,         // 需要覆盖 Modal 的样式
     content: PropTypes.string,
     icon: PropTypes.string,
     onClose: PropTypes.func,            // 点击onClose 触发函数
-    timeout: PropTypes.number,          // 设置 Toast 指定时间隐藏， -1 不自动隐藏
-    isLockScreen: PropTypes.bool,       //  是否锁屏
-    transitionName: PropTypes.string,   // 动画的类名
-    transitionTimeOut: PropTypes.number // 动画的时间
+    timeout: PropTypes.number          // 设置 Toast 指定时间隐藏， -1 不自动隐藏
   }
   static defaultProps = {
     prefixCls: 'NEUI',
-    show: false,
     timeout: 2000,
     icon: '',
-    prepareStyle: {
-      zIndex: 1000
-    },
     onClose: noop,
-    isLockScreen: false,
-    transitionName: 'fade',
-    transitionTimeOut: 300
+    isLockScreen: false
   }
 
   constructor(props) {
@@ -86,15 +75,22 @@ class Toast extends React.Component {
 
   render() {
     const { prefixCls, content, icon, show, transitionName, transitionTimeOut, className, isLockScreen, prepareStyle } = this.props
+    const cls = classname({
+      [`${prefixCls}_toast`]: true,
+      [className]: className
+    })
     return (
-      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} isLockScreen={isLockScreen} prepareStyle={prepareStyle}>
-        <div className={`${prefixCls}_toast ${className || ''}`}>
-          {icon !== '' ? <div className={`${prefixCls}_toast_icon`}><Icon type={icon} /></div> : null}
-          <span>{content}</span>
-        </div>
-      </Modal>
+      <div className={cls}>
+        {icon !== '' ? <div className={`${prefixCls}_toast_icon`}><Icon type={icon} /></div> : null}
+        <span>{content}</span>
+      </div>
     )
   }
 }
 
-export default Toast
+export default ModalHOC({
+  prepareStyle: {
+    zIndex: 1000
+  },
+  transitionName: 'fade'
+})(Toast)

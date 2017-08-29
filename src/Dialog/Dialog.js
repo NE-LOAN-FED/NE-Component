@@ -21,7 +21,7 @@ class Dialog extends React.Component {
     onCancel: noop
   }
   render() {
-    const { prefixCls, confirmContent, headerContent, onConfirm, onCancel, cancelContent, className, ...others } = this.props
+    const { prefixCls, confirmContent, headerContent, onConfirm, onCancel, cancelContent, className, onClose, show, ...others } = this.props
     const confirmEle = confirmContent ? <button onClick={onConfirm} className={`${prefixCls}_dialog_confirm_button`}>{confirmContent}</button> : null
     const cancelEle = cancelContent ? <button onClick={onCancel} className={`${prefixCls}_dialog_cancel_button`}>{cancelContent}</button> : null
     const header = headerContent ? (

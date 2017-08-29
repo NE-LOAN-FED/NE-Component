@@ -107,7 +107,7 @@ export default class ModalPage extends Component {
     return (
       <section>
         <Button onClick={this.showToast} />
-        <Toast content={msg} show={showToast} onClose={this.closeToast} timeout={timeout} transitionTimeOut={10} />
+        <Toast content={msg} show={showToast} onClose={this.closeToast} timeout={timeout} isLockScreen />
         <div className='page--header'>
           <h1 className='page-title'>Modal</h1>
           <p className='page--desc'>模态窗</p>
@@ -116,6 +116,8 @@ export default class ModalPage extends Component {
         <Alert
           show={showModal}
           onClose={this.closeAlert}
+          isClickMaskToClose
+          className='test'
         >
           <h2>This is a Alert.</h2>
         </Alert>
@@ -137,7 +139,7 @@ export default class ModalPage extends Component {
           showCancel
           onClose={this.handleActionClose}
           onMenuClick={this.handleActionChange}
-          clickMaskToClose
+          isClickMaskToClose
           onMaskClick={e => console.log(e)}
         />
       </section>

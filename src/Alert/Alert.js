@@ -14,7 +14,7 @@ class Alert extends React.Component {
     onClose: noop
   }
   render() {
-    const { prefixCls, className, children, onClose, ...others } = this.props
+    const { prefixCls, className, children, onClose, show, ...others } = this.props
     const cls = classname({
       [`${prefixCls}_modal`]: true,
       [className]: className
@@ -32,6 +32,5 @@ class Alert extends React.Component {
   }
 }
 export default ModalHOC({
-  transitionName: 'verticalSlideTB',
-  transitionTimeOut: 300
+  transitionName: 'verticalSlideTB'
 })(Alert)

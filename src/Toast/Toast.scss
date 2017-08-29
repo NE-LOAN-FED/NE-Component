@@ -11,6 +11,7 @@ $toast: #{$prefixCls}_toast;
   text-align: center;
   padding: pxToRem(20);
   z-index: 1000;
+  position: relative;
   color: $white;
   font-size: $normalSize;
   &_modal {
