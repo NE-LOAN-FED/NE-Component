@@ -92,22 +92,22 @@ export default class ModalPage extends Component {
       showToast: true,
       timeout: -1,
       msg: 'Jello'
-    },()=>{
-      setTimeout(()=>{
-      this.setState({
-        showToast: true,
-        timeout: 2000,
-        msg: 'Hello World'
-      })
-      },2000)
+    }, () => {
+      setTimeout(() => {
+        this.setState({
+          showToast: true,
+          timeout: 2000,
+          msg: 'Hello World'
+        })
+      }, 2000)
     })
   }
   render () {
-    const {msg, showToast, showModal, showAlert, showActionSheet,timeout} = this.state
+    const {msg, showToast, showModal, showAlert, showActionSheet, timeout} = this.state
     return (
       <section>
         <Button onClick={this.showToast} />
-        <Toast content={msg} show={showToast} onClose={this.closeToast} timeout={timeout} transitionTimeOut={10}/>
+        <Toast content={msg} show={showToast} onClose={this.closeToast} timeout={timeout} transitionTimeOut={10} />
         <div className='page--header'>
           <h1 className='page-title'>Modal</h1>
           <p className='page--desc'>模态窗</p>
@@ -137,7 +137,7 @@ export default class ModalPage extends Component {
           showCancel
           onClose={this.handleActionClose}
           onMenuClick={this.handleActionChange}
-          clickMaskToClose={true}
+          clickMaskToClose
           onMaskClick={e => console.log(e)}
         />
       </section>

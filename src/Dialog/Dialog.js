@@ -1,37 +1,27 @@
 import React from 'react'
 const PropTypes = React.PropTypes
 import classname from 'classnames'
-import Modal from '../Modal'
+import { ModalHOC } from '../Modal'
 
 const noop = () => { }
 
 class Dialog extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
-    show: PropTypes.bool,       // dialog 显示
     onConfirm: PropTypes.func,  // dialog confirm 事件
     onCancel: PropTypes.func,   // dialog cancel 事件
     headerContent: PropTypes.node, // 头部内容
     confirmContent: PropTypes.node, // 确认内容
-    cancelContent: PropTypes.node,  // 取消内容
-    prepareStyle: PropTypes.any,         // 需要覆盖 Modal 的样式
-    transitionName: PropTypes.string, // 动画的类名
-    transitionTimeOut: PropTypes.number // 动画的时间
+    cancelContent: PropTypes.node  // 取消内容
   }
 
   static defaultProps = {
     prefixCls: 'NEUI',
-    show: false,
     onConfirm: noop,
-    onCancel: noop,
-    prepareStyle: {
-      zIndex: 900
-    },
-    transitionName: 'verticalSlideTB',
-    transitionTimeOut: 300
+    onCancel: noop
   }
   render() {
-    const { prefixCls, confirmContent, headerContent, onConfirm, onCancel, cancelContent, className, show, transitionName, transitionTimeOut, prepareStyle, ...others } = this.props
+    const { prefixCls, confirmContent, headerContent, onConfirm, onCancel, cancelContent, className, ...others } = this.props
     const confirmEle = confirmContent ? <button onClick={onConfirm} className={`${prefixCls}_dialog_confirm_button`}>{confirmContent}</button> : null
     const cancelEle = cancelContent ? <button onClick={onCancel} className={`${prefixCls}_dialog_cancel_button`}>{cancelContent}</button> : null
     const header = headerContent ? (
@@ -51,18 +41,16 @@ class Dialog extends React.Component {
       [className]: className
     })
     return (
-      <Modal show={show} transitionName={transitionName} transitionTimeOut={transitionTimeOut} prepareStyle={prepareStyle}>
-        <div className={cls} {...others}>
-          {header}
-          {content}
-          <div className={`${prefixCls}_dialog_confirm_box`}>
-            {cancelEle}
-            {confirmEle}
-          </div>
-        </div >
-      </Modal>
+      <div className={cls} {...others}>
+        {header}
+        {content}
+        <div className={`${prefixCls}_dialog_confirm_box`}>
+          {cancelEle}
+          {confirmEle}
+        </div>
+      </div >
     )
   }
 }
 
-export default Dialog
+export default ModalHOC()(Dialog)
