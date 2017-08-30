@@ -22,8 +22,7 @@ export default class Content extends React.Component {
     })
     return (
       <section className={contentCls}>
-        <div className='navbar-toggle-container'>
-        </div>
+
        {this.props.children}
       </section>
     )

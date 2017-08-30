@@ -13,7 +13,7 @@ import Home from './demo/Home'
 import Alert from './demo/Alert'
 import Form from './demo/Form'
 import Button from './demo/Button'
-import Cells from './demo/Cells'
+import Cell from './demo/Cell'
 import Panel from './demo/Panel'
 import Picker from './demo/Picker'
 import Modal from './demo/Modal'
@@ -34,7 +34,7 @@ ReactDom.render((
       <Route path='form' component={Form} />
       <Route path='alert' component={Alert} />
       <Route path='button' component={Button} />
-      <Route path='cells' component={Cells} />
+      <Route path='cell' component={Cell} />
       <Route path='panel' component={Panel} />
       <Route path='picker' component={Picker} />
       <Route path='modal' component={Modal} />

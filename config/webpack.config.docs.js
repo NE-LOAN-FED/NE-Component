@@ -8,7 +8,8 @@ const autoprefixer = require('autoprefixer')
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, '../examples/sites/index'),
+    app: ['webpack-dev-server/client', path.join(__dirname, '../examples/sites/index')],
+    demo: ['webpack-dev-server/client', path.join(__dirname, '../examples/index')],
     vendors: ['babel-polyfill', 'react', 'react-dom', 'react-router'],
   },
   devtool: 'cheap-module-eval-source-map',
@@ -51,7 +52,7 @@ module.exports = {
     }, {
       test: /\.(md)$/,
       use: {
-        loader: 'my-loader',
+        loader: 'react-for-markdown-loader',
         options: {
           preprocess: function (MarkdownIt, Source) {
             MarkdownIt.renderer.rules.table_open = function () {
@@ -95,7 +96,15 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../examples/sites/index.html'),
       hash: false,
+      chunks: ['app', 'vendors'],
       filename: path.join(cwd, 'sites/index.html'),
+      inject: true
+    }),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../examples/index.html'),
+      hash: false,
+      chunks: ['demo', 'vendors'],
+      filename: path.join(cwd, 'sites/demo.html'),
       inject: true
     }),
     new ExtractTextPlugin({

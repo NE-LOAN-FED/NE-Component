@@ -1,20 +1,7 @@
 import Main from './views/Main.jsx'
 
 import maps from './maps.js'
-const childRoutes = []
-maps.forEach((group) => {
-  group.list.forEach((item) => {
-    childRoutes.push({
-      path: item.name,
-      getComponent(nextState, cb) {
-        require.ensure([], require => {
-          cb(null, require(`../../src/${item.name}/README.md`).default)
-        }, item.name)
-      }
-    })
-  })
-})
-console.log(childRoutes)
+
 const routes = {
   component: Main,
   path: '/',
@@ -28,6 +15,7 @@ const routes = {
   }, {
     path: 'ActionSheet',
     getComponent(nextState, cb) {
+
       require.ensure([], require => {
         cb(null, require('../../src/ActionSheet/README.md').default)
       })
@@ -36,6 +24,7 @@ const routes = {
     path: 'Panel',
     getComponent(nextState, cb) {
       require.ensure([], require => {
+        console.log('Panel')
         cb(null, require('../../src/Panel/README.md').default)
       })
     }
