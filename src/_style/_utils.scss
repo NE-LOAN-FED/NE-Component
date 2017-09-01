@@ -1,5 +1,5 @@
 @function pxToRem($px) {
-  @return ($px/40)*1rem
+  @return ($px/50)*1rem
 }
 
 @mixin flexCenter {

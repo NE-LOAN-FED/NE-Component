@@ -6,7 +6,7 @@ $collapse: #{$prefixCls}_collapse;
 .#{$collapse} {
   border-top: 1px solid $border_primary;
   &:last-child {
-  border-bottom: 1px solid $border_primary;
+    border-bottom: 1px solid $border_primary;
   }
   .list_icon {
     transition: all 0.3s ease-in-out;
@@ -17,15 +17,21 @@ $collapse: #{$prefixCls}_collapse;
   }
 
   .list_content_wrap {
-    background: $white;
-    overflow: hidden;
+    border: 1px solid $border_primary;
+    border-left: none;
+    border-right: none;
+    background: #ebebeb;
+    position: relative;
     &.collapse {
       display: none;
     }
   }
 
   .list_content {
-    padding: pxToRem(20) 0 pxToRem(20) pxToRem(30);
+    font-size: $bigSize1;
+    margin: pxToRem(24) 0;
+    padding: 0 pxToRem(32);
+    line-height: 1.6;
   }
 }
 

@@ -3,18 +3,18 @@
 $font_size: pxToRem(24);
 .NEUI_panel {
   width: 100%;
-  padding: pxToRem(34) pxToRem(30);
+  padding: pxToRem(34) pxToRem(30) 0;
   background-color: $white;
-  font-size: pxToRem(22);
+  font-size: $smallSize;
   border-top: 1px solid $border_primary;
   border-bottom: 1px solid $border_primary;
   transition: height 0.3s ease-in-out;
   overflow: hidden;
   &_title {
-    font-size: $smallSize;
+    font-size: pxToRem(28);
     color: $text_highlight;
-    margin-bottom: pxToRem(16);
     margin-top: pxToRem(16);
+    margin-bottom: pxToRem(16);
     &:first-child {
       margin-top: 0;
     }
@@ -22,15 +22,11 @@ $font_size: pxToRem(24);
   &_item {
     display: flex;
     line-height: 1;
-    padding: pxToRem(16) 0;
+    padding: pxToRem(17) 0;
     height: pxToRem(56);
     justify-content: center;
     &:first-child {
       padding-top: 0;
-      height: pxToRem(40);
-    }
-    &:last-child {
-      padding-bottom: 0;
       height: pxToRem(40);
     }
   }
