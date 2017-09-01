@@ -3,14 +3,13 @@ import PropTypes from 'prop-types'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import RenderLayer from '../internal/RenderLayer'
 import Mask from '../internal/Mask'
-import Modal from './Modal.js'
-import classname from 'classnames'
-
+import histtNonReactStatic from 'hoist-non-react-statics'
 const noop = () => { }
-
+const getDisplayName = component => component.displayName || component.name || 'Component'
 export default function ModalHOC(options) {
   return function (WrapComponent) {
-    return class HOC extends React.Component {
+    class HOC extends React.Component {
+      static displayName = `HOC(${getDisplayName(WrapComponent)})`
       static propTypes = {
         show: PropTypes.bool,       // modal 显示
         onClose: PropTypes.func,  // modal close 事件
@@ -76,5 +75,7 @@ export default function ModalHOC(options) {
         )
       }
     }
+    histtNonReactStatic(HOC, WrapComponent)
+    return HOC
   }
 }
