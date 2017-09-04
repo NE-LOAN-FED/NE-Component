@@ -1,4 +1,4 @@
-# Collapse (实现不够友好，需要考虑重构)
+# Collapse
 通用行折叠列表，用来包裹其他需要折叠需求的具体组件。
 
 ## 代码示例
@@ -29,8 +29,8 @@ const collapseListData = questions.map((v, k) => {
 
 export default class CollapsePage extends Component {
 
-  handleCollapseListChange = (openListIdCollection) => {
-    console.log(openListIdCollection)
+  handleCollapseListChange = (id, isCollapse, openListIdCollection) => {
+    console.log(id, isCollapse, openListIdCollection)
   }
 
   render() {
@@ -60,24 +60,21 @@ export default class CollapsePage extends Component {
 ```
 
 ## API
-
-### Cell
 属性名 | 描述 | 类型 | 默认值
 --- | --- | --- | ---
 prefixCls | 样式前缀 | String | NEUI
 openListIdCollection | 当前所有打开状态组件的 ID 列表 | Array | []
 listCollection | 包裹组件渲染所需要的数据 | Array | []
 accordion | 是否打开手风琴模式 | bool | false
-onListChange(openListIdCollection) | 包裹组件状态发生变化时的回调函数 | Function | 无
+onListChange(id, isCollapse, openListIdCollection) | 包裹组件状态发生变化时的回调函数 | Function | 无
 subComponent | 要包裹的组件（需要自行实现打开关闭功能）| React.PropTypes.element | 无
-
-#### subComponent:React.PropTypes.element
+### CollapseHOC
+高阶组件，用来创建 subComponent. 创建的组件会接收当前的 isCollapse 来作为 props.
+### subComponent:React.PropTypes.element
 
 要包裹的组件，需要自己实现折叠功能。
-
-* [ ] TODO 做成一个高阶函数，以方便生成 Collapse 自组件。
-
-Collapse 会通过 clone 包裹的组件来传入 `data`,`onChange`,`id` 这三个参数。
+可以通过高级组件 CollapseHOC 来生成，当前的 collapse 状态会作为 props 传入。
+Collapse 会通过 clone 包裹的组件来传入 `data`,`id` 这两个参数。
 
 ```js
 renderList = () => {
@@ -87,7 +84,6 @@ renderList = () => {
       v.isCollapse = openListIdCollection.indexOf(k) === -1
       return React.cloneElement(subComponent, {
         data: v,
-        onChange: this.handleListChange,
         id: k,
         key: k,
       })
@@ -95,12 +91,8 @@ renderList = () => {
   }
 ```
 
-##### data:object
+#### data:object
 渲染所需要的数据,里面会包含一个 key 为 isCollapse 的参数，用来标识当前这个组件需要展示的状态。
 
-##### id
-由 Collapse 传递给的 ID，作为当前 Collapse 下面的唯一标识。
-
-##### onChange(id, nextCollapse:bool)
-组件需要在自己状态发生变化时调用这个函数来告诉 Collapse 组件当前变化的组件的 ID 和 它的下一个状态。
-
+#### id
+由 Collapse 传递给的包裹组件的 ID，作为当前 Collapse 下面的唯一标识。

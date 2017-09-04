@@ -50,8 +50,8 @@ const collapseListData = questions.map((v, k) => {
 })
 
 export default class CollapsePage extends Component {
-  handleCollapseListChange = (openListIdCollection) => {
-    console.log(openListIdCollection)
+  handleCollapseListChange = (id, collapse, openListIdCollection) => {
+    console.log(id, collapse, openListIdCollection)
   }
 
   render() {
