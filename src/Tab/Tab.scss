@@ -7,15 +7,15 @@ $prefix: NEUI;
   position: relative;
   &_header {
     display: flex;
-    height: pxToRem(72);
+    height: pxToRem(80);
     background-color: $white;
     position: relative;
     &_item {
       flex: 1;
       display: flex;
-      line-height: pxToRem(72);
       justify-content: center;
-      font-size: pxToRem(24);
+      align-items: center;
+      font-size: $normalSize;
       border-bottom: 1px solid $border_primary;
     }
     .active {
