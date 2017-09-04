@@ -7,22 +7,22 @@ $prefix: NEUI;
   position: relative;
   &_header {
     display: flex;
-    height: pxToRem(72);
+    height: pxToRem(80);
     background-color: $white;
     position: relative;
     &_item {
       flex: 1;
       display: flex;
-      line-height: pxToRem(72);
       justify-content: center;
-      font-size: pxToRem(24);
-      border-bottom: 1px solid $border_primary;
+      align-items: center;
+      font-size: $font-size-big;
+      border-bottom: 1px solid $border-color-primary;
     }
     .active {
-      color: $red_primary;
+      color: $red-primary;
     }
     .disabled {
-      color: $border_primary;
+      color: $border-color-primary;
       cursor: not-allowed;
     }
     .#{$prefix}_ink_bar {
@@ -30,7 +30,7 @@ $prefix: NEUI;
       height: 3px;
       bottom: 0;
       left: 0;
-      background-color: $red_primary;
+      background-color: $red-primary;
     }
     .bar_animate {
       transition: right 0.3s cubic-bezier(0.35, 0, 0.25, 1), left 0.3s cubic-bezier(0.35, 0, 0.25, 1) 0.09s;

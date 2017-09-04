@@ -12,10 +12,10 @@ $date_picker: #{$prefixCls}_date_picker;
   &_placeholder {
     width: 100%;
     text-align: right;
-    color: $text_primary;
+    color: $color-text-primary;
   }
   &_placeholder {
-    color: $text_light;
+    color: $color-text-light;
   }
   &_popup {
     display: block;
@@ -23,7 +23,7 @@ $date_picker: #{$prefixCls}_date_picker;
     bottom: 0;
     left: 0px;
     background-color: $white;
-    border: 1px solid $border_primary;
+    border: 1px solid $border-color-primary;
     width: 100%;
   }
   &_header {
