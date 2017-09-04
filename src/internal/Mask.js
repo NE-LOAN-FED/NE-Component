@@ -20,10 +20,6 @@ class Mask extends Component {
       right: 0,
       backgroundColor: backgroundColor || 'rgba(0,0,0,0.5)'
     }
-    function FirstChild(props) {
-      const childrenArray = React.Children.toArray(props.children)
-      return childrenArray[0] || null
-    }
     return (
       <ReactCSSTransitionGroup
         transitionAppear
