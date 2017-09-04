@@ -22,9 +22,10 @@ $text_placeholder: $gray_light;
 $border_primary: #dddddd; // 与页面之间的分割颜色
 $border_secondary: #e5e5e5; // 元素与元素之间的分割颜色
 $border_error: rgba(255, 85, 51, .5); // 表单错误提示
-
-$normalSize: pxToRem(26);
-$smallSize: pxToRem(22);
+$bigSize: pxToRem(32);
+$normalSize: pxToRem(30);
+$smallSize: pxToRem(24);
+$bigSize1: pxToRem(28);
 $titleColor: #666666;
 $contentColor: $text_primary;
 

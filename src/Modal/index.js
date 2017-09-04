@@ -1,2 +1,5 @@
-import Modal from './Modal'
-export default Modal
+import ModalHOC from './ModalHOC'
+export default ModalHOC
+export {
+  ModalHOC
+}

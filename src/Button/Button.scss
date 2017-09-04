@@ -1,21 +1,21 @@
 @import "../_style/config";
 
 .NEUI_button {
-  display: block;
   text-align: center;
-  font-size: pxToRem(28);
-  margin: pxToRem(30) auto;
-
+  font-size: $bigSize;
+  margin: pxToRem(40) auto pxToRem(30);
+  height: pxToRem(80);
+  line-height: pxToRem(80);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   &_style_normal {
     border-radius: pxToRem(4);
-    width: pxToRem(580);
-    height: pxToRem(76);
-    line-height: pxToRem(76);
+    width: pxToRem(686);
   }
   &_style_rightAngle {
     width: 100%;
-    height: pxToRem(100);
-    line-height: pxToRem(100);
   }
 
   &_primary {
@@ -44,5 +44,5 @@
 }
 
 .NEUI_button_small {
-  width: pxToRem(270)
+  width: pxToRem(333);
 }

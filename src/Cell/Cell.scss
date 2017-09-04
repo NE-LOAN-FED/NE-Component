@@ -2,7 +2,7 @@
 
 .NEUI_cells_tip {
   display: block;
-  margin: pxToRem(15) pxToRem(30) pxToRem(30);
+  margin: pxToRem(14) pxToRem(32) pxToRem(24);
   line-height: pxToRem(30);
   font-size: $smallSize;
   color: $text_light;
@@ -26,8 +26,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: pxToRem(90);
-  padding: pxToRem(20) pxToRem(30);
+  min-height: pxToRem(88);
+  padding: pxToRem(20) pxToRem(32);
   font-size: $normalSize;
   background-color: $white;
   position: relative;
