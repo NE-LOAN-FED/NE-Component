@@ -49,7 +49,7 @@ export default function (options) {
 
       render () {
         return (
-          <WrapComponent onClick={this.handleClick} {...this.props} isCollapse={this.state.isCollapse} />
+          <WrapComponent onSubComponentChange={this.handleClick} {...this.props} isCollapse={this.state.isCollapse} />
         )
       }
     }

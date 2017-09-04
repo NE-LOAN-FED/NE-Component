@@ -11,7 +11,7 @@ import {
 import HOC from './CollapseHOC'
 
 function List (props) {
-  const {isCollapse, data, className, prefixCls, ...others} = props
+  const {isCollapse, data, className, prefixCls, onSubComponentChange, ...others} = props
   const {title, content} = data
   const cls = classNames({
     [`${prefixCls}_collapse_list`]: true,
@@ -26,7 +26,7 @@ function List (props) {
 
   return (
     <div className={cls} {...others}>
-      <Cell>
+      <Cell onClick={onSubComponentChange}>
         <CellBody>{title}</CellBody>
         <CellFooter>
           <Icon type='arrow'

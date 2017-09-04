@@ -69,28 +69,10 @@ accordion | 是否打开手风琴模式 | bool | false
 onListChange(id, isCollapse, openListIdCollection) | 包裹组件状态发生变化时的回调函数 | Function | 无
 subComponent | 要包裹的组件（需要自行实现打开关闭功能）| React.PropTypes.element | 无
 ### CollapseHOC
-高阶组件，用来创建 subComponent. 创建的组件会接收当前的 isCollapse 来作为 props.
+高阶组件，用来创建 subComponent. 创建的组件会接收当前的 isCollapse 和 onSubComponentChange 方法来作为 props.
 ### subComponent:React.PropTypes.element
-
 要包裹的组件，需要自己实现折叠功能。
-可以通过高级组件 CollapseHOC 来生成，当前的 collapse 状态会作为 props 传入。
-Collapse 会通过 clone 包裹的组件来传入 `data`,`id` 这两个参数。
-
-```js
-renderList = () => {
-    const {openListIdCollection, listCollection} = this.state
-    const subComponent = this.props.subComponent
-    return listCollection.map((v, k) => {
-      v.isCollapse = openListIdCollection.indexOf(k) === -1
-      return React.cloneElement(subComponent, {
-        data: v,
-        id: k,
-        key: k,
-      })
-    })
-  }
-```
-
+可以通过高级组件 CollapseHOC 来生成，当前的 collapse 状态会作为 props 传入。组件需要自己在合适的地方地方调用 onSubComponentChange 来决定何时打开或关闭当前组件。
 #### data:object
 渲染所需要的数据,里面会包含一个 key 为 isCollapse 的参数，用来标识当前这个组件需要展示的状态。
 
