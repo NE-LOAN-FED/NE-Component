@@ -1,10 +1,12 @@
 @import "../_style/config";
 
 // TODO 重新组织
-$collapse: #{$prefixCls}_collapse;
+$collapse: #{$prefixCls}_collapse_list;
 
 .#{$collapse} {
   border-top: 1px solid $border_primary;
+  width: 100%;
+  overflow: hidden;
   &:last-child {
     border-bottom: 1px solid $border_primary;
   }
@@ -33,6 +35,23 @@ $collapse: #{$prefixCls}_collapse;
     padding: 0 pxToRem(32);
     line-height: 1.6;
   }
+}
+
+.#{$collapse} + .#{$collapse} {
+  border-top: none;
+  position: relative;
+  &::before {
+    content: '';
+    display: inline-block;
+    margin-left: pxToRem(32);
+    position: absolute;
+    border-top: 1px solid $border_secondary;
+    width: 100%;
+    z-index: 10;
+  }
+}
+.#{$collapse}.is_active + .#{$collapse}::before {
+  display: none;
 }
 
 .#{$collapse} .#{$prefixCls}_cell::after {

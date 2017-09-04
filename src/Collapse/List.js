@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import Animation from '../_utils/animation'
 import Animate from 'rc-animate'
 import {
-  Cells,
   Cell,
   CellBody,
   CellFooter,
@@ -60,7 +59,7 @@ export default class List extends Component {
     const { title, content } = data
     const { isCollapse } = this.state
     const cls = classNames({
-      [`${prefixCls}_collapse`]: true,
+      [`${prefixCls}_collapse_list`]: true,
       is_active: !isCollapse,
       [className]: className
     })
