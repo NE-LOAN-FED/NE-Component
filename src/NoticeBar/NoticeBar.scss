@@ -14,9 +14,7 @@ $noticeBar: #{$prefixCls}_notice_bar;
   }
   .content {
     margin: pxToRem(12) pxToRem(20);
-    line-height: pxToRem(28);
-    // overflow: hidden;
-    // white-space: nowrap;
+    line-height: 1.4;
   }
   .tail-icon {
     position: absolute;
