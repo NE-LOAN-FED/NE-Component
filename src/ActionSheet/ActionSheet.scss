@@ -11,11 +11,11 @@ $prefix: NEUI;
   margin: 0;
   list-style: none;
   z-index: 100;
-  font-size: $bigSize;
+  font-size: $font-size-large;
   li {
     height: pxToRem(100);
-    font-size: $normalSize;
-    border-bottom: 1px solid $border_secondary;
+    font-size: $font-size-big;
+    border-bottom: 1px solid $border-color-secondary;
     display: flex;
     align-items: center;
     justify-content: center;

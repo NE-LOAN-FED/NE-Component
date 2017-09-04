@@ -2,7 +2,7 @@
 
 .NEUI_button {
   text-align: center;
-  font-size: $bigSize;
+  font-size: $font-size-large;
   margin: pxToRem(40) auto pxToRem(30);
   height: pxToRem(80);
   line-height: pxToRem(80);
@@ -19,10 +19,10 @@
   }
 
   &_primary {
-    background-color: $red_primary;
+    background-color: $red-primary;
     color: $white;
     &:active {
-      background-color: $red_active;
+      background-color: $red-active;
     }
     &.NEUI_button_disabled {
       background-color: #cdcdcd;
@@ -31,7 +31,7 @@
   }
 
   &_secondary {
-    border: 1px solid $border_primary;
+    border: 1px solid $border-color-primary;
     background-color: $white;
     &:active {
       background-color: #ccc;

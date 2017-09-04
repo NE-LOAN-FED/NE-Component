@@ -13,7 +13,7 @@ $toast: #{$prefixCls}_toast;
   z-index: 1000;
   position: relative;
   color: $white;
-  font-size: $normalSize;
+  font-size: $font-size-big;
   &_modal {
     display: flex;
     align-items: center;

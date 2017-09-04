@@ -19,18 +19,18 @@ $prefix: NEUI;
     }
     &_process {
       .#{$prefix}_flow_body_title {
-        color: $text_primary;
+        color: $color-text-primary;
       }
     }
     &_finish {
       .#{$prefix}_flow_tail {
-        background-color: $red_primary;
+        background-color: $red-primary;
       }
     }
   }
   &_tail {
     height: 2px;
-    background-color: $border_primary;
+    background-color: $border-color-primary;
     width: 100%;
   }
   &_body {
@@ -48,7 +48,7 @@ $prefix: NEUI;
       top: pxToRem(40);
       left: 50%;
       transform: translate(-50%, 0);
-      color: $text_secondary;
+      color: $color-text-secondary;
     }
     &_finish {
       font-size: pxToRem(32);
@@ -61,8 +61,8 @@ $prefix: NEUI;
       text-align: center;
       line-height: pxToRem(32);
       border-radius: 50%;
-      border: 1px solid $text_secondary;
-      color: $text_secondary;
+      border: 1px solid $color-text-secondary;
+      color: $color-text-secondary;
     }
     &_process {
       width: pxToRem(32);
@@ -71,8 +71,8 @@ $prefix: NEUI;
       text-align: center;
       line-height: pxToRem(32);
       border-radius: 50%;
-      border: 1px solid $red_primary;
-      background-color: $red_primary;
+      border: 1px solid $red-primary;
+      background-color: $red-primary;
       color: $white;
     }
   }
@@ -86,7 +86,7 @@ $prefix: NEUI;
   }
   .#{$prefix}_flow_tail {
     height: 100%;
-    background-color: $border_primary;
+    background-color: $border-color-primary;
     width: 2px;
   }
   .#{$prefix}_flow_body_title {

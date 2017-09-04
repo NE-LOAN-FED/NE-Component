@@ -18,8 +18,8 @@ $picker: #{$prefixCls}_picker;
     top: 50%;
     margin-top: pxToRem(-30);
     height: pxToRem(60);
-    border-top: 1px solid $text_secondary;
-    border-bottom: 1px solid $text_secondary;
+    border-top: 1px solid $color-text-secondary;
+    border-bottom: 1px solid $color-text-secondary;
   }
   &_content {
     display: block;

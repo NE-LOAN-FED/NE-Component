@@ -4,11 +4,11 @@
 $collapse: #{$prefixCls}_collapse_list;
 
 .#{$collapse} {
-  border-top: 1px solid $border_primary;
+  border-top: 1px solid $border-color-primary;
   width: 100%;
   overflow: hidden;
   &:last-child {
-    border-bottom: 1px solid $border_primary;
+    border-bottom: 1px solid $border-color-primary;
   }
   .list_icon {
     transition: all 0.3s ease-in-out;
@@ -19,7 +19,7 @@ $collapse: #{$prefixCls}_collapse_list;
   }
 
   .list_content_wrap {
-    border: 1px solid $border_primary;
+    border: 1px solid $border-color-primary;
     border-left: none;
     border-right: none;
     background: #ebebeb;
@@ -30,7 +30,7 @@ $collapse: #{$prefixCls}_collapse_list;
   }
 
   .list_content {
-    font-size: $bigSize1;
+    font-size: $font-size-base;
     margin: pxToRem(24) 0;
     padding: 0 pxToRem(32);
     line-height: 1.6;
@@ -45,7 +45,7 @@ $collapse: #{$prefixCls}_collapse_list;
     display: inline-block;
     margin-left: pxToRem(32);
     position: absolute;
-    border-top: 1px solid $border_secondary;
+    border-top: 1px solid $border-color-secondary;
     width: 100%;
     z-index: 10;
   }

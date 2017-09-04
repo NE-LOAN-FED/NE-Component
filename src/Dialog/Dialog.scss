@@ -22,11 +22,11 @@ $dialog: #{$prefixCls}_dialog;
     margin-bottom:pxToRem(16);
   }
   &_header_content {
-    font-size: $bigSize;
+    font-size: $font-size-large;
   }
   &_content {
     margin: 0 pxToRem(32) pxToRem(40);
-    font-size: $bigSize1;
+    font-size: $font-size-base;
     text-align: center;
   }
   &_confirm_box {
@@ -34,9 +34,9 @@ $dialog: #{$prefixCls}_dialog;
     position: relative;
     width: 100%;
     align-items: center;
-    border-top: 1px solid $border_primary;
+    border-top: 1px solid $border-color-primary;
     font-size: pxToRem(28);
-    color: $text_highlight;
+    color: $color-text-highlight;
   }
   &_cancel_button,
   &_confirm_button {
@@ -50,6 +50,6 @@ $dialog: #{$prefixCls}_dialog;
     padding: 0;
   }
   &_confirm_button {
-    border-left: 1px solid $border_primary;
+    border-left: 1px solid $border-color-primary;
   }
 }
