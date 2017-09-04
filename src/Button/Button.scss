@@ -1,28 +1,28 @@
 @import "../_style/config";
 
 .NEUI_button {
-  display: block;
   text-align: center;
-  font-size: pxToRem(28);
-  margin: pxToRem(30) auto;
-
+  font-size: $font-size-large;
+  margin: pxToRem(40) auto pxToRem(30);
+  height: pxToRem(80);
+  line-height: pxToRem(80);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   &_style_normal {
     border-radius: pxToRem(4);
-    width: pxToRem(580);
-    height: pxToRem(76);
-    line-height: pxToRem(76);
+    width: pxToRem(686);
   }
   &_style_rightAngle {
     width: 100%;
-    height: pxToRem(100);
-    line-height: pxToRem(100);
   }
 
   &_primary {
-    background-color: $red_primary;
+    background-color: $red-primary;
     color: $white;
     &:active {
-      background-color: $red_active;
+      background-color: $red-active;
     }
     &.NEUI_button_disabled {
       background-color: #cdcdcd;
@@ -31,7 +31,7 @@
   }
 
   &_secondary {
-    border: 1px solid $border_primary;
+    border: 1px solid $border-color-primary;
     background-color: $white;
     &:active {
       background-color: #ccc;
@@ -44,5 +44,5 @@
 }
 
 .NEUI_button_small {
-  width: pxToRem(270)
+  width: pxToRem(333);
 }

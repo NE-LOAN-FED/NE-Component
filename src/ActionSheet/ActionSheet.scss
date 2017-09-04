@@ -9,19 +9,19 @@ $prefix: NEUI;
   width: 100%;
   padding: 0;
   margin: 0;
-  background: $border_secondary;
   list-style: none;
   z-index: 100;
+  font-size: $font-size-large;
   li {
-    height: pxToRem(74);
-    font-size: $normalSize;
-    border-bottom: 1px solid $border_secondary;
+    height: pxToRem(100);
+    font-size: $font-size-big;
+    border-bottom: 1px solid $border-color-secondary;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-left: pxToRem(30);
     padding-right: pxToRem(30);
-    background-color: $white;
+    background: rgba(255, 255, 255, 0.9);
   }
   .#{$prefix}_action_cancel {
     margin-top: pxToRem(10);

@@ -17,7 +17,7 @@ $cell_input: #{$prefixCls}_cell_input;
   }
   &_item {
     display: inline-block;
-    border: pxToRem(2) solid $border_secondary;
+    border: pxToRem(2) solid $border-color-secondary;
     border-radius: pxToRem(2);
     width: pxToRem(62);
     height: pxToRem(62);
@@ -26,7 +26,7 @@ $cell_input: #{$prefixCls}_cell_input;
     vertical-align: middle;
     text-align: center;
     font-size: pxToRem(36);
-    color: $text_highlight;
+    color: $color-text-highlight;
     &.active{
       border-color:  $blue;
     }

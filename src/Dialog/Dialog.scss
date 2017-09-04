@@ -4,7 +4,7 @@
 $dialog: #{$prefixCls}_dialog;
 
 .#{$dialog} {
-  width: pxToRem(500);
+  width: pxToRem(540);
   border-radius: pxToRem(6);
   background-color: #fff;
   overflow: hidden;
@@ -17,22 +17,26 @@ $dialog: #{$prefixCls}_dialog;
     background: rgba(0, 0, 0, 0.48);
   }
   &_header {
-    margin-top: pxToRem(30);
+    margin-top: pxToRem(44);
     text-align: center;
+    margin-bottom:pxToRem(16);
   }
   &_header_content {
-    font-size: pxToRem(32);
+    font-size: $font-size-large;
   }
   &_content {
-    margin: pxToRem(30) pxToRem(20) pxToRem(40);
+    margin: 0 pxToRem(32) pxToRem(40);
+    font-size: $font-size-base;
+    text-align: center;
   }
   &_confirm_box {
     display: flex;
     position: relative;
     width: 100%;
     align-items: center;
-    border-top: 1px solid $border_primary;
+    border-top: 1px solid $border-color-primary;
     font-size: pxToRem(28);
+    color: $color-text-highlight;
   }
   &_cancel_button,
   &_confirm_button {
@@ -40,12 +44,12 @@ $dialog: #{$prefixCls}_dialog;
     flex: 1;
     display: inline-block;
     text-align: center;
-    line-height: pxToRem(80);
+    height:pxToRem(90);
     vertical-align: middle;
     background-color: #fff;
-    color: $blue;
+    padding: 0;
   }
   &_confirm_button {
-    border-left: 1px solid $border_primary;
+    border-left: 1px solid $border-color-primary;
   }
 }
