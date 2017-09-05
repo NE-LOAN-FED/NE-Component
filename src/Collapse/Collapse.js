@@ -53,7 +53,7 @@ export default class Collapse extends React.Component {
       collapse ? removeCollapseListId(id) : addIdToCollapseListId(id)
     }
     openListIdCollection = openListIdCollection.length ? openListIdCollection : []
-    this.props.onListChange(openListIdCollection)
+    this.props.onListChange(id, collapse, openListIdCollection)
     this.setState({
       openListIdCollection,
       listCollection

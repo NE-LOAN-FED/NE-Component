@@ -4,8 +4,8 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import RenderLayer from '../internal/RenderLayer'
 import Mask from '../internal/Mask'
 import histtNonReactStatic from 'hoist-non-react-statics'
+import getDisplayName from '../_utils/getComponentName'
 const noop = () => { }
-const getDisplayName = component => component.displayName || component.name || 'Component'
 export default function ModalHOC(options) {
   return function (WrapComponent) {
     class HOC extends React.Component {
