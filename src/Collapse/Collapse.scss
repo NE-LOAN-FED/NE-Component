@@ -31,12 +31,14 @@ $collapse: #{$prefixCls}_collapse_list;
 
   .list_content {
     font-size: $font-size-base;
-    margin: pxToRem(24) 0;
-    padding: 0 pxToRem(32);
+    margin: 0;
+    padding: pxToRem(24) pxToRem(32);
     line-height: 1.6;
   }
 }
-
+.#{$collapse}:last-child .list_content_wrap{
+  border-bottom: none;
+}
 .#{$collapse} + .#{$collapse} {
   border-top: none;
   position: relative;
