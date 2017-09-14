@@ -10,6 +10,7 @@ $dialog: #{$prefixCls}_dialog;
   overflow: hidden;
   z-index: 1000;
   position: relative;
+  padding-top: pxToRem(44);
   &_modal {
     display: flex;
     align-items: center;
@@ -17,9 +18,12 @@ $dialog: #{$prefixCls}_dialog;
     background: rgba(0, 0, 0, 0.48);
   }
   &_header {
-    margin-top: pxToRem(44);
     text-align: center;
     margin-bottom:pxToRem(16);
+    overflow: hidden;
+    > h4 {
+      margin: 0;
+    }
   }
   &_header_content {
     font-size: $font-size-large;
