@@ -1,5 +1,8 @@
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://github.com/NE-LOAN-FED/NE-Component)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-
+[![Travis](https://img.shields.io/travis/NE-LOAN-FED/NE-Component.svg)]()
+[![npm](https://img.shields.io/npm/dm/localeval.svg)](https://github.com/NE-LOAN-FED/NE-Component)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/NE-LOAN-FED/NE-Component/master/LICENSE)
 # Notice
 **1.0.0 版本正式发布前，不建议外部项目使用。**
 ## 说明
@@ -119,6 +122,7 @@ npm install ne-rc
 ```
 ## 文档
 1. [Alert](./src/Alert/README.md)
+1. [ActionSheet](./src/ActionSheet/README.md)
 1. [Button](./src/Button/README.md)
 1. [Cell](./src/Cell/README.md)
 1. [CellInput](./src/CellInput/README.md)
@@ -132,36 +136,5 @@ npm install ne-rc
 1. [Toast](./src/Toast/README.md)
 1. [VerifyButton](./src/VerifyButton/README.md)
 1. [NoticeBar](./src/NoticeBar/README.md)
-
-
-## TODO
-* [x] 添加并完善文档
-* [x] 重写部分组件
- * [x] Form
- * [x] Collapse
-* [x] Modal 添加动画
-* [] 样式表结构重新组织
-
-## 列表
-* [x] Form          提供表单校验，填写完成校验（决定提交按钮是否高亮）
-    - [x] Select    选择器
-    - [x] Input     基础输入组件
-    - [x] CheckBox
-* [x] Button
-* [x] verifyButton  验证码
-* [x] Cells         Cell 集合
-    - [x] Cell      
-        * [x] CellHD    Cell 标题
-        * [x] CellBD    Cell 主体内容
-        * [x] CellFT    Cell 修饰
-* [x] Panel         通用展示面板
-    - [x] PanelItem
-        - [x] PanelContent
-* [x] Link
-* [x] Icon
-* [x] Toast         
-* [x] Alert         弹窗
-* [X] Dialog        对话框
-* [x] DatePicker    日历
-* [X] Collapse      折叠列表
-
+1. [Tab（待更新）](/)
+1. [Flow(待更新)](/)
