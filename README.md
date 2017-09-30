@@ -4,6 +4,11 @@
 [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://github.com/NE-LOAN-FED/NE-Component)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/NE-LOAN-FED/NE-Component/master/LICENSE)
 
+# 功能
+* 开箱即用的移动端基础组件
+* 基于 npm + webpack 开发
+* 支持多用引入方式：ES Module 、umd(不建议使用)
+
 # 环境
 * React > 15.4.*
 * ReactDOM > 15.4.*
