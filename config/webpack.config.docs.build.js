@@ -17,7 +17,7 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name]-[chunkhash:8].js',
     sourceMapFilename: '[name].map',
-    publicPath: 'http://NE-loan-fed.github.io/NE-Component'
+    publicPath: 'https://NE-loan-fed.github.io/NE-Component'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css', '.scss']
