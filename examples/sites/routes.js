@@ -6,7 +6,6 @@ const routes = {
   component: Main,
   path: '/',
   indexRoute: {
-    path: 'Introduction',
     component: require('../../README.md').default
   },
   childRoutes: [{

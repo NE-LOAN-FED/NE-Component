@@ -10,16 +10,14 @@ export default class Phone extends React.Component {
       'col-4': true,
       'demo': true
     })
-    const protocol = window.location.protocol
-    const host = window.location.host
+    const { protocol, host, pathname } = window.location
     // const path = 'demo.html/#/';
-    const demoUrl = `${protocol}//${host}/demo.html#/${this.props.pathname}`
+    const demoUrl = `${protocol}//${host}/${pathname}/demo.html#/${this.props.pathname}`
 
     return (
       <section className={phoneCls}>
         <div className='phone'>
-          <iframe className='demo-page' src={demoUrl}>
-          </iframe>
+          <iframe className='demo-page' src={demoUrl} />
           {this.props.children}
         </div>
       </section>

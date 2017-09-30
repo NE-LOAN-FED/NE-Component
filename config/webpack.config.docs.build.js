@@ -8,20 +8,19 @@ const autoprefixer = require('autoprefixer')
 
 module.exports = {
   entry: {
-    app: ['webpack-dev-server/client', path.join(__dirname, '../examples/sites/index')],
-    demo: ['webpack-dev-server/client', path.join(__dirname, '../examples/index')],
+    app: [path.join(__dirname, '../examples/sites/index')],
+    demo: [path.join(__dirname, '../examples/index')],
     vendors: ['babel-polyfill', 'react', 'react-dom', 'react-router']
   },
-  devtool: 'cheap-module-eval-source-map',
   output: {
     path: path.join(cwd, 'sites'),
     filename: '[name].js',
     chunkFilename: '[name]-[chunkhash:8].js',
     sourceMapFilename: '[name].map',
-    publicPath: '/'
+    publicPath: 'http://NE-loan-fed.github.io/NE-Component'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css', '.scss'],
+    extensions: ['.js', '.jsx', '.json', '.css', '.scss']
   },
   module: {
     rules: [{
@@ -44,7 +43,7 @@ module.exports = {
       use: {
         loader: 'url-loader',
         options: {
-          limit: 1024,
+          limit: 20480,
           name: 'images/[path][name].[ext]',
           hash: '[hash:8]'
         }
@@ -82,7 +81,7 @@ module.exports = {
               ]
             }
           },
-          'sass-loader?sourceMap'
+          'sass-loader'
         ]
       })
     }]

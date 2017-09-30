@@ -24,6 +24,8 @@ _cache
 /connect.lock
 /.chrome
 
+#gh-page sites
+sites
 
 # Logs
 logs

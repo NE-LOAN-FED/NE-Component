@@ -18,7 +18,9 @@
     "lint": "node ./node_modules/eslint/bin/eslint.js ./src || eslint ./src",
     "scsslint": "node ./node_modules/eslint/bin/eslint.js ./",
     "test": "mocha --compilers js:babel-register --recursive",
-    "build:docs": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.docs.js",
+    "sites": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.docs.js",
+    "sites:build": "cross-env NODE_ENV=development webpack --config ./config/webpack.config.docs.build.js --progress --colors",
+    "gh-pages": "gh-pages -d sites",
     "test:watch": "npm test --watch"
   },
   "dependencies": {
