@@ -69,6 +69,41 @@ const routes = {
         cb(null, require('../../src/Flow/README.md').default)
       })
     }
+  }, {
+    path: 'Form',
+    getComponent(nextState, cb) {
+      require.ensure([], require => {
+        cb(null, require('../../src/Form/README.md').default)
+      })
+    }
+  }, {
+    path: 'NoticeBar',
+    getComponent(nextState, cb) {
+      require.ensure([], require => {
+        cb(null, require('../../src/NoticeBar/README.md').default)
+      })
+    }
+  }, {
+    path: 'Introduction',
+    getComponent(nextState, cb) {
+      require.ensure([], require => {
+        cb(null, require('../../README.md').default)
+      })
+    }
+  }, {
+    path: 'ActionSheet',
+    getComponent(nextState, cb) {
+      require.ensure([], require => {
+        cb(null, require('../../src/ActionSheet/README.md').default)
+      })
+    }
+  }, {
+    path: 'Tab',
+    getComponent(nextState, cb) {
+      require.ensure([], require => {
+        cb(null, require('../../src/Tab/README.md').default)
+      })
+    }
   }
   ]
 }
