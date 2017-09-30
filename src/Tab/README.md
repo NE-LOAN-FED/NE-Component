@@ -1,67 +1,54 @@
 # Tab
 Tab 组件
+
 # 示例
 ```js
-export default class TabPage extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      tabs: [
-        { title: '借款中', disabled: false },
-        { title: '审核中', disabled: false },
-        { title: '还款中', disabled: true },
-        { title: '放款中', disabled: false}
-      ],
-      activeIndex: 0
-    }
-  }
-
-  onTabChange = (index) => {
-    console.log('current tab:', index)
-  }
-
-  onControlledTabChange = (index) => {
-    this.setState({
-      activeIndex: index
-    })
-  }
-
-  handleTabChange = () => {
-    this.setState({
-      activeIndex: 3
-    })
-  }
-
+import React from 'react'
+import { Tab } from 'ne-rc'
+class TabDemo extends React.Component {
   render() {
-    const { tabs, activeIndex } = this.state
     return (
-      <section className='page_collapse'>
-        <div className='page--header'>
-          <h1 className='page-title'>Tab</h1>
-          <p className='page--desc'>选项卡列表</p>
-        </div>
+      <div>
         <h3>Normal</h3>
-        <Tab defaultActiveIndex='key1' onChange={this.onTabChange}>
-          {tabs.map((item, index) => {
-            return <Tab.Item title={item.title} key={`key${index}`} disabled={item.disabled}>内容：{item.title}</Tab.Item>
-          })}
+        <Tab>
+          <Tab.Item title={'借款中'} key={1}>
+            内容：借款中
+          </Tab.Item>
+          <Tab.Item title={'审核中'} key={2}>
+            内容：审核中
+          </Tab.Item>
+          <Tab.Item title={'还款中'} key={3} disabled>
+            内容：还款中
+          </Tab.Item>
+          <Tab.Item title={'放款中'} key={4}>
+            内容：还款中
+          </Tab.Item>
         </Tab>
-        <h3>Controlled</h3>
-        <Tab activeIndex={activeIndex} onChange={this.onControlledTabChange}>
-          {tabs.map((item, index) => {
-            return <Tab.Item title={item.title} key={index} disabled={item.disabled}>内容：{item.title}</Tab.Item>
-          })}
+         <h3>Controlled</h3>
+        <Tab activeIndex={1}>
+          <Tab.Item title={'借款中'} key={1}>
+            内容：借款中
+          </Tab.Item>
+          <Tab.Item title={'审核中'} key={2}>
+            内容：审核中
+          </Tab.Item>
+          <Tab.Item title={'还款中'} key={3} disabled>
+            内容：还款中
+          </Tab.Item>
+          <Tab.Item title={'放款中'} key={4}>
+            内容：还款中
+          </Tab.Item>
         </Tab>
-        <Button onClick={this.handleTabChange}>放款中</Button>
-      </section>
+      </div>
     )
   }
 }
+
 ```
+
 # 子组件
 组件名 | 描述 | 功能
---- | --- | --- isClickMaskToClose
-Tab.Item | 单个 Tab 块 | 
+--- | --- | --- isClickMaskToClose | Tab.Item | 单个 Tab 块 | 
 ## API
 属性名 | 描述 | 类型 | 默认值
 --- | --- | --- | ---

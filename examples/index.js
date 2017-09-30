@@ -46,6 +46,7 @@ ReactDom.render((
       <Route path='tab' component={Tab} />
       <Route path='flow' component={Flow} />
       <Route path='actionsheet' component={ActionSheet} />
+      <Route path='*' component={Home} />
     </Route>
   </Router>
 ), root)

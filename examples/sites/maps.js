@@ -62,6 +62,10 @@ const map = [{
       'path': '/tab',
       'name': 'Tab',
       'useMarkdown': true
+    }, {
+      'path': '/picker',
+      'name': 'Picker',
+      'useMarkdown': true
     }]
 }, {
   'title': 'Form Components',
