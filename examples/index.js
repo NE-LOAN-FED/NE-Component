@@ -13,7 +13,7 @@ import Home from './demo/Home'
 import Alert from './demo/Alert'
 import Form from './demo/Form'
 import Button from './demo/Button'
-import Cells from './demo/Cells'
+import Cell from './demo/Cell'
 import Panel from './demo/Panel'
 import Picker from './demo/Picker'
 import Modal from './demo/Modal'
@@ -22,6 +22,7 @@ import Icon from './demo/Icon'
 import NoticeBar from './demo/NoticeBar'
 import Tab from './demo/Tab'
 import Flow from './demo/Flow'
+import ActionSheet from './demo/ActionSheet'
 if (module.hot) {
   module.hot.accept()
 }
@@ -35,7 +36,7 @@ ReactDom.render((
       <Route path='form' component={Form} />
       <Route path='alert' component={Alert} />
       <Route path='button' component={Button} />
-      <Route path='cells' component={Cells} />
+      <Route path='cell' component={Cell} />
       <Route path='panel' component={Panel} />
       <Route path='picker' component={Picker} />
       <Route path='modal' component={Modal} />
@@ -44,6 +45,8 @@ ReactDom.render((
       <Route path='noticebar' component={NoticeBar} />
       <Route path='tab' component={Tab} />
       <Route path='flow' component={Flow} />
+      <Route path='actionsheet' component={ActionSheet} />
+      <Route path='*' component={Home} />
     </Route>
   </Router>
 ), root)

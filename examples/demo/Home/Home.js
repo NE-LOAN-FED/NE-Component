@@ -31,7 +31,7 @@ import Logger from '../../../src/_utils/log'
 const logger = new Logger('DEBUG', 'Home')
 
 class Home extends React.Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       phone: '',
@@ -43,19 +43,19 @@ class Home extends React.Component {
     }
   }
 
-  comonentWillMount () {
+  comonentWillMount() {
     logger.info('WillMount')
   }
 
-  componentDidMount () {
+  componentDidMount() {
     logger.info('DidMount', this.state)
   }
 
-  componentWillUpdate (nextProps, nextState) {
+  componentWillUpdate(nextProps, nextState) {
     logger.log('componentWillUpdate', nextState)
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     logger.info('DidUpdate', this.state)
   }
 
@@ -88,16 +88,16 @@ class Home extends React.Component {
     })
   }
 
-  render () {
-    const {msg, showToast, showModal, showAlert, formData, phone, gender} = this.state
-    const {isComplete} = formData
+  render() {
+    const { msg, showToast, showModal, showAlert, formData, phone, gender } = this.state
+    const { isComplete } = formData
 
-    const Links = ['form', 'button', 'cells', 'panel', 'picker', 'modal', 'collapse', 'icon', 'noticebar', 'tab', 'flow']
+    const Links = ['form', 'button', 'cells', 'panel', 'picker', 'modal', 'collapse', 'icon', 'noticebar', 'tab', 'flow', 'actionsheet']
     return (
       <section className='page-home'>
         <Toast content={msg}
-               show={showToast}
-               onClose={this.closeToast}
+          show={showToast}
+          onClose={this.closeToast}
         />
         <div className="page--header">
           <h1 className="page-title">NE-RC</h1>
@@ -109,7 +109,7 @@ class Home extends React.Component {
             Links.map((v, k) => {
               return <Cell key={k}>
                 <CellBody><Link to={'/' + v}>{v.toUpperCase()}</Link></CellBody>
-                <CellFooter><Icon type={'arrow'}/></CellFooter>
+                <CellFooter><Icon type={'arrow'} /></CellFooter>
               </Cell>
             })
           }

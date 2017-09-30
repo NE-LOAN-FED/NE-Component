@@ -9,6 +9,8 @@
 ## 代码示例
 
 ```js
+import { Cell } from 'ne-rc'
+
 export default class CellsPage extends Component {
   render() {
     return (
