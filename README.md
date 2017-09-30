@@ -7,7 +7,7 @@
 # 功能
 * 开箱即用的移动端基础组件
 * 基于 npm + webpack 开发
-* 支持多用引入方式：ES Module 、umd(不建议使用)
+* 支持多种引入方式：ES Module 、umd(不建议使用)
 
 # 环境
 * React > 15.4.*
