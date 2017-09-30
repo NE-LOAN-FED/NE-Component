@@ -4,6 +4,8 @@
 [![npm](https://img.shields.io/npm/dm/localeval.svg)](https://github.com/NE-LOAN-FED/NE-Component)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/NE-LOAN-FED/NE-Component/master/LICENSE)
 
+# 文档
+[https://ne-loan-fed.github.io/NE-Component/#/](https://ne-loan-fed.github.io/NE-Component/#/)
 # 功能
 * 开箱即用的移动端基础组件
 * 基于 npm + webpack 开发
