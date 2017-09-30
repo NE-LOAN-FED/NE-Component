@@ -425,14 +425,14 @@ module.exports = {"amp":"&","apos":"'","gt":">","lt":"<","quot":"\""}
 /***/ 321:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(373);
+module.exports = __webpack_require__(367);
 
 /***/ }),
 
 /***/ 322:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(374);
+module.exports = __webpack_require__(373);
 
 /***/ }),
 
@@ -1112,97 +1112,154 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 class Markdown extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-  constructor(props) {
-    super(props);
-  }
-  componentDidMount() {
-    this.refs['container'].innerHTML = `<div><h1>Toast 组件</h1>
-<p>Toast 轻提示，建议包含文字和 Icon 信息，规则如下：</p>
+		constructor(props) {
+				super(props);
+		}
+		componentDidMount() {
+				this.refs['container'].innerHTML = `<div><p><a href="https://github.com/NE-LOAN-FED/NE-Component"><img src="https://img.shields.io/npm/v/npm.svg" alt="npm"></a>
+<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a>
+<a href=""><img src="https://img.shields.io/travis/NE-LOAN-FED/NE-Component.svg" alt="Travis"></a>
+<a href="https://github.com/NE-LOAN-FED/NE-Component"><img src="https://img.shields.io/npm/dm/localeval.svg" alt="npm"></a>
+<a href="https://raw.githubusercontent.com/NE-LOAN-FED/NE-Component/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a></p>
+<h1>Notice</h1>
+<p><strong>1.0.0 版本正式发布前，不建议外部项目使用。</strong></p>
+<h2>说明</h2>
+<p>大数据风控组移动端 React 组件。</p>
+<h2>开发</h2>
+<h3>前提</h3>
 <ul>
-<li>建议文字内容不超过 13 个字</li>
-<li>默认自动隐藏，手动隐藏建议使用 Modal</li>
+<li>Node &gt; 6.0</li>
+<li>Npm &gt; 3.0</li>
 </ul>
-<h2>代码示例</h2>
-<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
-  onClose = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-    <span class="hljs-comment">// ...</span>
-  }
-  render(){
-    <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">Toast</span> <span class="hljs-attr">show</span>=<span class="hljs-string">{this.props.ToastShow}</span>
-          <span class="hljs-attr">content</span>=<span class="hljs-string">"出错啦！"</span>
-          <span class="hljs-attr">onClose</span>=<span class="hljs-string">{this.onClose}</span> /&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    )
-  }
-}
-</span></code></pre>
-<h2>API</h2>
-<div class="table-container"><table class="table"><thead>
-<tr>
-<th>属性名</th>
-<th>描述</th>
-<th>类型</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>prefixCls</td>
-<td>样式前缀</td>
-<td>String</td>
-<td>NEUI</td>
-</tr>
-<tr>
-<td>show</td>
-<td>是否显示</td>
-<td>Boolean</td>
-<td>false</td>
-</tr>
-<tr>
-<td>content</td>
-<td>显示文字内容</td>
-<td>String</td>
-<td>无</td>
-</tr>
-<tr>
-<td>icon</td>
-<td>显示 icon 的 type</td>
-<td>String</td>
-<td>无</td>
-</tr>
-<tr>
-<td>timeout</td>
-<td>自动隐藏时间</td>
-<td>Number</td>
-<td>2000</td>
-</tr>
-<tr>
-<td>isLockScreen</td>
-<td>是否需要锁屏遮罩</td>
-<td>Bool</td>
-<td>false</td>
-</tr>
-<tr>
-<td>transitionName</td>
-<td>出现和消失动画的类名</td>
-<td>String</td>
-<td>verticalSlideTB</td>
-</tr>
-<tr>
-<td>transitionTimeOut</td>
-<td>动画的时间</td>
-<td>Number</td>
-<td>300 单位ms</td>
-</tr>
-</tbody>
-</table></div></div>`;
-  }
+<h2>使用</h2>
+<h3>安装</h3>
+<pre><code class="language-bash">npm install ne-rc
+</code></pre>
+<h3>引用</h3>
+<pre><code class="language-js">	<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+	<span class="hljs-comment">// 引入组件</span>
+	<span class="hljs-keyword">import</span> {
+	  Form, Input, CheckBox,
+	  Cells, Cell, CellTip, CellHeader, CellBody, CellFooter,
+	  VerifyButton, Toast, Button
+	} <span class="hljs-keyword">from</span> <span class="hljs-string">'ne-rc'</span>
+	<span class="hljs-keyword">import</span> Logger <span class="hljs-keyword">from</span> <span class="hljs-string">'../../../utils/log'</span>
+	<span class="hljs-keyword">import</span> lang <span class="hljs-keyword">from</span> <span class="hljs-string">'../../utils/lang'</span>
+	<span class="hljs-keyword">import</span> validate <span class="hljs-keyword">from</span> <span class="hljs-string">'../../utils/validate'</span>
+	
+	<span class="hljs-keyword">const</span> logger = <span class="hljs-keyword">new</span> Logger(<span class="hljs-string">'DEBUG'</span>, <span class="hljs-string">'FormDemo'</span>)
+	
+	<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FormDemo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+	  <span class="hljs-keyword">constructor</span>() {
+	    <span class="hljs-keyword">super</span>()
+	    <span class="hljs-keyword">this</span>.state = {  <span class="hljs-comment">// 初始化需要的数据</span>
+	      formData: {
+	        <span class="hljs-attr">name</span>: {<span class="hljs-attr">value</span>: <span class="hljs-string">'抹桥'</span>},
+	        <span class="hljs-attr">phone</span>: {<span class="hljs-attr">value</span>: <span class="hljs-string">'13333333333'</span>},
+	        <span class="hljs-attr">verifyCode</span>: {<span class="hljs-attr">value</span>: <span class="hljs-number">3303</span>},
+	        <span class="hljs-attr">is</span>: {<span class="hljs-attr">value</span>: <span class="hljs-literal">true</span>}
+	      },
+	      <span class="hljs-attr">msg</span>: <span class="hljs-string">''</span>,
+	      <span class="hljs-attr">isComplete</span>: <span class="hljs-literal">false</span>,
+	      <span class="hljs-attr">showToast</span>: <span class="hljs-literal">false</span>
+	    }
+	  }
+	
+	  handleSubmit = <span class="hljs-function">(<span class="hljs-params">isValidate, state, pureData</span>) =&gt;</span> { <span class="hljs-comment">// Form 提交的回调函数</span>
+	    <span class="hljs-keyword">if</span> (!isValidate) {
+	      <span class="hljs-keyword">this</span>.setState({
+	        <span class="hljs-attr">showToast</span>: <span class="hljs-literal">true</span>,
+	        <span class="hljs-attr">msg</span>: state.errorMsgList[<span class="hljs-number">0</span>]
+	      })
+	    } <span class="hljs-keyword">else</span> {
+	      <span class="hljs-keyword">this</span>.setState({
+	        <span class="hljs-attr">showToast</span>: <span class="hljs-literal">true</span>,
+	        <span class="hljs-attr">msg</span>: <span class="hljs-string">'正在提交'</span>
+	      })
+	    }
+	  }
+	  handleChange = <span class="hljs-function">(<span class="hljs-params">formData</span>) =&gt;</span> {  <span class="hljs-comment">// Form 变化的回调函数</span>
+	    <span class="hljs-keyword">this</span>.setState({
+	      <span class="hljs-attr">formData</span>: formData.data,
+	      <span class="hljs-attr">isComplete</span>: formData.isComplete
+	    })
+	  }
+	  handleFieldChange = <span class="hljs-function">(<span class="hljs-params">FieldData</span>) =&gt;</span> { <span class="hljs-comment">// Form 下面子表单变化的回调函数</span>
+	    logger.log(<span class="hljs-string">'FieldChange'</span>, FieldData)
+	  }
+	  closeToast = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+	    <span class="hljs-keyword">this</span>.setState({
+	      <span class="hljs-attr">showToast</span>: <span class="hljs-literal">false</span>
+	    })
+	  }
+	
+	  render() {
+	    <span class="hljs-keyword">const</span> {msg, showToast, formData, isComplete} = <span class="hljs-keyword">this</span>.state
+	    <span class="hljs-keyword">return</span> (
+	      &lt;section className="page-form-demo"&gt;
+	        &lt;Toast content={msg}
+	               show={showToast}
+	               onClose={this.closeToast}
+	        /&gt;
+	        &lt;Form onSubmit={this.handleSubmit}
+	              onFieldChange={this.handleFieldChange}
+	              onChange={this.handleChange}
+	              ref={(ref) =&gt; {
+	                this['$Form'] = ref
+	              } }&gt;
+	          &lt;Cells&gt;
+	            &lt;Cell warning={formData.name.isError}&gt;
+	              &lt;CellHeader&gt;Name&lt;/CellHeader&gt;
+	              &lt;Input type='text'
+	                     name='name'
+	                     errorMsg={lang.nameErrorMsg}
+	                     validate={validate.name}
+	                     value={formData.name.value}
+	              /&gt;
+	            &lt;/Cell&gt;
+	          &lt;/Cells&gt;
+	          &lt;Cells&gt;
+	            &lt;Cell htmlFor="is"&gt;
+	              &lt;CellBody&gt;Is yourself?&lt;/CellBody&gt;
+	              &lt;CellFooter&gt;&lt;CheckBox name='is' id="is" value={formData.is.value}/&gt;&lt;/CellFooter&gt;
+	            &lt;/Cell&gt;
+	          &lt;/Cells&gt;
+	          &lt;Button type="submit" disabled={!isComplete}&gt;提交&lt;/Button&gt;
+	        &lt;/Form&gt;
+	      &lt;/section&gt;
+	    )
+	  }
+	}
+	
+	export default FormDemo
 
-  render() {
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('section', { ref: 'container' });
-  }
+</code></pre>
+<h2>文档</h2>
+<ol>
+<li><a href="./src/Alert/README.md">Alert</a></li>
+<li><a href="./src/ActionSheet/README.md">ActionSheet</a></li>
+<li><a href="./src/Button/README.md">Button</a></li>
+<li><a href="./src/Cell/README.md">Cell</a></li>
+<li><a href="./src/CellInput/README.md">CellInput</a></li>
+<li><a href="./src/Collapse/README.md">Collapse</a></li>
+<li><a href="./src/DatePicker/README.md">DatePicker</a></li>
+<li><a href="./src/Form/README.md">Form</a></li>
+<li><a href="./src/Icon/README.md">Icon</a></li>
+<li><a href="./src/Dialog/README.md">Dialog</a></li>
+<li><a href="./src/Picker/README.md">Picker</a></li>
+<li><a href="./src/Popup/README.md">Popup</a></li>
+<li><a href="./src/Toast/README.md">Toast</a></li>
+<li><a href="./src/VerifyButton/README.md">VerifyButton</a></li>
+<li><a href="./src/NoticeBar/README.md">NoticeBar</a></li>
+<li><a href="/">Tab（待更新）</a></li>
+<li><a href="/">Flow(待更新)</a></li>
+</ol>
+</div>`;
+		}
+
+		render() {
+				return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('section', { ref: 'container' });
+		}
 }
 /* harmony export (immutable) */ __webpack_exports__["default"] = Markdown;
 
@@ -2010,171 +2067,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 class Markdown extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-		constructor(props) {
-				super(props);
-		}
-		componentDidMount() {
-				this.refs['container'].innerHTML = `<div><p><a href="https://github.com/NE-LOAN-FED/NE-Component"><img src="https://img.shields.io/npm/v/npm.svg" alt="npm"></a>
-<a href="http://standardjs.com/"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg" alt="JavaScript Style Guide"></a>
-<a href=""><img src="https://img.shields.io/travis/NE-LOAN-FED/NE-Component.svg" alt="Travis"></a>
-<a href="https://github.com/NE-LOAN-FED/NE-Component"><img src="https://img.shields.io/npm/dm/localeval.svg" alt="npm"></a>
-<a href="https://raw.githubusercontent.com/NE-LOAN-FED/NE-Component/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="GitHub license"></a></p>
-<h1>Notice</h1>
-<p><strong>1.0.0 版本正式发布前，不建议外部项目使用。</strong></p>
-<h2>说明</h2>
-<p>大数据风控组移动端 React 组件。</p>
-<h2>开发</h2>
-<h3>前提</h3>
-<ul>
-<li>Node &gt; 6.0</li>
-<li>Npm &gt; 3.0</li>
-</ul>
-<h2>使用</h2>
-<h3>安装</h3>
-<pre><code class="language-bash">npm install ne-rc
-</code></pre>
-<h3>引用</h3>
-<pre><code class="language-js">	<span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
-	<span class="hljs-comment">// 引入组件</span>
-	<span class="hljs-keyword">import</span> {
-	  Form, Input, CheckBox,
-	  Cells, Cell, CellTip, CellHeader, CellBody, CellFooter,
-	  VerifyButton, Toast, Button
-	} <span class="hljs-keyword">from</span> <span class="hljs-string">'ne-rc'</span>
-	<span class="hljs-keyword">import</span> Logger <span class="hljs-keyword">from</span> <span class="hljs-string">'../../../utils/log'</span>
-	<span class="hljs-keyword">import</span> lang <span class="hljs-keyword">from</span> <span class="hljs-string">'../../utils/lang'</span>
-	<span class="hljs-keyword">import</span> validate <span class="hljs-keyword">from</span> <span class="hljs-string">'../../utils/validate'</span>
-	
-	<span class="hljs-keyword">const</span> logger = <span class="hljs-keyword">new</span> Logger(<span class="hljs-string">'DEBUG'</span>, <span class="hljs-string">'FormDemo'</span>)
-	
-	<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FormDemo</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
-	  <span class="hljs-keyword">constructor</span>() {
-	    <span class="hljs-keyword">super</span>()
-	    <span class="hljs-keyword">this</span>.state = {  <span class="hljs-comment">// 初始化需要的数据</span>
-	      formData: {
-	        <span class="hljs-attr">name</span>: {<span class="hljs-attr">value</span>: <span class="hljs-string">'抹桥'</span>},
-	        <span class="hljs-attr">phone</span>: {<span class="hljs-attr">value</span>: <span class="hljs-string">'13333333333'</span>},
-	        <span class="hljs-attr">verifyCode</span>: {<span class="hljs-attr">value</span>: <span class="hljs-number">3303</span>},
-	        <span class="hljs-attr">is</span>: {<span class="hljs-attr">value</span>: <span class="hljs-literal">true</span>}
-	      },
-	      <span class="hljs-attr">msg</span>: <span class="hljs-string">''</span>,
-	      <span class="hljs-attr">isComplete</span>: <span class="hljs-literal">false</span>,
-	      <span class="hljs-attr">showToast</span>: <span class="hljs-literal">false</span>
-	    }
-	  }
-	
-	  handleSubmit = <span class="hljs-function">(<span class="hljs-params">isValidate, state, pureData</span>) =&gt;</span> { <span class="hljs-comment">// Form 提交的回调函数</span>
-	    <span class="hljs-keyword">if</span> (!isValidate) {
-	      <span class="hljs-keyword">this</span>.setState({
-	        <span class="hljs-attr">showToast</span>: <span class="hljs-literal">true</span>,
-	        <span class="hljs-attr">msg</span>: state.errorMsgList[<span class="hljs-number">0</span>]
-	      })
-	    } <span class="hljs-keyword">else</span> {
-	      <span class="hljs-keyword">this</span>.setState({
-	        <span class="hljs-attr">showToast</span>: <span class="hljs-literal">true</span>,
-	        <span class="hljs-attr">msg</span>: <span class="hljs-string">'正在提交'</span>
-	      })
-	    }
-	  }
-	  handleChange = <span class="hljs-function">(<span class="hljs-params">formData</span>) =&gt;</span> {  <span class="hljs-comment">// Form 变化的回调函数</span>
-	    <span class="hljs-keyword">this</span>.setState({
-	      <span class="hljs-attr">formData</span>: formData.data,
-	      <span class="hljs-attr">isComplete</span>: formData.isComplete
-	    })
-	  }
-	  handleFieldChange = <span class="hljs-function">(<span class="hljs-params">FieldData</span>) =&gt;</span> { <span class="hljs-comment">// Form 下面子表单变化的回调函数</span>
-	    logger.log(<span class="hljs-string">'FieldChange'</span>, FieldData)
-	  }
-	  closeToast = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-	    <span class="hljs-keyword">this</span>.setState({
-	      <span class="hljs-attr">showToast</span>: <span class="hljs-literal">false</span>
-	    })
-	  }
-	
-	  render() {
-	    <span class="hljs-keyword">const</span> {msg, showToast, formData, isComplete} = <span class="hljs-keyword">this</span>.state
-	    <span class="hljs-keyword">return</span> (
-	      &lt;section className="page-form-demo"&gt;
-	        &lt;Toast content={msg}
-	               show={showToast}
-	               onClose={this.closeToast}
-	        /&gt;
-	        &lt;Form onSubmit={this.handleSubmit}
-	              onFieldChange={this.handleFieldChange}
-	              onChange={this.handleChange}
-	              ref={(ref) =&gt; {
-	                this['$Form'] = ref
-	              } }&gt;
-	          &lt;Cells&gt;
-	            &lt;Cell warning={formData.name.isError}&gt;
-	              &lt;CellHeader&gt;Name&lt;/CellHeader&gt;
-	              &lt;Input type='text'
-	                     name='name'
-	                     errorMsg={lang.nameErrorMsg}
-	                     validate={validate.name}
-	                     value={formData.name.value}
-	              /&gt;
-	            &lt;/Cell&gt;
-	          &lt;/Cells&gt;
-	          &lt;Cells&gt;
-	            &lt;Cell htmlFor="is"&gt;
-	              &lt;CellBody&gt;Is yourself?&lt;/CellBody&gt;
-	              &lt;CellFooter&gt;&lt;CheckBox name='is' id="is" value={formData.is.value}/&gt;&lt;/CellFooter&gt;
-	            &lt;/Cell&gt;
-	          &lt;/Cells&gt;
-	          &lt;Button type="submit" disabled={!isComplete}&gt;提交&lt;/Button&gt;
-	        &lt;/Form&gt;
-	      &lt;/section&gt;
-	    )
-	  }
-	}
-	
-	export default FormDemo
-
-</code></pre>
-<h2>文档</h2>
-<ol>
-<li><a href="./src/Alert/README.md">Alert</a></li>
-<li><a href="./src/ActionSheet/README.md">ActionSheet</a></li>
-<li><a href="./src/Button/README.md">Button</a></li>
-<li><a href="./src/Cell/README.md">Cell</a></li>
-<li><a href="./src/CellInput/README.md">CellInput</a></li>
-<li><a href="./src/Collapse/README.md">Collapse</a></li>
-<li><a href="./src/DatePicker/README.md">DatePicker</a></li>
-<li><a href="./src/Form/README.md">Form</a></li>
-<li><a href="./src/Icon/README.md">Icon</a></li>
-<li><a href="./src/Dialog/README.md">Dialog</a></li>
-<li><a href="./src/Picker/README.md">Picker</a></li>
-<li><a href="./src/Popup/README.md">Popup</a></li>
-<li><a href="./src/Toast/README.md">Toast</a></li>
-<li><a href="./src/VerifyButton/README.md">VerifyButton</a></li>
-<li><a href="./src/NoticeBar/README.md">NoticeBar</a></li>
-<li><a href="/">Tab（待更新）</a></li>
-<li><a href="/">Flow(待更新)</a></li>
-</ol>
-</div>`;
-		}
-
-		render() {
-				return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('section', { ref: 'container' });
-		}
-}
-/* harmony export (immutable) */ __webpack_exports__["default"] = Markdown;
-
-
-/***/ }),
-
-/***/ 374:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-
-
-
-class Markdown extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   constructor(props) {
     super(props);
   }
@@ -2240,6 +2132,114 @@ class Markdown extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 <td>是否开启点击遮罩关闭</td>
 <td>Boolean</td>
 <td>false</td>
+</tr>
+</tbody>
+</table></div></div>`;
+  }
+
+  render() {
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('section', { ref: 'container' });
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["default"] = Markdown;
+
+
+/***/ }),
+
+/***/ 374:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+
+class Markdown extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    this.refs['container'].innerHTML = `<div><h1>Toast 组件</h1>
+<p>Toast 轻提示，建议包含文字和 Icon 信息，规则如下：</p>
+<ul>
+<li>建议文字内容不超过 13 个字</li>
+<li>默认自动隐藏，手动隐藏建议使用 Modal</li>
+</ul>
+<h2>代码示例</h2>
+<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  onClose = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-comment">// ...</span>
+  }
+  render(){
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Toast</span> <span class="hljs-attr">show</span>=<span class="hljs-string">{this.props.ToastShow}</span>
+          <span class="hljs-attr">content</span>=<span class="hljs-string">"出错啦！"</span>
+          <span class="hljs-attr">onClose</span>=<span class="hljs-string">{this.onClose}</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    )
+  }
+}
+</span></code></pre>
+<h2>API</h2>
+<div class="table-container"><table class="table"><thead>
+<tr>
+<th>属性名</th>
+<th>描述</th>
+<th>类型</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prefixCls</td>
+<td>样式前缀</td>
+<td>String</td>
+<td>NEUI</td>
+</tr>
+<tr>
+<td>show</td>
+<td>是否显示</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>content</td>
+<td>显示文字内容</td>
+<td>String</td>
+<td>无</td>
+</tr>
+<tr>
+<td>icon</td>
+<td>显示 icon 的 type</td>
+<td>String</td>
+<td>无</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>自动隐藏时间</td>
+<td>Number</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>isLockScreen</td>
+<td>是否需要锁屏遮罩</td>
+<td>Bool</td>
+<td>false</td>
+</tr>
+<tr>
+<td>transitionName</td>
+<td>出现和消失动画的类名</td>
+<td>String</td>
+<td>verticalSlideTB</td>
+</tr>
+<tr>
+<td>transitionTimeOut</td>
+<td>动画的时间</td>
+<td>Number</td>
+<td>300 单位ms</td>
 </tr>
 </tbody>
 </table></div></div>`;
@@ -7180,7 +7180,7 @@ module.exports = __webpack_require__(371);
 /***/ 875:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(367);
+module.exports = __webpack_require__(374);
 
 /***/ }),
 
