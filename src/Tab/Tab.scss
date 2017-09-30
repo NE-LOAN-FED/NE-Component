@@ -1,0 +1,42 @@
+@import "../_style/_config";
+@import "../_style/_utils";
+
+$prefix: NEUI;
+.#{$prefix}_tab {
+  width: 100%;
+  position: relative;
+  &_header {
+    display: flex;
+    height: pxToRem(80);
+    background-color: $white;
+    position: relative;
+    &_item {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $font-size-big;
+      border-bottom: 1px solid $border-color-primary;
+    }
+    .active {
+      color: $red-primary;
+    }
+    .disabled {
+      color: $border-color-primary;
+      cursor: not-allowed;
+    }
+    .#{$prefix}_ink_bar {
+      position: absolute;
+      height: 3px;
+      bottom: 0;
+      left: 0;
+      background-color: $red-primary;
+    }
+    .bar_animate {
+      transition: right 0.3s cubic-bezier(0.35, 0, 0.25, 1), left 0.3s cubic-bezier(0.35, 0, 0.25, 1) 0.09s;
+    }
+  }
+  &_content {
+
+  }
+}

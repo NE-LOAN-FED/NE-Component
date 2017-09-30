@@ -5,18 +5,16 @@ $noticeBar: #{$prefixCls}_notice_bar;
   width: 100%;
   display: flex;
   font-size: pxToRem(22);
-  color: $noticebar_color;
-  background-color: $noticebar_primary;
+  color: $noticebar-color;
+  background-color: $noticebar-primary;
   align-items: center;
   position: relative;
   i {
-    color: $noticebar_color;
+    color: $noticebar-color;
   }
   .content {
     margin: pxToRem(12) pxToRem(20);
-    line-height: pxToRem(28);
-    // overflow: hidden;
-    // white-space: nowrap;
+    line-height: 1.4;
   }
   .tail-icon {
     position: absolute;

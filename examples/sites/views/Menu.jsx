@@ -2,6 +2,7 @@ import React from 'react'
 import maps from '../maps.js'
 import '../navbar.scss'
 import { Link } from 'react-router'
+import classname from 'classnames'
 
 export default class Menu extends React.Component {
   constructor(props) {
@@ -9,18 +10,27 @@ export default class Menu extends React.Component {
     this.renderNavs = this.renderNavs.bind(this)
     this.renderGroup = this.renderGroup.bind(this)
   }
-  renderLi() {
 
+  isPathEqual(currentPath, defaultPath) {
+    return currentPath.toLowerCase() === defaultPath.toLowerCase()
   }
-
   renderGroup(list) {
-    const lis = list.map((item, index) => (
-      <li key={index}>
-        <Link className='nav-link' to={`${item.name}`}>
-          {item.name}
-        </Link>
-      </li>
-    ))
+    const self = this
+    const { pathname } = this.props
+    const lis = list.map((item, index) => {
+      let cls = classname({
+        'nav-link': true,
+        'is-active': self.isPathEqual(item.name, pathname)
+      })
+
+      return (
+        <li key={index}>
+          <Link className={cls} to={`${item.name}`}>
+            {item.name}
+          </Link>
+        </li>
+      )
+    })
 
     return (
       <ul>{lis}</ul>
@@ -30,7 +40,7 @@ export default class Menu extends React.Component {
   renderNavs(maps) {
     const navs = maps.map((group, index) => (
       <li key={index}>
-        <a href='#' className='nav-label'>{group.title}</a>
+        <a href='#' className='nav-label' style={{ pointerEvents: 'none' }}>{group.title}</a>
         {this.renderGroup(group.list)}
       </li>
     ))

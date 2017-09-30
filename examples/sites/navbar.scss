@@ -37,6 +37,7 @@
   transition: color .2s;
 
   &.is-active {
+    pointer-events: none;
     color: #4078c0;
     border-right: 2px solid;
   }

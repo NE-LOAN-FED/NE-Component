@@ -1,8 +1,8 @@
 /**
  * Created by kisnows on 2016/9/13.
  */
-import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import {
   Form,
   FormCell,
@@ -30,9 +30,8 @@ import Logger from '../../../src/_utils/log'
 
 const logger = new Logger('DEBUG', 'Home')
 
-
 class Home extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       phone: '',
@@ -44,19 +43,19 @@ class Home extends React.Component {
     }
   }
 
-  comonentWillMount() {
+  comonentWillMount () {
     logger.info('WillMount')
   }
 
-  componentDidMount() {
+  componentDidMount () {
     logger.info('DidMount', this.state)
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate (nextProps, nextState) {
     logger.log('componentWillUpdate', nextState)
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     logger.info('DidUpdate', this.state)
   }
 
@@ -89,12 +88,11 @@ class Home extends React.Component {
     })
   }
 
-
-  render() {
+  render () {
     const {msg, showToast, showModal, showAlert, formData, phone, gender} = this.state
     const {isComplete} = formData
 
-    const Links = ['form', 'button', 'cell', 'panel', 'picker', 'modal', 'collapse', 'icon', 'noticebar']
+    const Links = ['form', 'button', 'cells', 'panel', 'picker', 'modal', 'collapse', 'icon', 'noticebar', 'tab', 'flow']
     return (
       <section className='page-home'>
         <Toast content={msg}

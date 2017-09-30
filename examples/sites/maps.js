@@ -39,8 +39,11 @@ const map = [{
       'path': '/icon',
       'name': 'Icon',
       'useMarkdown': true
-    }],
-
+    }, {
+      'path': '/flow',
+      'name': 'Flow',
+      'useMarkdown': true
+    }]
 }, {
   'title': 'Form Components',
   'list': [{
@@ -51,5 +54,3 @@ const map = [{
 }]
 
 export default map
-
-

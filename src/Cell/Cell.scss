@@ -2,19 +2,19 @@
 
 .NEUI_cells_tip {
   display: block;
-  margin: pxToRem(15) pxToRem(30) pxToRem(30);
+  margin: pxToRem(14) pxToRem(32) pxToRem(24);
   line-height: pxToRem(30);
-  font-size: $smallSize;
-  color: $text_light;
+  font-size: $font-size-small;
+  color: $color-text-light;
 }
 
 .NEUI_cells {
   width: 100%;
   & .NEUI_cell:first-child {
-    border-top: 1px solid $border_primary;
+    border-top: 1px solid $border-color-primary;
   }
   & .NEUI_cell:last-child {
-    border-bottom: 1px solid $border_primary;
+    border-bottom: 1px solid $border-color-primary;
     &:after {
       display: none;
     }
@@ -26,14 +26,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: pxToRem(90);
-  padding: pxToRem(20) pxToRem(30);
-  font-size: $normalSize;
+  min-height: pxToRem(88);
+  padding: pxToRem(20) pxToRem(32);
+  font-size: $font-size-big;
   background-color: $white;
   position: relative;
   overflow: hidden;
   &__hd {
-    color: $titleColor;
+    color: $color-text-title;
     width: pxToRem(130);
     display: flex;
     align-items: center;
@@ -43,6 +43,8 @@
     flex: 1;
     display: flex;
     align-items: center;
+    word-wrap: break-word;
+    word-break: break-all;
     a {
       width: 100%;
     }
@@ -50,6 +52,7 @@
   &__ft {
     display: flex;
     align-items: center;
+    margin-left: pxToRem(30)
   }
   &:after {
     content: '';
@@ -59,7 +62,7 @@
     z-index: 10;
     width: 95%;
     height: 1px;
-    background-color: $border_secondary;
+    background-color: $border-color-secondary;
     display: block;
     transition: all .3s ease;
   }
@@ -70,7 +73,7 @@
 
 .NEUI_cell_warning {
   &:after {
-    background-color: $color_warning;
+    background-color: $color-warning;
     display: block !important;
   }
 }

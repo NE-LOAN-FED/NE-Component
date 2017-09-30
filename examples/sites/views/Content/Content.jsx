@@ -21,7 +21,7 @@ export default class Content extends React.Component {
       'content': true
     })
     return (
-      <section className={contentCls}>
+      <section className={contentCls} style={{height: '100vh', overflow: 'scroll'}}>
 
        {this.props.children}
       </section>

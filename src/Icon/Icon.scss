@@ -21,13 +21,13 @@ $iconfont-prefix: #{$prefixCls}_icon;
     }
   }
   &_del {
-    color: $gray_light;
+    color: $gray-light;
     &:before {
       content: '\e60b';
     }
   }
   &_arrow {
-    color: $gray_light;
+    color: $gray-light;
     &:before {
       content: '\e600';
     }
@@ -39,19 +39,19 @@ $iconfont-prefix: #{$prefixCls}_icon;
     }
   }
   &_camera {
-    color: $gray_light;
+    color: $gray-light;
     &:before {
       content: '\e604'
     }
   }
   &_camera_close {
-    color: $gray_light;
+    color: $gray-light;
     &:before {
       content: '\e605'
     }
   }
   &_close {
-    color: $color_warning;
+    color: $color-warning;
     font-size: pxToRem(56);
     margin-left: 0;
     &:before {
@@ -59,7 +59,7 @@ $iconfont-prefix: #{$prefixCls}_icon;
     }
   }
   &_wait {
-    color: $color_warning;
+    color: $color-warning;
     font-size: pxToRem(56);
     margin-left: 0;
     &:before {
@@ -67,7 +67,7 @@ $iconfont-prefix: #{$prefixCls}_icon;
     }
   }
   &_warning {
-    color: $color_warning;
+    color: $color-warning;
     font-size: pxToRem(56);
     margin-left: 0;
     &:before {
@@ -75,7 +75,7 @@ $iconfont-prefix: #{$prefixCls}_icon;
     }
   }
   &_success {
-    color: $color_warning;
+    color: $color-warning;
     font-size: pxToRem(56);
     margin-left: 0;
     &:before {

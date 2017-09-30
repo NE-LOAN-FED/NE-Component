@@ -1,12 +1,14 @@
 @import "../_style/config";
 
 // TODO 重新组织
-$collapse: #{$prefixCls}_collapse;
+$collapse: #{$prefixCls}_collapse_list;
 
 .#{$collapse} {
-  border-top: 1px solid $border_primary;
+  border-top: 1px solid $border-color-primary;
+  width: 100%;
+  overflow: hidden;
   &:last-child {
-  border-bottom: 1px solid $border_primary;
+    border-bottom: 1px solid $border-color-primary;
   }
   .list_icon {
     transition: all 0.3s ease-in-out;
@@ -17,16 +19,41 @@ $collapse: #{$prefixCls}_collapse;
   }
 
   .list_content_wrap {
-    background: $white;
-    overflow: hidden;
+    border: 1px solid $border-color-primary;
+    border-left: none;
+    border-right: none;
+    background: #ebebeb;
+    position: relative;
     &.collapse {
       display: none;
     }
   }
 
   .list_content {
-    padding: pxToRem(20) 0 pxToRem(20) pxToRem(30);
+    font-size: $font-size-base;
+    margin: 0;
+    padding: pxToRem(24) pxToRem(32);
+    line-height: 1.6;
   }
+}
+.#{$collapse}:last-child .list_content_wrap{
+  border-bottom: none;
+}
+.#{$collapse} + .#{$collapse} {
+  border-top: none;
+  position: relative;
+  &::before {
+    content: '';
+    display: inline-block;
+    margin-left: pxToRem(32);
+    position: absolute;
+    border-top: 1px solid $border-color-secondary;
+    width: 100%;
+    z-index: 10;
+  }
+}
+.#{$collapse}.is_active + .#{$collapse}::before {
+  display: none;
 }
 
 .#{$collapse} .#{$prefixCls}_cell::after {

@@ -11,19 +11,18 @@ const list = getMapList()
 
 export default class Main extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       item: list[0],
       navbarShow: false,
       pathname: getPathname(this.props.location.pathname, list)
-    };
+    }
     this.renderContent = this.renderContent.bind(this)
   }
 
   componentDidMount() {
     this.renderContent()
   }
-
 
   componentWillReceiveProps(nextProps) {
     this.renderContent()
@@ -41,7 +40,6 @@ export default class Main extends React.Component {
     this.setState({
       item
     })
-
   }
 
   handleToggleBar() {
@@ -59,13 +57,13 @@ export default class Main extends React.Component {
     })
     return (
       <main className={mainCls}>
-        <Menu />
+        <Menu pathname={this.state.pathname} />
         <Content item={this.state.item}>
           <div className='navbar-toggle-container'>
             <button className='navbar-toggle' onClick={this.handleToggleBar.bind(this)}>
-              <span></span>
-              <span></span>
-              <span></span>
+              <span />
+              <span />
+              <span />
             </button>
           </div>
           {this.props.children}

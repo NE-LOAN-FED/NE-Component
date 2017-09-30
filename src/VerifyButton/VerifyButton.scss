@@ -14,9 +14,9 @@
   justify-content: center;
   align-items: center;
   color: $blue;
-  border-left: 1px solid $border_secondary;
+  border-left: 1px solid $border-color-secondary;
   &_sending {
-    color: $text_light;
+    color: $color-text-light;
   }
 }
 

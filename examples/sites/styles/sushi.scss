@@ -872,7 +872,7 @@ h6, .h6 {
     max-width: 100%;
     margin-bottom: 16px;
     margin-bottom: 1rem;
-    table-layout: fixed;
+    // table-layout: fixed;
     background-color: #fff;
 }
 .table td, .table th {
@@ -881,6 +881,7 @@ h6, .h6 {
     border: 1px solid #eee;
     text-align: left;
     color: #656b79;
+    white-space: nowrap;
 }
 .table th {
     font-weight: 400;

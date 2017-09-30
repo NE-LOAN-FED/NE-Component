@@ -15,7 +15,6 @@ const routes = {
   }, {
     path: 'ActionSheet',
     getComponent(nextState, cb) {
-
       require.ensure([], require => {
         cb(null, require('../../src/ActionSheet/README.md').default)
       })
@@ -61,6 +60,13 @@ const routes = {
     getComponent(nextState, cb) {
       require.ensure([], require => {
         cb(null, require('../../src/Button/README.md').default)
+      })
+    }
+  }, {
+    path: 'Flow',
+    getComponent(nextState, cb) {
+      require.ensure([], require => {
+        cb(null, require('../../src/Flow/README.md').default)
       })
     }
   }

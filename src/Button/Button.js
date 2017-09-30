@@ -5,7 +5,6 @@ import React from 'react'
 import classNames from 'classnames'
 
 export default class Button extends React.Component {
-
   static propTypes = {
     disabled: React.PropTypes.bool,
     role: React.PropTypes.oneOf(['primary', 'secondary']),
@@ -37,9 +36,9 @@ export default class Button extends React.Component {
     })
     return (
       <button className={cls}
-              disabled={disabled}
-              type={type}
-              {...others}>
+        disabled={disabled}
+        type={type}
+        {...others}>
         {children}
       </button>
     )
