@@ -70,6 +70,9 @@
     display: none;
   }
 }
+a.NEUI_cell:active {
+  background-color: $gray_light;
+}
 
 .NEUI_cell_warning {
   &:after {

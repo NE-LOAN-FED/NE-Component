@@ -1,0 +1,71 @@
+@import "../_style/config";
+.NEUI_table {
+  width: 100%;
+  text-align: center;
+  background-color: #ffffff;
+  position: relative;
+  border-collapse: collapse;
+  line-height: pxToRem(40);
+  font-size: pxToRem(28);
+
+  td,th {
+    position: relative;
+    &::before {
+      content: " ";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 1px;
+      border-bottom: 1px solid #C7C7C7;
+      color: #C7C7C7;
+      -webkit-transform-origin: 0 100%;
+      transform-origin: 0 100%;
+      -webkit-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+    }
+    &::after {
+      content: " ";
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 1px;
+      bottom: 0;
+      border-right: 1px solid #C7C7C7;
+      color: #C7C7C7;
+      -webkit-transform-origin: 100% 0;
+      transform-origin: 100% 0;
+      -webkit-transform: scaleX(0.5);
+      transform: scaleX(0.5);
+    }
+    &:last-child:after {
+      border-right-width: 0;
+    }
+  }
+
+  th {
+    font-weight: 500;
+  }
+
+  &::after {
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 1px;
+    border-top: 1px solid #C7C7C7;
+    color: #C7C7C7;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
+  &_no_cell_border {
+    td,th {
+      &::after {
+        border-right-width: 0;
+      }
+    }
+  }
+}
