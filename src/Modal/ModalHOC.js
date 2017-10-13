@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import RenderLayer from '../internal/RenderLayer'
+import { CSSTransition } from 'react-transition-group'
 import Mask from '../internal/Mask'
 import histtNonReactStatic from 'hoist-non-react-statics'
 import getDisplayName from '../_utils/getComponentName'
@@ -31,8 +32,8 @@ export default function ModalHOC(options) {
         prepareStyle: {},
         ...options
       }
-      handleMaskClick =(e) => {
-        const {onClose, isClickMaskToClose, onMaskClick} = this.props
+      handleMaskClick = (e) => {
+        const { onClose, isClickMaskToClose, onMaskClick } = this.props
         isClickMaskToClose && onClose(e)
         onMaskClick(e)
       }
@@ -51,20 +52,13 @@ export default function ModalHOC(options) {
         }
         return (
           <div className='NEUI-Modal' style={Object.assign(style, prepareStyle)}>
-            <ReactCSSTransitionGroup
-              component='div'
-              transitionAppear
-              transitionAppearTimeout={transitionTimeOut}
-              transitionEnter
-              transitionEnterTimeout={transitionTimeOut}
-              transitionLeave
-              transitionLeaveTimeout={transitionTimeOut}
-              transitionName={transitionName}
+            <CSSTransition
+              className={transitionName}
+              timeout={transitionTimeOut}
+              in={show}
             >
-              {show &&
-                <WrapComponent {...others} show={show} />
-              }
-            </ReactCSSTransitionGroup>
+              <WrapComponent {...others} show={show} />
+            </CSSTransition>
             {isLockScreen && <Mask show={show} onClick={this.handleMaskClick} />}
           </div>
         )

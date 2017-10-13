@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
-
+import { CSSTransition } from 'react-transition-group'
 class Mask extends Component {
   static propTypes = {
     prefixCls: PropTypes.string,
@@ -22,18 +22,13 @@ class Mask extends Component {
       backgroundColor: backgroundColor || 'rgba(0,0,0,0.5)'
     }
     return (
-      <ReactCSSTransitionGroup
-        transitionAppear
-        transitionAppearTimeout={300}
-        transitionEnter={false}
-        transitionLeave
-        transitionLeaveTimeout={300}
-        transitionName='fade'
+      <CSSTransition
+        className='fade'
+        timeout={300}
+        in={show}
       >
-        {
-          show ? <div style={style} {...others} /> : null
-        }
-      </ReactCSSTransitionGroup>
+        <div style={style} {...others} />
+      </CSSTransition>
     )
   }
 }
