@@ -1,8 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react'
 import classNames from 'classnames'
 import RenderLayer from '../internal/RenderLayer'
-
-const PropTypes = React.PropTypes
 
 const noop = () => {}
 

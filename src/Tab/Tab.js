@@ -1,7 +1,9 @@
 /**
  * Created by hzyanming on 17/6/28.
  */
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import classname from 'classnames'
 const noop = () => {}
 

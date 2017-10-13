@@ -1,5 +1,5 @@
+import PropTypes from 'prop-types';
 import React from 'react'
-const PropTypes = React.PropTypes
 import classname from 'classnames'
 import { ModalHOC } from '../Modal'
 

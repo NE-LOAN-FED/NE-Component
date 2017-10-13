@@ -1,8 +1,7 @@
 {
   "presets": [
     "./tools/es2015Preset",
-    "react",
-    "stage-1"
+    "react"
   ],
   "env": {
     "cjs": {

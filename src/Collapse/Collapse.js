@@ -1,7 +1,9 @@
 /**
  * Created by kisnows on 2017/2/17.
  */
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import List from './List'
 const noop = () => { }
 export default class Collapse extends React.Component {

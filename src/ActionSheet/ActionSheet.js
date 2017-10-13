@@ -1,8 +1,9 @@
 /**
  * Created by hzyuanqi1 on 2017/5/26.
  */
-import React from 'react'
-const PropTypes = React.PropTypes
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import classname from 'classnames'
 import { ModalHOC } from '../Modal'
 const noop = () => { }

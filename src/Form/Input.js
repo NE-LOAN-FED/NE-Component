@@ -1,11 +1,12 @@
 /**
  * Created by kisnows on 2016/12/26.
  */
-import React from 'react'
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import classNames from 'classnames'
 import Icon from '../Icon'
 
-const PropTypes = React.PropTypes
 // TODO 完成 Input 重构
 const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
 const noop = () => { }

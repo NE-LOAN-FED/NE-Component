@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react'
 import { Animate, easeOutCubic, easeInOutCubic } from '../internal/Animate'
-
-const PropTypes = React.PropTypes
 
 const DECELERATION_VELOCITY_RATE = 0.95
 

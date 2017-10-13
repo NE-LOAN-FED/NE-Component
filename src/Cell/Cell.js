@@ -1,9 +1,10 @@
 /**
  * Created by hzyuanqi1 on 2016/9/12.
  */
-import React from 'react'
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import classNames from 'classnames'
-const PropTypes = React.PropTypes
 export default class Cell extends React.Component {
   static propTypes = {
     tip: PropTypes.bool,

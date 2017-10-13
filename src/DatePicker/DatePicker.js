@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
 import Picker from '../Picker'
@@ -14,8 +15,6 @@ import {
   getDays,
   getDaysInMonth
 } from './DateUtils.js'
-
-const PropTypes = React.PropTypes
 
 class DatePicker extends React.Component {
   static propTypes = {

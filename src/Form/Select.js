@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
 
-const PropTypes = React.PropTypes
 const noop = () => { }
 /**
  * 生成一个 Value 到 Name 的 Map 对象

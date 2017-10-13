@@ -1,4 +1,4 @@
-const buildPreset = require('babel-preset-es2015').buildPreset
+const buildPreset = require('babel-preset-env').buildPreset
 
 const BABEL_ENV = process.env.BABEL_ENV
 

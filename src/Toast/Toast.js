@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types';
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
 import Icon from '../Icon'
 import { ModalHOC } from '../Modal'
 import classname from 'classnames'
-const PropTypes = React.PropTypes
 
 const noop = () => { }
 

@@ -1,10 +1,10 @@
 /**
  * Created by hzyuanqi1 on 2016/9/13.
  */
-import React from 'react'
-import classNames from 'classnames'
+import PropTypes from 'prop-types';
 
-const PropTypes = React.PropTypes
+import React from 'react';
+import classNames from 'classnames'
 
 export default class Icon extends React.Component {
   static propTypes = {

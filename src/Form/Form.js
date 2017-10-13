@@ -1,12 +1,12 @@
 /**
  * Created by kisnows on 2016/12/26.
  */
-import React from 'react'
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import classNames from 'classnames'
 import { isFormComplete, formPure, isFromValidate } from './FormUtils'
 import isEqual from 'lodash/isEqual'
-
-const PropTypes = React.PropTypes
 
 // TODO 完成 Form 重构
 

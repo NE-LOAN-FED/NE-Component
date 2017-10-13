@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react';
 import classNames from 'classnames'
 import Animation from '../_utils/animation'
+import PropTypes from 'prop-types';
 import Animate from 'rc-animate'
 import {
   Cell,

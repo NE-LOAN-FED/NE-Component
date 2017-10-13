@@ -1,7 +1,9 @@
 /**
  * Created by yanming on 17/6/29.
  */
-import React, { PropTypes } from 'react'
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import classname from 'classnames'
 import {
   Icon

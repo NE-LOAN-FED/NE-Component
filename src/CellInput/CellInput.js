@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react'
 import classNames from 'classnames'
 
-const PropTypes = React.PropTypes
 const NUMBER_REGEXP = /^\d+$/
 
 export default class CellInput extends React.Component {
