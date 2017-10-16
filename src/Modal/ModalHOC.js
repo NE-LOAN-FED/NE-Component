@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import RenderLayer from '../internal/RenderLayer'
-import { CSSTransition } from 'react-transition-group'
+import { CSSTransition,TransitionGroup } from 'react-transition-group'
 import Mask from '../internal/Mask'
 import histtNonReactStatic from 'hoist-non-react-statics'
 import getDisplayName from '../_utils/getComponentName'
@@ -52,13 +52,13 @@ export default function ModalHOC(options) {
         }
         return (
           <div className='NEUI-Modal' style={Object.assign(style, prepareStyle)}>
-            <CSSTransition
-              className={transitionName}
-              timeout={transitionTimeOut}
-              in={show}
-            >
-              <WrapComponent {...others} show={show} />
-            </CSSTransition>
+            <TransitionGroup>
+              {show &&
+                <CSSTransition classNames={transitionName} in={show} timeout={transitionTimeOut}>
+                  <WrapComponent {...others} show={show} />
+                </CSSTransition>
+              }
+            </TransitionGroup>
             {isLockScreen && <Mask show={show} onClick={this.handleMaskClick} />}
           </div>
         )
