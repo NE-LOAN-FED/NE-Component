@@ -9,7 +9,7 @@ export default function (options) {
       constructor (props) {
         super(props)
         this.state = {
-          isCollapse: this.props.data.isCollapse || true
+          isCollapse: typeof this.props.isCollapse !== 'undefined' ? this.props.isCollapse : true
         }
       }
       static displayName = `HOC(${getDisplayName(WrapComponent)})`

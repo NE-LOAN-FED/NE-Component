@@ -1,8 +1,8 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import React, {Component, PropTypes} from 'react'
-import {Link} from 'react-router'
+import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 import {
   Form,
   FormCell,
@@ -54,7 +54,7 @@ export default class CollapsePage extends Component {
     console.log(id, collapse, openListIdCollection)
   }
 
-  render() {
+  render () {
     const CollapseSubComponent = <List />
     return (
       <section className='page_collapse'>
@@ -63,13 +63,17 @@ export default class CollapsePage extends Component {
           <p className='page--desc'>折叠列表</p>
         </div>
         <h3>Normal</h3>
-        <Collapse listCollection={collapseListData}
+        <Collapse
+          listCollection={collapseListData}
           onListChange={this.handleCollapseListChange}
+          openListIdCollection={[1]}
         />
         <h3>Accordion</h3>
-        <Collapse listCollection={collapseListData}
+        <Collapse
+          listCollection={collapseListData}
           accordion
           onListChange={this.handleCollapseListChange}
+          openListIdCollection={[1]}
         />
       </section>
     )
