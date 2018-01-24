@@ -1,39 +1,28 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
 import Picker from '../Picker'
 import Icon from '../Icon'
-import {
-  noop,
-  formatDate,
-  cloneDate,
-  addYears,
-  addMonths,
-  addDays,
-  getYears,
-  getMonths,
-  getDays,
-  getDaysInMonth
-} from './DateUtils.js'
+import { addYears, cloneDate, formatDate, getDays, getMonths, getYears, noop } from './DateUtils.js'
 
 class DatePicker extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string, // 修改date组件class前缀
-    className: PropTypes.string,  // 添加date class
-    show: PropTypes.bool,       // date 显示日期选择框
+    className: PropTypes.string, // 添加date class
+    show: PropTypes.bool, // date 显示日期选择框
     defaultDate: PropTypes.any, // 默认选中日期
     date: PropTypes.any, // 选中日期
     type: PropTypes.oneOf(['YMD', 'YM']),
-    format: PropTypes.any,     // 格式化方式，或者格式化函数
-    maxDate: PropTypes.any,    // 最大日期
-    minDate: PropTypes.any,    // 最小日期
+    format: PropTypes.any, // 格式化方式，或者格式化函数
+    maxDate: PropTypes.any, // 最大日期
+    minDate: PropTypes.any, // 最小日期
     headerContent: PropTypes.node, // 头部内容
     confirmContent: PropTypes.node, // 确认内容
-    cancelContent: PropTypes.node,  // 取消内容
-    onConfirm: PropTypes.func,  // date confirm 事件
-    onCancel: PropTypes.func,   // date cancel 事件
+    cancelContent: PropTypes.node, // 取消内容
+    onConfirm: PropTypes.func, // date confirm 事件
+    onCancel: PropTypes.func, // date cancel 事件
     onDateChange: PropTypes.func, // 日期改变触发函数
-    disabled: PropTypes.bool     // 是否可以修改日期
+    disabled: PropTypes.bool // 是否可以修改日期
   }
 
   static defaultProps = {
@@ -50,7 +39,7 @@ class DatePicker extends React.Component {
     disabled: false
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.onClick = this.onClick.bind(this)
     this.onConfirm = this.onConfirm.bind(this)
@@ -62,7 +51,8 @@ class DatePicker extends React.Component {
     this.init()
     this.state = this.initState()
   }
-  componentWillReceiveProps(nextProps) {
+
+  componentWillReceiveProps (nextProps) {
     if ('date' in nextProps && nextProps.date) {
       this.setState({
         selectedDate: cloneDate(nextProps.date)
@@ -75,14 +65,14 @@ class DatePicker extends React.Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     if (this.state.show !== nextState.show || this.state.selectedDate.getTime() !== cloneDate(nextState.selectedDate).getTime()) {
       return true
     }
     return false
   }
 
-  initState() {
+  initState () {
     let selectedDateState
     const {show, defaultDate, date} = this.props
     if (date) {
@@ -100,7 +90,7 @@ class DatePicker extends React.Component {
     }
   }
 
-  init() {
+  init () {
     Object.assign(this, {
       liveUpdate: false,
       selectedDateFormat: null,
@@ -110,11 +100,11 @@ class DatePicker extends React.Component {
     })
   }
 
-  setSelectedDateFormat(selectedDate = this.state.selectedDate) {
+  setSelectedDateFormat (selectedDate = this.state.selectedDate) {
     this.selectedDateFormat = this.formatDate(selectedDate)
   }
 
-  formatDate(date) {
+  formatDate (date) {
     let format = this.props.format
     if (this.props.type === 'YM') {
       format = 'yyyy-MM'
@@ -122,7 +112,7 @@ class DatePicker extends React.Component {
     return formatDate(date, format)
   }
 
-  getYears() {
+  getYears () {
     let minDate = this.props.minDate
     let maxDate = this.props.maxDate
     if (!minDate || !maxDate) {
@@ -137,37 +127,38 @@ class DatePicker extends React.Component {
       return i + '年'
     })
   }
-  getMonths() {
-    const { minDate, maxDate } = this.props
+
+  getMonths () {
+    const {minDate, maxDate} = this.props
     return this.formatArrayToPicker(getMonths(this.state.selectedDate, minDate, maxDate), (i) => {
       return i + 1 + '月'
     })
   }
 
-  getDays() {
-    const { minDate, maxDate } = this.props
+  getDays () {
+    const {minDate, maxDate} = this.props
     return this.formatArrayToPicker(getDays(this.state.selectedDate, minDate, maxDate), (i) => {
       return i + '日'
     })
   }
 
-  getSelectedDate() {
+  getSelectedDate () {
     return cloneDate(this.state.selectedDate)
   }
 
-  getSelectedYear() {
+  getSelectedYear () {
     return this.getSelectedDate().getFullYear()
   }
 
-  getSelectedMonth() {
+  getSelectedMonth () {
     return this.getSelectedDate().getMonth()
   }
 
-  getSelectedDay() {
+  getSelectedDay () {
     return this.getSelectedDate().getDate()
   }
 
-  formatArrayToPicker(a, extra) {
+  formatArrayToPicker (a, extra) {
     const arr = []
     for (let i = 0, len = a.length; i < len; i++) {
       arr.push({
@@ -177,7 +168,8 @@ class DatePicker extends React.Component {
     }
     return arr
   }
-  onConfirm() {
+
+  onConfirm () {
     this.setSelectedDateFormat()
     this.setState({
       show: false
@@ -186,13 +178,13 @@ class DatePicker extends React.Component {
     })
   }
 
-  onClick() {
+  onClick () {
     this.setState({
       show: true
     })
   }
 
-  onCancel() {
+  onCancel () {
     this.setState({
       show: false
     }, () => {
@@ -200,22 +192,22 @@ class DatePicker extends React.Component {
     })
   }
 
-  onYearChange(y) {
+  onYearChange (y) {
     const date = cloneDate(this.getSelectedDate().setFullYear(y))
     this.fireDateChange(date)
   }
 
-  onMonthChange(m) {
+  onMonthChange (m) {
     const date = cloneDate(this.getSelectedDate().setMonth(m))
     this.fireDateChange(date)
   }
 
-  onDayChange(d) {
+  onDayChange (d) {
     const date = cloneDate(this.getSelectedDate().setDate(d))
     this.fireDateChange(date)
   }
 
-  fireDateChange(date = this.state.selectedDate, cb = noop) {
+  fireDateChange (date = this.state.selectedDate, cb = noop) {
     const newDate = cloneDate(date)
     this.setState({
       selectedDate: newDate
@@ -224,8 +216,8 @@ class DatePicker extends React.Component {
     })
   }
 
-  renderHeader() {
-    const { prefixCls, headerContent, confirmContent, cancelContent } = this.props
+  renderHeader () {
+    const {prefixCls, headerContent, confirmContent, cancelContent} = this.props
     let headerEle = (
       <div className={`${prefixCls}_date_picker_header`}>
         <span className={`${prefixCls}_date_picker_cancel`} onClick={this.onCancel}>{cancelContent}</span>
@@ -238,7 +230,7 @@ class DatePicker extends React.Component {
     return headerEle
   }
 
-  getContent() {
+  getContent () {
     const contents = [{
       key: 'year',
       selectedValue: this.getSelectedYear(),
@@ -265,29 +257,31 @@ class DatePicker extends React.Component {
     return contents
   }
 
-  renderContent() {
-    const { children, className, prefixCls, confirmContent, cancelContent, classNames } = this.props
+  renderContent () {
+    const {children, className, prefixCls, confirmContent, cancelContent, classNames} = this.props
     const content = this.getContent().map(function (c, i) {
       return <Picker className={`${prefixCls}_date_picker_content_item`} {...c} />
     })
     return (
-      <div className={`${className || ''} ${prefixCls}_date_picker_popup`} >
+      <div className={`${className || ''} ${prefixCls}_date_picker_popup`}>
         {this.renderHeader()}
         <div className={`${prefixCls}_date_picker_content`}>
           {content}
         </div>
-      </div >
+      </div>
     )
   }
 
-  render() {
-    const { prefixCls } = this.props
+  render () {
+    const {prefixCls} = this.props
     const selectedDateFormat = this.selectedDateFormat
     return (
       <div className={`${prefixCls}_date_picker`} onClick={this.onClick}>
-        {selectedDateFormat ? <span className={`${prefixCls}_date_picker_date`}>{selectedDateFormat}</span> : <span className={`${prefixCls}_date_picker_placeholder`}>请选择</span>}
+        {selectedDateFormat ? <span className={`${prefixCls}_date_picker_date`}>{selectedDateFormat}</span>
+          : <span className={`${prefixCls}_date_picker_placeholder`}>请选择</span>}
         <Icon type='arrow' />
-        {this.state.show ? <RenderLayer className={`${prefixCls}_date_modal`} render={this.renderContent} show maskClosable={false} /> : null}
+        {this.state.show ? <RenderLayer className={`${prefixCls}_date_modal`} render={this.renderContent} show
+          maskClosable={false} /> : null}
       </div>
     )
   }

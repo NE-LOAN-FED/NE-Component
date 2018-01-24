@@ -1,9 +1,9 @@
 /**
  * Created by hzyuanqi1 on 2016/9/8.
  */
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-import React from 'react';
+import React from 'react'
 import classNames from 'classnames'
 
 export default class Button extends React.Component {
@@ -24,7 +24,7 @@ export default class Button extends React.Component {
     children: '确定'
   }
 
-  render() {
+  render () {
     const {role, type, size, disabled, style, className, children, ...others} = this.props
     const cls = classNames({
       NEUI_button: true,

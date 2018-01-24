@@ -13,7 +13,7 @@ export const Animate = {
   })(),
 
   // Stops the given animation.
-  stop(id) {
+  stop (id) {
     const cleared = running[id] !== null
     if (cleared) {
       running[id] = null
@@ -22,12 +22,12 @@ export const Animate = {
   },
 
   // Whether the given animation is still running.
-  isRunning(id) {
+  isRunning (id) {
     return running[id] !== null
   },
 
   // Start the animation.
-  start(stepCallback, verifyCallback, completedCallback, duration, easingMethod) {
+  start (stepCallback, verifyCallback, completedCallback, duration, easingMethod) {
     const start = Date.now()
     let lastFrame = start
     let percent = 0
@@ -101,11 +101,11 @@ export const Animate = {
   }
 }
 
-export function easeOutCubic(pos) {
+export function easeOutCubic (pos) {
   return (Math.pow((pos - 1), 3) + 1)
 }
 
-export function easeInOutCubic(p) {
+export function easeInOutCubic (p) {
   let pos = p
   pos /= 0.5
   if (pos < 1) {

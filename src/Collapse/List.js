@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react'
 import classNames from 'classnames'
 import Animation from '../_utils/animation'
-import PropTypes from 'prop-types'
 import Animate from 'rc-animate'
-import {
-  Cell,
-  CellBody,
-  CellFooter,
-  Icon
-} from '../index'
+import { Cell, CellBody, CellFooter, Icon } from '../index'
 import HOC from './CollapseHOC'
 
 function List (props) {

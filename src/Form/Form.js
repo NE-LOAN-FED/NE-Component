@@ -1,11 +1,11 @@
 /**
  * Created by kisnows on 2016/12/26.
  */
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-import React from 'react';
+import React from 'react'
 import classNames from 'classnames'
-import { isFormComplete, formPure, isFromValidate } from './FormUtils'
+import { formPure, isFormComplete, isFromValidate } from './FormUtils'
 import isEqual from 'lodash/isEqual'
 
 // TODO 完成 Form 重构
@@ -24,60 +24,16 @@ const noop = () => {
 }
 
 export default class Form extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      isComplete: false,
-      isValidate: false,
-      data: {},
-      errorMsgList: []
-    }
-    // 存放 clone 前的原始子组件
-    this.formFields = []
-    this.children = []
-    // 标识当前 Form 处于哪个状态
-    this.CURRENT_STATUS = STATUS.Normal
-    // 由于 setState 是异步的，所以需要存放一个最新 state 的地方
-    this.currentState = Object.assign({}, this.state)
-    this.setStateAndCurrentStatus = function (nextState, nextSTATUS) {
-      this.currentState = nextState
-      this.setState(nextState, () => {
-        // eslint-disable-next-line
-        typeof nextSTATUS === 'undefined' ? this.CURRENT_STATUS = nextSTATUS : null
-      })
-    }
-  }
-
   static propTypes = {
     onFieldChange: PropTypes.func,
     onChange: PropTypes.func,
     onSubmit: PropTypes.func
   }
-
   static defaultProps = {
     onFieldChange: noop,
     onChange: noop,
     onSubmit: noop
   }
-
-  componentWillMount () {
-    this.children = this.collectFormField(this.props.children)
-    this.initFormDataStructure()
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (!isEqual(nextProps.children, this.props.children) && this.CURRENT_STATUS !== STATUS.Submit) {
-      this.children = this.collectFormField(nextProps.children)
-      if (this.CURRENT_STATUS === STATUS.Normal) {
-        this.updateFormDataStructure()
-      }
-    }
-  }
-
-  get data () {
-    return this.state
-  }
-
   /**
    * 递归遍历收集所有需要管理的表单组件，并注册 handleFieldChange 方法
    * @param children
@@ -128,21 +84,6 @@ export default class Form extends React.PureComponent {
 
     return getChildList(children)
   }
-
-  /**
-   * 更新子表单的基础数据
-   * @param {object} props 传入的 props
-   */
-  updateFieldData (props) {
-    return {
-      value: props.value,
-      errorMsg: props.errorMsg || `${props.name} 填写错误`,
-      validate: props.validate,
-      shouldRsa: props.shouldRsa,
-      required: typeof props.required === 'undefined' ? true : props.required
-    }
-  }
-
   /**
    * 初始化 FormData 结构，给 this.state.data 添加 key 为表单项 name 的属性
    */
@@ -166,7 +107,6 @@ export default class Form extends React.PureComponent {
     this.handleFormChange(nextState)
     this.setStateAndCurrentStatus(nextState, STATUS.Normal)
   }
-
   /**
    * 更新 FormData 结构，当 Form 下表单项添加或删除时，将 FormData 结构更新到最新
    */
@@ -201,7 +141,6 @@ export default class Form extends React.PureComponent {
     this.handleFormChange(nextState)
     this.setStateAndCurrentStatus(nextState, STATUS.Normal)
   }
-
   /**
    * 由 Form 管理的子表单变化时触发的回掉函数，会对外触发 onFieldChange 和 onFormChange 事件
    * @param fieldData {object} 由子表单传入的参数
@@ -240,7 +179,6 @@ export default class Form extends React.PureComponent {
     this.handleFormChange(nextState)
     this.setStateAndCurrentStatus(nextState, STATUS.Normal)
   }
-
   /**
    * Form 发生变化时触发的回调函数，同时对外触发 onFormChange 事件
    * @param state {object} 当前的表单 state
@@ -248,7 +186,6 @@ export default class Form extends React.PureComponent {
   handleFormChange = (state) => {
     this.props.onChange(state)
   }
-
   /**
    * 提交事件，对外触发 onSubmit 事件
    */
@@ -273,10 +210,65 @@ export default class Form extends React.PureComponent {
     }
     this.setStateAndCurrentStatus(state, STATUS.Normal)
   }
-
   handleFormSubmit = (e) => {
     e.preventDefault()
     this.formSubmit()
+  }
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      isComplete: false,
+      isValidate: false,
+      data: {},
+      errorMsgList: []
+    }
+    // 存放 clone 前的原始子组件
+    this.formFields = []
+    this.children = []
+    // 标识当前 Form 处于哪个状态
+    this.CURRENT_STATUS = STATUS.Normal
+    // 由于 setState 是异步的，所以需要存放一个最新 state 的地方
+    this.currentState = Object.assign({}, this.state)
+    this.setStateAndCurrentStatus = function (nextState, nextSTATUS) {
+      this.currentState = nextState
+      this.setState(nextState, () => {
+        // eslint-disable-next-line
+        typeof nextSTATUS === 'undefined' ? this.CURRENT_STATUS = nextSTATUS : null
+      })
+    }
+  }
+
+  get data () {
+    return this.state
+  }
+
+  componentWillMount () {
+    this.children = this.collectFormField(this.props.children)
+    this.initFormDataStructure()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (!isEqual(nextProps.children, this.props.children) && this.CURRENT_STATUS !== STATUS.Submit) {
+      this.children = this.collectFormField(nextProps.children)
+      if (this.CURRENT_STATUS === STATUS.Normal) {
+        this.updateFormDataStructure()
+      }
+    }
+  }
+
+  /**
+   * 更新子表单的基础数据
+   * @param {object} props 传入的 props
+   */
+  updateFieldData (props) {
+    return {
+      value: props.value,
+      errorMsg: props.errorMsg || `${props.name} 填写错误`,
+      validate: props.validate,
+      shouldRsa: props.shouldRsa,
+      required: typeof props.required === 'undefined' ? true : props.required
+    }
   }
 
   render () {

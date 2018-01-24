@@ -12,10 +12,10 @@ export default function ModalHOC (options) {
     class HOC extends React.Component {
       static displayName = `HOC(${getDisplayName(WrapComponent)})`
       static propTypes = {
-        show: PropTypes.bool,       // modal 显示
-        onClose: PropTypes.func,  // modal close 事件
+        show: PropTypes.bool, // modal 显示
+        onClose: PropTypes.func, // modal close 事件
         isLockScreen: PropTypes.bool, // 是否添加遮罩
-        onMaskClick: PropTypes.func,  // 遮罩点击事件
+        onMaskClick: PropTypes.func, // 遮罩点击事件
         isClickMaskToClose: PropTypes.bool, // 是否点击遮罩关闭
         transitionName: PropTypes.string, // 动画的类名
         transitionTimeOut: PropTypes.number, // 动画的时间
@@ -55,18 +55,18 @@ export default function ModalHOC (options) {
             <TransitionGroup>
               {show &&
               <CSSTransition classNames={transitionName} in={show} timeout={transitionTimeOut}>
-                <WrapComponent {...others} show={show}/>
+                <WrapComponent {...others} show={show} />
               </CSSTransition>
               }
             </TransitionGroup>
-            {isLockScreen && <Mask show={show} onClick={this.handleMaskClick}/>}
+            {isLockScreen && <Mask show={show} onClick={this.handleMaskClick} />}
           </div>
         )
       }
 
       render () {
         return (
-          <RenderLayer render={this.renderContent} show/>
+          <RenderLayer render={this.renderContent} show />
         )
       }
     }

@@ -1,16 +1,10 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import classNames from 'classnames'
 import Icon from '../Icon'
+
 export default class NoticeBar extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {}
-    this.handleClose = this.handleClose.bind(this)
-  }
-
   static propTypes = {
     prefixCls: PropTypes.string,
     onClose: PropTypes.func,
@@ -19,7 +13,6 @@ export default class NoticeBar extends Component {
     icon: PropTypes.element,
     type: PropTypes.oneOf(['link', 'closable', ''])
   }
-
   static defaultProps = {
     prefixCls: 'NEUI',
     type: '',
@@ -28,14 +21,21 @@ export default class NoticeBar extends Component {
     onClick: () => {}
   }
 
-  handleClose() {
+  constructor (props) {
+    super(props)
+
+    this.state = {}
+    this.handleClose = this.handleClose.bind(this)
+  }
+
+  handleClose () {
     this.props.onClose()
     let el = findDOMNode(this)
     el.parentNode.removeChild(el)
   }
 
-  render() {
-    const { type, icon, prefixCls, className, children, closeIcon, ...others } = this.props
+  render () {
+    const {type, icon, prefixCls, className, children, closeIcon, ...others} = this.props
     const cls = classNames({
       [className]: className,
       [`${prefixCls}_notice_bar`]: true

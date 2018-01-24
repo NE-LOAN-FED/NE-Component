@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import React from 'react'
 import classNames from 'classnames'
 
@@ -39,7 +39,7 @@ export default class CellInput extends React.Component {
     validate: () => true
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.onChange = this.onChange.bind(this)
     this.onFocus = this.onFocus.bind(this)
@@ -49,14 +49,14 @@ export default class CellInput extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.value !== this.props.value) {
       this.setValueState(nextProps.value)
       this.setCellsActive(nextProps.value)
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     if (nextState.value !== this.state.value || nextState.activeIndex !== this.state.activeIndex) {
       return true
     }
@@ -65,18 +65,19 @@ export default class CellInput extends React.Component {
     }
     return false
   }
-  componentDidUpdate() {
+
+  componentDidUpdate () {
     this.setCellsActive(this.state.value)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     if (this.props.autoFocus) {
       this.setFocus()
     }
   }
 
-  isValidate(value) {
-    const { type, maxLength, validate } = this.props
+  isValidate (value) {
+    const {type, maxLength, validate} = this.props
     if (value.length > maxLength) {
       return false
     }
@@ -90,15 +91,15 @@ export default class CellInput extends React.Component {
     }
   }
 
-  isCompletion(value = this.state.value) {
+  isCompletion (value = this.state.value) {
     if (this.isValidate(value) && (value.length === this.props.maxLength)) {
       return true
     }
     return false
   }
 
-  setCellsActive(value = this.state.value) {
-    const { maxLength } = this.props
+  setCellsActive (value = this.state.value) {
+    const {maxLength} = this.props
     const index = value.length
     if (index < maxLength && index > 0) {
       this.setState({
@@ -111,8 +112,8 @@ export default class CellInput extends React.Component {
     }
   }
 
-  setValueState(value) {
-    const { maxLength, onConfirm, onChange, onError, errorMsg } = this.props
+  setValueState (value) {
+    const {maxLength, onConfirm, onChange, onError, errorMsg} = this.props
     const prevValue = this.state.value
     if (this.isValidate(value) || value === '') {
       this.setState({
@@ -132,29 +133,29 @@ export default class CellInput extends React.Component {
     }
   }
 
-  setFocus() {
+  setFocus () {
     this.Input.focus()
     this.setCellsActive(this.state.value)
   }
 
-  clearValue() {
+  clearValue () {
     this.setState({
       value: ''
     })
   }
 
-  onChange(e) {
+  onChange (e) {
     const value = e.target.value
     this.setValueState(value)
   }
 
-  onFocus(e) {
+  onFocus (e) {
     this.props.onFocus(e)
   }
 
-  createCellsEle() {
-    const { value, activeIndex } = this.state
-    const { prefixCls, maxLength } = this.props
+  createCellsEle () {
+    const {value, activeIndex} = this.state
+    const {prefixCls, maxLength} = this.props
     const cellsEle = []
     for (let i = 0; i < maxLength; i++) {
       let cellProps = {
@@ -167,7 +168,7 @@ export default class CellInput extends React.Component {
     return cellsEle
   }
 
-  render() {
+  render () {
     const {
       prefixCls,
       value,
@@ -194,7 +195,7 @@ export default class CellInput extends React.Component {
           onChange={this.onChange}
           onFocus={this.onFocus}
           {...other}
-          />
+        />
         <div className={`${prefixCls}_cell_input_list`}>
           {cells}
         </div>
@@ -204,7 +205,7 @@ export default class CellInput extends React.Component {
 }
 
 const Cell = (props) => {
-  const { prefixCls, value, active } = props
+  const {prefixCls, value, active} = props
   const classnames = classNames({
     [`${prefixCls}_cell_input_item`]: true,
     active

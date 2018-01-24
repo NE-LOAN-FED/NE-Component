@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
@@ -6,13 +6,6 @@ import Icon from '../Icon'
 const noop = () => { }
 // TODO 待完成,解决嵌套在 Form 组件后 checkbox 的选择问题
 export default class _FieldCheckbox extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: this.props.value || false
-    }
-  }
-
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.bool,
@@ -22,15 +15,37 @@ export default class _FieldCheckbox extends React.Component {
     onChange: PropTypes.func,
     handleFieldChange: PropTypes.func
   }
-
   static defaultProps = {
     required: true,
     disabled: false,
     onChange: noop,
     handleFieldChange: noop
   }
+  handleChange = (e) => {
+    this.props.onChange(e)
+    this.setState({
+      value: e.target.checked
+    })
+  }
 
-  componentWillReceiveProps(nextProps) {
+  constructor (props) {
+    super(props)
+    this.state = {
+      value: this.props.value || false
+    }
+  }
+
+  get data () {
+    const {value} = this.state
+    const {name, shouldRsa} = this.props
+    return {
+      name,
+      value,
+      shouldRsa
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
     if (nextProps.value !== this.state.value) {
       const nextValue = typeof nextProps.value === 'undefined' ? false : nextProps.value
       this.setState({
@@ -39,32 +54,15 @@ export default class _FieldCheckbox extends React.Component {
     }
   }
 
-  componentDidUpdate(preProps, preState) {
-    const { handleFieldChange } = preProps
+  componentDidUpdate (preProps, preState) {
+    const {handleFieldChange} = preProps
     if (preState.value !== this.state.value) {
       handleFieldChange(this.data)
       console.log(this.data)
     }
   }
 
-  get data() {
-    const { value } = this.state
-    const { name, shouldRsa } = this.props
-    return {
-      name,
-      value,
-      shouldRsa
-    }
-  }
-
-  handleChange = (e) => {
-    this.props.onChange(e)
-    this.setState({
-      value: e.target.checked
-    })
-  }
-
-  render() {
+  render () {
     const {
       className, name, value, children, onChange, handleFieldChange, ...others
     } = this.props

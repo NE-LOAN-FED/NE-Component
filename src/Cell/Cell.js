@@ -1,10 +1,11 @@
 /**
  * Created by hzyuanqi1 on 2016/9/12.
  */
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-import React from 'react';
+import React from 'react'
 import classNames from 'classnames'
+
 export default class Cell extends React.Component {
   static propTypes = {
     tip: PropTypes.bool,
@@ -16,8 +17,8 @@ export default class Cell extends React.Component {
     warning: false
   }
 
-  render() {
-    const { className, children, tip, warning, ...others } = this.props
+  render () {
+    const {className, children, tip, warning, ...others} = this.props
     const Component = this.props.href ? 'a' : this.props.htmlFor === 'undefined' ? 'div' : 'label'
     const cls = classNames({
       NEUI_cell: true,

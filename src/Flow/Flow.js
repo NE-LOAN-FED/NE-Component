@@ -1,13 +1,11 @@
 /**
  * Created by yanming on 17/6/29.
  */
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-import React from 'react';
+import React from 'react'
 import classname from 'classnames'
-import {
-  Icon
-} from '../index'
+import { Icon } from '../index'
 
 class FlowItem extends React.Component {
   static propTypes = {
@@ -22,8 +20,8 @@ class FlowItem extends React.Component {
     status: 'wait'
   }
 
-  render() {
-    const { prefixCls, title, status, className, number } = this.props
+  render () {
+    const {prefixCls, title, status, className, number} = this.props
 
     const cls = classname({
       [`${prefixCls}_flow_item`]: true,
@@ -35,14 +33,14 @@ class FlowItem extends React.Component {
       <div className={cls}>
         <div className={`${prefixCls}_flow_body`}>
           <div className={`${prefixCls}_flow_body_main`}>
-            { ['wait', 'process'].indexOf(status) !== -1 &&
+            {['wait', 'process'].indexOf(status) !== -1 &&
             <span className={`${prefixCls}_flow_body_${status}`}>{number}</span>
             }
-            { status === 'finish' &&
+            {status === 'finish' &&
             <Icon type='success' className={`${prefixCls}_flow_body_${status}`} />
             }
           </div>
-          <p className={`${prefixCls}_flow_body_title`}>{ title }</p>
+          <p className={`${prefixCls}_flow_body_title`}>{title}</p>
         </div>
         <div className={`${prefixCls}_flow_tail`} />
       </div>
@@ -63,8 +61,8 @@ export default class Flow extends React.Component {
     direction: 'horizontal'
   }
 
-  render() {
-    const { className, prefixCls, children, current, direction, ...others } = this.props
+  render () {
+    const {className, prefixCls, children, current, direction, ...others} = this.props
 
     const cls = classname({
       [`${prefixCls}_flow`]: true,

@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import React from 'react'
-import RenderLayer from '../internal/RenderLayer'
 import Icon from '../Icon'
 import { ModalHOC } from '../Modal'
 import classname from 'classnames'
@@ -10,11 +9,11 @@ const noop = () => { }
 class Toast extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
-    className: PropTypes.string,        // 添加toast class
+    className: PropTypes.string, // 添加toast class
     content: PropTypes.string,
     icon: PropTypes.string,
-    onClose: PropTypes.func,            // 点击onClose 触发函数
-    timeout: PropTypes.number          // 设置 Toast 指定时间隐藏， -1 不自动隐藏
+    onClose: PropTypes.func, // 点击onClose 触发函数
+    timeout: PropTypes.number // 设置 Toast 指定时间隐藏， -1 不自动隐藏
   }
   static defaultProps = {
     prefixCls: 'NEUI',
@@ -24,7 +23,7 @@ class Toast extends React.Component {
     isLockScreen: false
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.close = this.close.bind(this)
     this.state = {
@@ -33,7 +32,7 @@ class Toast extends React.Component {
     this.autoClose(props.timeout)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps.show !== this.state.show) {
       if (nextProps.show) {
         this.show()
@@ -44,11 +43,11 @@ class Toast extends React.Component {
     this.autoClose(nextProps.timeout)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearTimeout(this.timer)
   }
 
-  autoClose(timeout = 0) {
+  autoClose (timeout = 0) {
     if (timeout >= 0) {
       this.timer = setTimeout(() => {
         this.close()
@@ -56,14 +55,14 @@ class Toast extends React.Component {
     }
   }
 
-  show() {
+  show () {
     this.setState({
       show: true
     })
   }
 
-  close() {
-    const { onClose } = this.props
+  close () {
+    const {onClose} = this.props
     if (this.state.show) {
       this.setState({
         show: false
@@ -73,8 +72,8 @@ class Toast extends React.Component {
     }
   }
 
-  render() {
-    const { prefixCls, content, icon, show, transitionName, transitionTimeOut, className, isLockScreen, prepareStyle } = this.props
+  render () {
+    const {prefixCls, content, icon, show, transitionName, transitionTimeOut, className, isLockScreen, prepareStyle} = this.props
     const cls = classname({
       [`${prefixCls}_toast`]: true,
       [className]: className

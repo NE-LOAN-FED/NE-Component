@@ -1,9 +1,9 @@
 /**
  * Created by kisnows on 2016/12/26.
  */
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-import React from 'react';
+import React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
 
@@ -12,16 +12,6 @@ const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'P
 const noop = () => { }
 
 export default class _FieldInput extends React.Component {
-  constructor(props) {
-    super(props)
-    this.timer = null
-    this.state = {
-      showDelIcon: false,
-      value: this.props.value || '',
-      isError: this.props.isError || false
-    }
-  }
-
   static propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.any,
@@ -44,7 +34,6 @@ export default class _FieldInput extends React.Component {
     formatter: PropTypes.func,
     parser: PropTypes.func
   }
-
   static defaultProps = {
     type: 'text',
     isError: false,
@@ -60,57 +49,9 @@ export default class _FieldInput extends React.Component {
     formatter: data => data,
     parser: data => data
   }
-
-  componentDidMount() {
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.value !== this.state.value) {
-      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
-      this.setState({
-        value: nextValue
-      })
-    }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.disabled !== nextProps.disabled ||
-      this.state.value !== nextState.value ||
-      this.state.showDelIcon !== nextState.showDelIcon ||
-      this.state.isError !== nextState.isError
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-
-  }
-
-  componentDidUpdate(preProps, preState) {
-    const { handleFieldChange } = preProps
-    if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
-      handleFieldChange(this.data)
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timer)
-  }
-
-  get data() {
-    const { value, isError } = this.state
-    const { name, errorMsg, required, shouldRsa } = this.props
-    return {
-      name,
-      value,
-      isError,
-      errorMsg,
-      required,
-      shouldRsa
-    }
-  }
-
   handleValidate = (e) => {
     const value = e.target.value
-    const { validate } = this.props
+    const {validate} = this.props
     let isError = false
     // TODO 考虑把校验方法提取出来，作为 props 传给 Input
     if (validate instanceof RegExp) {
@@ -134,7 +75,6 @@ export default class _FieldInput extends React.Component {
       isError
     })
   }
-
   handleChange = (e) => {
     const {parser} = this.props
     const value = e.target.value
@@ -150,9 +90,8 @@ export default class _FieldInput extends React.Component {
       showDelIcon: !!formatterE.target.value.length
     })
   }
-
   handleFocus = (e) => {
-    const { onFocus } = this.props
+    const {onFocus} = this.props
     onFocus(e)
     if (e.target.value.length > 0) {
       this.setState({
@@ -160,11 +99,10 @@ export default class _FieldInput extends React.Component {
       })
     }
   }
-
   handleBlur = (e) => {
     // 因为要异步的使用 e, 所以需要保留 e 的引用
     e.persist()
-    const { name, onBlur } = this.props
+    const {name, onBlur} = this.props
     onBlur(e)
     // TODO 考虑做成配置项，来决定什么时候作校验
     this.handleValidate(e)
@@ -176,7 +114,6 @@ export default class _FieldInput extends React.Component {
       })
     }, 300)
   }
-
   handleEmptied = () => {
     const e = {
       target: {
@@ -185,7 +122,6 @@ export default class _FieldInput extends React.Component {
     }
     this.handleChange(e)
   }
-
   handleDelClick = () => {
     this.handleEmptied()
     this.setState({
@@ -193,9 +129,66 @@ export default class _FieldInput extends React.Component {
     })
   }
 
-  render() {
-    const { showDelIcon, value } = this.state
-    const { className, disabled, name, type, formatter } = this.props
+  constructor (props) {
+    super(props)
+    this.timer = null
+    this.state = {
+      showDelIcon: false,
+      value: this.props.value || '',
+      isError: this.props.isError || false
+    }
+  }
+
+  get data () {
+    const {value, isError} = this.state
+    const {name, errorMsg, required, shouldRsa} = this.props
+    return {
+      name,
+      value,
+      isError,
+      errorMsg,
+      required,
+      shouldRsa
+    }
+  }
+
+  componentDidMount () {
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value !== this.state.value) {
+      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
+      this.setState({
+        value: nextValue
+      })
+    }
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.disabled !== nextProps.disabled ||
+      this.state.value !== nextState.value ||
+      this.state.showDelIcon !== nextState.showDelIcon ||
+      this.state.isError !== nextState.isError
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+
+  }
+
+  componentDidUpdate (preProps, preState) {
+    const {handleFieldChange} = preProps
+    if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
+      handleFieldChange(this.data)
+    }
+  }
+
+  componentWillUnmount () {
+    clearTimeout(this.timer)
+  }
+
+  render () {
+    const {showDelIcon, value} = this.state
+    const {className, disabled, name, type, formatter} = this.props
     const formatterValue = formatter(value)
     const prefix = 'NEUI'
     const cls = classNames({
