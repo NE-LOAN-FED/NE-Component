@@ -54,12 +54,13 @@ export default class Collapse extends React.Component {
     const {openListIdCollection, listCollection} = this.state
     const SubComponent = this.props.subComponent
     return listCollection.map((v, k) => {
-      v.isCollapse = openListIdCollection.indexOf(k) === -1
+      const isCollapse = openListIdCollection.indexOf(k) === -1
       return <SubComponent
         data={v}
         onChange={this.handleListChange}
         id={v.id || k}
         key={k}
+        isCollapse={isCollapse}
       />
     })
   }

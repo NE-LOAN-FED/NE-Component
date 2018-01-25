@@ -9,6 +9,12 @@ import getDisplayName from '../_utils/getComponentName'
 export default function (options) {
   return function (WrapComponent) {
     class HOC extends Component {
+      constructor (props) {
+        super(props)
+        this.state = {
+          isCollapse: typeof this.props.isCollapse !== 'undefined' ? this.props.isCollapse : true
+        }
+      }
       static displayName = `HOC(${getDisplayName(WrapComponent)})`
       static propTypes = {
         prefixCls: PropTypes.string,
