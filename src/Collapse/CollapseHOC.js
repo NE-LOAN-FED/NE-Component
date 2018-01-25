@@ -12,7 +12,7 @@ export default function (options) {
       constructor (props) {
         super(props)
         this.state = {
-          isCollapse: typeof this.props.isCollapse !== 'undefined' ? this.props.isCollapse : true
+          isCollapse: this.props.data.isCollapse || true
         }
       }
       static displayName = `HOC(${getDisplayName(WrapComponent)})`
@@ -37,13 +37,6 @@ export default function (options) {
         this.setState({
           isCollapse: nextCollapse
         })
-      }
-
-      constructor (props) {
-        super(props)
-        this.state = {
-          isCollapse: this.props.data.isCollapse || true
-        }
       }
 
       componentWillReceiveProps (nextProps) {
