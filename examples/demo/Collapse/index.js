@@ -1,8 +1,9 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router'
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import {Link} from 'react-router'
 import {
   Form,
   FormCell,
@@ -31,7 +32,7 @@ import './Collapse.scss'
 const questions = [
   {
     q: 'Q：客服电话是多少？',
-    a: 'A：客服热线：400-0881188  服务时间：工作日09:30-12:00 ;13:30-18:00'
+    a: 'A：客服热线：400-88888888  服务时间：工作日09:30-12:00 ;13:30-18:00'
   }, {
     q: 'Q：申请的条件是什么？',
     a: 'A：年龄在18-60周岁的在职员工。'

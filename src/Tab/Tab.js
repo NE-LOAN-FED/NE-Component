@@ -1,8 +1,11 @@
 /**
  * Created by hzyanming on 17/6/28.
  */
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types'
+
+import React, { Component } from 'react'
 import classname from 'classnames'
+
 const noop = () => {}
 
 class TabItem extends Component {
@@ -17,10 +20,10 @@ class TabItem extends Component {
     isShow: false
   }
 
-  render() {
-    const { children, isShow } = this.props
+  render () {
+    const {children, isShow} = this.props
     return (
-      <div className='NEUI_tab_content_item' style={{'display': (isShow ? 'block' : 'none')}}>{ children }</div>
+      <div className='NEUI_tab_content_item' style={{'display': (isShow ? 'block' : 'none')}}>{children}</div>
     )
   }
 }
@@ -45,22 +48,6 @@ export default class Tab extends Component {
     onChange: noop,
     animated: true
   }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      activeIndex: this.getActiveIndex(props)
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if ('activeIndex' in nextProps) {
-      this.setState({
-        activeIndex: nextProps.activeIndex
-      })
-    }
-  }
   /**
    * 获取默认 activeIndex
    * @return {string}
@@ -72,7 +59,7 @@ export default class Tab extends Component {
     } else if ('defaultActiveIndex' in props) {
       activeIndex = props.defaultActiveIndex
     } else {
-      activeIndex = (function(props) {
+      activeIndex = (function (props) {
         let index
         props.children.forEach(child => {
           if (!index && !child.props.disabled) {
@@ -84,10 +71,9 @@ export default class Tab extends Component {
     }
     return activeIndex + ''
   }
-
   getHeaderClass = (index, disabled) => {
-    let { activeIndex } = this.state
-    const { prefixCls } = this.props
+    let {activeIndex} = this.state
+    const {prefixCls} = this.props
     if ('activeIndex' in this.props) {
       activeIndex = this.props.activeIndex
     }
@@ -96,9 +82,8 @@ export default class Tab extends Component {
     }
     return activeIndex === index ? `${prefixCls}_tab_header_item active` : `${prefixCls}_tab_header_item`
   }
-
   handleTabClick = (index, disabled) => {
-    const { onChange } = this.props
+    const {onChange} = this.props
     if (!disabled) {
       this.setState({
         activeIndex: index
@@ -107,9 +92,25 @@ export default class Tab extends Component {
     }
   }
 
-  render() {
-    const { children, className, prefixCls, animated } = this.props
-    let { activeIndex } = this.state
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      activeIndex: this.getActiveIndex(props)
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if ('activeIndex' in nextProps) {
+      this.setState({
+        activeIndex: nextProps.activeIndex
+      })
+    }
+  }
+
+  render () {
+    const {children, className, prefixCls, animated} = this.props
+    let {activeIndex} = this.state
     if ('activeIndex' in this.props) {
       activeIndex = this.props.activeIndex + ''
     }
@@ -118,7 +119,7 @@ export default class Tab extends Component {
       [className]: className
     })
 
-    const barIndex = (function(children, activeIndex) {
+    const barIndex = (function (children, activeIndex) {
       let index
       children.forEach((child, i) => {
         if (child.key === activeIndex) {
@@ -142,11 +143,12 @@ export default class Tab extends Component {
                 className={this.getHeaderClass(el.key, el.props.disabled)}
                 onClick={() => this.handleTabClick(el.key, el.props.disabled)}
               >
-                { el.props.title }
+                {el.props.title}
               </div>
             )
           })}
-          <div className={classname({[`${prefixCls}_ink_bar`]: true, bar_animate: animated})} style={{ 'left': percentLeft + '%', 'right': percentRight + '%' }} />
+          <div className={classname({[`${prefixCls}_ink_bar`]: true, bar_animate: animated})}
+            style={{'left': percentLeft + '%', 'right': percentRight + '%'}} />
         </div>
         <div className={`${prefixCls}_tab_content`}>
           {children.map((el) => {

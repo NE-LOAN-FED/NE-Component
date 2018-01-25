@@ -35,14 +35,14 @@ button {
   @extend .verticalSlideTB-appear-active
 }
 
-.verticalSlideTB-leave {
+.verticalSlideTB-exit {
   opacity: 1;
   transform-origin: 0% 0%;
   transform: translate(0, 0);
   transition: all .2s ease-out;
 }
 
-.verticalSlideTB-leave-active {
+.verticalSlideTB-exit-active {
   opacity: 0.01;
   transform-origin: 0 0;
   transform: translate(0, -10%);
@@ -68,14 +68,14 @@ button {
   @extend .verticalSlideBT-appear-active
 }
 
-.verticalSlideBT-leave {
+.verticalSlideBT-exit {
   opacity: 1;
   transform-origin: 0 0;
   transform: translate(0, 0);
   transition: all .2s ease-out;
 }
 
-.verticalSlideBT-leave-active {
+.verticalSlideBT-exit-active {
   opacity: 0.01;
   transform-origin: 0 0;
   transform: translate(0, 10%);
@@ -98,11 +98,11 @@ button {
   @extend .fade-appear-active
 }
 
-.fade-leave {
+.fade-exit {
   opacity: 1;
   transition: all .2s ease-out;
 }
 
-.fade-leave-active {
+.fade-exit-active {
   opacity: 0.01;
 }

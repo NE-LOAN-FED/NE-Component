@@ -1,19 +1,18 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import classNames from 'classnames'
 import RenderLayer from '../internal/RenderLayer'
-
-const PropTypes = React.PropTypes
 
 const noop = () => {}
 
 class Popup extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
-    className: PropTypes.string,  // 添加 popup class
-    show: PropTypes.bool,       // popup 显示
-    type: PropTypes.oneOf(['bottom', 'top']),      // popup 位置，默认底部
-    maskClosable: PropTypes.bool,  // 点击遮罩是否可以关闭,默认可以关闭
-    onMaskClose: PropTypes.func    // 遮罩关闭回调函数
+    className: PropTypes.string, // 添加 popup class
+    show: PropTypes.bool, // popup 显示
+    type: PropTypes.oneOf(['bottom', 'top']), // popup 位置，默认底部
+    maskClosable: PropTypes.bool, // 点击遮罩是否可以关闭,默认可以关闭
+    onMaskClose: PropTypes.func // 遮罩关闭回调函数
   }
 
   static defaultProps = {
@@ -24,7 +23,7 @@ class Popup extends React.Component {
     onMaskClose: () => { }
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.onMaskClose = this.onMaskClose.bind(this)
     this.renderContent = this.renderContent.bind(this)
@@ -33,7 +32,7 @@ class Popup extends React.Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (newProps.show !== this.props.show) {
       this.setState({
         show: newProps.show
@@ -41,14 +40,14 @@ class Popup extends React.Component {
     }
   }
 
-  onMaskClose() {
+  onMaskClose () {
     this.setState({
       show: false
     })
     this.props.onMaskClose()
   }
 
-  renderContent() {
+  renderContent () {
     const {prefixCls, className, type, children} = this.props
     const classnames = classNames({
       [`${prefixCls}_popup`]: true,
@@ -58,15 +57,16 @@ class Popup extends React.Component {
     return (
       <div className={classnames}>
         {children}
-      </div >
+      </div>
     )
   }
 
-  render() {
+  render () {
     const {prefixCls, maskClosable, onMaskClose} = this.props
 
     return (
-      <RenderLayer className={`${prefixCls}_popup_modal`} render={this.renderContent} show={this.state.show} maskClosable={maskClosable} onMaskClose={this.onMaskClose} />
+      <RenderLayer className={`${prefixCls}_popup_modal`} render={this.renderContent} show={this.state.show}
+        maskClosable={maskClosable} onMaskClose={this.onMaskClose} />
     )
   }
 }

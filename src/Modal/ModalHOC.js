@@ -1,20 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import RenderLayer from '../internal/RenderLayer'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import Mask from '../internal/Mask'
 import histtNonReactStatic from 'hoist-non-react-statics'
 import getDisplayName from '../_utils/getComponentName'
+
 const noop = () => { }
-export default function ModalHOC(options) {
+export default function ModalHOC (options) {
   return function (WrapComponent) {
     class HOC extends React.Component {
       static displayName = `HOC(${getDisplayName(WrapComponent)})`
       static propTypes = {
-        show: PropTypes.bool,       // modal 显示
-        onClose: PropTypes.func,  // modal close 事件
+        show: PropTypes.bool, // modal 显示
+        onClose: PropTypes.func, // modal close 事件
         isLockScreen: PropTypes.bool, // 是否添加遮罩
-        onMaskClick: PropTypes.func,  // 遮罩点击事件
+        onMaskClick: PropTypes.func, // 遮罩点击事件
         isClickMaskToClose: PropTypes.bool, // 是否点击遮罩关闭
         transitionName: PropTypes.string, // 动画的类名
         transitionTimeOut: PropTypes.number, // 动画的时间
@@ -31,13 +32,13 @@ export default function ModalHOC(options) {
         prepareStyle: {},
         ...options
       }
-      handleMaskClick =(e) => {
+      handleMaskClick = (e) => {
         const {onClose, isClickMaskToClose, onMaskClick} = this.props
         isClickMaskToClose && onClose(e)
         onMaskClick(e)
       }
       renderContent = () => {
-        const { show, isLockScreen, onMaskClick, isClickMaskToClose, transitionName, transitionTimeOut, prepareStyle, ...others } = this.props
+        const {show, isLockScreen, onMaskClick, isClickMaskToClose, transitionName, transitionTimeOut, prepareStyle, ...others} = this.props
         const style = {
           position: 'fixed',
           top: 0,
@@ -51,30 +52,25 @@ export default function ModalHOC(options) {
         }
         return (
           <div className='NEUI-Modal' style={Object.assign(style, prepareStyle)}>
-            <ReactCSSTransitionGroup
-              component='div'
-              transitionAppear
-              transitionAppearTimeout={transitionTimeOut}
-              transitionEnter
-              transitionEnterTimeout={transitionTimeOut}
-              transitionLeave
-              transitionLeaveTimeout={transitionTimeOut}
-              transitionName={transitionName}
-            >
+            <TransitionGroup>
               {show &&
+              <CSSTransition classNames={transitionName} in={show} timeout={transitionTimeOut}>
                 <WrapComponent {...others} show={show} />
+              </CSSTransition>
               }
-            </ReactCSSTransitionGroup>
+            </TransitionGroup>
             {isLockScreen && <Mask show={show} onClick={this.handleMaskClick} />}
           </div>
         )
       }
-      render() {
+
+      render () {
         return (
           <RenderLayer render={this.renderContent} show />
         )
       }
     }
+
     histtNonReactStatic(HOC, WrapComponent)
     return HOC
   }

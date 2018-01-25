@@ -1,28 +1,18 @@
 /**
  * Created by hzyuanqi1 on 2016/9/28.
  */
+import PropTypes from 'prop-types'
+
 import React from 'react'
 import classNames from 'classnames'
 
-const PropTypes = React.PropTypes
-
 export default class VerifyButton extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isSending: this.props.isSending,
-      text: this.props.text,
-      times: this.props.times
-    }
-  }
-
   static propTypes = {
     isSending: PropTypes.bool,
     text: PropTypes.string,
     times: PropTypes.number,
     isCanSend: PropTypes.func
   }
-
   static defaultProps = {
     isSending: false,
     text: '发送验证码',
@@ -30,17 +20,8 @@ export default class VerifyButton extends React.Component {
     isCanSend: () => true,
     handleClick: () => { }
   }
-
-  getIsSending() {
-    return this.state.isSending
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer)
-  }
-
   send = () => {
-    const { isCanSend, handleClick } = this.props
+    const {isCanSend, handleClick} = this.props
     if (!isCanSend()) return false
     let count = 60
     handleClick()
@@ -65,16 +46,34 @@ export default class VerifyButton extends React.Component {
     })
   }
 
-  render() {
-    const { className } = this.props
-    const { isSending, text } = this.state
+  constructor (props) {
+    super(props)
+    this.state = {
+      isSending: this.props.isSending,
+      text: this.props.text,
+      times: this.props.times
+    }
+  }
+
+  getIsSending () {
+    return this.state.isSending
+  }
+
+  componentWillUnmount () {
+    clearInterval(this.timer)
+  }
+
+  render () {
+    const {className} = this.props
+    const {isSending, text} = this.state
     const cls = classNames({
       NEUI_verify: true,
       NEUI_verify_sending: isSending,
       [className]: className
     })
     return (
-      <button className={cls}
+      <button
+        className={cls}
         onClick={(e) => {
           e.preventDefault()
           this.send()

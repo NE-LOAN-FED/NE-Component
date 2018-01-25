@@ -9,8 +9,8 @@ export default class CellFooter extends React.Component {
 
   static defaultProps = {}
 
-  render() {
-    const { className, children, ...others } = this.props
+  render () {
+    const {className, children, ...others} = this.props
     const cls = classNames({
       NEUI_cell__ft: true,
       [className]: className

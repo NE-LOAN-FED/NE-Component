@@ -12,8 +12,8 @@
 * 支持多种引入方式：ES Module 、umd(不建议使用)
 
 # 环境
-* React > 15.4.*
-* ReactDOM > 15.4.*
+* React > 16.0.0
+* ReactDOM > 16.0.0
 
 # 支持环境
 * IE9+ 和现代浏览器

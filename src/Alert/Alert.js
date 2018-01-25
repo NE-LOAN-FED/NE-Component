@@ -1,20 +1,22 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-const PropTypes = React.PropTypes
 import classname from 'classnames'
 import { ModalHOC } from '../Modal'
+
 const noop = () => { }
 
 class Alert extends React.Component {
   static propTypes = {
     prefixCls: PropTypes.string,
-    onClose: PropTypes.func  // modal close 事件
+    onClose: PropTypes.func // modal close 事件
   }
   static defaultProps = {
     prefixCls: 'NEUI',
     onClose: noop
   }
-  render() {
-    const { prefixCls, className, children, onClose, show, ...others } = this.props
+
+  render () {
+    const {prefixCls, className, children, onClose, show, ...others} = this.props
     const cls = classname({
       [`${prefixCls}_modal`]: true,
       [className]: className
@@ -31,6 +33,7 @@ class Alert extends React.Component {
     )
   }
 }
+
 export default ModalHOC({
   transitionName: 'verticalSlideTB'
 })(Alert)

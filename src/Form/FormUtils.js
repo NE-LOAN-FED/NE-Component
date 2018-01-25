@@ -3,17 +3,17 @@
  */
 // Form 表单的输入数据格式应该是如下格式
 const FormStateSchema = {
-  'isValidate': 'boole',  // 决定是否能提交
-  'errorMsg': '',         // 放第一条错误信息
-  'isComplete': 'boole',   // 决定提交按钮是否高亮
+  'isValidate': 'boole', // 决定是否能提交
+  'errorMsg': '', // 放第一条错误信息
+  'isComplete': 'boole', // 决定提交按钮是否高亮
   'data': {
-    'name': {             // 每条表单的属性
-      'value': 'value',   // 表单的值
-      'validate': /[a-z]/,  // 校验方法
+    'name': { // 每条表单的属性
+      'value': 'value', // 表单的值
+      'validate': /[a-z]/, // 校验方法
       'isError': 'boole', // 是否通过校验
-      'errorMsg': '',         // 错误信息
-      'shouldRsa': 'boole',   // 是否需要加密
-      'required': 'boole'     // 是否为必填项
+      'errorMsg': '', // 错误信息
+      'shouldRsa': 'boole', // 是否需要加密
+      'required': 'boole' // 是否为必填项
     },
     'name1': {
       'value': 'value',
@@ -33,7 +33,7 @@ const FormStateSchema = {
  * @param formData 表单数据
  * @returns {boolean} 是否完成
  */
-function isFormComplete(formData) {
+function isFormComplete (formData) {
   const dataList = Object.keys(formData)
   let shouldInput = 0
   let actualInput = 0
@@ -62,7 +62,7 @@ function isFormComplete(formData) {
  * @param formState {object} 表单数据
  * @returns {object} 修改后的新的 formState 对象
  */
-function isFromValidate(formState) {
+function isFromValidate (formState) {
   console.log(123, formState)
   let state = {
     ...formState,
@@ -98,7 +98,7 @@ function isFromValidate(formState) {
  * @param formData 表单数据存储每一条具体字段的 data 对象，即 fromState.data
  * @returns {Promise}
  */
-function formPure(formData) {
+function formPure (formData) {
   // TODO 加密功能后续补上
   const pureData = {}
   const promises = []

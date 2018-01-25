@@ -1,4 +1,4 @@
- @import "../_style/config";
+@import "../_style/config";
 
 $font_size: pxToRem(24);
 .NEUI_panel {
@@ -46,7 +46,7 @@ $font_size: pxToRem(24);
   &_driver {
     border-top: 1px solid $border-color-secondary;
     margin-top: pxToRem(17);
-    padding-bottom:pxToRem(17);
+    padding-bottom: pxToRem(17);
   }
   &_button {
     height: pxToRem(90);

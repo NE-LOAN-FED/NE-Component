@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types'
 import React from 'react'
-import { Animate, easeOutCubic, easeInOutCubic } from '../internal/Animate'
-
-const PropTypes = React.PropTypes
+import { Animate, easeInOutCubic, easeOutCubic } from '../internal/Animate'
 
 const DECELERATION_VELOCITY_RATE = 0.95
 
@@ -16,16 +15,16 @@ const CLIENT_ITEM_COUNT = 5
 
 const MIN_VELOCITY_TO_START_DECELERATION = 4
 
-function isEmptyArray(a) {
+function isEmptyArray (a) {
   return !a || !a.length
 }
 
-function getComputedStyle(el, key) {
+function getComputedStyle (el, key) {
   const computedStyle = window.getComputedStyle(el)
   return computedStyle[key] || ''
 }
 
-function isChildrenEqual(c1, c2, pure) {
+function isChildrenEqual (c1, c2, pure) {
   if (isEmptyArray(c1) && isEmptyArray(c2)) {
     return true
   }
@@ -64,15 +63,15 @@ class Picker extends React.Component {
     pure: false,
     itemHeight: '60',
     clientItemCount: 5,
-    onValueChange() { }
+    onValueChange () { }
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = this.initState()
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if ('selectedValue' in nextProps) {
       this.setState({
         selectedValue: nextProps.selectedValue
@@ -80,16 +79,16 @@ class Picker extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.init()
     this.component.addEventListener('touchstart', this.onTouchStart.bind(this), false)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate (nextProps, nextState) {
     return nextState.selectedValue !== this.state.selectedValue || !isChildrenEqual(nextProps.children, this.props.children, this.props.pure)
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate (prevProps) {
     if (!isChildrenEqual(prevProps.children, this.props.children, this.props.pure)) {
       this.init()
     } else {
@@ -97,11 +96,11 @@ class Picker extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.component.removeEventListener('touchstart', this.onTouchStart.bind(this), false)
   }
 
-  init() {
+  init () {
     Object.assign(this, {
       isAnimating: false,
       isDragging: false,
@@ -124,9 +123,9 @@ class Picker extends React.Component {
     this.select(this.state.selectedValue)
   }
 
-  initState() {
+  initState () {
     let selectedValueState
-    const { selectedValue, defaultSelectedValue, children } = this.props
+    const {selectedValue, defaultSelectedValue, children} = this.props
     if (selectedValue !== undefined) {
       selectedValueState = selectedValue
     } else if (defaultSelectedValue !== undefined) {
@@ -139,7 +138,7 @@ class Picker extends React.Component {
     }
   }
 
-  scrollTo(top, animate = true) {
+  scrollTo (top, animate = true) {
     this.clearAnim()
     top = Math.round(top / this.itemHeight) * this.itemHeight
     top = Math.max(Math.min(this.maxScrollTop, top), this.minScrollTop)
@@ -152,7 +151,7 @@ class Picker extends React.Component {
     this.publish(top, DEFAULT_ANIM_DURATION)
   }
 
-  selectByIndex(index) {
+  selectByIndex (index) {
     if (index < 0 || index >= this.props.children.length) {
       throw new Error('Invalid prop index supplied to Picker Must > 0 and < children.length.')
     }
@@ -161,8 +160,8 @@ class Picker extends React.Component {
     this.scrollTo(this.scrollTop)
   }
 
-  select(value) {
-    const { children } = this.props
+  select (value) {
+    const {children} = this.props
     for (let i = 0, len = children.length; i < len; i++) {
       if (children[i].value === value) {
         this.selectByIndex(i)
@@ -172,7 +171,7 @@ class Picker extends React.Component {
     this.selectByIndex(0)
   }
 
-  fireValueChange(selectedValue) {
+  fireValueChange (selectedValue) {
     if (selectedValue !== this.state.selectedValue) {
       if (!('selectedValue' in this.props)) {
         this.setState({
@@ -183,7 +182,7 @@ class Picker extends React.Component {
     }
   }
 
-  scrollingComplete() {
+  scrollingComplete () {
     const index = Math.round((this.scrollTop - this.minScrollTop - this.itemHeight / 2) / this.itemHeight)
     const child = this.props.children[index]
     if (child) {
@@ -191,9 +190,9 @@ class Picker extends React.Component {
     }
   }
 
-  setDimensions() {
-    const { component, indicator, content } = this
-    const { children, clientItemCount } = this.props
+  setDimensions () {
+    const {component, indicator, content} = this
+    const {children, clientItemCount} = this.props
     const totalItemCount = children.length
 
     // 根据实际高度滑动
@@ -204,7 +203,7 @@ class Picker extends React.Component {
     this.maxScrollTop = this.minScrollTop + this.itemHeight * totalItemCount - 0.001
   }
 
-  onTouchStart(e) {
+  onTouchStart (e) {
     e.preventDefault()
     this.component.addEventListener('touchmove', this.onTouchMove.bind(this), false)
     this.component.addEventListener('touchend', this.onTouchEnd.bind(this), false)
@@ -214,13 +213,13 @@ class Picker extends React.Component {
     }
   }
 
-  onTouchMove(e) {
+  onTouchMove (e) {
     if (!this.props.disabled) {
       this.doTouchMove(e.touches, e.timeStamp)
     }
   }
 
-  onTouchEnd(e) {
+  onTouchEnd (e) {
     this.component.removeEventListener('touchmove', this.onTouchMove.bind(this), false)
     this.component.removeEventListener('touchend', this.onTouchEnd.bind(this), false)
 
@@ -229,7 +228,7 @@ class Picker extends React.Component {
     }
   }
 
-  clearAnim() {
+  clearAnim () {
     if (this.isDecelerating) {
       Animate.stop(this.isDecelerating)
       this.isDecelerating = false
@@ -241,7 +240,7 @@ class Picker extends React.Component {
     }
   }
 
-  doTouchStart(touches, timeStamp) {
+  doTouchStart (touches, timeStamp) {
     const touchY = touches[0].pageY
     this.clearAnim()
 
@@ -257,7 +256,7 @@ class Picker extends React.Component {
     })
   }
 
-  addPosition(top, timeStamp) {
+  addPosition (top, timeStamp) {
     const positions = this.positions
     if (positions.length > POSITION_MAX_LENGTH) {
       positions.splice(0, POSITION_MAX_LENGTH / 2)
@@ -265,10 +264,10 @@ class Picker extends React.Component {
     positions.push(top, timeStamp)
   }
 
-  doTouchMove(touches, timeStamp) {
+  doTouchMove (touches, timeStamp) {
     const currentTouchTop = touches[0].pageY
 
-    const { isDragging, lastTouchTop, initialTouchTop, maxScrollTop, minScrollTop, positions } = this
+    const {isDragging, lastTouchTop, initialTouchTop, maxScrollTop, minScrollTop, positions} = this
 
     if (isDragging) {
       const moveY = currentTouchTop - lastTouchTop
@@ -299,8 +298,8 @@ class Picker extends React.Component {
     this.lastTouchMove = timeStamp
   }
 
-  doTouchEnd(timeStamp) {
-    const { isDragging, scrollTop, lastTouchMove, positions } = this
+  doTouchEnd (timeStamp) {
+    const {isDragging, scrollTop, lastTouchMove, positions} = this
 
     if (isDragging) {
       this.isDragging = false
@@ -330,15 +329,15 @@ class Picker extends React.Component {
     this.positions.length = 0
   }
 
-  setTop(top) {
-    const { content } = this
+  setTop (top) {
+    const {content} = this
 
     if (content) {
       content.style.webkitTransform = `translate3d(0, ${-top}px, 0)`
     }
   }
 
-  publish(top, animationDuration) {
+  publish (top, animationDuration) {
     const wasAnimating = this.isAnimating
     if (wasAnimating) {
       Animate.stop(wasAnimating)
@@ -377,7 +376,7 @@ class Picker extends React.Component {
     }
   }
 
-  startDeceleration() {
+  startDeceleration () {
     this.minDecelerationScrollTop = this.minScrollTop
     this.maxDecelerationScrollTop = this.maxScrollTop
 
@@ -408,7 +407,7 @@ class Picker extends React.Component {
     this.isDecelerating = Animate.start(step, verify, completed)
   }
 
-  stepThroughDeceleration() {
+  stepThroughDeceleration () {
     let scrollTop = this.scrollTop + this.decelerationVelocityY
 
     const scrollTopFixed = Math.max(Math.min(this.maxDecelerationScrollTop, scrollTop), this.minDecelerationScrollTop)
@@ -428,14 +427,14 @@ class Picker extends React.Component {
     this.publish(scrollTop)
   }
 
-  render() {
-    const { children, prefixCls, className } = this.props
-    const { selectedValue } = this.state
+  render () {
+    const {children, prefixCls, className} = this.props
+    const {selectedValue} = this.state
     const items = children.map((item) => {
       return (
         <div className={selectedValue === item.value ? `${prefixCls}_picker_item_selected` : `${prefixCls}_picker_item`}
           key={item.value} data-value={item.value}
-          >
+        >
           {item.label}
         </div>
       )

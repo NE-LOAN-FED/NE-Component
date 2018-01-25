@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-const PropTypes = React.PropTypes
 
 class RenderLayer extends React.Component {
   static propTypes = {
@@ -17,24 +16,25 @@ class RenderLayer extends React.Component {
     layerClickAble: false
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.onClick = this.onClick.bind(this)
   }
-  componentDidMount() {
+
+  componentDidMount () {
     this.renderLayer()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this.renderLayer()
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.unrenderLayer()
   }
 
-  onClick(e) {
-    const { show, onLayerClick } = this.props
+  onClick (e) {
+    const {show, onLayerClick} = this.props
     if (!show) {
       return
     }
@@ -44,7 +44,7 @@ class RenderLayer extends React.Component {
     onLayerClick(e)
   }
 
-  unrenderLayer() {
+  unrenderLayer () {
     if (!this.layer) {
       return
     }
@@ -60,8 +60,8 @@ class RenderLayer extends React.Component {
     this.layer = null
   }
 
-  renderLayer() {
-    const { show, render } = this.props
+  renderLayer () {
+    const {show, render} = this.props
     if (show) {
       if (render) {
         if (!this.layer) {
@@ -87,7 +87,7 @@ class RenderLayer extends React.Component {
     }
   }
 
-  render() {
+  render () {
     return null
   }
 }
