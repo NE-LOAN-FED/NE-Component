@@ -6,10 +6,10 @@
  */
 import cssAnimation from 'css-animation'
 
-function animate(node, show, done) {
+function animate (node, show, done) {
   let height
   return cssAnimation(node, 'NEUI-collapse', {
-    start() {
+    start () {
       if (!show) {
         node.style.height = `${node.offsetHeight}px`
       } else {
@@ -17,10 +17,10 @@ function animate(node, show, done) {
         node.style.height = 0
       }
     },
-    active() {
+    active () {
       node.style.height = `${show ? height : 0}px`
     },
-    end() {
+    end () {
       node.style.height = ''
       done()
     }
@@ -28,13 +28,13 @@ function animate(node, show, done) {
 }
 
 const animation = {
-  enter(node, done) {
+  enter (node, done) {
     return animate(node, true, done)
   },
-  leave(node, done) {
+  leave (node, done) {
     return animate(node, false, done)
   },
-  appear(node, done) {
+  appear (node, done) {
     return animate(node, true, done)
   }
 }

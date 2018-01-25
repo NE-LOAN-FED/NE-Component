@@ -19,7 +19,7 @@ $dialog: #{$prefixCls}_dialog;
   }
   &_header {
     text-align: center;
-    margin-bottom:pxToRem(16);
+    margin-bottom: pxToRem(16);
     overflow: hidden;
     > h4 {
       margin: 0;
@@ -48,7 +48,7 @@ $dialog: #{$prefixCls}_dialog;
     flex: 1;
     display: inline-block;
     text-align: center;
-    height:pxToRem(90);
+    height: pxToRem(90);
     vertical-align: middle;
     background-color: #fff;
     padding: 0;

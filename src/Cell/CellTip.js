@@ -9,8 +9,8 @@ export default class CellTip extends React.Component {
 
   static defaultProps = {}
 
-  render() {
-    const { className, children, ...others } = this.props
+  render () {
+    const {className, children, ...others} = this.props
     const cls = classNames({
       NEUI_cells_tip: true,
       [className]: className

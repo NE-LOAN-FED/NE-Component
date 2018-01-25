@@ -1,5 +1,6 @@
 @import "../_style/_config";
 @import "../_style/_utils";
+
 $noticeBar: #{$prefixCls}_notice_bar;
 .#{$noticeBar} {
   width: 100%;

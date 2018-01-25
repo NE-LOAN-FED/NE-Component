@@ -6,14 +6,14 @@ import classNames from 'classnames'
 import ReactDOM from 'react-dom'
 
 const PanelTitle = (props) => {
-  const { children } = props
+  const {children} = props
   return (
     <h3 className='NEUI_panel_title'>{children}</h3>
   )
 }
 
 const PanelItem = (props) => {
-  const { label, className, children, ...others } = props
+  const {label, className, children, ...others} = props
   const cls = classNames({
     NEUI_panel_item: true,
     [className]: className
@@ -27,7 +27,7 @@ const PanelItem = (props) => {
 }
 
 const PanelContent = (props) => {
-  const { className, children, ...others } = props
+  const {className, children, ...others} = props
   const cls = classNames({
     NEUI_panel_content: true,
     [className]: className
@@ -46,7 +46,7 @@ const PanelDriver = () => {
 }
 
 const PanelButton = (props) => {
-  const { className, children, onPanelButtonClick, ...others } = props
+  const {className, children, onPanelButtonClick, ...others} = props
   const cls = classNames({
     NEUI_panel_button: true,
     [className]: className
@@ -59,37 +59,8 @@ const PanelButton = (props) => {
 }
 
 export default class Panel extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      limit: false,
-      expansion: false
-    }
-    this.Panel = {}
-  }
-
   static propTypes = {}
-
   static defaultProps = {}
-
-  componentWillMount() {
-    this.props.children.map((el) => {
-      if (el.type === PanelButton) {
-        this.setState({
-          limit: true
-        })
-      }
-    })
-  }
-
-  componentDidMount() {
-    if (this.state.limit) {
-      setTimeout(() => {
-        this.initHeight()
-      })
-    }
-  }
-
   initHeight = () => {
     // TODO 拿到当前 panel
     const $panel = ReactDOM.findDOMNode(this)
@@ -101,7 +72,6 @@ export default class Panel extends React.Component {
     const paddingHeight = parseInt(window.getComputedStyle($panel)['padding-top'], 10)
     $panel.style.height = degHeight + buttonHeight + 'px'
   }
-
   onPanelButtonClick = () => {
     if (!this.state.expansion) {
       const $panel = ReactDOM.findDOMNode(this)
@@ -112,9 +82,36 @@ export default class Panel extends React.Component {
     }
   }
 
-  render() {
-    const { className, children, ...others } = this.props
-    const { limit, expansion } = this.state
+  constructor (props) {
+    super(props)
+    this.state = {
+      limit: false,
+      expansion: false
+    }
+    this.Panel = {}
+  }
+
+  componentWillMount () {
+    this.props.children.map((el) => {
+      if (el.type === PanelButton) {
+        this.setState({
+          limit: true
+        })
+      }
+    })
+  }
+
+  componentDidMount () {
+    if (this.state.limit) {
+      setTimeout(() => {
+        this.initHeight()
+      })
+    }
+  }
+
+  render () {
+    const {className, children, ...others} = this.props
+    const {limit, expansion} = this.state
     const cls = classNames({
       NEUI_panel: true,
       NEUI_panel_limit: limit,

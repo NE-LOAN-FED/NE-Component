@@ -15,7 +15,7 @@ export default class TabPage extends Component {
         { title: '借款中', disabled: false },
         { title: '审核中', disabled: false },
         { title: '还款中', disabled: true },
-        { title: '放款中', disabled: false}
+        { title: '放款中', disabled: false }
       ],
       activeIndex: 0
     }

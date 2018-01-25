@@ -1,8 +1,11 @@
 /**
  * Created by kisnows on 2017/9/4.
  */
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types'
+
+import React, { Component } from 'react'
 import getDisplayName from '../_utils/getComponentName'
+
 export default function (options) {
   return function (WrapComponent) {
     class HOC extends Component {
@@ -18,12 +21,22 @@ export default function (options) {
         onChange: PropTypes.func,
         id: PropTypes.number
       }
-
       static defaultProps = {
         prefixCls: 'NEUI',
         isCollapse: true,
         data: {},
         ...options
+      }
+      handleClick = () => {
+        this.toggle()
+      }
+      toggle = (collapse) => {
+        const id = this.props.id
+        const nextCollapse = collapse || !this.state.isCollapse
+        this.props.onChange(id, nextCollapse)
+        this.setState({
+          isCollapse: nextCollapse
+        })
       }
 
       componentWillReceiveProps (nextProps) {
@@ -34,25 +47,13 @@ export default function (options) {
         }
       }
 
-      handleClick = () => {
-        this.toggle()
-      }
-
-      toggle = (collapse) => {
-        const id = this.props.id
-        const nextCollapse = collapse || !this.state.isCollapse
-        this.props.onChange(id, nextCollapse)
-        this.setState({
-          isCollapse: nextCollapse
-        })
-      }
-
       render () {
         return (
           <WrapComponent onSubComponentChange={this.handleClick} {...this.props} isCollapse={this.state.isCollapse} />
         )
       }
     }
+
     return HOC
   }
 }

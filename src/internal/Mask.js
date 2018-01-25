@@ -1,5 +1,6 @@
-import React, { PropTypes, Component } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 class Mask extends Component {
   static propTypes = {
@@ -10,8 +11,8 @@ class Mask extends Component {
     show: false
   }
 
-  render() {
-    const { show, prefixCls, backgroundColor, ...others } = this.props
+  render () {
+    const {show, prefixCls, backgroundColor, ...others} = this.props
     const style = {
       position: 'fixed',
       top: 0,
@@ -21,18 +22,13 @@ class Mask extends Component {
       backgroundColor: backgroundColor || 'rgba(0,0,0,0.5)'
     }
     return (
-      <ReactCSSTransitionGroup
-        transitionAppear
-        transitionAppearTimeout={300}
-        transitionEnter={false}
-        transitionLeave
-        transitionLeaveTimeout={300}
-        transitionName='fade'
-      >
-        {
-          show ? <div style={style} {...others} /> : null
+      <TransitionGroup>
+        {show &&
+        <CSSTransition classNames={'fade'} in={show} timeout={100}>
+          <div style={style} {...others} />
+        </CSSTransition>
         }
-      </ReactCSSTransitionGroup>
+      </TransitionGroup>
     )
   }
 }

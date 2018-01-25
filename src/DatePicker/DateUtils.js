@@ -10,10 +10,10 @@ const ZERO_CHAR = 0
 
 const toString = Object.prototype.toString
 
-export function noop() {}
+export function noop () {}
 
 // 获取固定 size 的 number。 trim 设置为 true 则长度超过 size 部分去除
-function formatNumber(number, size, trim = false) {
+function formatNumber (number, size, trim = false) {
   if (size === 0 || !(isString(number) || isNumber(number))) {
     return ''
   }
@@ -27,7 +27,7 @@ function formatNumber(number, size, trim = false) {
   return value
 }
 
-function dateGetter(name, offset = 0, trim = false) {
+function dateGetter (name, offset = 0, trim = false) {
   return (date, match) => {
     const size = match.length || 0
     let value = date['get' + name]()
@@ -44,7 +44,7 @@ const DATE_FORMATS = new Map([
   [FORMAT_DAY_CHAR, dateGetter('Date')]
 ])
 
-export function formatDate(date, format) {
+export function formatDate (date, format) {
   const newDate = cloneDate(date)
   if (isString(format)) {
     return dateFilter(date, format)
@@ -54,11 +54,11 @@ export function formatDate(date, format) {
   return date
 }
 
-export function set(...times) {
+export function set (...times) {
   return new Date(...times)
 }
 
-function dateFilter(date, f) {
+function dateFilter (date, f) {
   let format = f
   for (let [key, value] of DATE_FORMATS) {
     format = format.replace(key, (s) => {
@@ -68,29 +68,29 @@ function dateFilter(date, f) {
   return format
 }
 
-export function cloneDate(d) {
+export function cloneDate (d) {
   return typeof d === 'undefined' ? d : new Date(d)
 }
 
-export function addYears(d, years) {
+export function addYears (d, years) {
   const newDate = cloneDate(d)
   newDate.setFullYear(newDate.getFullYear() + years)
   return newDate
 }
 
-export function addMonths(d, months) {
+export function addMonths (d, months) {
   const newDate = cloneDate(d)
   newDate.setMonth(newDate.getMonth() + months)
   return newDate
 }
 
-export function addDays(d, days) {
+export function addDays (d, days) {
   const newDate = cloneDate(d)
   newDate.setDate(newDate.getDate() + days)
   return newDate
 }
 
-export function getYears(minValue, maxValue) {
+export function getYears (minValue, maxValue) {
   const minYear = cloneDate(minValue).getFullYear()
   const maxYear = cloneDate(maxValue).getFullYear()
   const years = []
@@ -100,7 +100,7 @@ export function getYears(minValue, maxValue) {
   return years
 }
 
-export function getMonths(currentDate, minValue, maxValue) {
+export function getMonths (currentDate, minValue, maxValue) {
   const minDate = cloneDate(minValue)
   const maxDate = cloneDate(maxValue)
   let months = monthList
@@ -117,7 +117,7 @@ export function getMonths(currentDate, minValue, maxValue) {
   return months
 }
 
-export function getDays(currentDate, minValue, maxValue) {
+export function getDays (currentDate, minValue, maxValue) {
   const minDate = cloneDate(minValue)
   const maxDate = cloneDate(maxValue)
   const currentYear = currentDate.getFullYear()
@@ -140,7 +140,7 @@ export function getDays(currentDate, minValue, maxValue) {
   return days
 }
 
-export function getDaysInMonth(d) {
+export function getDaysInMonth (d) {
   const firstDate = new Date(d.getFullYear(), d.getMonth() + 1, 1)
   firstDate.setDate(firstDate.getDate() - 1)
   return firstDate.getDate()

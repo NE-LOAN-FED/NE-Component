@@ -1,7 +1,8 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import React, {Component, PropTypes} from 'react'
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import {Link} from 'react-router'
 import {
   Form,
@@ -31,7 +32,7 @@ import './Collapse.scss'
 const questions = [
   {
     q: 'Q：客服电话是多少？',
-    a: 'A：客服热线：400-0881188  服务时间：工作日09:30-12:00 ;13:30-18:00'
+    a: 'A：客服热线：400-88888888  服务时间：工作日09:30-12:00 ;13:30-18:00'
   }, {
     q: 'Q：申请的条件是什么？',
     a: 'A：年龄在18-60周岁的在职员工。'
@@ -54,7 +55,7 @@ export default class CollapsePage extends Component {
     console.log(id, collapse, openListIdCollection)
   }
 
-  render() {
+  render () {
     const CollapseSubComponent = <List />
     return (
       <section className='page_collapse'>
@@ -63,13 +64,17 @@ export default class CollapsePage extends Component {
           <p className='page--desc'>折叠列表</p>
         </div>
         <h3>Normal</h3>
-        <Collapse listCollection={collapseListData}
+        <Collapse
+          listCollection={collapseListData}
           onListChange={this.handleCollapseListChange}
+          openListIdCollection={[1]}
         />
         <h3>Accordion</h3>
-        <Collapse listCollection={collapseListData}
+        <Collapse
+          listCollection={collapseListData}
           accordion
           onListChange={this.handleCollapseListChange}
+          openListIdCollection={[1]}
         />
       </section>
     )

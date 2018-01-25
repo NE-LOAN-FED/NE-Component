@@ -1,7 +1,9 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import React, { Component, PropTypes } from 'react'
+import PropTypes from 'prop-types';
+
+import React, { Component } from 'react';
 import { Link } from 'react-router'
 import {
   Form,
@@ -37,6 +39,7 @@ export default class ModalPage extends Component {
       msg: '',
       timeout: 2000,
       showToast: false,
+      showLoading: true,
       showAlert: false,
       showActionSheet: false
     }
@@ -103,11 +106,12 @@ export default class ModalPage extends Component {
     })
   }
   render () {
-    const {msg, showToast, showModal, showAlert, showActionSheet, timeout} = this.state
+    const {msg, showToast, showModal,showLoading, showAlert, showActionSheet, timeout} = this.state
     return (
       <section>
         <Button onClick={this.showToast} />
         <Toast content={msg} show={showToast} onClose={this.closeToast} timeout={timeout} isLockScreen />
+        <Toast content={msg} show={showLoading} onClose={this.closeToast} timeout={timeout}  icon='loading' isLockScreen />
         <div className='page--header'>
           <h1 className='page-title'>Modal</h1>
           <p className='page--desc'>模态窗</p>

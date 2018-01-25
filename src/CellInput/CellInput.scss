@@ -4,7 +4,7 @@
 $cell_input: #{$prefixCls}_cell_input;
 
 .#{$cell_input} {
-  input{
+  input {
     display: block;
     position: absolute;
     opacity: 0;
@@ -27,8 +27,8 @@ $cell_input: #{$prefixCls}_cell_input;
     text-align: center;
     font-size: pxToRem(36);
     color: $color-text-highlight;
-    &.active{
-      border-color:  $blue;
+    &.active {
+      border-color: $blue;
     }
   }
 }

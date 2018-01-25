@@ -36,9 +36,11 @@ $collapse: #{$prefixCls}_collapse_list;
     line-height: 1.6;
   }
 }
-.#{$collapse}:last-child .list_content_wrap{
+
+.#{$collapse}:last-child .list_content_wrap {
   border-bottom: none;
 }
+
 .#{$collapse} + .#{$collapse} {
   border-top: none;
   position: relative;
@@ -52,6 +54,7 @@ $collapse: #{$prefixCls}_collapse_list;
     z-index: 10;
   }
 }
+
 .#{$collapse}.is_active + .#{$collapse}::before {
   display: none;
 }
