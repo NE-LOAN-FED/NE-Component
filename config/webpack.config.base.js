@@ -29,6 +29,7 @@ const webpackConfig = {
         use: 'babel-loader',
         exclude: /node_modules/
       },
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
       {
         test: /\.(jpeg|jpg|png|gif)$/,
         use: {

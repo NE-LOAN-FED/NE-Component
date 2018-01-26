@@ -1,19 +1,15 @@
 /**
  * Created by hzyuanqi1 on 2016/9/8.
  */
-import PropTypes from 'prop-types'
 
 import React from 'react'
 import classNames from 'classnames'
+import BasePropTypes from "./PropTypes";
+export interface ButtonProps extends BasePropTypes {
+  className?: string;
+}
 
-export default class Button extends React.Component {
-  static propTypes = {
-    disabled: PropTypes.bool,
-    role: PropTypes.oneOf(['primary', 'secondary']),
-    type: PropTypes.oneOf(['button', 'submit']),
-    size: PropTypes.oneOf(['normal', 'small']),
-    style: PropTypes.oneOf(['normal', 'rightAngle'])
-  }
+export default class Button extends React.Component<ButtonProps,{}> {
 
   static defaultProps = {
     disabled: false,
@@ -34,7 +30,7 @@ export default class Button extends React.Component {
       NEUI_button_secondary: role === 'secondary',
       NEUI_button_small: size === 'small',
       NEUI_button_disabled: disabled,
-      [className]: className
+      [className as string]: className
     })
     return (
       <button className={cls}

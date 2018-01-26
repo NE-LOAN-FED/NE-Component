@@ -1,39 +1,42 @@
 /**
  * Created by kisnows on 2017/2/17.
  */
-import PropTypes from 'prop-types'
 
 import React from 'react'
 import List from './List'
-
+import BasePropTypes from './PropTypes'
+export interface CollapsePropTypes extends BasePropTypes {
+  prefixCls: string;
+}
 const noop = () => { }
-export default class Collapse extends React.Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    openListIdCollection: PropTypes.arrayOf(PropTypes.number),
-    listCollection: PropTypes.array.isRequired,
-    // 手风琴模式
-    accordion: PropTypes.bool,
-    onListChange: PropTypes.func,
-    subComponent: PropTypes.func
-  }
+export default class Collapse extends React.Component<CollapsePropTypes, any> {
+
   static defaultProps = {
     prefixCls: 'NEUI',
     subComponent: List,
     onListChange: noop
   }
+  constructor(props) {
+    super(props)
+    this.state = {
+      // 当前打开元素的集合
+      openListIdCollection: this.props.openListIdCollection || [],
+      // SubComponent 渲染所需要的数据集合
+      listCollection: this.props.listCollection || []
+    }
+  }
   handleListChange = (id, collapse) => {
     // TODO 把 openListIdCollection 改为不可重复的数据结构 set
-    let {openListIdCollection, listCollection} = this.state
-    const {accordion} = this.props
+    let { openListIdCollection, listCollection } = this.state
+    const { accordion } = this.props
     listCollection[id]['isCollapse'] = collapse
 
-    function removeCollapseListId (id) {
+    function removeCollapseListId(id) {
       openListIdCollection = openListIdCollection.filter(value => value !== id)
       return openListIdCollection
     }
 
-    function addIdToCollapseListId (id) {
+    function addIdToCollapseListId(id) {
       openListIdCollection.indexOf(id) === -1 && openListIdCollection.push(id)
     }
 
@@ -51,7 +54,7 @@ export default class Collapse extends React.Component {
     })
   }
   renderList = () => {
-    const {openListIdCollection, listCollection} = this.state
+    const { openListIdCollection, listCollection } = this.state
     const SubComponent = this.props.subComponent
     return listCollection.map((v, k) => {
       const isCollapse = openListIdCollection.indexOf(k) === -1
@@ -65,19 +68,11 @@ export default class Collapse extends React.Component {
     })
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      // 当前打开元素的集合
-      openListIdCollection: this.props.openListIdCollection || [],
-      // SubComponent 渲染所需要的数据集合
-      listCollection: this.props.listCollection || []
-    }
-  }
 
-  render () {
+
+  render() {
     const Lists = this.renderList()
-    const {prefixCls, openListIdCollection, listCollection, accordion, onListChange, subComponent, ...others} = this.props
+    const { prefixCls, openListIdCollection, listCollection, accordion, onListChange, subComponent, ...others } = this.props
     return (
       <div {...others}>
         {Lists}

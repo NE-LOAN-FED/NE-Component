@@ -1,26 +1,30 @@
 /**
  * Created by kisnows on 2017/9/4.
  */
-import PropTypes from 'prop-types'
 
 import React, { Component } from 'react'
 import getDisplayName from '../_utils/getComponentName'
 
+export interface WrapPropTypes {
+  data: {
+    isCollapse: boolean;
+  };
+  prefixCls?: string;
+  onChange: (id: WrapPropTypes['id'], nextCollapse: boolean) => void;
+  id: number;
+}
+
 export default function (options) {
   return function (WrapComponent) {
-    class HOC extends Component {
-      constructor (props) {
+    class HOC extends Component<WrapPropTypes, any> {
+      constructor(props) {
         super(props)
         this.state = {
           isCollapse: this.props.data.isCollapse || true
         }
       }
       static displayName = `HOC(${getDisplayName(WrapComponent)})`
-      static propTypes = {
-        prefixCls: PropTypes.string,
-        onChange: PropTypes.func,
-        id: PropTypes.number
-      }
+
       static defaultProps = {
         prefixCls: 'NEUI',
         isCollapse: true,
@@ -30,7 +34,7 @@ export default function (options) {
       handleClick = () => {
         this.toggle()
       }
-      toggle = (collapse) => {
+      toggle = (collapse?: boolean) => {
         const id = this.props.id
         const nextCollapse = collapse || !this.state.isCollapse
         this.props.onChange(id, nextCollapse)
@@ -39,7 +43,7 @@ export default function (options) {
         })
       }
 
-      componentWillReceiveProps (nextProps) {
+      componentWillReceiveProps(nextProps) {
         if (nextProps.data.isCollapse && nextProps.data.isCollapse !== this.state.isCollapse) {
           this.setState({
             isCollapse: nextProps.data.isCollapse
@@ -47,7 +51,7 @@ export default function (options) {
         }
       }
 
-      render () {
+      render() {
         return (
           <WrapComponent onSubComponentChange={this.handleClick} {...this.props} isCollapse={this.state.isCollapse} />
         )

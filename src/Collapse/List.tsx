@@ -4,14 +4,19 @@ import Animation from '../_utils/animation'
 import Animate from 'rc-animate'
 import { Cell, CellBody, CellFooter, Icon } from '../index'
 import HOC from './CollapseHOC'
+import { CollapseSubProps as BaseProps} from './PropTypes'
 
-function List (props) {
+export interface CollapseSubProps extends BaseProps{
+  className?: string;
+  prefixCls?: string;
+}
+function List (props: CollapseSubProps) {
   const {isCollapse, data, className, prefixCls, onSubComponentChange, ...others} = props
   const {title, content} = data
   const cls = classNames({
     [`${prefixCls}_collapse_list`]: true,
     is_active: !isCollapse,
-    [className]: className
+    [className as string]: className
   })
 
   function FirstChild (props) {

@@ -1,19 +1,14 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import classname from 'classnames'
+import classnames from 'classnames'
 import { ModalHOC } from '../Modal'
+import BasePropTypes from './PropTypes'
 
 const noop = () => { }
-
-class Dialog extends React.Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    onConfirm: PropTypes.func, // dialog confirm 事件
-    onCancel: PropTypes.func, // dialog cancel 事件
-    headerContent: PropTypes.node, // 头部内容
-    confirmContent: PropTypes.node, // 确认内容
-    cancelContent: PropTypes.node // 取消内容
-  }
+export interface DialogPropTypes extends BasePropTypes {
+  prefixCls?: string;
+  className?: string;
+}
+class Dialog extends React.Component<DialogPropTypes,any> {
 
   static defaultProps = {
     prefixCls: 'NEUI',
@@ -39,9 +34,9 @@ class Dialog extends React.Component {
         {this.props.children}
       </div>
     ) : null
-    const cls = classname({
+    const cls = classnames({
       [`${prefixCls}_dialog`]: true,
-      [className]: className
+      [className as string]: className
     })
     return (
       <div className={cls} {...others}>

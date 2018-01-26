@@ -11,7 +11,6 @@ const config = {
       path.join(__dirname, '../examples/index')
     ]
   },
-  devtool: 'source-map',
   devServer: {
     hot: true,
     inline: true,

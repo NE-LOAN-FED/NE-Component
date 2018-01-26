@@ -1,32 +1,31 @@
 /**
  * Created by yanming on 17/6/29.
  */
-import PropTypes from 'prop-types'
-
 import React from 'react'
-import classname from 'classnames'
+import classnames from 'classnames'
 import { Icon } from '../index'
-
-class FlowItem extends React.Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    title: PropTypes.string,
-    status: PropTypes.string,
-    number: PropTypes.number
-  }
-
+import { FlowItemProps as FlowItemBaseProps, FlowProps as FlowBaseProps } from './PropTypes'
+export interface FlowPropsType extends FlowBaseProps {
+  prefixCls?: string;
+  className?: string;
+}
+export interface FlowItemPropsType extends FlowItemBaseProps {
+  prefixCls?: string;
+  className?: string;
+}
+class FlowItem extends React.Component<FlowItemPropsType, {}> {
   static defaultProps = {
     prefixCls: 'NEUI',
     status: 'wait'
   }
 
-  render () {
-    const {prefixCls, title, status, className, number} = this.props
+  render() {
+    const { prefixCls, title, status, className, number } = this.props
 
-    const cls = classname({
+    const cls = classnames({
       [`${prefixCls}_flow_item`]: true,
       [`${prefixCls}_flow_item_${status}`]: true,
-      [className]: className
+      [className as string]: className
     })
 
     return (
@@ -34,10 +33,10 @@ class FlowItem extends React.Component {
         <div className={`${prefixCls}_flow_body`}>
           <div className={`${prefixCls}_flow_body_main`}>
             {['wait', 'process'].indexOf(status) !== -1 &&
-            <span className={`${prefixCls}_flow_body_${status}`}>{number}</span>
+              <span className={`${prefixCls}_flow_body_${status}`}>{number}</span>
             }
             {status === 'finish' &&
-            <Icon type='success' className={`${prefixCls}_flow_body_${status}`} />
+              <Icon type='success' className={`${prefixCls}_flow_body_${status}`} />
             }
           </div>
           <p className={`${prefixCls}_flow_body_title`}>{title}</p>
@@ -48,44 +47,43 @@ class FlowItem extends React.Component {
   }
 }
 
-export default class Flow extends React.Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    current: PropTypes.number,
-    direction: PropTypes.string
-  }
+export default class Flow extends React.Component<FlowPropsType, {}> {
 
   static defaultProps = {
     prefixCls: 'NEUI',
     current: 0,
-    direction: 'horizontal'
+    direction: 'horizontal',
+    children: []
   }
 
-  render () {
-    const {className, prefixCls, children, current, direction, ...others} = this.props
+  render() {
+    const { className, prefixCls, children, current, direction, ...others } = this.props
 
-    const cls = classname({
+    const cls = classnames({
       [`${prefixCls}_flow`]: true,
       [`${prefixCls}_flow_vertical`]: direction === 'vertical',
-      [className]: className
+      [className as string]: className
     })
 
     return (
       <div className={cls} {...others}>
-        {children.map((el, index) => {
-          const props = {
-            number: index + 1,
-            key: el.key || index
-          }
-          if (index === current) {
-            props.status = 'process'
-          } else if (index < current) {
-            props.status = 'finish'
-          } else {
-            props.status = 'wait'
-          }
-          return React.cloneElement(el, props)
-        })}
+        {
+          React.Children.map(children, (el, index) => {
+            const props = {
+              number: index + 1,
+              key: el.key || index,
+              status: ''
+            }
+            if (index === current) {
+              props.status = 'process'
+            } else if (index < current) {
+              props.status = 'finish'
+            } else {
+              props.status = 'wait'
+            }
+            return React.cloneElement(el, props)
+          })
+        }
       </div>
     )
   }
