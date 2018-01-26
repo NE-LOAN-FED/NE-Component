@@ -1,8 +1,8 @@
 /**
  * Created by hzyuanqi1 on 2016/9/12.
  */
-import React from 'react'
-import classNames from 'classnames'
+import * as React from 'react'
+import * as classNames from 'classnames'
 
 export default class CellBody extends React.Component {
   static propTypes = {}

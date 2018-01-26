@@ -3,7 +3,7 @@ import React from 'react'
 import RenderLayer from '../internal/RenderLayer'
 import Picker from '../Picker'
 import Icon from '../Icon'
-import { addYears, cloneDate, formatDate, getDays, getMonths, getYears, noop } from './DateUtils.js'
+import { addYears, cloneDate, formatDate, getDays, getMonths, getYears, noop } from './DateUtils'
 
 class DatePicker extends React.Component {
   static propTypes = {

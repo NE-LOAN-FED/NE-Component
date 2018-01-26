@@ -13,37 +13,47 @@ const webpackConfig = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css', '.scss'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss']
   },
+  devtool: 'source-map',
   context: cwd,
   module: {
-    rules: [{
-      test: /\.(js|jsx)$/,
-      use: 'babel-loader',
-      exclude: /node_modules/
-    }, {
-      test: /\.(jpeg|jpg|png|gif)$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 1024,
-          name: 'images/[path][name].[ext]',
-          context: path.resolve(cwd, 'examples/assets/images'),
-          hash: '[hash:8]'
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.(jpeg|jpg|png|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 1024,
+            name: 'images/[path][name].[ext]',
+            context: path.resolve(cwd, 'examples/assets/images'),
+            hash: '[hash:8]'
+          }
+        }
+      },
+      {
+        test: /\.(ttf|woff|woff|eot|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10240,
+            name: 'font/[name].[ext]',
+            context: path.resolve(cwd, 'examples/assets/font'),
+            hash: '[hash:8]'
+          }
         }
       }
-    }, {
-      test: /\.(ttf|woff|woff|eot|svg)$/,
-      use: {
-        loader: 'url-loader',
-        options: {
-          limit: 10240,
-          name: 'font/[name].[ext]',
-          context: path.resolve(cwd, 'examples/assets/font'),
-          hash: '[hash:8]'
-        }
-      }
-    }]
+    ]
   }
 }
 

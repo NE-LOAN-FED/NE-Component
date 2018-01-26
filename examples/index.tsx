@@ -2,8 +2,8 @@
  * @author kisnows
  * @create 2016/8/3.
  */
-import React from 'react'
-import ReactDom from 'react-dom'
+import * as React from 'react'
+import * as ReactDom from 'react-dom'
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import '../src/_style/index.scss'
 import './style/app.scss'
@@ -23,9 +23,10 @@ import NoticeBar from './demo/NoticeBar'
 import Tab from './demo/Tab'
 import Flow from './demo/Flow'
 import ActionSheet from './demo/ActionSheet'
-if (module.hot) {
-  module.hot.accept()
-}
+
+// if (module.hot) {
+//   module.hot.accept()
+// }
 
 const root = document.getElementById('root')
 

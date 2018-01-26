@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import * as React from 'react'
 import Animate from 'rc-animate'
 
 class App extends React.Component {
