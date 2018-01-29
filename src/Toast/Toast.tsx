@@ -20,7 +20,6 @@ class Toast extends React.Component {
     timeout: 2000,
     icon: '',
     onClose: noop,
-    isLockScreen: false
   }
 
   constructor (props) {
