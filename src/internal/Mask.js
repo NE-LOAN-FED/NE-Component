@@ -24,7 +24,7 @@ class Mask extends Component {
     return (
       <TransitionGroup>
         {show &&
-        <CSSTransition classNames={'fade'} in={show} timeout={100}>
+        <CSSTransition classNames={'fade'} in={show} timeout={200}>
           <div style={style} {...others} />
         </CSSTransition>
         }

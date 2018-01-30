@@ -90,13 +90,13 @@ button {
   opacity: 1;
 }
 
-.fade-enter {
-  @extend .fade-appear
-}
-
-.fade-appear-active {
-  @extend .fade-appear-active
-}
+//.fade-enter {
+//  @extend .fade-appear
+//}
+//
+//.fade-appear-active {
+//  @extend .fade-appear-active
+//}
 
 .fade-exit {
   opacity: 1;
