@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 import RenderLayer from '../internal/RenderLayer'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import Mask from '../internal/Mask'
@@ -10,8 +9,8 @@ const noop = () => { }
 export interface ModalPropType extends BasePropTypes {
 
 }
-export default function ModalHOC (options) {
-  return function (WrapComponent) {
+export default function ModalHOC (options?: object) {
+  return function (WrapComponent): object {
     class HOC extends React.Component<ModalPropType,{}> {
       static displayName = `HOC(${getDisplayName(WrapComponent)})`
 
@@ -39,10 +38,7 @@ export default function ModalHOC (options) {
           left: show ? 0 : '-10000px',
           width: '100%',
           height: '100%',
-          zIndex: 900,
-          transition: show
-            ? '0ms left 0ms'
-            : `0ms left ${transitionTimeOut}ms`
+          zIndex: 900
         }
         return (
           <div className='NEUI-Modal' style={Object.assign(style, prepareStyle)}>

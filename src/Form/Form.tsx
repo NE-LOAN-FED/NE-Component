@@ -10,20 +10,39 @@ import isEqual from 'lodash/isEqual'
 
 // TODO 完成 Form 重构
 
-const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
+// const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
+
 // 标识当前 Form 处于的状态
-const STATUS = {
-  Init: 'Init',
-  Normal: 'Normal',
-  FieldChange: 'FieldChange',
-  UpdateFormDataStructure: 'UpdateFormDataStructure',
-  Submit: 'Submit'
+export const enum STATUS {
+  Init = 'Init',
+  Normal = 'Normal',
+  FieldChange = 'FieldChange',
+  UpdateFormDataStructure = 'UpdateFormDataStructure',
+  Submit = 'Submit'
 }
 
 const noop = () => {
 }
 
-export default class Form extends React.PureComponent {
+export interface FormFields extends React.ReactElement<any> {
+  data: object
+}
+export interface FormProps {
+
+}
+export interface FormState {
+  isComplete: boolean;
+  isValidate: boolean;
+  errorMsgList: Array<string>;
+  data: object;
+}
+export default class Form extends React.PureComponent<any, FormState> {
+  formFields: Array<FormFields>
+  field: Array<React.ReactElement<any>>
+  CURRENT_STATUS: STATUS
+  children: Array<React.ReactElement<any>>
+  currentState: FormState
+  setStateAndCurrentStatus: (object, STATUS) => void
   static propTypes = {
     onFieldChange: PropTypes.func,
     onChange: PropTypes.func,
@@ -34,30 +53,55 @@ export default class Form extends React.PureComponent {
     onChange: noop,
     onSubmit: noop
   }
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      isComplete: false,
+      isValidate: false,
+      data: {},
+      errorMsgList: []
+    }
+    // 存放 clone 前的原始子组件
+    this.formFields = []
+    this.children = []
+    // 标识当前 Form 处于哪个状态
+    this.CURRENT_STATUS = STATUS.Normal
+    // 由于 setState 是异步的，所以需要存放一个最新 state 的地方
+    this.currentState = Object.assign({}, this.state)
+    this.setStateAndCurrentStatus = function (nextState, nextSTATUS) {
+      this.currentState = nextState
+      this.setState(nextState, () => {
+        // eslint-disable-next-line
+        typeof nextSTATUS === 'undefined' ? this.CURRENT_STATUS = nextSTATUS : null
+      })
+    }
+  }
+
   /**
    * 递归遍历收集所有需要管理的表单组件，并注册 handleFieldChange 方法
    * @param children
    * @returns {*} 处理过的 children
    */
   collectFormField = (children) => {
-    // TODO 优化性能，当 Field 已经有 key 的时候，就不重新 clone 了
+    // TODO 优化性能，当 Field 已经有 id 的时候，就不重新 clone 了
     const handleFieldChange = this.handleFieldChange
 
     /* 简单粗暴，在 Form 更新的时候直接清空上一次保存的 formFields，全量更新，避免 formFields 内容或者数量发生变化时 this.formFields 数据不正确的问题 */
-    const FormFields = this.formFields = []
+    const FormFields: Array<React.ReactElement<any>> = this.formFields = []
 
     /**
      * 用来保存 clone 后的子组件的实例
      */
-    const Fields = this.field = []
+    const Fields: Array<React.ReactElement<any>> = this.field = []
 
     function getChildList (children) {
       return React.Children.map(children, (el, i) => {
         // 只要 Name 以 _Field 开头，就认为是需要 From 管理的组件
         if (!el || el === null) return null
-
+        if (typeof el === 'string' || typeof el === 'number') return el
         const reg = /^_Field/
-        const childName = el.type && el.type.name
+        const childName = el.type && (el.type as any).name
         if (reg.test(childName)) {
           const child = React.cloneElement(el, {
             key: i,
@@ -85,16 +129,16 @@ export default class Form extends React.PureComponent {
     return getChildList(children)
   }
   /**
-   * 初始化 FormData 结构，给 this.state.data 添加 key 为表单项 name 的属性
+   * 初始化 FormData 结构，给 this.state.data 添加 id 为表单项 name 的属性
    */
   initFormDataStructure = () => {
     this.CURRENT_STATUS = STATUS.Init
     const formData = {
       ...this.state.data
     }
-    this.formFields.forEach((formField, k) => {
+    this.formFields.forEach((formField) => {
       const Props = formField.props
-      const Data = formField.data
+      // const Data = formField.data
       const Name = Props.name
       // TODO 重写初始化 Form data 方法
       formData[Name] = this.updateFieldData(Props)
@@ -116,13 +160,13 @@ export default class Form extends React.PureComponent {
       ...this.currentState.data
     }
 
-    const formItems = []
+    const formItems:Array<string> = []
     // 在 formData 中添加新加入的表单项
-    this.formFields.forEach((formField, k) => {
+    this.formFields.forEach((formField) => {
       const Props = formField.props
       const Name = Props.name
       formItems.push(Name)
-      /* 如果新增加了子表单，则添加对应 name 的 key */
+      /* 如果新增加了子表单，则添加对应 name 的 id */
       if (typeof formData[Name] === 'undefined') {
         formData[Name] = this.updateFieldData(Props)
       }
@@ -213,30 +257,6 @@ export default class Form extends React.PureComponent {
   handleFormSubmit = (e) => {
     e.preventDefault()
     this.formSubmit()
-  }
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      isComplete: false,
-      isValidate: false,
-      data: {},
-      errorMsgList: []
-    }
-    // 存放 clone 前的原始子组件
-    this.formFields = []
-    this.children = []
-    // 标识当前 Form 处于哪个状态
-    this.CURRENT_STATUS = STATUS.Normal
-    // 由于 setState 是异步的，所以需要存放一个最新 state 的地方
-    this.currentState = Object.assign({}, this.state)
-    this.setStateAndCurrentStatus = function (nextState, nextSTATUS) {
-      this.currentState = nextState
-      this.setState(nextState, () => {
-        // eslint-disable-next-line
-        typeof nextSTATUS === 'undefined' ? this.CURRENT_STATUS = nextSTATUS : null
-      })
-    }
   }
 
   get data () {

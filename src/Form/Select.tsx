@@ -31,7 +31,7 @@ function renderData (data) {
   })
 }
 
-export default class _FieldSelect extends React.Component {
+export default class _FieldSelect extends React.Component<any, any> {
   static propTypes = {
     name: PropTypes.string,
     data: PropTypes.array,

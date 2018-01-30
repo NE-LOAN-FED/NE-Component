@@ -1,17 +1,13 @@
 export default interface CollapseProps {
-  openListIdCollection: Array<number>,
-  listCollection: Array<any>,
+  activeIdList: Array<number>,
   accordion: boolean, // 手风琴模式
-  onListChange: (id, collapse, openListIdCollection) => void,
-  subComponent: JSX.ElementClass
+  onListChange: (id, collapse, openListIdCollection) => void
 }
 
-
 export interface CollapseSubProps {
-  isCollapse: boolean;
-  data: {
-    title: any;
-    content: any;
-  };
-  onSubComponentChange: () => void;
+  title: any;
+  isActive: boolean;
+  children: JSX.Element;
+  onListChange: () => void;
+  id?: number | string;
 }

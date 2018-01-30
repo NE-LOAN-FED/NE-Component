@@ -25,12 +25,12 @@ const routes = {
     //   })
     // }
   }, {
-    path: 'Panel',
-    component: require('../../src/Panel/README.md').default
+    path: 'Item',
+    component: require('../../src/Item/README.md').default
     // getComponent(nextState, cb) {
     //   require.ensure([], require => {
-    //     console.log('Panel')
-    //     cb(null, require('../../src/Panel/README.md').default)
+    //     console.log('Item')
+    //     cb(null, require('../../src/Item/README.md').default)
     //   })
     // }
   }, {

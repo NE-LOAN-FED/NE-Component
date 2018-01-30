@@ -1,19 +1,21 @@
 /**
  * Created by hzyuanqi1 on 2016/9/12.
  */
-import * as React from 'react'
-import * as classNames from 'classnames'
+import React from 'react'
+import classNames from 'classnames'
 
-export default class CellBody extends React.Component {
-  static propTypes = {}
+export interface CellBodyProps {
+  className?: string;
+  children: JSX.Element;
+}
 
-  static defaultProps = {}
+export default class CellBody extends React.Component<CellBodyProps, any> {
 
-  render () {
-    const {className, children, ...others} = this.props
+  render() {
+    const { className, children, ...others } = this.props
     const cls = classNames({
       NEUI_cell__bd: true,
-      [className]: className
+      [className as string]: !!className
     })
     return (
       <div className={cls} {...others}>{

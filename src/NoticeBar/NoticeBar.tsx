@@ -1,18 +1,15 @@
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
 import classNames from 'classnames'
 import Icon from '../Icon'
+import BaseProps from './PropsType'
 
-export default class NoticeBar extends Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    onClose: PropTypes.func,
-    onClick: PropTypes.func,
-    children: PropTypes.string,
-    icon: PropTypes.element,
-    type: PropTypes.oneOf(['link', 'closable', ''])
-  }
+export interface NoticeBarPropsType extends BaseProps {
+  prefixCls?: string;
+  className?: string;
+}
+
+export default class NoticeBar extends Component<NoticeBarPropsType, any> {
   static defaultProps = {
     prefixCls: 'NEUI',
     type: '',
@@ -31,13 +28,13 @@ export default class NoticeBar extends Component {
   handleClose () {
     this.props.onClose()
     let el = findDOMNode(this)
-    el.parentNode.removeChild(el)
+    el && el.parentNode && el.parentNode.removeChild(el)
   }
 
   render () {
     const {type, icon, prefixCls, className, children, closeIcon, ...others} = this.props
     const cls = classNames({
-      [className]: className,
+      [className as string]: !!className,
       [`${prefixCls}_notice_bar`]: true
     })
     let iconEle
@@ -63,7 +60,8 @@ export default class NoticeBar extends Component {
 
     return (
       <div className={cls}
-        onClick={this.props.onClick}
+           onClick={this.props.onClick}
+           {...others}
       >
         {icon
           ? <div className='head-icon'>

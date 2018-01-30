@@ -7,22 +7,15 @@ import {
   Input,
   Select,
   CheckBox,
+  CellInput,
   Cells,
   Cell,
-  CellTip,
-  CellHeader,
   Icon,
-  CellBody,
-  CellFooter,
-  Panel,
-  DatePicker,
-  Picker,
   Modal,
   Alert,
   VerifyButton,
   Toast,
-  Button,
-  Collapse
+  Button
 } from '../../../src'
 import Logger from '../../../src/_utils/log'
 import lang from '../../utils/lang'
@@ -52,17 +45,8 @@ class FormDemo extends React.Component {
       card: {},
       msg: '',
       isComplete: false,
-
       showToast: false
     }
-    this.timer = setTimeout(() => {
-      this.setState(Object.assign({}, this.state, {
-        name: {
-          value: '123'
-        },
-        showInput: true
-      }))
-    }, 3000)
   }
 
   componentWillMount() {
@@ -115,7 +99,7 @@ class FormDemo extends React.Component {
     switch (FieldData.name) {
       case 'card':
         this.setState({
-          showToast: true,
+          showToast: false,
           msg: '测试'
         })
         break
@@ -151,12 +135,11 @@ class FormDemo extends React.Component {
         <Form
           onSubmit={this.handleSubmit}
           onFieldChange={this.handleFieldChange}
-          onChange={this.handleChange}
         >
-          <CellTip>Input</CellTip>
+          <Cell.Tip>Input</Cell.Tip>
           <Cells>
             <Cell warning={this.state.name.isError}>
-              <CellHeader>Name</CellHeader>
+              <Cell.Header>Name</Cell.Header>
               <Input type='text'
                 name='name'
                 errorMsg={lang.nameErrorMsg}
@@ -166,7 +149,7 @@ class FormDemo extends React.Component {
               />
             </Cell>
             <Cell warning={this.state.phone.isError}>
-              <CellHeader>Phone</CellHeader>
+              <Cell.Header>Phone</Cell.Header>
               <Input type='tel'
                 name='phone'
                 validate={validate.phone}
@@ -175,7 +158,7 @@ class FormDemo extends React.Component {
               />
             </Cell>
             <Cell warning={this.state.card.isError}>
-              <CellHeader>Card</CellHeader>
+              <Cell.Header>Card</Cell.Header>
               <Input type='tel'
                 name='card'
                 validate={validate.card}
@@ -186,21 +169,21 @@ class FormDemo extends React.Component {
               />
             </Cell>
             <Cell warning={this.state.verifyCode.isError}>
-              <CellHeader>Verify Code</CellHeader>
+              <Cell.Header>Verify Code</Cell.Header>
               <Input type='number'
                 name='verifyCode'
                 errorMsg={lang.smsCodeErrorMsg}
                 validate={/\d{4}/}
                 value={this.state.verifyCode.value}
               />
-              <CellFooter><VerifyButton /></CellFooter>
+              <Cell.Footer><VerifyButton /></Cell.Footer>
             </Cell>
           </Cells>
-          <CellTip>Select</CellTip>
+          <Cell.Tip>Select</Cell.Tip>
           {
             showInput ? <Cells>
               <Cell warning={this.state.gender.isError}>
-                <CellHeader>Gender</CellHeader>
+                <Cell.Header>Gender</Cell.Header>
                 <Select name='gender'
                   data={genderData}
                   value={this.state.gender.value}
@@ -208,11 +191,11 @@ class FormDemo extends React.Component {
               </Cell>
             </Cells> : null
           }
-          <CellTip>CheckBox</CellTip>
+          <Cell.Tip>CheckBox</Cell.Tip>
           <Cells>
             <Cell htmlFor='is'>
-              <CellBody>Is yourself?</CellBody>
-              <CellFooter><CheckBox name='is' id='is' value={this.state.is.value} /></CellFooter>
+              <Cell.Body>Is yourself?</Cell.Body>
+              <Cell.Footer><CheckBox name='is' id='is' value={this.state.is.value} /></Cell.Footer>
             </Cell>
           </Cells>
           <Button type='submit' disabled={!isComplete}>提交</Button>

@@ -1,20 +1,18 @@
 {
   "compilerOptions": {
     "strictNullChecks": true,
-    "outDir": "./dist/",
-    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "jsx": "react",
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "sourceMap": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react",
-    "allowJs": true
+    "allowSyntheticDefaultImports":true,
+    "target": "es6",
+    "declaration": true,
+    "types": [
+      "react",
+      "react-dom"
+    ]
   },
-  "include": [
-    "src",
-    "example"
-  ],
   "exclude": [
     "node_modules",
     "lib",

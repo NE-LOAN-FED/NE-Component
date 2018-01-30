@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
 export interface RenderLayerPropTypes {
   show: boolean;
   render: () => JSX.Element;
-  layerClickAble: boolean;
-  onLayerClick: (e: MouseEvent) => void;
-  zIndex: string;
+  layerClickAble?: boolean;
+  onLayerClick?: (e: MouseEvent) => void;
+  zIndex?: string;
+  className?: string;
 }
 class RenderLayer extends React.Component<RenderLayerPropTypes, {}> {
   layer: any

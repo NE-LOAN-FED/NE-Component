@@ -3,8 +3,8 @@
  */
 import React from 'react'
 
-export default (argvs) => ComposedComponent => {
-  console.log(argvs)
+export default (args) => ComposedComponent => {
+  console.log(args)
   return class extends React.Component {
     render () {
       const props = {}

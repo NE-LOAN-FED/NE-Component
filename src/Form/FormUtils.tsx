@@ -2,7 +2,7 @@
  * Created by kisnows on 2017/2/7.
  */
 // Form 表单的输入数据格式应该是如下格式
-const FormStateSchema = {
+/*const FormStateSchema = {
   'isValidate': 'boole', // 决定是否能提交
   'errorMsg': '', // 放第一条错误信息
   'isComplete': 'boole', // 决定提交按钮是否高亮
@@ -26,7 +26,7 @@ const FormStateSchema = {
       'required': 'boole'
     }
   }
-}
+}*/
 
 /**
  * 判断 Form 是否完全填写，用来决定提交按钮是否高亮,判断完成后修改 formData 的 canSubmit 字段
@@ -102,8 +102,8 @@ function formPure (formData) {
   // TODO 加密功能后续补上
   const pureData = {}
   const promises = []
-  return new Promise((resolve, reject) => {
-    Object.keys(formData).forEach((v, k) => {
+  return new Promise((resolve) => {
+    Object.keys(formData).forEach((v) => {
       if (formData[v].shouldRsa) {
         // TODO 加密功能
         // promises.push(

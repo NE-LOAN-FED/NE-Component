@@ -5,7 +5,7 @@ import Icon from '../Icon'
 
 const noop = () => { }
 // TODO 待完成,解决嵌套在 Form 组件后 checkbox 的选择问题
-export default class _FieldCheckbox extends React.Component {
+export default class _FieldCheckbox extends React.Component<any, any> {
   static propTypes = {
     name: PropTypes.string,
     value: PropTypes.bool,
@@ -74,11 +74,11 @@ export default class _FieldCheckbox extends React.Component {
     return (
       <div className={cls}>
         <input type='checkbox'
-          name={name}
-          onChange={this.handleChange}
-          checked={this.state.value}
-          value={value}
-          {...others}
+               name={name}
+               onChange={this.handleChange}
+               checked={this.state.value}
+               value={value}
+               {...others}
         />
         {this.state.value ? <Icon type='tick' className='NEUI_checkbox_icon' /> : null}
         {children}

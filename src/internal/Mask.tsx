@@ -1,12 +1,15 @@
-import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
-class Mask extends Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    show: PropTypes.bool
-  }
+export interface MaskProps {
+  prefixCls?: string;
+  show: boolean;
+  backgroundColor?: string;
+  onClick?: (e?:any) => void;
+}
+
+class Mask extends Component<MaskProps, any> {
+
   static defaultProps = {
     show: false
   }
@@ -20,11 +23,11 @@ class Mask extends Component {
       bottom: 0,
       right: 0,
       backgroundColor: backgroundColor || 'rgba(0,0,0,0.5)'
-    }
+    } as React.CSSProperties
     return (
       <TransitionGroup>
         {show &&
-        <CSSTransition classNames={'fade'} in={show} timeout={200}>
+        <CSSTransition classNames={'fade'} in={show} timeout={300}>
           <div style={style} {...others} />
         </CSSTransition>
         }

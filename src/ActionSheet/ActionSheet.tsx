@@ -3,7 +3,7 @@
  */
 import React from 'react'
 import classnames from 'classnames'
-import { ModalHOC } from '../Modal'
+import ModalHOC from '../Modal'
 import BasePropsTypes from './PropTypes'
 const noop = () => { }
 export interface ActionSheetProps extends BasePropsTypes {
@@ -34,7 +34,7 @@ class ActionSheet extends React.Component<ActionSheetProps, {}> {
     } = this.props
     const cls = classnames({
       [`${prefixCls}_action__sheet`]: true,
-      [className as string]: className
+      [className as string]: !!className
     })
     return (
       <ul className={cls} {...others}>

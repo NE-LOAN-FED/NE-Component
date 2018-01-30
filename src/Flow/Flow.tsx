@@ -5,15 +5,18 @@ import React from 'react'
 import classnames from 'classnames'
 import { Icon } from '../index'
 import { FlowItemProps as FlowItemBaseProps, FlowProps as FlowBaseProps } from './PropTypes'
+
 export interface FlowPropsType extends FlowBaseProps {
   prefixCls?: string;
   className?: string;
 }
+
 export interface FlowItemPropsType extends FlowItemBaseProps {
   prefixCls?: string;
   className?: string;
 }
-class FlowItem extends React.Component<FlowItemPropsType, {}> {
+
+export class FlowItem extends React.Component<FlowItemPropsType, {}> {
   static defaultProps = {
     prefixCls: 'NEUI',
     status: 'wait'
@@ -25,7 +28,7 @@ class FlowItem extends React.Component<FlowItemPropsType, {}> {
     const cls = classnames({
       [`${prefixCls}_flow_item`]: true,
       [`${prefixCls}_flow_item_${status}`]: true,
-      [className as string]: className
+      [className as string]: !!className
     })
 
     return (
@@ -55,6 +58,7 @@ export default class Flow extends React.Component<FlowPropsType, {}> {
     direction: 'horizontal',
     children: []
   }
+  static Item = FlowItem
 
   render() {
     const { className, prefixCls, children, current, direction, ...others } = this.props
@@ -62,7 +66,7 @@ export default class Flow extends React.Component<FlowPropsType, {}> {
     const cls = classnames({
       [`${prefixCls}_flow`]: true,
       [`${prefixCls}_flow_vertical`]: direction === 'vertical',
-      [className as string]: className
+      [className as string]: !!className
     })
 
     return (
@@ -71,7 +75,7 @@ export default class Flow extends React.Component<FlowPropsType, {}> {
           React.Children.map(children, (el, index) => {
             const props = {
               number: index + 1,
-              key: el.key || index,
+              key: (typeof el !== 'string' && typeof el !== 'number' && el.key) || index,
               status: ''
             }
             if (index === current) {
@@ -81,12 +85,10 @@ export default class Flow extends React.Component<FlowPropsType, {}> {
             } else {
               props.status = 'wait'
             }
-            return React.cloneElement(el, props)
+            return React.cloneElement(el as React.ReactElement<any>, props)
           })
         }
       </div>
     )
   }
 }
-
-Flow.Item = FlowItem

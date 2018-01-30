@@ -6,54 +6,53 @@ import React, { Component } from 'react'
 import getDisplayName from '../_utils/getComponentName'
 
 export interface WrapPropTypes {
-  data: {
-    isCollapse: boolean;
-  };
-  prefixCls?: string;
-  onChange: (id: WrapPropTypes['id'], nextCollapse: boolean) => void;
-  id: number;
+  onChange: (id: WrapPropTypes['id'], nextStatus: boolean) => void;
+  id: number|string;
+  isActive: boolean;
 }
 
-export default function (options) {
-  return function (WrapComponent) {
+export default function (options?: object) {
+  return function (WrapComponent): object {
     class HOC extends Component<WrapPropTypes, any> {
-      constructor(props) {
-        super(props)
-        this.state = {
-          isCollapse: this.props.data.isCollapse || true
-        }
-      }
+
       static displayName = `HOC(${getDisplayName(WrapComponent)})`
 
       static defaultProps = {
-        prefixCls: 'NEUI',
-        isCollapse: true,
-        data: {},
+        isActive: false,
         ...options
       }
-      handleClick = () => {
-        this.toggle()
-      }
-      toggle = (collapse?: boolean) => {
-        const id = this.props.id
-        const nextCollapse = collapse || !this.state.isCollapse
-        this.props.onChange(id, nextCollapse)
-        this.setState({
-          isCollapse: nextCollapse
-        })
+
+      constructor (props) {
+        super(props)
+        this.state = {
+          isActive: this.props.isActive || false
+        }
       }
 
-      componentWillReceiveProps(nextProps) {
-        if (nextProps.data.isCollapse && nextProps.data.isCollapse !== this.state.isCollapse) {
+      componentWillReceiveProps (nextProps: WrapPropTypes) {
+        if (nextProps.isActive !== this.state.isActive) {
           this.setState({
-            isCollapse: nextProps.data.isCollapse
+            isActive: nextProps.isActive
           })
         }
       }
 
-      render() {
+      handleClick = () => {
+        this.toggle()
+      }
+
+      toggle = (isActive?: boolean) => {
+        const id = this.props.id
+        const nextStatus = isActive || !this.state.isActive
+        this.props.onChange(id, nextStatus)
+        this.setState({
+          isActive: nextStatus
+        })
+      }
+
+      render () {
         return (
-          <WrapComponent onSubComponentChange={this.handleClick} {...this.props} isCollapse={this.state.isCollapse} />
+          <WrapComponent onClick={this.handleClick} isActive={this.state.isActive}  {...this.props} />
         )
       }
     }

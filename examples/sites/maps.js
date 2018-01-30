@@ -22,7 +22,7 @@ const map = [{
     // },
     {
       'path': '/panel',
-      'name': 'Panel',
+      'name': 'Item',
       'useMarkdown': true
 
     },

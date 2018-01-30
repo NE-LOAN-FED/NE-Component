@@ -8,10 +8,11 @@ import classNames from 'classnames'
 import Icon from '../Icon'
 
 // TODO 完成 Input 重构
-const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
+// const env = process.env || process.env.NODE_ENV === 'development' ? 'DEBUG' : 'PROD'
 const noop = () => { }
 
-export default class _FieldInput extends React.Component {
+export default class _FieldInput extends React.Component<any, any> {
+  private timer: number
   static propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.any,
@@ -49,6 +50,46 @@ export default class _FieldInput extends React.Component {
     formatter: data => data,
     parser: data => data
   }
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      showDelIcon: false,
+      value: this.props.value || '',
+      isError: this.props.isError || false
+    }
+  }
+
+  componentDidMount () {
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value !== this.state.value) {
+      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
+      this.setState({
+        value: nextValue
+      })
+    }
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.disabled !== nextProps.disabled ||
+      this.state.value !== nextState.value ||
+      this.state.showDelIcon !== nextState.showDelIcon ||
+      this.state.isError !== nextState.isError
+  }
+
+  componentDidUpdate (preProps, preState) {
+    const {handleFieldChange} = preProps
+    if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
+      handleFieldChange(this.data)
+    }
+  }
+
+  componentWillUnmount () {
+    clearTimeout(this.timer)
+  }
+
   handleValidate = (e) => {
     const value = e.target.value
     const {validate} = this.props
@@ -102,7 +143,7 @@ export default class _FieldInput extends React.Component {
   handleBlur = (e) => {
     // 因为要异步的使用 e, 所以需要保留 e 的引用
     e.persist()
-    const {name, onBlur} = this.props
+    const {onBlur} = this.props
     onBlur(e)
     // TODO 考虑做成配置项，来决定什么时候作校验
     this.handleValidate(e)
@@ -129,16 +170,6 @@ export default class _FieldInput extends React.Component {
     })
   }
 
-  constructor (props) {
-    super(props)
-    this.timer = null
-    this.state = {
-      showDelIcon: false,
-      value: this.props.value || '',
-      isError: this.props.isError || false
-    }
-  }
-
   get data () {
     const {value, isError} = this.state
     const {name, errorMsg, required, shouldRsa} = this.props
@@ -150,40 +181,6 @@ export default class _FieldInput extends React.Component {
       required,
       shouldRsa
     }
-  }
-
-  componentDidMount () {
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.value !== this.state.value) {
-      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
-      this.setState({
-        value: nextValue
-      })
-    }
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return this.props.disabled !== nextProps.disabled ||
-      this.state.value !== nextState.value ||
-      this.state.showDelIcon !== nextState.showDelIcon ||
-      this.state.isError !== nextState.isError
-  }
-
-  componentWillUpdate (nextProps, nextState) {
-
-  }
-
-  componentDidUpdate (preProps, preState) {
-    const {handleFieldChange} = preProps
-    if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
-      handleFieldChange(this.data)
-    }
-  }
-
-  componentWillUnmount () {
-    clearTimeout(this.timer)
   }
 
   render () {
@@ -200,11 +197,11 @@ export default class _FieldInput extends React.Component {
     return (
       <label className={cls}>
         <input name={name}
-          value={formatterValue}
-          type={type}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
+               value={formatterValue}
+               type={type}
+               onChange={this.handleChange}
+               onFocus={this.handleFocus}
+               onBlur={this.handleBlur}
         />
         {showDelIcon ? <Icon onClick={handleDelClick} type={'del'} /> : null}
       </label>

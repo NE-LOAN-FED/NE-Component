@@ -1,20 +1,17 @@
 /**
- * Created by hzyuanqi1 on 2016/9/13.
+ * Created by kisnows on 2016/9/13.
  */
-import PropTypes from 'prop-types'
-
 import React from 'react'
 import classNames from 'classnames'
-
-export default class Icon extends React.Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    type: PropTypes.oneOf(['tip', 'loading', 'del', 'arrow', 'tick', 'wait', 'close', 'wait', 'warning', 'success'])
-  }
-
+import BaseProps from './PropsType'
+export interface IconPropsType extends  BaseProps {
+  prefixCls?: string;
+  className?: string;
+}
+export default class Icon extends React.Component<IconPropsType,{}> {
   static defaultProps = {
     prefixCls: 'NEUI',
-    type: 'tip'
+    type: 'tip',
   }
 
   render () {
@@ -23,7 +20,7 @@ export default class Icon extends React.Component {
     const cls = classNames({
       [`${prefixCls}_icon`]: true,
       [`${prefixCls}_icon_${type}`]: true,
-      [className]: className
+      [className as string]: !!className
     })
     return (
       <i className={cls} {...others} />

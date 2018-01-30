@@ -3,17 +3,13 @@
  */
 import React from 'react'
 import classNames from 'classnames'
-
-export default class CellHeader extends React.Component {
-  static propTypes = {}
-
-  static defaultProps = {}
-
-  render () {
-    const {className, children, ...others} = this.props
+import { BaseProps } from './PropsType'
+export default class CellHeader extends React.Component<BaseProps, any> {
+  render() {
+    const { className, children, ...others } = this.props
     const cls = classNames({
       NEUI_cell__hd: true,
-      [className]: className
+      [className as string]: !!className
     })
     return (
       <div className={cls} {...others}>

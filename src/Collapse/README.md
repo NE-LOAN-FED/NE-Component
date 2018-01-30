@@ -4,7 +4,7 @@
 ## 代码示例
 
 ```js
-import List from '../../../components/Collapse/List'
+import List from Item
 
 const questions = [
   {

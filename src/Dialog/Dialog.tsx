@@ -1,6 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
-import { ModalHOC } from '../Modal'
+import ModalHOC from '../Modal'
 import BasePropTypes from './PropTypes'
 
 const noop = () => { }
@@ -36,7 +36,7 @@ class Dialog extends React.Component<DialogPropTypes,any> {
     ) : null
     const cls = classnames({
       [`${prefixCls}_dialog`]: true,
-      [className as string]: className
+      [className as string]: !!className
     })
     return (
       <div className={cls} {...others}>

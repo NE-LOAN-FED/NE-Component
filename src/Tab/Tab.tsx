@@ -1,20 +1,12 @@
 /**
  * Created by hzyanming on 17/6/28.
  */
-import PropTypes from 'prop-types'
-
 import React, { Component } from 'react'
-import classname from 'classnames'
-
+import classnames from 'classnames'
+import {TabItemPropsType, TabPropsType as BaseTabProps} from './PropsType'
 const noop = () => {}
-
-class TabItem extends Component {
-  static propTypes = {
-    title: PropTypes.node.isRequired,
-    disabled: PropTypes.bool,
-    isShow: PropTypes.bool
-  }
-
+export
+class TabItem extends Component<TabItemPropsType,any> {
   static defaultProps = {
     disabled: false,
     isShow: false
@@ -28,21 +20,12 @@ class TabItem extends Component {
   }
 }
 
-export default class Tab extends Component {
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    defaultActiveIndex: PropTypes.oneOfType([ // 默认选项卡index
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    activeIndex: PropTypes.oneOfType([ // 当前选项卡index
-      PropTypes.number,
-      PropTypes.string
-    ]),
-    onChange: PropTypes.func, // 切换选项卡的回调
-    animated: PropTypes.bool // 切换是否有动画
-  }
-
+export interface TabPropsType extends BaseTabProps {
+  prefixCls: string;
+  className?: string
+}
+export default class Tab extends Component<TabPropsType,any> {
+  static Item = TabItem
   static defaultProps = {
     prefixCls: 'NEUI',
     onChange: noop,
@@ -114,53 +97,58 @@ export default class Tab extends Component {
     if ('activeIndex' in this.props) {
       activeIndex = this.props.activeIndex + ''
     }
-    const cls = classname({
+    const cls = classnames({
       [`${prefixCls}_tab`]: true,
-      [className]: className
+      [className as string]: !!className
     })
 
     const barIndex = (function (children, activeIndex) {
       let index
-      children.forEach((child, i) => {
-        if (child.key === activeIndex) {
+      React.Children.forEach(children, (child, i)=>{
+        if ((child as React.ReactElement<any>).key === activeIndex) {
           index = i
         }
       })
       return index
     }(children, activeIndex))
-
-    const percent = (100 / children.length).toFixed(1)
+    const percent:number = parseFloat((100 / (children as Array<any>).length).toFixed(1))
     const percentLeft = barIndex * percent
     const percentRight = 100 - (barIndex + 1) * percent
 
     return (
       <div className={cls}>
         <div className={`${prefixCls}_tab_header`}>
-          {children.map((el) => {
-            return (
-              <div
-                key={el.key}
-                className={this.getHeaderClass(el.key, el.props.disabled)}
-                onClick={() => this.handleTabClick(el.key, el.props.disabled)}
-              >
-                {el.props.title}
-              </div>
-            )
-          })}
-          <div className={classname({[`${prefixCls}_ink_bar`]: true, bar_animate: animated})}
+          {
+            React.Children.map(children, el => {
+              if (el === null) return null
+              if(typeof el === 'string' || typeof el === 'number') return el
+              return (
+                <div
+                  key={((el as React.ReactElement<any>).key) as string}
+                  className={this.getHeaderClass(el.key, el.props.disabled)}
+                  onClick={() => this.handleTabClick(el.key, el.props.disabled)}
+                >
+                  {el.props.title}
+                </div>
+              )
+            })
+          }
+          <div className={classnames({[`${prefixCls}_ink_bar`]: true, bar_animate: animated})}
             style={{'left': percentLeft + '%', 'right': percentRight + '%'}} />
         </div>
         <div className={`${prefixCls}_tab_content`}>
-          {children.map((el) => {
-            return React.cloneElement(el, {
-              key: el.key,
-              isShow: el.key === activeIndex
+          {
+            React.Children.map(children, el=> {
+              if (typeof el === 'string' || typeof el === 'number') return el
+              return React.cloneElement(el as React.ReactElement<any>, {
+                key: el.key,
+                isShow: el.key === activeIndex
+              })
             })
-          })}
+          }
         </div>
       </div>
     )
   }
 }
 
-Tab.Item = TabItem

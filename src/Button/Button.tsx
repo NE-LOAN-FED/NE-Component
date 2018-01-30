@@ -3,13 +3,14 @@
  */
 
 import React from 'react'
-import classNames from 'classnames'
-import BasePropTypes from "./PropTypes";
+import classnames from 'classnames'
+import BasePropTypes from './PropTypes'
+
 export interface ButtonProps extends BasePropTypes {
   className?: string;
 }
 
-export default class Button extends React.Component<ButtonProps,{}> {
+export default class Button extends React.Component<ButtonProps, {}> {
 
   static defaultProps = {
     disabled: false,
@@ -22,21 +23,20 @@ export default class Button extends React.Component<ButtonProps,{}> {
 
   render () {
     const {role, type, size, disabled, style, className, children, ...others} = this.props
-    const cls = classNames({
-      NEUI_button: true,
+    const cls = classnames('NEUI_button', {
       NEUI_button_style_normal: style === 'normal',
       NEUI_button_style_rightAngle: style === 'rightAngle',
       NEUI_button_primary: role === 'primary',
       NEUI_button_secondary: role === 'secondary',
       NEUI_button_small: size === 'small',
       NEUI_button_disabled: disabled,
-      [className as string]: className
+      [className as string]: !!className
     })
     return (
       <button className={cls}
-        disabled={disabled}
-        type={type}
-        {...others}>
+              disabled={disabled}
+              type={type}
+              {...others}>
         {children}
       </button>
     )

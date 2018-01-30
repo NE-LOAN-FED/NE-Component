@@ -1,8 +1,8 @@
-interface Logger {
+export interface logger {
   env: string;
   prefix: string;
 }
-export default class Logger {
+export default class Logger implements logger {
   static DEBUG = 'DEBUG'
   static PROD = 'PROD'
   static DEV = 'DEV'

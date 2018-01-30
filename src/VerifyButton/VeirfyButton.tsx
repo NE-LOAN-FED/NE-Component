@@ -1,18 +1,14 @@
 /**
  * Created by hzyuanqi1 on 2016/9/28.
  */
-import PropTypes from 'prop-types'
-
 import React from 'react'
 import classNames from 'classnames'
-
-export default class VerifyButton extends React.Component {
-  static propTypes = {
-    isSending: PropTypes.bool,
-    text: PropTypes.string,
-    times: PropTypes.number,
-    isCanSend: PropTypes.func
-  }
+import BasePropsType from './PropsType'
+export interface VerifyButtonPropsType extends BasePropsType {
+  className?: string;
+}
+export default class VerifyButton extends React.Component<VerifyButtonPropsType, any> {
+  private timer: number;
   static defaultProps = {
     isSending: false,
     text: '发送验证码',
@@ -69,7 +65,7 @@ export default class VerifyButton extends React.Component {
     const cls = classNames({
       NEUI_verify: true,
       NEUI_verify_sending: isSending,
-      [className]: className
+      [className as string]: className
     })
     return (
       <button

@@ -1,7 +1,7 @@
 import React from 'react'
-import { ModalHOC } from '../Modal'
+import ModalHOC from '../Modal'
 import BasePropTypes from '../Modal/PropTypes'
-const noop = () => { }
+import classnames from 'classnames'
 export interface AlertPropTypes extends BasePropTypes {
   prefixCls?: string;
   className?: string;
@@ -14,9 +14,9 @@ class Alert extends React.Component<AlertPropTypes, {}> {
 
   render() {
     const { prefixCls, className, children, onClose, show, ...others } = this.props
-    const cls = classname({
+    const cls = classnames({
       [`${prefixCls}_modal`]: true,
-      [className as string]: className
+      [className as string]: !!className
     })
     return (
       <div className={cls} {...others}>

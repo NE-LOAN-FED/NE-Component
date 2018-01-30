@@ -1,38 +1,18 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import PropTypes from 'prop-types';
-
-import React, { Component } from 'react';
-import { Link } from 'react-router'
+import React, { Component } from 'react'
 import {
-  Form,
-  FormCell,
-  Input,
-  Select,
-  CheckBox,
-  Cells,
-  Cell,
-  CellHeader,
-  Icon,
-  CellBody,
-  CellFooter,
-  Panel,
-  DatePicker,
-  Picker,
-  Modal,
-  Dialog,
-  Alert,
-  VerifyButton,
   Toast,
   Button,
-  Collapse,
-  ActionSheet
+  Dialog,
+  Alert,
+  ActionSheet,
+  CellInput
 } from '../../../src'
-
 export default class ModalPage extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
       phone: '',
       formData: {},
@@ -41,7 +21,8 @@ export default class ModalPage extends Component {
       showToast: false,
       showLoading: true,
       showAlert: false,
-      showActionSheet: false
+      showActionSheet: false,
+      showPWD: false
     }
   }
 
@@ -89,28 +70,53 @@ export default class ModalPage extends Component {
       showActionSheet: false
     })
   }
-
-  showToast = () => {
+  openCellInput = () => {
     this.setState({
-      showToast: true,
-      timeout: -1,
-      msg: 'Jello'
-    }, () => {
-      setTimeout(() => {
-        this.setState({
-          showToast: true,
-          timeout: 2000,
-          msg: 'Hello World'
-        })
-      }, 2000)
+      showPWD: true
     })
   }
+  handelCellInputClose = () => {
+    this.setState({
+      showPWD: false
+    })
+  }
+  showToast = () => {
+    this.setState(
+      {
+        showToast: true,
+        timeout: -1,
+        msg: 'Jello'
+      },
+      () => {
+        setTimeout(() => {
+          this.setState({
+            showToast: true,
+            timeout: 2000,
+            msg: 'Hello World'
+          })
+        }, 2000)
+      }
+    )
+  }
   render () {
-    const {msg, showToast, showModal,showLoading, showAlert, showActionSheet, timeout} = this.state
+    const {
+      msg,
+      showToast,
+      showModal,
+      showAlert,
+      showActionSheet,
+      timeout
+    } = this.state
     return (
       <section>
         <Button onClick={this.showToast} />
-        <Toast content={msg} show={showToast} onClose={this.closeToast} timeout={timeout} isLockScreen />
+        <Toast
+          content={msg}
+          show={showToast}
+          onClose={this.closeToast}
+          timeout={timeout}
+          isLockScreen
+        />
         <div className='page--header'>
           <h1 className='page-title'>Modal</h1>
           <p className='page--desc'>模态窗</p>
@@ -135,7 +141,9 @@ export default class ModalPage extends Component {
         >
           Are you a beautiful girl?
         </Dialog>
-        <Button onClick={this.openActionSheet}>Click to open a ActionSheet</Button>
+        <Button onClick={this.openActionSheet}>
+          Click to open a ActionSheet
+        </Button>
         <ActionSheet
           menus={[<a href='#form'>你好</a>, '我好']}
           show={showActionSheet}
@@ -145,6 +153,15 @@ export default class ModalPage extends Component {
           isClickMaskToClose
           onMaskClick={e => console.log(e)}
         />
+        <Dialog
+          headerContent={'输入密码'}
+          show={this.state.showPWD}
+          confirmContent={'Yes'}
+          onConfirm={this.handelCellInputClose}
+        >
+          <CellInput />
+        </Dialog>
+        <Button onClick={this.openCellInput}>PWD Dialog</Button>
       </section>
     )
   }

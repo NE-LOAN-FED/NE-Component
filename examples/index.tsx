@@ -14,8 +14,6 @@ import Alert from './demo/Alert'
 import Form from './demo/Form'
 import Button from './demo/Button'
 import Cell from './demo/Cell'
-import Panel from './demo/Panel'
-import Picker from './demo/Picker'
 import Modal from './demo/Modal'
 import Collapse from './demo/Collapse'
 import Icon from './demo/Icon'
@@ -38,8 +36,6 @@ ReactDom.render((
       <Route path='alert' component={Alert} />
       <Route path='button' component={Button} />
       <Route path='cell' component={Cell} />
-      <Route path='panel' component={Panel} />
-      <Route path='picker' component={Picker} />
       <Route path='modal' component={Modal} />
       <Route path='collapse' component={Collapse} />
       <Route path='icon' component={Icon} />

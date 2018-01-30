@@ -54,23 +54,24 @@
     align-items: center;
     margin-left: pxToRem(30)
   }
-  &:after {
+}
+.NEUI_cell + .NEUI_cell {
+  &:before {
     content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: 0;
+    left: pxToRem(32);
     z-index: 10;
-    width: 95%;
     height: 1px;
     background-color: $border-color-secondary;
     display: block;
     transition: all .3s ease;
   }
-  &:last-child:after {
+  &:first-child:before {
     display: none;
   }
 }
-
 .NEUI_cell_warning {
   &:after {
     background-color: $color-warning;
