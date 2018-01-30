@@ -111,7 +111,6 @@ export default class ModalPage extends Component {
       <section>
         <Button onClick={this.showToast} />
         <Toast content={msg} show={showToast} onClose={this.closeToast} timeout={timeout} isLockScreen />
-        <Toast content={msg} show={showLoading} onClose={this.closeToast} timeout={timeout}  icon='loading' isLockScreen />
         <div className='page--header'>
           <h1 className='page-title'>Modal</h1>
           <p className='page--desc'>模态窗</p>
