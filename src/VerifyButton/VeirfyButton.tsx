@@ -1,14 +1,15 @@
 /**
- * Created by hzyuanqi1 on 2016/9/28.
+ * Created by kisnows on 2016/9/28.
  */
 import React from 'react'
 import classNames from 'classnames'
 import BasePropsType from './PropsType'
+
 export interface VerifyButtonPropsType extends BasePropsType {
   className?: string;
 }
+
 export default class VerifyButton extends React.Component<VerifyButtonPropsType, any> {
-  private timer: number;
   static defaultProps = {
     isSending: false,
     text: '发送验证码',
@@ -41,6 +42,7 @@ export default class VerifyButton extends React.Component<VerifyButtonPropsType,
       }, 1000)
     })
   }
+  private timer: number
 
   constructor (props) {
     super(props)

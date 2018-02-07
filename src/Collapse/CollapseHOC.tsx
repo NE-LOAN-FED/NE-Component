@@ -7,7 +7,7 @@ import getDisplayName from '../_utils/getComponentName'
 
 export interface WrapPropTypes {
   onChange: (id: WrapPropTypes['id'], nextStatus: boolean) => void;
-  id: number|string;
+  id: number | string;
   isActive: boolean;
 }
 
@@ -20,6 +20,17 @@ export default function (options?: object) {
       static defaultProps = {
         isActive: false,
         ...options
+      }
+      handleClick = () => {
+        this.toggle()
+      }
+      toggle = (isActive?: boolean) => {
+        const id = this.props.id
+        const nextStatus = isActive || !this.state.isActive
+        this.props.onChange(id, nextStatus)
+        this.setState({
+          isActive: nextStatus
+        })
       }
 
       constructor (props) {
@@ -35,19 +46,6 @@ export default function (options?: object) {
             isActive: nextProps.isActive
           })
         }
-      }
-
-      handleClick = () => {
-        this.toggle()
-      }
-
-      toggle = (isActive?: boolean) => {
-        const id = this.props.id
-        const nextStatus = isActive || !this.state.isActive
-        this.props.onChange(id, nextStatus)
-        this.setState({
-          isActive: nextStatus
-        })
       }
 
       render () {

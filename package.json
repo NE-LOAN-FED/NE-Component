@@ -15,7 +15,6 @@
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files && cp dist/ne.min.css es/ne.min.css",
     "build": "npm run clean && npm run build:umd && npm run build:cjs && npm run build:es",
     "lint": "node ./node_modules/eslint/bin/eslint.js ./src --fix|| eslint ./src --fix",
-    "scsslint": "node ./node_modules/eslint/bin/eslint.js ./",
     "test": "mocha --compilers js:babel-register --recursive",
     "sites": "cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack.config.docs.js",
     "sites:build": "cross-env NODE_ENV=development webpack --config ./config/webpack.config.docs.build.js --progress --colors",

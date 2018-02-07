@@ -9,32 +9,33 @@ export interface RenderLayerPropTypes {
   zIndex?: string;
   className?: string;
 }
+
 class RenderLayer extends React.Component<RenderLayerPropTypes, {}> {
-  layer: any
   static defaultProps = {
     show: false,
     layerClickAble: false
   }
+  layer: any
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.onClick = this.onClick.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.renderLayer()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this.renderLayer()
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.unrenderLayer()
   }
 
-  onClick(e) {
-    const { show, onLayerClick } = this.props
+  onClick (e) {
+    const {show, onLayerClick} = this.props
     if (!show) {
       return
     }
@@ -44,7 +45,7 @@ class RenderLayer extends React.Component<RenderLayerPropTypes, {}> {
     onLayerClick(e)
   }
 
-  unrenderLayer() {
+  unrenderLayer () {
     if (!this.layer) {
       return
     }
@@ -60,8 +61,8 @@ class RenderLayer extends React.Component<RenderLayerPropTypes, {}> {
     this.layer = null
   }
 
-  renderLayer() {
-    const { show, render } = this.props
+  renderLayer () {
+    const {show, render} = this.props
     if (show) {
       if (render) {
         if (!this.layer) {
@@ -87,7 +88,7 @@ class RenderLayer extends React.Component<RenderLayerPropTypes, {}> {
     }
   }
 
-  render() {
+  render () {
     return null
   }
 }

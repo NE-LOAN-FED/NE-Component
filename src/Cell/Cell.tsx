@@ -1,9 +1,9 @@
 /**
- * Created by hzyuanqi1 on 2016/9/12.
+ * Created by kisnows on 2016/9/12.
  */
 import React from 'react'
 import classNames from 'classnames'
-import {CellProps as BaseProps} from './PropsType'
+import { CellProps as BaseProps } from './PropsType'
 import CellBody from './CellBody'
 import CellHeader from './CellHeader'
 import CellFooter from './CellFooter'
@@ -13,10 +13,10 @@ export interface CellProps extends BaseProps {
   className?: string;
   href?: string;
   htmlFor?: string;
-  onClick?: (e:object) => void;
+  onClick?: (e: object) => void;
 }
 
-export default class Cell extends React.Component<CellProps,any> {
+export default class Cell extends React.Component<CellProps, any> {
   static Body = CellBody
   static Header = CellHeader
   static Footer = CellFooter

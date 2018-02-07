@@ -5,7 +5,7 @@ export interface MaskProps {
   prefixCls?: string;
   show: boolean;
   backgroundColor?: string;
-  onClick?: (e?:any) => void;
+  onClick?: (e?: any) => void;
 }
 
 class Mask extends Component<MaskProps, any> {

@@ -1,8 +1,6 @@
 /**
  * Created by kisnows on 2016/12/26.
  */
-import PropTypes from 'prop-types'
-
 import React from 'react'
 import classNames from 'classnames'
 import { formPure, isFormComplete, isFromValidate } from './FormUtils'
@@ -27,57 +25,30 @@ const noop = () => {
 export interface FormFields extends React.ReactElement<any> {
   data: object
 }
+
 export interface FormProps {
 
 }
+
 export interface FormState {
   isComplete: boolean;
   isValidate: boolean;
   errorMsgList: Array<string>;
   data: object;
 }
+
 export default class Form extends React.PureComponent<any, FormState> {
+  static defaultProps = {
+    onFieldChange: noop,
+    onChange: noop,
+    onSubmit: noop
+  }
   formFields: Array<FormFields>
   field: Array<React.ReactElement<any>>
   CURRENT_STATUS: STATUS
   children: Array<React.ReactElement<any>>
   currentState: FormState
   setStateAndCurrentStatus: (object, STATUS) => void
-  static propTypes = {
-    onFieldChange: PropTypes.func,
-    onChange: PropTypes.func,
-    onSubmit: PropTypes.func
-  }
-  static defaultProps = {
-    onFieldChange: noop,
-    onChange: noop,
-    onSubmit: noop
-  }
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      isComplete: false,
-      isValidate: false,
-      data: {},
-      errorMsgList: []
-    }
-    // 存放 clone 前的原始子组件
-    this.formFields = []
-    this.children = []
-    // 标识当前 Form 处于哪个状态
-    this.CURRENT_STATUS = STATUS.Normal
-    // 由于 setState 是异步的，所以需要存放一个最新 state 的地方
-    this.currentState = Object.assign({}, this.state)
-    this.setStateAndCurrentStatus = function (nextState, nextSTATUS) {
-      this.currentState = nextState
-      this.setState(nextState, () => {
-        // eslint-disable-next-line
-        typeof nextSTATUS === 'undefined' ? this.CURRENT_STATUS = nextSTATUS : null
-      })
-    }
-  }
-
   /**
    * 递归遍历收集所有需要管理的表单组件，并注册 handleFieldChange 方法
    * @param children
@@ -160,7 +131,7 @@ export default class Form extends React.PureComponent<any, FormState> {
       ...this.currentState.data
     }
 
-    const formItems:Array<string> = []
+    const formItems: Array<string> = []
     // 在 formData 中添加新加入的表单项
     this.formFields.forEach((formField) => {
       const Props = formField.props
@@ -257,6 +228,30 @@ export default class Form extends React.PureComponent<any, FormState> {
   handleFormSubmit = (e) => {
     e.preventDefault()
     this.formSubmit()
+  }
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      isComplete: false,
+      isValidate: false,
+      data: {},
+      errorMsgList: []
+    }
+    // 存放 clone 前的原始子组件
+    this.formFields = []
+    this.children = []
+    // 标识当前 Form 处于哪个状态
+    this.CURRENT_STATUS = STATUS.Normal
+    // 由于 setState 是异步的，所以需要存放一个最新 state 的地方
+    this.currentState = Object.assign({}, this.state)
+    this.setStateAndCurrentStatus = function (nextState, nextSTATUS) {
+      this.currentState = nextState
+      this.setState(nextState, () => {
+        // eslint-disable-next-line
+        typeof nextSTATUS === 'undefined' ? this.CURRENT_STATUS = nextSTATUS : null
+      })
+    }
   }
 
   get data () {

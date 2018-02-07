@@ -4,7 +4,7 @@
 ## 代码示例
 
 ```js
-import List from Item
+import {List} from 'ne-rc'
 
 const questions = [
   {

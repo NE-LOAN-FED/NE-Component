@@ -5,13 +5,16 @@ import Mask from '../internal/Mask'
 import histNonReactStatic from 'hoist-non-react-statics'
 import getDisplayName from '../_utils/getComponentName'
 import BasePropTypes from './PropTypes'
+
 const noop = () => { }
+
 export interface ModalPropType extends BasePropTypes {
 
 }
+
 export default function ModalHOC (options?: object) {
   return function (WrapComponent): object {
-    class HOC extends React.Component<ModalPropType,{}> {
+    class HOC extends React.Component<ModalPropType, {}> {
       static displayName = `HOC(${getDisplayName(WrapComponent)})`
 
       static defaultProps = {

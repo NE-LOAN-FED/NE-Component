@@ -17,6 +17,7 @@ function Item (props: CollapseSubProps) {
     [`${prefixCls}_collapse_item_active`]: isActive,
     [className as string]: !!className
   })
+
   function FirstChild (props) {
     const childrenArray = React.Children.toArray(props.children)
     return childrenArray[0] || null

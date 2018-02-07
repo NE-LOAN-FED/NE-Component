@@ -12,7 +12,6 @@ import Icon from '../Icon'
 const noop = () => { }
 
 export default class _FieldInput extends React.Component<any, any> {
-  private timer: number
   static propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.any,
@@ -50,46 +49,6 @@ export default class _FieldInput extends React.Component<any, any> {
     formatter: data => data,
     parser: data => data
   }
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      showDelIcon: false,
-      value: this.props.value || '',
-      isError: this.props.isError || false
-    }
-  }
-
-  componentDidMount () {
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.value !== this.state.value) {
-      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
-      this.setState({
-        value: nextValue
-      })
-    }
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return this.props.disabled !== nextProps.disabled ||
-      this.state.value !== nextState.value ||
-      this.state.showDelIcon !== nextState.showDelIcon ||
-      this.state.isError !== nextState.isError
-  }
-
-  componentDidUpdate (preProps, preState) {
-    const {handleFieldChange} = preProps
-    if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
-      handleFieldChange(this.data)
-    }
-  }
-
-  componentWillUnmount () {
-    clearTimeout(this.timer)
-  }
-
   handleValidate = (e) => {
     const value = e.target.value
     const {validate} = this.props
@@ -169,6 +128,16 @@ export default class _FieldInput extends React.Component<any, any> {
       showDelIcon: false
     })
   }
+  private timer: number
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      showDelIcon: false,
+      value: this.props.value || '',
+      isError: this.props.isError || false
+    }
+  }
 
   get data () {
     const {value, isError} = this.state
@@ -181,6 +150,36 @@ export default class _FieldInput extends React.Component<any, any> {
       required,
       shouldRsa
     }
+  }
+
+  componentDidMount () {
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value !== this.state.value) {
+      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
+      this.setState({
+        value: nextValue
+      })
+    }
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.disabled !== nextProps.disabled ||
+      this.state.value !== nextState.value ||
+      this.state.showDelIcon !== nextState.showDelIcon ||
+      this.state.isError !== nextState.isError
+  }
+
+  componentDidUpdate (preProps, preState) {
+    const {handleFieldChange} = preProps
+    if (this.state.value !== preState.value || this.state.isError !== preState.isError) {
+      handleFieldChange(this.data)
+    }
+  }
+
+  componentWillUnmount () {
+    clearTimeout(this.timer)
   }
 
   render () {

@@ -3,10 +3,11 @@
  */
 import React, { Component } from 'react'
 import classnames from 'classnames'
-import {TabItemPropsType, TabPropsType as BaseTabProps} from './PropsType'
+import { TabItemPropsType, TabPropsType as BaseTabProps } from './PropsType'
+
 const noop = () => {}
-export
-class TabItem extends Component<TabItemPropsType,any> {
+
+export class TabItem extends Component<TabItemPropsType, any> {
   static defaultProps = {
     disabled: false,
     isShow: false
@@ -24,7 +25,8 @@ export interface TabPropsType extends BaseTabProps {
   prefixCls: string;
   className?: string
 }
-export default class Tab extends Component<TabPropsType,any> {
+
+export default class Tab extends Component<TabPropsType, any> {
   static Item = TabItem
   static defaultProps = {
     prefixCls: 'NEUI',
@@ -104,14 +106,14 @@ export default class Tab extends Component<TabPropsType,any> {
 
     const barIndex = (function (children, activeIndex) {
       let index
-      React.Children.forEach(children, (child, i)=>{
+      React.Children.forEach(children, (child, i) => {
         if ((child as React.ReactElement<any>).key === activeIndex) {
           index = i
         }
       })
       return index
     }(children, activeIndex))
-    const percent:number = parseFloat((100 / (children as Array<any>).length).toFixed(1))
+    const percent: number = parseFloat((100 / (children as Array<any>).length).toFixed(1))
     const percentLeft = barIndex * percent
     const percentRight = 100 - (barIndex + 1) * percent
 
@@ -121,7 +123,7 @@ export default class Tab extends Component<TabPropsType,any> {
           {
             React.Children.map(children, el => {
               if (el === null) return null
-              if(typeof el === 'string' || typeof el === 'number') return el
+              if (typeof el === 'string' || typeof el === 'number') return el
               return (
                 <div
                   key={((el as React.ReactElement<any>).key) as string}
@@ -134,11 +136,11 @@ export default class Tab extends Component<TabPropsType,any> {
             })
           }
           <div className={classnames({[`${prefixCls}_ink_bar`]: true, bar_animate: animated})}
-            style={{'left': percentLeft + '%', 'right': percentRight + '%'}} />
+               style={{'left': percentLeft + '%', 'right': percentRight + '%'}} />
         </div>
         <div className={`${prefixCls}_tab_content`}>
           {
-            React.Children.map(children, el=> {
+            React.Children.map(children, el => {
               if (typeof el === 'string' || typeof el === 'number') return el
               return React.cloneElement(el as React.ReactElement<any>, {
                 key: el.key,

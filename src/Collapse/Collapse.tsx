@@ -20,15 +20,6 @@ export default class Collapse extends React.Component<CollapsePropTypes, any> {
     prefixCls: 'NEUI',
     onListChange: noop
   }
-
-  constructor (props) {
-    super(props)
-    this.state = {
-      // 当前打开元素的集合
-      activeIdList: this.props.activeIdList || []
-    }
-  }
-
   handleListChange = (id, active) => {
     // TODO 把 activeIdList 改为不可重复的数据结构 set
     let {activeIdList} = this.state
@@ -68,6 +59,14 @@ export default class Collapse extends React.Component<CollapsePropTypes, any> {
         isActive
       })
     })
+  }
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      // 当前打开元素的集合
+      activeIdList: this.props.activeIdList || []
+    }
   }
 
   render () {

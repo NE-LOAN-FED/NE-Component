@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import Icon from '../Icon'
 import ModalHOC from '../Modal'
@@ -13,21 +12,13 @@ export interface ToastProps extends BaseProps {
 }
 
 class Toast extends React.Component<ToastProps, any> {
-  timer: number
-  static propTypes = {
-    prefixCls: PropTypes.string,
-    className: PropTypes.string, // 添加toast class
-    content: PropTypes.string,
-    icon: PropTypes.string,
-    onClose: PropTypes.func, // 点击onClose 触发函数
-    timeout: PropTypes.number // 设置 Toast 指定时间隐藏， -1 不自动隐藏
-  }
   static defaultProps = {
     prefixCls: 'NEUI',
     timeout: 2000,
     icon: '',
     onClose: noop,
   }
+  timer: number
 
   constructor (props) {
     super(props)

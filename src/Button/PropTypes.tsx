@@ -5,4 +5,5 @@ interface ButtonProps {
   size?: 'normal' | 'small';
   style?: 'normal' | 'rightAngle';
 }
+
 export default ButtonProps

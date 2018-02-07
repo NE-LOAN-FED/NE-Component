@@ -1,12 +1,13 @@
 /**
- * Created by hzyuanqi1 on 2016/9/12.
+ * Created by kisnows on 2016/9/12.
  */
 import React from 'react'
 import classNames from 'classnames'
 import { BaseProps } from './PropsType'
+
 export default class CellHeader extends React.Component<BaseProps, any> {
-  render() {
-    const { className, children, ...others } = this.props
+  render () {
+    const {className, children, ...others} = this.props
     const cls = classNames({
       NEUI_cell__hd: true,
       [className as string]: !!className

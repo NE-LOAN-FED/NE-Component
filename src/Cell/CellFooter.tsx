@@ -1,11 +1,11 @@
 /**
- * Created by hzyuanqi1 on 2016/9/19.
+ * Created by kisnows on 2016/9/19.
  */
 import React from 'react'
 import classNames from 'classnames'
-import {BaseProps} from './PropsType'
+import { BaseProps } from './PropsType'
 
-export default class CellFooter extends React.Component<BaseProps,any> {
+export default class CellFooter extends React.Component<BaseProps, any> {
 
   render () {
     const {className, children, ...others} = this.props

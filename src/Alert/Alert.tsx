@@ -2,18 +2,20 @@ import React from 'react'
 import ModalHOC from '../Modal'
 import BasePropTypes from '../Modal/PropTypes'
 import classnames from 'classnames'
+
 export interface AlertPropTypes extends BasePropTypes {
   prefixCls?: string;
   className?: string;
 }
+
 class Alert extends React.Component<AlertPropTypes, {}> {
 
   static defaultProps = {
     prefixCls: 'NEUI'
   }
 
-  render() {
-    const { prefixCls, className, children, onClose, show, ...others } = this.props
+  render () {
+    const {prefixCls, className, children, onClose, show, ...others} = this.props
     const cls = classnames({
       [`${prefixCls}_modal`]: true,
       [className as string]: !!className

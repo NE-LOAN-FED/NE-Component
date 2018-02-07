@@ -1,13 +1,14 @@
 /**
- * Created by hzyuanqi1 on 2016/9/22.
+ * Created by kisnows on 2016/9/22.
  */
 import React from 'react'
 import classNames from 'classnames'
-import { BaseProps } from "./PropsType";
+import { BaseProps } from './PropsType'
+
 export default class CellTip extends React.Component<BaseProps, any> {
 
-  render() {
-    const { className, children, ...others } = this.props
+  render () {
+    const {className, children, ...others} = this.props
     const cls = classNames({
       NEUI_cells_tip: true,
       [className as string]: !!className

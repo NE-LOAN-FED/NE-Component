@@ -4,11 +4,13 @@ import ModalHOC from '../Modal'
 import BasePropTypes from './PropTypes'
 
 const noop = () => { }
+
 export interface DialogPropTypes extends BasePropTypes {
   prefixCls?: string;
   className?: string;
 }
-class Dialog extends React.Component<DialogPropTypes,any> {
+
+class Dialog extends React.Component<DialogPropTypes, any> {
 
   static defaultProps = {
     prefixCls: 'NEUI',

@@ -1,5 +1,5 @@
 /**
- * Created by hzyuanqi1 on 2016/9/29.
+ * Created by kisnows on 2016/9/29.
  */
 import VerifyButton from './VeirfyButton'
 

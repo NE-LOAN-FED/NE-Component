@@ -4,11 +4,13 @@
 import React from 'react'
 import classNames from 'classnames'
 import BaseProps from './PropsType'
-export interface IconPropsType extends  BaseProps {
+
+export interface IconPropsType extends BaseProps {
   prefixCls?: string;
   className?: string;
 }
-export default class Icon extends React.Component<IconPropsType,{}> {
+
+export default class Icon extends React.Component<IconPropsType, {}> {
   static defaultProps = {
     prefixCls: 'NEUI',
     type: 'tip',
