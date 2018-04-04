@@ -115,7 +115,7 @@ function formPure (formData) {
         pureData[v] = formData[v].value
       }
     })
-    Promise.all(promises)
+    return Promise.all(promises)
       .then(() => resolve(pureData))
       .catch(err => resolve(err))
   })

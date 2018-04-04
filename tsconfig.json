@@ -6,13 +6,18 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports":true,
-    "target": "es6",
+    "target": "es5",
+    "downlevelIteration": true,
     "declaration": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "outDir": "./lib",
     "types": [
       "react",
       "react-dom"
     ]
   },
+  "include": ["./src/**/*.tsx"],
   "exclude": [
     "node_modules",
     "lib",

@@ -1,10 +1,5 @@
 const path = require('path')
-const fs = require('fs')
-const webpack = require('webpack')
-
 const cwd = process.cwd()
-const nodeModulePath = path.join(cwd, 'node_modules')
-
 const webpackConfig = {
   output: {
     path: path.join(cwd, './'),
@@ -15,8 +10,6 @@ const webpackConfig = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss']
   },
-  devtool: 'source-map',
-  context: cwd,
   module: {
     rules: [
       {
@@ -29,7 +22,7 @@ const webpackConfig = {
         use: 'babel-loader',
         exclude: /node_modules/
       },
-      {enforce: 'pre', test: /\.js$/, loader: 'source-map-loader'},
+      {enforce: 'pre', test: /\.(js|jsx)$/, loader: 'source-map-loader'},
       {
         test: /\.(jpeg|jpg|png|gif)$/,
         use: {

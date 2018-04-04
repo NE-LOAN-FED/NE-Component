@@ -21,8 +21,9 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '.css', '.scss'],
+    extensions: ['.js', '.jsx', '.json', '.css', '.scss']
   },
+  mode: 'development',
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
@@ -70,7 +71,7 @@ module.exports = {
     }, {
       test: /\.(css|scss|sass)$/,
       use: ExtractTextPlugin.extract({
-        fallback: "style-loader",
+        fallback: 'style-loader',
         use: [
           'css-loader', {
             loader: 'postcss-loader',
