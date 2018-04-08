@@ -1,46 +1,22 @@
 /**
  * Created by kisnows on 2017/2/22.
  */
-import PropTypes from 'prop-types';
-
-import React, { Component } from 'react';
-import {Link} from 'react-router'
-import {
-  Form,
-  FormCell,
-  Input,
-  Select,
-  CheckBox,
-  Cells,
-  Cell,
-  CellHeader,
-  Icon,
-  CellBody,
-  CellFooter,
-  Panel,
-  DatePicker,
-  Picker,
-  Modal,
-  Alert,
-  VerifyButton,
-  Toast,
-  Button,
-  Collapse
-} from '../../../src'
+import React, { Component } from 'react'
+import { Cell, Picker} from '../../../src'
 
 export default class PickerPage extends Component {
-  render() { 
+  render () {
     return (
       <section>
-        <div className="page--header">
-          <h1 className="page-title">Picker</h1>
-          <p className="page--desc">选择器</p>
+        <div className='page--header'>
+          <h1 className='page-title'>Picker</h1>
+          <p className='page--desc'>选择器</p>
         </div>
         <Cell>
-          <CellHeader>DatePicker</CellHeader>
-          <CellBody>
-            <DatePicker/>
-          </CellBody>
+          <Cell.Header>DatePicker</Cell.Header>
+          <Cell.Body>
+            <Picker/>
+          </Cell.Body>
         </Cell>
       </section>
     )

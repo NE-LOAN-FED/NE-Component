@@ -11,7 +11,6 @@ const config = {
       path.join(__dirname, '../examples/index')
     ]
   },
-  devtool: 'cheap-module-source-map',
   devServer: {
     hot: true,
     inline: true,
@@ -19,6 +18,7 @@ const config = {
     host: '0.0.0.0',
     lazy: false
   },
+  mode: 'development',
   module: {
     rules: [{
       test: /\.(css|scss|sass)$/,
@@ -37,6 +37,7 @@ const config = {
       inject: true
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development')

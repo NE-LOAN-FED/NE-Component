@@ -1,64 +1,37 @@
 @import "../_style/config";
 
 // TODO 重新组织
-$collapse: #{$prefixCls}_collapse_list;
+$collapse: #{$prefixCls}_collapse;
+$collapse_item: #{$prefixCls}_collapse_item;
 
 .#{$collapse} {
   border-top: 1px solid $border-color-primary;
-  width: 100%;
-  overflow: hidden;
-  &:last-child {
-    border-bottom: 1px solid $border-color-primary;
-  }
-  .list_icon {
-    transition: all 0.3s ease-in-out;
-    transform: rotate(270deg);
-    &.collapse {
+  border-bottom: 1px solid $border-color-primary;
+  .#{$collapse_item} {
+    width: 100%;
+    overflow: hidden;
+    &_icon {
+      transition: all 0.3s ease-in-out;
       transform: rotate(90deg);
     }
-  }
-
-  .list_content_wrap {
-    border: 1px solid $border-color-primary;
-    border-left: none;
-    border-right: none;
-    background: #ebebeb;
-    position: relative;
-    &.collapse {
-      display: none;
+    &_content {
+      will-change: height;
+      //transform: translate3d(0, 0, 0);
     }
   }
 
-  .list_content {
-    font-size: $font-size-base;
-    margin: 0;
-    padding: pxToRem(24) pxToRem(32);
-    line-height: 1.6;
+  .#{$collapse_item}_active {
+    .#{$collapse_item}_icon {
+      transform: rotate(270deg);
+    }
+    .#{$collapse_item}_content {
+      border-top: 1px solid $border-color-primary;
+    }
+
+  }
+
+  .#{$collapse_item} + .#{$collapse_item} {
+    border-top: 1px solid $border-color-primary;
   }
 }
 
-.#{$collapse}:last-child .list_content_wrap {
-  border-bottom: none;
-}
-
-.#{$collapse} + .#{$collapse} {
-  border-top: none;
-  position: relative;
-  &::before {
-    content: '';
-    display: inline-block;
-    margin-left: pxToRem(32);
-    position: absolute;
-    border-top: 1px solid $border-color-secondary;
-    width: 100%;
-    z-index: 10;
-  }
-}
-
-.#{$collapse}.is_active + .#{$collapse}::before {
-  display: none;
-}
-
-.#{$collapse} .#{$prefixCls}_cell::after {
-  display: none;
-}

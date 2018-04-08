@@ -3,6 +3,7 @@
  */
 
 export default {
+  card: '银行卡填写错误',
   realNameTip: '姓名不能修改',
   nameErrorMsg: '姓名由2-6个汉字组成',
   relativeNameErrorMsg: '紧急联系人姓名由2-6个汉字组成',

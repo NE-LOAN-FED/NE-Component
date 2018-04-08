@@ -83,7 +83,7 @@ button {
 
 .fade-appear {
   opacity: 0.01;
-  transition: all .2s ease-in;
+  transition: all .3s ease-in;
 }
 
 .fade-appear-active {
@@ -100,7 +100,7 @@ button {
 
 .fade-exit {
   opacity: 1;
-  transition: all .2s ease-out;
+  transition: all .3s ease-out;
 }
 
 .fade-exit-active {

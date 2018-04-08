@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "allowSyntheticDefaultImports":true,
+    "target": "es2015",
+    "declaration": true,
+    "sourceMap": true,
+    "module": "es6",
+    "outDir": "./ts",
+    "types": [
+      "react",
+      "react-dom"
+    ]
+  },
+  "include": ["./src/**/*.tsx"],
+  "exclude": [
+    "node_modules",
+    "lib",
+    "es"
+  ]
+}

@@ -22,6 +22,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.css', '.scss']
   },
+  mode: 'production',
   module: {
     rules: [{
       test: /\.(js|jsx)$/,

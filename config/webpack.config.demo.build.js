@@ -21,16 +21,16 @@ const config = {
     path: path.join(cwd, 'demo'),
     filename: '[name]-[chunkhash:8].js',
     chunkFilename: '[name]-[chunkhash:8].js',
-    sourceMapFilename: '[name].map',
     publicPath: '/'
   },
+  mode: 'production',
   module: {
     rules: [
       // 不能使用 use 字段，暂时用 loader 代替
       {
         test: /\.(css|scss|sass)$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: [
             'css-loader',
             {
@@ -60,9 +60,6 @@ const config = {
       filename: 'css/[name].css'
       // 是否从所有追加的 chunk 中提取样式文件
       // allChunks: true
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendors'] // Specify the common bundle's name.
     }),
     new webpack.DefinePlugin({
       'process.env': {

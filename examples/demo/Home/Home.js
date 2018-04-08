@@ -1,33 +1,14 @@
 /**
  * Created by kisnows on 2016/9/13.
  */
-import PropTypes from 'prop-types';
-
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Link } from 'react-router'
 import {
-  Form,
-  FormCell,
-  Input,
-  Select,
-  CheckBox,
-  Cells,
   Cell,
-  CellHeader,
-  Icon,
-  CellBody,
-  CellFooter,
-  Panel,
-  DatePicker,
-  Picker,
-  Modal,
-  Alert,
-  VerifyButton,
+  Cells,
   Toast,
-  Button,
-  Collapse,
-  NoticeBar
-} from '../../../src'
+  Icon
+} from '../../../lib'
 import Logger from '../../../src/_utils/log'
 
 const logger = new Logger('DEBUG', 'Home')
@@ -94,24 +75,24 @@ class Home extends React.Component {
     const { msg, showToast, showModal, showAlert, formData, phone, gender } = this.state
     const { isComplete } = formData
 
-    const Links = ['form', 'button', 'cells', 'panel', 'picker', 'modal', 'collapse', 'icon', 'noticebar', 'tab', 'flow', 'actionsheet']
+    const Links = ['form', 'button', 'cells', 'modal', 'collapse', 'icon', 'noticebar', 'tab', 'flow', 'actionsheet']
     return (
       <section className='page-home'>
         <Toast content={msg}
           show={showToast}
           onClose={this.closeToast}
         />
-        <div className="page--header">
-          <h1 className="page-title">NE-RC</h1>
-          <p className="page--desc">NE-RC 是由大数据风控-前端小组开发的一套基于 React
+        <div className='page--header'>
+          <h1 className='page-title'>NE-RC</h1>
+          <p className='page--desc'>NE-RC 是由大数据风控-前端小组开发的一套基于 React
             的组件，风格和交互上遵循之前部门的内部规范。开发的目的是为了给内部移动端项目提供统一用户体验输出。</p>
         </div>
         <Cells>
           {
             Links.map((v, k) => {
               return <Cell key={k}>
-                <CellBody><Link to={'/' + v}>{v.toUpperCase()}</Link></CellBody>
-                <CellFooter><Icon type={'arrow'} /></CellFooter>
+                <Cell.Body><Link to={'/' + v}>{v.toUpperCase()}</Link></Cell.Body>
+                <Cell.Footer><Icon type={'arrow'} /></Cell.Footer>
               </Cell>
             })
           }

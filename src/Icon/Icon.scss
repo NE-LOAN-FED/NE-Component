@@ -18,10 +18,8 @@ $iconfont-prefix: #{$prefixCls}_icon;
     width: pxToRem(60);
     height: pxToRem(60);
     border-radius: 100%;
-    border: 2px solid transparent;
-    border-top-color: #fff;
-    border-left-color: #fff;
-    border-bottom-color: #fff;
+    border: 2px solid #fff;
+    border-right-color: transparent;
     padding: 0;
     margin-left: 0;
   }

@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const webpackMerge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base.js')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const autoprefixer = require('autoprefixer')
 
 const cwd = process.cwd()
@@ -22,14 +22,9 @@ const config = {
   module: {
     rules: [{
       test: /\.(css|scss|sass)$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [{
-          loader: 'css-loader',
-          options: {
-            minimize: true
-          }
-        },
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader',
         {
           loader: 'postcss-loader',
           options: {
@@ -40,10 +35,22 @@ const config = {
             ]
           }
         },
-          'sass-loader'
-        ]
-      })
+        'sass-loader'
+      ]
     }]
+  },
+  mode: 'production',
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -51,11 +58,12 @@ const config = {
         NODE_ENV: JSON.stringify('production')
       }
     }),
-    new ExtractTextPlugin({
-      filename: '[name].min.css',
-      allChunks: false
-    }),
-    new webpack.optimize.UglifyJsPlugin()
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: '[name].css',
+      chunkFilename: '[id].css'
+    })
   ],
   externals: {
     'react': 'React',

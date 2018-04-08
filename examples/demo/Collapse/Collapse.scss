@@ -4,4 +4,9 @@
   h3 {
     padding: 0 pxToRem(30)
   }
+  .ne-collapse {
+    .NEUI_collapse_item_content {
+      padding: pxToRem(20) pxToRem(32);
+    }
+  }
 }
