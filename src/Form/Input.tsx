@@ -1,9 +1,9 @@
 /**
  * Created by kisnows on 2016/12/26.
  */
-import PropTypes from 'prop-types'
+import * as PropTypes from 'prop-types'
 
-import React from 'react'
+import * as React from 'react'
 import classNames from 'classnames'
 import Icon from '../Icon'
 

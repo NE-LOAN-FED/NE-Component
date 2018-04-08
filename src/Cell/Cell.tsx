@@ -1,7 +1,7 @@
 /**
  * Created by kisnows on 2016/9/12.
  */
-import React from 'react'
+import * as React from 'react'
 import classNames from 'classnames'
 import { CellProps as BaseProps } from './PropsType'
 import CellBody from './CellBody'

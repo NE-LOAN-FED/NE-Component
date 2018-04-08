@@ -16,7 +16,7 @@ import {
   VerifyButton,
   Toast,
   Button
-} from '../../../src'
+} from '../../../lib'
 import Logger from '../../../src/_utils/log'
 import lang from '../../utils/lang'
 import validate from '../../utils/validate'
@@ -134,6 +134,7 @@ class FormDemo extends React.Component {
         />
         <Form
           onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
           onFieldChange={this.handleFieldChange}
         >
           <Cell.Tip>Input</Cell.Tip>

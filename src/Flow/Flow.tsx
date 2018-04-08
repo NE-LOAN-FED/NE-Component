@@ -1,7 +1,7 @@
 /**
  * Created by yanming on 17/6/29.
  */
-import React from 'react'
+import * as React from 'react'
 import classnames from 'classnames'
 import { Icon } from '../index'
 import { FlowItemProps as FlowItemBaseProps, FlowProps as FlowBaseProps } from './PropTypes'

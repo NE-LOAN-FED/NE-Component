@@ -37,4 +37,5 @@ npm-debug.log
 /dist
 /lib
 /es
+/ts
 app-*.js

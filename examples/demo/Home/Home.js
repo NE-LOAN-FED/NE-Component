@@ -1,8 +1,6 @@
 /**
  * Created by kisnows on 2016/9/13.
  */
-import PropTypes from 'prop-types'
-
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 import {
@@ -10,7 +8,7 @@ import {
   Cells,
   Toast,
   Icon
-} from '../../../src'
+} from '../../../lib'
 import Logger from '../../../src/_utils/log'
 
 const logger = new Logger('DEBUG', 'Home')

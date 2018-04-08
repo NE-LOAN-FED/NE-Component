@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { findDOMNode } from 'react-dom'
 import classNames from 'classnames'
 import Icon from '../Icon'
@@ -9,7 +9,7 @@ export interface NoticeBarPropsType extends BaseProps {
   className?: string;
 }
 
-export default class NoticeBar extends Component<NoticeBarPropsType, any> {
+export default class NoticeBar extends React.Component<NoticeBarPropsType, any> {
   static defaultProps = {
     prefixCls: 'NEUI',
     type: '',

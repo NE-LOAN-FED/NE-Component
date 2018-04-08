@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import ModalHOC from '../Modal'
 import BasePropTypes from '../Modal/PropTypes'
 import classnames from 'classnames'

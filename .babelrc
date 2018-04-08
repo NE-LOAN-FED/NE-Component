@@ -12,6 +12,11 @@
   "plugins": ["transform-export-extensions"],
   "env": {
     "cjs": {
+      "presets": [
+        [
+          "env"
+        ]
+      ],
       "plugins": [
         [
           "babel-plugin-transform-require-ignore",

@@ -1,7 +1,7 @@
 /**
  * Created by kisnows on 2017/5/26.
  */
-import React from 'react'
+import * as React from 'react'
 import classnames from 'classnames'
 import ModalHOC from '../Modal'
 import BasePropsTypes from './PropTypes'

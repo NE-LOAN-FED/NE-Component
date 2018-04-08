@@ -2,7 +2,7 @@
  * Created by kisnows on 2016/9/8.
  */
 
-import React from 'react'
+import * as React from 'react'
 import classnames from 'classnames'
 import BasePropTypes from './PropTypes'
 

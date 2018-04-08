@@ -7,6 +7,7 @@ const webpackConfig = {
     chunkFilename: '[name]-[chunkhash:8].js',
     publicPath: '/'
   },
+  devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss']
   },
@@ -14,15 +15,17 @@ const webpackConfig = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: 'ts-loader',
+        use: [
+          'babel-loader',
+          'ts-loader',
+        ],
         exclude: /node_modules/
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx)/,
         use: 'babel-loader',
         exclude: /node_modules/
       },
-      {enforce: 'pre', test: /\.(js|jsx)$/, loader: 'source-map-loader'},
       {
         test: /\.(jpeg|jpg|png|gif)$/,
         use: {

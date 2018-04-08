@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 export interface MaskProps {
@@ -8,7 +8,7 @@ export interface MaskProps {
   onClick?: (e?: any) => void;
 }
 
-class Mask extends Component<MaskProps, any> {
+class Mask extends React.Component<MaskProps, any> {
 
   static defaultProps = {
     show: false

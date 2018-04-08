@@ -2,7 +2,7 @@ import * as React from 'react'
 import RenderLayer from '../internal/RenderLayer'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 import Mask from '../internal/Mask'
-import histNonReactStatic from 'hoist-non-react-statics'
+// import histNonReactStatic from 'hoist-non-react-statics'
 import getDisplayName from '../_utils/getComponentName'
 import BasePropTypes from './PropTypes'
 
@@ -64,7 +64,7 @@ export default function ModalHOC (options?: object) {
       }
     }
 
-    histNonReactStatic(HOC, WrapComponent)
+    // histNonReactStatic(HOC, WrapComponent)
     return HOC
   }
 }

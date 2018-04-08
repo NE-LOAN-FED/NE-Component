@@ -1,13 +1,13 @@
 /**
  * Created by hzyanming on 17/6/28.
  */
-import React, { Component } from 'react'
+import * as React from 'react'
 import classnames from 'classnames'
 import { TabItemPropsType, TabPropsType as BaseTabProps } from './PropsType'
 
 const noop = () => {}
 
-export class TabItem extends Component<TabItemPropsType, any> {
+export class TabItem extends React.Component<TabItemPropsType, any> {
   static defaultProps = {
     disabled: false,
     isShow: false
@@ -26,7 +26,7 @@ export interface TabPropsType extends BaseTabProps {
   className?: string
 }
 
-export default class Tab extends Component<TabPropsType, any> {
+export default class Tab extends React.Component<TabPropsType, any> {
   static Item = TabItem
   static defaultProps = {
     prefixCls: 'NEUI',

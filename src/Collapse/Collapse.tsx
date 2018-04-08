@@ -2,7 +2,7 @@
  * Created by kisnows on 2017/2/17.
  */
 
-import React from 'react'
+import * as React from 'react'
 import BasePropTypes from './PropTypes'
 import Item from './Item'
 import { WrapPropTypes } from './CollapseHOC'

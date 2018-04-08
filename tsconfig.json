@@ -2,16 +2,15 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "moduleResolution": "node",
-    "jsx": "react",
+    "jsx": "preserve",
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports":true,
-    "target": "es5",
-    "downlevelIteration": true,
+    "target": "es2015",
     "declaration": true,
     "sourceMap": true,
-    "module": "commonjs",
-    "outDir": "./lib",
+    "module": "es6",
+    "outDir": "./ts",
     "types": [
       "react",
       "react-dom"
