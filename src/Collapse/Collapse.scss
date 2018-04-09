@@ -3,6 +3,7 @@
 // TODO 重新组织
 $collapse: #{$prefixCls}_collapse;
 $collapse_item: #{$prefixCls}_collapse_item;
+$collapse_content: #{$prefixCls}_collapse_item_content;
 
 .#{$collapse} {
   border-top: 1px solid $border-color-primary;
@@ -24,7 +25,7 @@ $collapse_item: #{$prefixCls}_collapse_item;
     .#{$collapse_item}_icon {
       transform: rotate(270deg);
     }
-    .#{$collapse_item}_content {
+    .#{$collapse_content} {
       border-top: 1px solid $border-color-primary;
     }
 
@@ -33,5 +34,12 @@ $collapse_item: #{$prefixCls}_collapse_item;
   .#{$collapse_item} + .#{$collapse_item} {
     border-top: 1px solid $border-color-primary;
   }
+
+  .#{$collapse_content} {
+    padding: pxToRem(20) pxToRem(32);
+    &.active {
+    }
+  }
+
 }
 

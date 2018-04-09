@@ -6,8 +6,8 @@ import React, { Component } from 'react'
 import getDisplayName from '../_utils/getComponentName'
 
 export interface WrapPropTypes {
-  onChange: (id: WrapPropTypes['id'], nextStatus: boolean) => void;
-  id: number | string;
+  onChange: (id: WrapPropTypes['data-id'], nextStatus: boolean) => void;
+  ['data-id']: number | string;
   isActive: boolean;
 }
 
@@ -21,17 +21,6 @@ export default function (options?: object) {
         isActive: false,
         ...options
       }
-      handleClick = () => {
-        this.toggle()
-      }
-      toggle = (isActive?: boolean) => {
-        const id = this.props.id
-        const nextStatus = isActive || !this.state.isActive
-        this.props.onChange(id, nextStatus)
-        this.setState({
-          isActive: nextStatus
-        })
-      }
 
       constructor (props) {
         super(props)
@@ -39,6 +28,20 @@ export default function (options?: object) {
           isActive: this.props.isActive || false
         }
       }
+
+      handleClick = () => {
+        this.toggle()
+      }
+
+      toggle = (isActive?: boolean) => {
+        const id = this.props['data-id']
+        const nextStatus = isActive || !this.state.isActive
+        this.props.onChange(id, nextStatus)
+        this.setState({
+          isActive: nextStatus
+        })
+      }
+
 
       componentWillReceiveProps (nextProps: WrapPropTypes) {
         if (nextProps.isActive !== this.state.isActive) {
@@ -50,7 +53,7 @@ export default function (options?: object) {
 
       render () {
         return (
-          <WrapComponent onClick={this.handleClick} isActive={this.state.isActive}  {...this.props} />
+          <WrapComponent toggle={this.handleClick} isActive={this.state.isActive}  {...this.props} />
         )
       }
     }

@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import { Collapse } from '../../../src'
-import './Collapse.scss'
+// import './Collapse.scss'
 
 const questions = [
   {
@@ -40,9 +40,9 @@ export default class CollapsePage extends Component {
           <p className='page--desc'>折叠列表</p>
         </div>
         <h3>Normal</h3>
-        <Collapse onListChange={this.handleCollapseListChange}>
+        <Collapse activeIdList={['0']} onListChange={this.handleCollapseListChange}>
           {collapseListData.map((data, index) => {
-            return <Collapse.Item title={data.title} key={index} className={'ne-collapse'}>
+            return <Collapse.Item title={data.title} key={index}>
               {data.content}
             </Collapse.Item>
           })}
@@ -50,7 +50,7 @@ export default class CollapsePage extends Component {
         <h3>Accordion</h3>
         <Collapse accordion onListChange={this.handleCollapseListChange}>
           {collapseListData.map((data, index) => {
-            return <Collapse.Item title={data.title} key={index} className={'ne-collapse'}>
+            return <Collapse.Item title={data.title} key={index} >
               {data.content}
             </Collapse.Item>
           })}
