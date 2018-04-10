@@ -119,6 +119,7 @@
     "frontend"
   ],
   "author": "NE-LOAN-FED",
+  "typings": "lib/index.d.ts",
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.3.1",

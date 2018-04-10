@@ -7,7 +7,8 @@ import {
   Cell,
   Cells,
   Toast,
-  Icon
+  Icon,
+  Button
 } from '../../../lib'
 import Logger from '../../../src/_utils/log'
 
