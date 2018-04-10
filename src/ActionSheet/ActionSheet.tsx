@@ -33,7 +33,7 @@ class ActionSheet extends React.Component<ActionSheetProps, {}> {
 
   render () {
     const {
-      prefixCls, show, menus, className, showCancel, cancelText, title, ...others
+      prefixCls, show, menus, className, showCancel, cancelText, title, onMenuClick, autoClose, ...others
     } = this.props
     const cls = classnames({
       [`${prefixCls}_action__sheet`]: true,

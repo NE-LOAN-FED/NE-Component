@@ -11,7 +11,7 @@ class AlertDemo extends React.Component {
     }
     this.handleClose = this.handleClose.bind(this)
     this.handleShow = this.handleShow.bind(this)
-
+    this.handleMenuClick = this.handleMenuClick.bind(this)
   }
 
   handleClose() {
@@ -25,7 +25,9 @@ class AlertDemo extends React.Component {
       show: true
     })
   }
-
+  handleMenuClick(key) {
+    console.log('Menu Click', key)
+  }
   render() {
     const items = [
       <p>《使用授权书》</p>,
@@ -34,15 +36,16 @@ class AlertDemo extends React.Component {
     ]
     return (
       <section className='page-actionsheet-demo'>
-        <div className="page--header">
-          <h1 className="page-title">ActionSheet</h1>
-          <p className="page--desc">底部菜单</p>
+        <div className='page--header'>
+          <h1 className='page-title'>ActionSheet</h1>
+          <p className='page--desc'>底部菜单</p>
         </div>
         <Button onClick={this.handleShow}>点击弹出ActionSheet</Button>
         <ActionSheet
           show={this.state.show}
           menus={items}
           onClose={this.handleClose}
+          onMenuClick={this.handleMenuClick}
           isClickMaskToClose
         />
       </section>

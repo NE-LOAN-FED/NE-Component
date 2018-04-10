@@ -98,6 +98,10 @@ export default class ModalPage extends Component {
       }
     )
   }
+
+  handleActionChange = (key) => {
+    console.log('Menu Click', key)
+  }
   render () {
     const {
       msg,
