@@ -19,7 +19,10 @@
   }
 
   &_primary {
-    background-color: $red-primary;
+    background: -webkit-linear-gradient(left, #ff4d00 , #ef3529); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #ff4d00 , #ef3529); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #ff4d00 , #ef3529); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #ff4d00  , #ef3529); /* 标准的语法（必须放在最后） */
     color: $white;
     &:active {
       background-color: $red-active;
