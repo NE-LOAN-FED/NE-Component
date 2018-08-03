@@ -143,7 +143,7 @@ export default class Tab extends React.Component<TabPropsType, any> {
             React.Children.map(children, el => {
               if (typeof el === 'string' || typeof el === 'number') return el
               return React.cloneElement(el as React.ReactElement<any>, {
-                key: el.key,
+                key: `${el.key}`,
                 isShow: el.key === activeIndex
               })
             })
