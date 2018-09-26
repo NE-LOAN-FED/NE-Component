@@ -20,7 +20,7 @@ import {
 import Logger from '../../../src/_utils/log'
 import lang from '../../utils/lang'
 import validate from '../../utils/validate'
-import { removeBlack, formatterToBankCard } from '../../utils/formatter'
+import { removeBlack, formatterToBankCard, formatterToPhone } from '../../utils/formatter'
 
 const logger = new Logger('DEBUG', 'FormDemo')
 
@@ -156,6 +156,7 @@ class FormDemo extends React.Component {
                 validate={validate.phone}
                 errorMsg={lang.phoneErrorMsg}
                 value={this.state.phone.value}
+                placeholder='phone'
               />
             </Cell>
             <Cell warning={this.state.card.isError}>

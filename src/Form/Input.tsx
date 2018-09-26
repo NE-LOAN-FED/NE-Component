@@ -14,6 +14,7 @@ const noop = () => { }
 export default class _FieldInput extends React.Component<any, any> {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
     value: PropTypes.any,
     type: PropTypes.string,
     onChange: PropTypes.func,
@@ -141,9 +142,10 @@ export default class _FieldInput extends React.Component<any, any> {
 
   get data () {
     const {value, isError} = this.state
-    const {name, errorMsg, required, shouldRsa} = this.props
+    const {name, placeholder, errorMsg, required, shouldRsa} = this.props
     return {
       name,
+      placeholder,
       value,
       isError,
       errorMsg,
@@ -184,7 +186,7 @@ export default class _FieldInput extends React.Component<any, any> {
 
   render () {
     const {showDelIcon, value} = this.state
-    const {className, disabled, name, type, formatter} = this.props
+    const {className, disabled, name,placeholder, type, formatter} = this.props
     const formatterValue = formatter(value)
     const prefix = 'NEUI'
     const cls = classNames({
@@ -196,6 +198,7 @@ export default class _FieldInput extends React.Component<any, any> {
     return (
       <label className={cls}>
         <input name={name}
+               placeholder={placeholder}
                value={formatterValue}
                type={type}
                onChange={this.handleChange}
