@@ -63,7 +63,6 @@ function isFormComplete (formData) {
  * @returns {object} 修改后的新的 formState 对象
  */
 function isFromValidate (formState) {
-  console.log(123, formState)
   let state = {
     ...formState,
     errorMsgList: [],

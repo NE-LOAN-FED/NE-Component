@@ -29,6 +29,7 @@ export default class CellsPage extends Component {
             <Cell.Body>Body</Cell.Body>
             <Cell.Footer>Footer</Cell.Footer>
           </Cell>
+          <Cell warning>123213</Cell>
         </Cells>
       </section>
     )

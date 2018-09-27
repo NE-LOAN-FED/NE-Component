@@ -135,7 +135,7 @@ class FormDemo extends React.Component {
         <Form
           onSubmit={this.handleSubmit}
           onChange={this.handleChange}
-          onFieldChange={this.handleFieldChange}
+          // onFieldChange={this.handleFieldChange}
         >
           <Cell.Tip>Input</Cell.Tip>
           <Cells>
