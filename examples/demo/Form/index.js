@@ -28,7 +28,7 @@ class FormDemo extends React.Component {
   constructor() {
     super()
     this.state = {
-      showInput: false,
+      showInput: true,
       name: {
         value: '抹桥'
       },
@@ -187,6 +187,8 @@ class FormDemo extends React.Component {
               <Cell warning={this.state.gender.isError}>
                 <Cell.Header>Gender</Cell.Header>
                 <Select name='gender'
+                  placeholder={'测试测试'}
+                  placeholderName={'waysSelect'}
                   data={genderData}
                   value={this.state.gender.value}
                 />

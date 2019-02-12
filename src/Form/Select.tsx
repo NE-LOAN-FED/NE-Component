@@ -34,6 +34,8 @@ function renderData (data) {
 export default class _FieldSelect extends React.Component<any, any> {
   static propTypes = {
     name: PropTypes.string,
+    placeholder: PropTypes.string,
+    placeholderName: PropTypes.string,
     data: PropTypes.array,
     required: PropTypes.bool,
     shouldRsa: PropTypes.bool,
@@ -70,9 +72,11 @@ export default class _FieldSelect extends React.Component<any, any> {
 
   get data () {
     const {value} = this.state
-    const {name, required, shouldRsa} = this.props
+    const {name, required, shouldRsa, placeholder, placeholderName} = this.props
     return {
       name,
+      placeholder,
+      placeholderName,
       value,
       required,
       shouldRsa
@@ -111,23 +115,23 @@ export default class _FieldSelect extends React.Component<any, any> {
   }
 
   render () {
-    const {className, name, data, disabled, children} = this.props
+    const {className, name,placeholder, placeholderName, data, disabled, children} = this.props
     const {value} = this.state
     const cls = classNames({
       NEUI_select: true,
       [className]: className
     })
-    const label = value ? this.state.valueNameMap[value] : '请选择'
+    const label = value ? this.state.valueNameMap[value] : (placeholder ||'请选择')
     return (
       <div className={cls}>
-        <div><span>{label}</span><Icon type='arrow' /></div>
+        <div><span className={placeholderName}>{label}</span><Icon type='arrow' /></div>
         <select
           name={name}
           value={value}
           onChange={this.handleChange}
           disabled={disabled}
         >
-          <option disabled={!!value}>请选择</option>
+          <option disabled={!!value}>{placeholder || '请选择'}</option>
           {data.length > 0 ? renderData(data) : children}
         </select>
       </div>
