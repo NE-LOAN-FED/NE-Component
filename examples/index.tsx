@@ -21,6 +21,7 @@ import Tab from './demo/Tab'
 import Flow from './demo/Flow'
 import ActionSheet from './demo/ActionSheet'
 import Picker from './demo/Picker'
+import ImagePicker from './demo/ImagePicker'
 
 // if (module.hot) {
 //   module.hot.accept()
@@ -44,6 +45,7 @@ ReactDom.render((
       <Route path='flow' component={Flow} />
       <Route path='actionsheet' component={ActionSheet} />
       <Route path='picker' component={Picker} />
+      <Route path='imagePicker' component={ImagePicker} />
       <Route path='*' component={Home} />
     </Route>
   </Router>
