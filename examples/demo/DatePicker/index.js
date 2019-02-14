@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react'
 import { Cell } from '../../../src/Cell'
-import DatePicker from '../../../src/DatePicker'
+import DatePicker from '../../../lib/DatePicker'
+
 const nowTimeStamp = Date.now()
 const now = new Date(nowTimeStamp)
 export default class DatePickerPage extends Component {

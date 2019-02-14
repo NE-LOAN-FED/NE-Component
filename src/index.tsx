@@ -5,6 +5,8 @@ import './_style/index.scss'
 
 export { default as Alert } from './Alert'
 export { default as Button } from './Button'
+export { default as DatePicker } from './DatePicker'
+export { default as ImagePicker } from './ImagePicker'
 export { default as Cell } from './Cell/Cell'
 export { default as Cells } from './Cell/Cells'
 export { default as CellInput } from './CellInput'
@@ -23,7 +25,6 @@ export { default as RenderLayer } from './internal/RenderLayer'
 export { default as ActionSheet } from './ActionSheet'
 export { default as Tab } from './Tab'
 export { default as Flow } from './Flow'
-export { default as DatePicker } from './DatePicker'
-export { default as ImagePicker } from './ImagePicker'
+
 
 

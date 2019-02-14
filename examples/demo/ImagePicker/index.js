@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react'
 import { Cell } from '../../../src/Cell'
-import ImagePicker from '../../../src/ImagePicker'
+// import ImagePicker from '../../../src/ImagePicker'
+import ImagePicker from '../../../lib/ImagePicker'
 const data = [{
   url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
   id: '2121'

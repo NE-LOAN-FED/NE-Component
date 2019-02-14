@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import * as React from 'react'
 import RCDatePicker from 'rmc-date-picker/lib/DatePicker';
 import PopupDatePicker from 'rmc-date-picker/lib/Popup';
-import { DatePickerPropsType } from './PickerPropsType';
+import { DatePickerPropsType as BasePropsType } from './PropsType';
 import { formatFn } from '../_utils/format';
 
-export interface PropsType extends DatePickerPropsType {
+export interface PropsType extends BasePropsType {
   // prefixCls?: string;
   className?: string;
   use12Hours?: boolean;

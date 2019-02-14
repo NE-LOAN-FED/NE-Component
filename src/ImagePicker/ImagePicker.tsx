@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import React from 'react';
 import TouchFeedback from 'rmc-feedback';
 import Flex from '../flex';
-import { ImagePickerPropTypes as BasePropsType } from './PropsType';
+import { ImagePickerPropTypes as BasePropsType } from './PropsTypes';
 
 export interface ImagePickerPropTypes extends BasePropsType {
   prefixCls?: string;
