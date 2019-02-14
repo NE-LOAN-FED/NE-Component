@@ -23,3 +23,7 @@ export { default as RenderLayer } from './internal/RenderLayer'
 export { default as ActionSheet } from './ActionSheet'
 export { default as Tab } from './Tab'
 export { default as Flow } from './Flow'
+export { default as DatePicker } from './DatePicker'
+export { default as ImagePicker } from './ImagePicker'
+
+

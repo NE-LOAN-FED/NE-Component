@@ -1,10 +1,10 @@
 
 import React, { Component } from 'react'
 import { Cell } from '../../../src/Cell'
-import { Picker } from '../../../src/Picker'
+import DatePicker from '../../../src/DatePicker'
 const nowTimeStamp = Date.now()
 const now = new Date(nowTimeStamp)
-export default class PickerPage extends Component {
+export default class DatePickerPage extends Component {
   state = {
     date: now,
     dpValue: null,
@@ -15,12 +15,12 @@ export default class PickerPage extends Component {
     return (
       <section>
         <div className='page--header'>
-          <h1 className='page-title'>Picker</h1>
+          <h1 className='page-title'>DatePicker</h1>
           <p className='page--desc'>选择器</p>
         </div>
         <Cell>
           <Cell.Body>
-            <Picker
+            <DatePicker
               mode='date'
               title='Select Date'
               extra='Optional'
@@ -28,7 +28,7 @@ export default class PickerPage extends Component {
               onChange={date => this.setState({ date })}
             >
               <Cell.Header>DatePicker1</Cell.Header>
-            </Picker>
+            </DatePicker>
           </Cell.Body>
         </Cell>
       </section>

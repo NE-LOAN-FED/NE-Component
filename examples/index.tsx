@@ -20,7 +20,7 @@ import NoticeBar from './demo/NoticeBar'
 import Tab from './demo/Tab'
 import Flow from './demo/Flow'
 import ActionSheet from './demo/ActionSheet'
-import Picker from './demo/Picker'
+import DatePicker from './demo/DatePicker'
 import ImagePicker from './demo/ImagePicker'
 
 // if (module.hot) {
@@ -44,7 +44,7 @@ ReactDom.render((
       <Route path='tab' component={Tab} />
       <Route path='flow' component={Flow} />
       <Route path='actionsheet' component={ActionSheet} />
-      <Route path='picker' component={Picker} />
+      <Route path='datePicker' component={DatePicker} />
       <Route path='imagePicker' component={ImagePicker} />
       <Route path='*' component={Home} />
     </Route>
