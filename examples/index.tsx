@@ -7,7 +7,6 @@ import * as ReactDom from 'react-dom'
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
 import '../src/_style/index.scss'
 import './style/app.scss'
-
 import App from './demo/App'
 import Home from './demo/Home'
 import Alert from './demo/Alert'
@@ -21,6 +20,7 @@ import NoticeBar from './demo/NoticeBar'
 import Tab from './demo/Tab'
 import Flow from './demo/Flow'
 import ActionSheet from './demo/ActionSheet'
+import Picker from './demo/Picker'
 
 // if (module.hot) {
 //   module.hot.accept()
@@ -43,6 +43,7 @@ ReactDom.render((
       <Route path='tab' component={Tab} />
       <Route path='flow' component={Flow} />
       <Route path='actionsheet' component={ActionSheet} />
+      <Route path='picker' component={Picker} />
       <Route path='*' component={Home} />
     </Route>
   </Router>

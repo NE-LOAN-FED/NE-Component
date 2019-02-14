@@ -23,5 +23,27 @@
 
     ga('create', 'UA-58453734-4', 'auto');
   </script>
+  <script>
+    /* eslint-disable */
+!function (e) {
+  function t () { e.rem = d.getBoundingClientRect().width / 15, d.style.fontSize = e.rem + 'px' }
+
+  var i,
+    n,
+    a = e.devicePixelRatio ? e.devicePixelRatio : 1,
+    m = 1 / a,
+    d = document.documentElement,
+    o = document.createElement('meta')
+  e.dpr = a,
+    e.addEventListener('resize', function () { clearTimeout(i), i = setTimeout(t, 300) }, !1),
+    e.addEventListener('pageshow', function (e) { e.persisted && (clearTimeout(i), i = setTimeout(t, 300)) }, !1),
+    d.setAttribute('data-dpr', a),
+    o.setAttribute('name', 'viewport'),
+    o.setAttribute('content', 'width=device-width,target-densityDpi=device-dpi,' + 'initial-scale=' + 1 + ', maximum-scale=' + 1 + ', minimum-scale=' + 1 + ', user-scalable=no'+',viewport-fit=cover'),
+    d.querySelector('head') ? d.querySelector('head').appendChild(o) : (n = document.createElement('div'), n.appendChild(o), document.write(n.innerHTML)),
+    t()
+}(window)
+
+  </script>
 </body>
 </html>

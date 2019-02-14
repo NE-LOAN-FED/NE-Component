@@ -1,10 +1,16 @@
-/**
- * Created by kisnows on 2017/2/22.
- */
-import React, { Component } from 'react'
-import { Cell, Picker} from '../../../src'
 
+import React, { Component } from 'react'
+import { Cell } from '../../../src/Cell'
+import { Picker } from '../../../src/Picker'
+const nowTimeStamp = Date.now()
+const now = new Date(nowTimeStamp)
 export default class PickerPage extends Component {
+  state = {
+    date: now,
+    dpValue: null,
+    customChildValue: null,
+    visible: false
+  }
   render () {
     return (
       <section>
@@ -13,9 +19,16 @@ export default class PickerPage extends Component {
           <p className='page--desc'>选择器</p>
         </div>
         <Cell>
-          <Cell.Header>DatePicker</Cell.Header>
           <Cell.Body>
-            <Picker/>
+            <Picker
+              mode='date'
+              title='Select Date'
+              extra='Optional'
+              value={this.state.date}
+              onChange={date => this.setState({ date })}
+            >
+              <Cell.Header>DatePicker1</Cell.Header>
+            </Picker>
           </Cell.Body>
         </Cell>
       </section>

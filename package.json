@@ -1,6 +1,6 @@
 {
-  "name": "ne-rc",
-  "version": "2.1.8",
+  "name": "ne-rc1",
+  "version": "2.1.9",
   "title": "NE-ReactComponents",
   "description": "A react components develop by NE-LOAN-FED",
   "homepage": "https://github.com/NE-LOAN-FED/NE-Component",
@@ -23,6 +23,7 @@
     "test:watch": "npm test --watch"
   },
   "dependencies": {
+    "antd-mobile": "^2.2.8",
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.5",
     "hoist-non-react-statics": "^2.5.0",
@@ -30,6 +31,7 @@
     "rc-animate": "^2.4.4",
     "react-router": "^3.2.0",
     "react-transition-group": "^2.3.0",
+    "rmc-date-picker": "^6.0.8",
     "velocity-animate": "^1.5.1"
   },
   "devDependencies": {
