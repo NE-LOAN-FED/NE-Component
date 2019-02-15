@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import * as React from 'react'
 import RCDatePicker from 'rmc-date-picker/lib/DatePicker';
 import PopupDatePicker from 'rmc-date-picker/lib/Popup';
-import { DatePickerPropsType as BasePropsType } from './PropsType';
+import { DatePickerPropsType as BasePropsType } from './PropsTypes';
 import { formatFn } from '../_utils/format';
 
 export interface PropsType extends BasePropsType {
@@ -72,7 +72,8 @@ export default class DatePicker extends React.Component<PropsType, any> {
     const { okText, dismissText, extra } = locale;
 
     const childProps = {
-      extra: value ? formatFn(this, value) : this.props.extra || extra
+      extra: value ? formatFn(this, value) : this.props.extra || extra,
+      children: value ? formatFn(this, value) : this.props.extra || extra,
     }
 
     /**

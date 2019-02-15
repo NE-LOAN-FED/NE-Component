@@ -73,7 +73,7 @@ export default class Form extends React.PureComponent<any, FormState> {
         if (typeof el === 'string' || typeof el === 'number') return el
         const reg = /^_Field/
         const childName = el.type && (el.type as any).name
-        if (reg.test(childName)) {
+        if (reg.test(childName) || childName === 'DatePicker' || childName === 'ImagePicker') {
           const child = React.cloneElement(el, {
             key: i,
             ref: (ref) => {
