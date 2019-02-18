@@ -5,6 +5,7 @@ import RCDatePicker from 'rmc-date-picker/lib/DatePicker';
 import PopupDatePicker from 'rmc-date-picker/lib/Popup';
 import { DatePickerPropsType as BasePropsType } from './PropsTypes';
 import { formatFn } from '../_utils/format';
+import Icon from '../Icon'
 
 export interface PropsType extends BasePropsType {
   // prefixCls?: string;
@@ -120,9 +121,13 @@ export default class DatePicker extends React.Component<PropsType, any> {
         ref={this.fixOnOk}
         onVisibleChange={this.onVisibleChange}
       >
+        <div className={'rmc-date-picker-content'}>
         {children &&
           React.isValidElement(children) &&
           React.cloneElement<object>(children, childProps)}
+        {value ? null : <Icon type='arrow' />}
+        </div>
+
       </PopupDatePicker>
     );
   }
