@@ -7,6 +7,8 @@ import { DatePickerPropsType as BasePropsType } from './PropsTypes';
 import { formatFn } from '../_utils/format';
 import Icon from '../Icon'
 
+const noop = () => { }
+
 export interface PropsType extends BasePropsType {
   // prefixCls?: string;
   className?: string;
@@ -15,6 +17,12 @@ export interface PropsType extends BasePropsType {
   // popupPrefixCls?: string;
   onOk?: (x: any) => void;
   onVisibleChange?: (visible: boolean) => void;
+  name?: string;
+  errorMsg?: string;
+  required?: boolean;
+  shouldRsa?: boolean;
+  isError?: boolean;
+
 }
 export default class DatePicker extends React.Component<PropsType, any> {
   static defaultProps = {
@@ -24,6 +32,11 @@ export default class DatePicker extends React.Component<PropsType, any> {
     // popupPrefixCls: 'am-picker-popup',
     minuteStep: 1,
     use12Hours: false,
+    required: true,
+    shouldRsa: false,
+    onChange: noop,
+    handleFieldChange: noop,
+    name: 'selectedDate'
   };
 
   static contextTypes = {
@@ -31,6 +44,48 @@ export default class DatePicker extends React.Component<PropsType, any> {
   };
 
   private scrollValue: any;
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      showDelIcon: false,
+      value: this.props.value || '',
+      isError: this.props.isError || false
+    }
+  }
+
+  get data () {
+    const {value, isError} = this.state
+    const {name, errorMsg, required, shouldRsa} = this.props
+    return {
+      name,
+      value,
+      isError,
+      errorMsg,
+      required,
+      shouldRsa
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value !== this.state.value) {
+      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
+      this.setState({
+        value: nextValue
+      })
+    }
+  }
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.disabled !== nextProps.disabled ||
+      this.state.value !== nextState.value ||
+      this.state.showDelIcon !== nextState.showDelIcon ||
+      this.state.isError !== nextState.isError
+  }
+  componentDidUpdate (preProps, preState) {
+    const {handleFieldChange} = preProps
+    if (preState.value !== this.state.value) {
+      handleFieldChange(this.data)
+    }
+  }
 
   setScrollValue = (v: any) => {
     this.scrollValue = v;

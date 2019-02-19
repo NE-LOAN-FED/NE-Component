@@ -41,6 +41,7 @@ export default class DatePickerPage extends Component {
               errorMsg={'xxxx'}
               value={this.state.name.value}
               data-index='1'
+              placeholder={'ssss'}
             />
           </Cell>
           <Cell>

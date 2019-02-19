@@ -121,10 +121,14 @@ export default class _FieldSelect extends React.Component<any, any> {
       NEUI_select: true,
       [className]: className
     })
+    const clsPlaceHolder = classNames({
+      [placeholderName]: true,
+      unSelected: !value
+    })
     const label = value ? this.state.valueNameMap[value] : (placeholder ||'请选择')
     return (
       <div className={cls}>
-        <div><span className={placeholderName}>{label}</span><Icon type='arrow' /></div>
+        <div><span className={clsPlaceHolder}>{label}</span><Icon type='arrow' /></div>
         <select
           name={name}
           value={value}

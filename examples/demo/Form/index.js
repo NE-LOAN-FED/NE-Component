@@ -21,6 +21,7 @@ import Logger from '../../../src/_utils/log'
 import lang from '../../utils/lang'
 import validate from '../../utils/validate'
 import { removeBlack, formatterToBankCard, formatterToPhone } from '../../utils/formatter'
+import DatePicker from '../../../src/DatePicker'
 
 const logger = new Logger('DEBUG', 'FormDemo')
 
@@ -116,8 +117,7 @@ class FormDemo extends React.Component {
     const { showInput, msg, showToast, isComplete } = this.state
     const genderData = [{
       name: '男',
-      value: 0,
-      disabled: true
+      value: 0
     }, {
       name: '女',
       value: 1

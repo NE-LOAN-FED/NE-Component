@@ -8,6 +8,13 @@ import { ImagePickerPropTypes as BasePropsType } from './PropsTypes';
 export interface ImagePickerPropTypes extends BasePropsType {
   prefixCls?: string;
   className?: string;
+  name?: string;
+  errorMsg?: string;
+  required?: boolean;
+  shouldRsa?: boolean;
+  isError?: boolean;
+  disabled?: boolean;
+  value?: Array<{}>;
 }
 
 function noop() {}
@@ -18,7 +25,7 @@ export default class ImagePicker extends React.Component<
 > {
   static defaultProps = {
     prefixCls: 'am-image-picker',
-    files: [],
+    value: [],
     onChange: noop,
     onImageClick: noop,
     onAddImageClick: noop,
@@ -27,8 +34,49 @@ export default class ImagePicker extends React.Component<
     multiple: false,
     accept: 'image/*',
     length: 4,
-  };
+    handleFieldChange: noop,
 
+  };
+  constructor (props) {
+    super(props)
+    this.state = {
+      showDelIcon: false,
+      value: this.props.value || '',
+      isError: this.props.isError || false
+    }
+  }
+  get data () {
+    const {value, isError} = this.state
+    const {name, errorMsg, required, shouldRsa} = this.props
+    return {
+      name,
+      value,
+      isError,
+      errorMsg,
+      required,
+      shouldRsa
+    }
+  }
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.value !== this.state.value) {
+      const nextValue = typeof nextProps.value === 'undefined' ? '' : nextProps.value
+      this.setState({
+        value: nextValue
+      })
+    }
+  }
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.disabled !== nextProps.disabled ||
+      this.state.value !== nextState.value ||
+      this.state.showDelIcon !== nextState.showDelIcon ||
+      this.state.isError !== nextState.isError
+  }
+  componentDidUpdate (preProps, preState) {
+    const {handleFieldChange} = preProps
+    if (preState.value !== this.state.value) {
+      handleFieldChange(this.data)
+    }
+  }
   fileSelectorInput: HTMLInputElement | null;
 
   // http://stackoverflow.com/questions/7584794/accessing-jpeg-exif-rotation-data-in-javascript-on-the-client-side
@@ -88,8 +136,8 @@ export default class ImagePicker extends React.Component<
 
   removeImage = (index: number) => {
     const newImages: any[] = [];
-    const { files = [] } = this.props;
-    files.forEach((image, idx) => {
+    const { value = [] } = this.props;
+    value.forEach((image, idx) => {
       if (index !== idx) {
         newImages.push(image);
       }
@@ -100,8 +148,8 @@ export default class ImagePicker extends React.Component<
   }
 
   addImage = (imgItem: any) => {
-    const { files = [] } = this.props;
-    const newImages = files.concat(imgItem);
+    const { value = [] } = this.props;
+    const newImages = value.concat(imgItem);
     if (this.props.onChange) {
       this.props.onChange(newImages, 'add');
     }
@@ -109,16 +157,16 @@ export default class ImagePicker extends React.Component<
 
   onImageClick = (index: number) => {
     if (this.props.onImageClick) {
-      this.props.onImageClick(index, this.props.files);
+      this.props.onImageClick(index, this.props.value);
     }
   }
 
   onFileChange = () => {
     const fileSelectorEl = this.fileSelectorInput;
-    if (fileSelectorEl && fileSelectorEl.files && fileSelectorEl.files.length) {
-      const files = fileSelectorEl.files;
-      for (let i = 0; i < files.length; i++) {
-        this.parseFile(files[i], i);
+    if (fileSelectorEl && fileSelectorEl.value && fileSelectorEl.value.length) {
+      const value = fileSelectorEl.value;
+      for (let i = 0; i < value.length; i++) {
+        this.parseFile(value[i], i);
       }
     }
     if (fileSelectorEl) {
@@ -157,7 +205,7 @@ export default class ImagePicker extends React.Component<
       prefixCls,
       style,
       className,
-      files = [],
+      value = [],
       selectable,
       onAddImageClick,
       multiple,
@@ -167,12 +215,12 @@ export default class ImagePicker extends React.Component<
     const imgItemList: any[] = [];
     let count = parseInt('' + this.props.length, 10);
     if (count <= 0) {
-      count = 4;
+      count = 3;
     }
 
     const wrapCls = classnames(`${prefixCls}`, className);
 
-    files.forEach((image: any, index: number) => {
+    value.forEach((image: any, index: number) => {
       const imgStyle = {
         backgroundImage: `url(${image.url})`,
         transform: `rotate(${this.getRotation(image.orientation)}deg)`,

@@ -1,8 +1,10 @@
 
 import React, { Component } from 'react'
 import { Cell } from '../../../src/Cell'
-// import ImagePicker from '../../../src/ImagePicker'
-import ImagePicker from '../../../lib/ImagePicker'
+import ImagePicker from '../../../src/ImagePicker'
+// import ImagePicker from '../../../lib/ImagePicker'
+import { Form, Input } from '../../../src/Form'
+
 const data = [{
   url: 'https://zos.alipayobjects.com/rmsportal/PZUUCKTRIHWiZSY.jpeg',
   id: '2121'
@@ -35,24 +37,24 @@ export default class ImagePickerPage extends Component {
           <h1 className='page-title'>ImagePicker</h1>
           <p className='page--desc'>图片选择器</p>
         </div>
-        <Cell>
-          <Cell.Header>Gender</Cell.Header>
-          <Cell.Body>
-            <ImagePicker
-              files={files}
-              onChange={this.onChange}
-              onImageClick={(index, fs) => console.log(index, fs)}
-              selectable={files.length < 7}
-              multiple={this.state.multiple}
-            />
-          </Cell.Body>
-        </Cell>
+        <Form>
+
+          <ImagePicker
+            value={files}
+            name={'files'}
+            onChange={this.onChange}
+            onImageClick={(index, fs) => console.log(index, fs)}
+            selectable={files.length < 7}
+            multiple={this.state.multiple}
+          />
+        </Form>
         <ImagePicker
           files={files}
           onChange={this.onChange}
           onImageClick={(index, fs) => console.log(index, fs)}
-          selectable={files.length < 7}
+          selectable={files.length < 3}
           multiple={this.state.multiple}
+          length={3}
         />
       </section>
     )
