@@ -41,8 +41,9 @@ function isFormComplete (formData) {
     const required = formData[v].required
     const value = formData[v].value
     const minLength = formData[v].minLength
+    const valueIsArr = typeof value === 'object' && value.length !== undefined
     if (required) shouldInput += 1
-    if (required && value && (typeof value === 'string' ? value.trim().length > 0 : true)) {
+    if (required && value && (typeof value === 'string' ? value.trim().length > 0 : (valueIsArr ? value.length > 0 : true))) {
       if (minLength) {
         if (value.trim().length >= minLength) {
           actualInput += 1
