@@ -6,6 +6,7 @@ import PopupDatePicker from 'rmc-date-picker/lib/Popup';
 import { DatePickerPropsType as BasePropsType } from './PropsTypes';
 import { formatFn } from '../_utils/format';
 import Icon from '../Icon'
+import classNames from 'classnames'
 
 const noop = () => { }
 
@@ -162,6 +163,11 @@ export default class DatePicker extends React.Component<PropsType, any> {
       />
     );
 
+    const cls = classNames({
+      'rmc-date-picker-content': true,
+      'unSelected': !value
+    })
+
     return (
       <PopupDatePicker
         datePicker={dataPicker}
@@ -176,7 +182,7 @@ export default class DatePicker extends React.Component<PropsType, any> {
         ref={this.fixOnOk}
         onVisibleChange={this.onVisibleChange}
       >
-        <div className={'rmc-date-picker-content'}>
+        <div className={cls}>
         {children &&
           React.isValidElement(children) &&
           React.cloneElement<object>(children, childProps)}

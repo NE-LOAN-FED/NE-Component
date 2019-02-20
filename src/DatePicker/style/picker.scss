@@ -15,8 +15,15 @@
   align-items: center;
   .NEUI_cell__hd {
     width: 100%;
+    color: #333;
   }
+
   .NEUI_icon_arrow {
     margin-left: -0.4rem;
+  }
+}
+.unSelected {
+  .NEUI_cell__hd {
+    color: #666;
   }
 }
