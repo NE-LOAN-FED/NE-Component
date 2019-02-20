@@ -25,7 +25,7 @@ export default class ImagePicker extends React.Component<
 > {
   static defaultProps = {
     prefixCls: 'am-image-picker',
-    value: [],
+    files: [],
     onChange: noop,
     onImageClick: noop,
     onAddImageClick: noop,
@@ -33,7 +33,7 @@ export default class ImagePicker extends React.Component<
     selectable: true,
     multiple: false,
     accept: 'image/*',
-    length: 4,
+    length: 3,
     handleFieldChange: noop,
 
   };
@@ -41,7 +41,7 @@ export default class ImagePicker extends React.Component<
     super(props)
     this.state = {
       showDelIcon: false,
-      value: this.props.value || '',
+      value: this.props.files || '',
       isError: this.props.isError || false
     }
   }
@@ -163,10 +163,10 @@ export default class ImagePicker extends React.Component<
 
   onFileChange = () => {
     const fileSelectorEl = this.fileSelectorInput;
-    if (fileSelectorEl && fileSelectorEl.value && fileSelectorEl.value.length) {
-      const value = fileSelectorEl.value;
-      for (let i = 0; i < value.length; i++) {
-        this.parseFile(value[i], i);
+    if (fileSelectorEl && fileSelectorEl.files && fileSelectorEl.files.length) {
+      const files = fileSelectorEl.files;
+      for (let i = 0; i < files.length; i++) {
+        this.parseFile(files[i], i);
       }
     }
     if (fileSelectorEl) {
@@ -215,7 +215,7 @@ export default class ImagePicker extends React.Component<
     const imgItemList: any[] = [];
     let count = parseInt('' + this.props.length, 10);
     if (count <= 0) {
-      count = 3;
+      count = 4;
     }
 
     const wrapCls = classnames(`${prefixCls}`, className);

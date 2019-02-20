@@ -14,19 +14,29 @@ const data = [{
 }]
 export default class ImagePickerPage extends Component {
   state = {
-    files: data,
+    files: {
+      value: data
+    },
     multiple: false
   }
   onChange = (files, type, index) => {
     console.log(files, type, index)
     this.setState({
-      files
+      files: {
+        value: files
+      }
     })
   }
   onSegChange = (e) => {
     const index = e.nativeEvent.selectedSegmentIndex
     this.setState({
       multiple: index === 1
+    })
+  }
+  handleChange = (formData) => {
+    this.setState({
+      ...formData.data,
+      isComplete: formData.isComplete
     })
   }
   render () {
@@ -37,25 +47,20 @@ export default class ImagePickerPage extends Component {
           <h1 className='page-title'>ImagePicker</h1>
           <p className='page--desc'>图片选择器</p>
         </div>
-        <Form>
+        <Form
+          onChange={this.handleChange}
+        >
 
           <ImagePicker
-            value={files}
+            value={files.value}
             name={'files'}
             onChange={this.onChange}
             onImageClick={(index, fs) => console.log(index, fs)}
-            selectable={files.length < 7}
-            multiple={this.state.multiple}
+            selectable={files.value.length < 3}
+            multiple={false}
+            length={3}
           />
         </Form>
-        <ImagePicker
-          files={files}
-          onChange={this.onChange}
-          onImageClick={(index, fs) => console.log(index, fs)}
-          selectable={files.length < 3}
-          multiple={this.state.multiple}
-          length={3}
-        />
       </section>
     )
   }
