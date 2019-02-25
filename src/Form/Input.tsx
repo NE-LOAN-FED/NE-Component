@@ -106,7 +106,14 @@ export default class _FieldInput extends React.Component<any, any> {
     const {onBlur} = this.props
     onBlur(e)
     // TODO 考虑做成配置项，来决定什么时候作校验
-    this.handleValidate(e)
+    const {parser} = this.props
+    const value = e.target.value
+    const formatterE = Object.assign({}, e, {
+      target: {
+        value: parser(value)
+      }
+    })
+    this.handleValidate(formatterE)
 
     // 延迟是为了当用户点击删除按钮的时候不会因为已经触发了 onBlur 事件而导致删除按钮不显示
     this.timer = setTimeout(() => {
