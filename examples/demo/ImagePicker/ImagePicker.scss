@@ -1,0 +1,32 @@
+.transferPhoto {
+  align-items: flex-start;
+  .NEUI_icon_qusetion {
+    position: absolute;
+    top: 0.4rem;
+    left: 3rem;
+    width: 0.56rem;
+    height: 0.56rem;
+  }
+  .am-flexbox {
+    overflow: inherit;
+  }
+  .am-image-picker{
+    width: 100%;
+    .am-image-picker-list {
+      padding: 0;
+      margin:0;
+      .am-flexbox-item {
+        margin-right: 15px;
+      }
+      .am-image-picker-item-remove {
+        top:  -6px;
+        right: -6px;
+      }
+      .am-image-picker-item-content {
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+    }
+  }
+}

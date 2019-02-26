@@ -238,7 +238,8 @@ export default class ImagePicker extends React.Component<
               role="button"
               aria-label="Click and Remove this image"
               // tslint:disable-next-line:jsx-no-multiline-js
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 this.removeImage(index);
               }}
             />
