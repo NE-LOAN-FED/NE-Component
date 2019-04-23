@@ -133,7 +133,6 @@ export default class _FieldInput extends React.Component<any, any> {
           showDelIcon: false
         })
       }
-
     }, 300)
   }
   handleEmptied = () => {
