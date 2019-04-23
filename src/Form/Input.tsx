@@ -33,6 +33,7 @@ export default class _FieldInput extends React.Component<any, any> {
     errorMsg: PropTypes.string,
     isError: PropTypes.bool,
     formatter: PropTypes.func,
+    formatterOnBlur: PropTypes.func,
     parser: PropTypes.func
   }
   static defaultProps = {
@@ -115,11 +116,24 @@ export default class _FieldInput extends React.Component<any, any> {
     })
     this.handleValidate(formatterE)
 
+    this.props.formatterOnBlur && this.setState({
+      value: this.props.formatterOnBlur(e.target.value),
+    })
+
     // 延迟是为了当用户点击删除按钮的时候不会因为已经触发了 onBlur 事件而导致删除按钮不显示
     this.timer = setTimeout(() => {
-      this.setState({
-        showDelIcon: false
-      })
+      if (this.props.formatterOnBlur) {
+        this.setState({
+          value: this.props.formatterOnBlur(e.target.value),
+          showDelIcon: false
+        })
+      } else {
+        this.setState({
+          value: e.target.value,
+          showDelIcon: false
+        })
+      }
+
     }, 300)
   }
   handleEmptied = () => {
@@ -193,8 +207,7 @@ export default class _FieldInput extends React.Component<any, any> {
 
   render () {
     const {showDelIcon, value} = this.state
-    const {className, disabled, name,placeholder, type, formatter} = this.props
-    const formatterValue = formatter(value)
+    const {className, disabled, name,placeholder, type} = this.props
     const prefix = 'NEUI'
     const cls = classNames({
       [`${prefix}_input`]: true,
@@ -206,7 +219,7 @@ export default class _FieldInput extends React.Component<any, any> {
       <label className={cls}>
         <input name={name}
                placeholder={placeholder}
-               value={formatterValue}
+               value={value}
                type={type}
                onChange={this.handleChange}
                onFocus={this.handleFocus}

@@ -27,16 +27,17 @@ export function removeBlack(value) {
  */
 export function formatterToBankCard(value) {
   value = toEntireString(value)
-  value = value.split('')
-  let formatterValue = ''
+  // value = value.split('')
+  // let formatterValue = ''
   if (value.length === 0) {
     return ''
   }
-  while (true) {
-    if (value.length === 0) break
-    formatterValue += value.splice(0, 4).join('') + ' '
-  }
-  return formatterValue.trim()
+  value = value.replace(/(\d{4})(?=\d)/g, '$1 ')
+  // while (true) {
+  //   if (value.length === 0) break
+  //   // formatterValue += value.splice(0, 4).join('') + ' '
+  // }
+  return value.trim()
 }
 
 /**

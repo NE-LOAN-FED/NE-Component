@@ -166,7 +166,7 @@ class FormDemo extends React.Component {
                 validate={validate.card}
                 errorMsg={lang.card}
                 value={this.state.card.value}
-                formatter={formatterToBankCard}
+                formatterOnBlur={formatterToBankCard}
                 parser={removeBlack}
               />
             </Cell>
